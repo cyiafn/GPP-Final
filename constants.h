@@ -39,6 +39,7 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const float GRAVITY = 6.67428e-11f;             // gravitational constant
 
 // graphic images
+const char PLATFORM1_IMAGE[] = "pictures\\platform1.png";
 
 // key mappings
 // In this game simple constants are used for key mappings. If variables were used
