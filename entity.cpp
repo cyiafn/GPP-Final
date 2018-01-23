@@ -65,34 +65,103 @@ void Entity::update(float frameTime)
 // Post: returns true if collision, false otherwise
 //       sets collisionVector if collision
 //=============================================================================
-bool Entity::collidesWith(Entity &ent, VECTOR2 &collisionVector)
+bool Entity::collidesWith(Entity &ent)
 { 
-    // if either entity is not active then no collision may occcur
-    if (!active || !ent.getActive())    
-        return false;
+	RECT rect1;
+	rect1.left = this->getX();
+	rect1.top = this->getY();
+	rect1.right = this->getX() + this->getWidth();
+	rect1.bottom = this->getY() + this->getHeight();
 
-    // If both entities are CIRCLE collision
-    if (collisionType == entityNS::CIRCLE && ent.getCollisionType() == entityNS::CIRCLE)
-        return collideCircle(ent, collisionVector);
-    // If both entities are BOX collision
-    if (collisionType == entityNS::BOX && ent.getCollisionType() == entityNS::BOX)
-        return collideBox(ent, collisionVector);
-    // All other combinations use separating axis test
-    // If neither entity uses CIRCLE collision
-    if (collisionType != entityNS::CIRCLE && ent.getCollisionType() != entityNS::CIRCLE)
-        return collideRotatedBox(ent, collisionVector);
-    else    // one of the entities is a circle
-        if (collisionType == entityNS::CIRCLE)  // if this entity uses CIRCLE collision
-        {
-            // Check for collision from other box with our circle
-            bool collide = ent.collideRotatedBoxCircle(*this, collisionVector); 
-            // Put the collision vector in the proper direction
-            collisionVector *= -1;              // reverse collision vector
-            return collide;
-        }
-        else    // the other entity uses CIRCLE collision
-            return collideRotatedBoxCircle(ent, collisionVector);
-    return false;
+	RECT rect2;
+	rect2.left = ent.getX();
+	rect2.top = ent.getY();
+	rect2.right = ent.getX() + ent.getWidth();
+	rect2.bottom = ent.getX() + ent.getWidth();
+
+	RECT dest;
+	if (IntersectRect(&dest, &rect1, &rect2))
+	{
+		D3DLOCKED_RECT rectS1;
+		HRESULT hResult = this->spriteData.texture->LockRect(0, &rectS1, NULL, NULL);
+
+		if (FAILED(hResult))
+		{
+			MessageBox(0, "Failed", "Info", 0);
+			return 0;
+		}
+
+		D3DLOCKED_RECT rectS2;
+		hResult = ent.spriteData.texture->LockRect(0, &rectS2, NULL, NULL);
+
+		if (FAILED(hResult))
+		{
+			MessageBox(0, "Failed", "Info", 0);
+			return 0;
+		}
+
+		D3DCOLOR* pixelsS1 = (D3DCOLOR*)rectS1.pBits;
+		D3DCOLOR* pixelsS2 = (D3DCOLOR*)rectS2.pBits;
+		for (int rx = dest.left; rx < dest.right; rx++)
+		{
+			for (int ry = dest.top; ry < dest.bottom; ry++)
+			{
+
+				// Translation from the "dest" rect to sprite1 coordinates
+				int s1x = rx - this->getX();
+				int s1y = ry - this->getY();
+
+				// Translation from the "dest" rect to sprite2 coordinates
+				int s2x = rx - this->getX();
+				int s2y = ry - this->getY();
+
+				// Check the alpha value of each texture pixel
+				// The alpha value is the leftmost byte
+				BYTE a = (pixelsS1[s1y * 128 + s1x] & 0xFF000000) >> 24;
+				BYTE b = (pixelsS2[s2y * 480 + s2x] & 0xFF000000) >> 24;
+
+				// If both pixels are opaque, we found a collision
+				// We have to unlock the textures and return
+				if (a == 255 && b == 255)
+				{
+					this->spriteData.texture->UnlockRect(0);
+					ent.spriteData.texture->UnlockRect(0);
+					return true;
+				}
+			}
+		}
+	}
+	this->spriteData.texture->UnlockRect(0);
+	ent.spriteData.texture->UnlockRect(0);
+	return false;
+
+
+    //// if either entity is not active then no collision may occcur
+    //if (!active || !ent.getActive())    
+    //    return false;
+
+    //// If both entities are CIRCLE collision
+    //if (collisionType == entityNS::CIRCLE && ent.getCollisionType() == entityNS::CIRCLE)
+    //    return collideCircle(ent, collisionVector);
+    //// If both entities are BOX collision
+    //if (collisionType == entityNS::BOX && ent.getCollisionType() == entityNS::BOX)
+    //    return collideBox(ent, collisionVector);
+    //// All other combinations use separating axis test
+    //// If neither entity uses CIRCLE collision
+    //if (collisionType != entityNS::CIRCLE && ent.getCollisionType() != entityNS::CIRCLE)
+    //    return collideRotatedBox(ent, collisionVector);
+    //else    // one of the entities is a circle
+    //    if (collisionType == entityNS::CIRCLE)  // if this entity uses CIRCLE collision
+    //    {
+    //        // Check for collision from other box with our circle
+    //        bool collide = ent.collideRotatedBoxCircle(*this, collisionVector); 
+    //        // Put the collision vector in the proper direction
+    //        collisionVector *= -1;              // reverse collision vector
+    //        return collide;
+    //    }
+    //    else    // the other entity uses CIRCLE collision
+    //        return collideRotatedBoxCircle(ent, collisionVector);
+    //return false;
 }
 
 //=============================================================================

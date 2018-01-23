@@ -138,16 +138,12 @@ class Entity : public Image
     virtual bool outsideRect(RECT rect);
 
     // Does this entity collide with ent?
-    virtual bool collidesWith(Entity &ent, VECTOR2 &collisionVector);
+	virtual bool collidesWith(Entity &ent);
 
     // Damage this Entity with weapon.
     // virtual void damage(int weapon);
 
-    // Entity bounces after collision with other Entity
-    void bounce(VECTOR2 &collisionVector, Entity &ent);
-
-    // Adds the gravitational force to the velocity vector of this entity
-    void gravityForce(Entity *other, float frameTime);
+	
 };
 
 #endif
