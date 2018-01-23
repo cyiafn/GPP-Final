@@ -11,12 +11,18 @@ MoveComponent::MoveComponent()
 	deltaV.y = 0.0;
 	gravity = moveComponentNS::GRAVITY;
 }
+MoveComponent::~MoveComponent()
+{
+	delete this;
+}
 
 void MoveComponent::update(float frameTime, Entity &ent)
 {
-	velocity += deltaV;
+	/*velocity += deltaV;
 	deltaV.x = 0;
-	deltaV.y = 0;
+	deltaV.y = 0;*/
+	ent.setX(ent.getX() + velocity.x * frameTime);
+	ent.setY(ent.getY() + velocity.y * frameTime);
 }
 //=============================================================================
 // Entity bounces after collision with another entity

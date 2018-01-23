@@ -10,6 +10,7 @@
 #include "game.h"
 #include "textureManager.h"
 #include "image.h"
+#include "map.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -20,7 +21,7 @@ private:
     // game items
 	//TextureManager
 	//Object
-
+	Map* map1;
 
 public:
     // Constructor
