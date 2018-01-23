@@ -1,0 +1,6 @@
+﻿  map.cpp
+d:\visual studio projects\cipher\movecomponent.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+  MoveComponent.cpp
+d:\visual studio projects\cipher\movecomponent.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+  Cipher.vcxproj -> D:\Visual Studio Projects\Cipher\Debug\Cipher.exe

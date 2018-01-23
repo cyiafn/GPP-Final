@@ -19,6 +19,7 @@ Cipher::Cipher()
 Cipher::~Cipher()
 {
     releaseAll();           // call onLostDevice() for every graphics item
+	delete map1;
 }
 
 //=============================================================================
@@ -28,7 +29,7 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-
+	map1 = new Map(0, *this);
     // demo texture initialize
     /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/
@@ -47,7 +48,7 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-	
+	map1->update(frameTime);
 }
 
 //=============================================================================
@@ -71,7 +72,7 @@ void Cipher::render()
 {
     graphics->spriteBegin();                // begin drawing sprites
 	
-	//draw here
+	map1->draw();
 
     graphics->spriteEnd();                  // end drawing sprites
 }
@@ -83,6 +84,7 @@ void Cipher::render()
 void Cipher::releaseAll()
 {
 	//demo release all nebulaTexture.onReleaseAll();
+	map1->releaseAll();
     Game::releaseAll();
     return;
 }
@@ -95,6 +97,7 @@ void Cipher::resetAll()
 {
     
     // demo reset device nebulaTexture.onResetDevice();
+	map1->resetAll();
     Game::resetAll();
     return;
 }

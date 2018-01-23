@@ -23,6 +23,7 @@ private:
 
 public:
 	MoveComponent();
+	~MoveComponent();
 	//return velocity vector
 	VECTOR2 getVelocity() const { return velocity; }
 	// Return mass.
