@@ -16,11 +16,13 @@ class MoveComponent
 private:
 	VECTOR2 velocity;       // velocity
 	VECTOR2 deltaV;         // added to velocity during next call to update()
+	float acceleration;
 	float   mass;           // Mass of entity
 	float   gravity;        // gravitational constant of the game universe
 	float   force;          // Force of gravity
 
 public:
+	MoveComponent();
 	//return velocity vector
 	VECTOR2 getVelocity() const { return velocity; }
 	// Return mass.
@@ -37,6 +39,10 @@ public:
 
 	// Set gravitational constant. Default is 6.67428e-11
 	void  setGravity(float g) { gravity = g; }
+
+	float getAcceleration() { return acceleration; }
+
+	void setAcceleration(float accel) { acceleration = accel; }
 
 	void update(float frameTime, Entity &ent);
 
