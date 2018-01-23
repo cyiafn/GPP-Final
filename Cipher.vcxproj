@@ -96,8 +96,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="planet.cpp" />
-    <ClCompile Include="ship.cpp" />
-    <ClCompile Include="spacewar.cpp" />
+    <ClCompile Include="Cipher.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
@@ -112,8 +111,7 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="planet.h" />
-    <ClInclude Include="ship.h" />
-    <ClInclude Include="spacewar.h" />
+    <ClInclude Include="Cipher.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
