@@ -20,6 +20,7 @@ Cipher::~Cipher()
 {
     releaseAll();           // call onLostDevice() for every graphics item
 	delete map1;
+	map1 = NULL;
 }
 
 //=============================================================================
@@ -29,7 +30,7 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-	map1 = new Map(0, *this);
+	map1 = new Map(0, this);
     // demo texture initialize
     /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/

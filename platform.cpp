@@ -17,7 +17,7 @@ Platform::Platform() : Entity()
 Platform::~Platform()
 {
 	delete motion;
-	delete this;
+	motion = NULL;
 }
 
 bool Platform::initialize(Game *gamePtr, int width, int height, TextureManager *textureM)
