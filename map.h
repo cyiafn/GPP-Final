@@ -14,13 +14,13 @@ private:
 	TextureManager middlegroundTexture;
 	TextureManager frontgroundTexture;
 	std::vector<Platform> *platforms;
-	Platform background1;
-	Platform middleground1;
-	Platform frontground1;
-	Platform middleground2;
-	Platform frontground2;
+	Platform *background1;
+	Platform *middleground1;
+	Platform *frontground1;
+	Platform *middleground2;
+	Platform *frontground2;
 public:
-	Map(int type, Game &cipher);
+	Map(int type, Game *cipher);
 	~Map();
 	void update(float frameTime);
 	void draw();

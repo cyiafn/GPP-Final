@@ -13,7 +13,7 @@ MoveComponent::MoveComponent()
 }
 MoveComponent::~MoveComponent()
 {
-	delete this;
+
 }
 
 void MoveComponent::update(float frameTime, Entity &ent)
