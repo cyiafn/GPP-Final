@@ -1,0 +1,19 @@
+﻿  NecridWComponent.cpp
+  NecridRComponent.cpp
+  NecridQComponent.cpp
+  NecridEComponent.cpp
+  FreidWComponent.cpp
+  FreidRComponent.cpp
+  FreidQComponent.cpp
+  FreidEComponent.cpp
+  CyraxWComponent.cpp
+  CyraxRComponent.cpp
+  CyraxQComponent.cpp
+  CyraxEComponent.cpp
+  Agent47WComponent.cpp
+  Agent47RComponent.cpp
+  Agent47QComponent.cpp
+  Agent47EComponent.cpp
+  Generating Code...
+Agent47.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  Cipher.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Assignment\GPP-Final\Debug\Cipher.exe
