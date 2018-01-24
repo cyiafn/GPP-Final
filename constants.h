@@ -40,12 +40,28 @@ const float GRAVITY = 6.67428e-11f;             // gravitational constant
 
 // graphic images
 
+
 // key mappings
+
 // In this game simple constants are used for key mappings. If variables were used
 // it would be possible to save and restore key mappings from a data file.
 const UCHAR ESC_KEY      = VK_ESCAPE;       // escape key
 const UCHAR ALT_KEY      = VK_MENU;         // Alt key
 const UCHAR ENTER_KEY    = VK_RETURN;       // Enter key
+
+
+// Controls
+//Player 1
+const UCHAR P1RIGHT_KEY = 0x44;
+const UCHAR P1LEFT_KEY = 0x41;
+const UCHAR P1DROP_KEY = 0x53;
+const UCHAR P1JUMP_KEY = 0x57;
+//Player 2
+const UCHAR P2RIGHT_KEY = VK_RIGHT;
+const UCHAR P2LEFT_KEY = VK_LEFT;
+const UCHAR P2DROP_KEY = VK_DOWN;
+const UCHAR P2JUMP_KEY = VK_UP;
+
 
 
 // weapon types
