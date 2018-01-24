@@ -93,6 +93,8 @@
     <ClCompile Include="Agent47QComponent.cpp" />
     <ClCompile Include="Agent47RComponent.cpp" />
     <ClCompile Include="Agent47WComponent.cpp" />
+    <ClCompile Include="bomb.cpp" />
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="characters.cpp" />
     <ClCompile Include="Cyrax.cpp" />
     <ClCompile Include="CyraxEComponent.cpp" />
@@ -129,6 +131,8 @@
     <ClInclude Include="Agent47QComponent.h" />
     <ClInclude Include="Agent47RComponent.h" />
     <ClInclude Include="Agent47WComponent.h" />
+    <ClInclude Include="bomb.h" />
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="characters.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="Cyrax.h" />

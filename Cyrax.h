@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _CYRAX_H               // Prevent multiple definitions if this 
 #define _CYRAX_H               // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
@@ -5,10 +6,10 @@
 #include "input.h"
 #include "constants.h"
 #include "characters.h"
-#include "CyraxQComponent"
-#include "CyraxWComponent"
-#include "CyraxEComponent"
-#include "CyraxRComponent"
+#include "CyraxQComponent.h"
+#include "CyraxWComponent.h"
+#include "CyraxEComponent.h"
+#include "CyraxRComponent.h"
 
 namespace cyraxNS
 {
@@ -27,7 +28,7 @@ public:
 	// constructor
 	Cyrax();
 	void update(float frameTime);
-}
+};
 
 
 #endif

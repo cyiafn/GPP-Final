@@ -1,19 +1,10 @@
-﻿  NecridWComponent.cpp
-  NecridRComponent.cpp
-  NecridQComponent.cpp
-  NecridEComponent.cpp
-  FreidWComponent.cpp
-  FreidRComponent.cpp
-  FreidQComponent.cpp
-  FreidEComponent.cpp
-  CyraxWComponent.cpp
-  CyraxRComponent.cpp
+﻿  bullet.cpp
+c:\users\eezhe\downloads\gpp\assignment\gpp-final\movecomponent.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+  Compiling...
   CyraxQComponent.cpp
-  CyraxEComponent.cpp
-  Agent47WComponent.cpp
-  Agent47RComponent.cpp
-  Agent47QComponent.cpp
-  Agent47EComponent.cpp
+c:\users\eezhe\downloads\gpp\assignment\gpp-final\movecomponent.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\assignment\gpp-final\cyraxqcomponent.cpp(10): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
 Agent47.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
   Cipher.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Assignment\GPP-Final\Debug\Cipher.exe

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _AGENT47_H               // Prevent multiple definitions if this 
 #define _AGENT47_H               // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
@@ -5,10 +6,10 @@
 #include "input.h"
 #include "constants.h"
 #include "characters.h"
-#include "Agent47QComponent"
-#include "Agent47WComponent"
-#include "Agent47EComponent"
-#include "Agent47RComponent"
+#include "Agent47QComponent.h"
+#include "Agent47WComponent.h"
+#include "Agent47EComponent.h"
+#include "Agent47RComponent.h"
 
 namespace agent47NS
 {
@@ -27,7 +28,7 @@ public:
 	// constructor
 	Agent47();
 	void update(float frameTime);
-}
+};
 
 
 #endif
