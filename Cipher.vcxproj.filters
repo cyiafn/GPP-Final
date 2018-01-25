@@ -16,37 +16,63 @@
     <Filter Include="Header Files\Skill Components">
       <UniqueIdentifier>{97f58af5-cb07-44e7-b7c2-a308f9ac3276}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Base Engine">
+      <UniqueIdentifier>{20841938-5f86-4af9-a278-7931e1714937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{513605bf-413d-4956-9269-d8d4022604e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{82ecd017-9a96-45bf-b611-7eab26380068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{6700e04d-34f9-45bf-ba35-f4bf2383950d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base Engine">
+      <UniqueIdentifier>{d25d7135-b324-4b72-80e6-5d2f189fc286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{ce29cde8-1b44-428d-bb09-d832f2b05688}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="winmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="image.cpp">
+    <ClCompile Include="Cipher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="entity.cpp">
+      <Filter>Source Files\Base Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\Base Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics.cpp">
+      <Filter>Source Files\Base Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Source Files\Base Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
       <Filter>Source Files</Filter>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files\Base Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="platform.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
     <ClCompile Include="textureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Base Engine</Filter>
     </ClCompile>
     <ClCompile Include="HealthComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Cipher.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="winmain.cpp">
+      <Filter>Source Files\Base Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
     <ClCompile Include="ItemPortal.cpp">
       <Filter>Source Files</Filter>
@@ -120,43 +146,49 @@
     <ClCompile Include="NecridRComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bomb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
+    <ClInclude Include="Cipher.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="platform.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files\Base Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\Base Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="gameError.h">
+      <Filter>Header Files\Base Engine</Filter>
     </ClInclude>
     <ClInclude Include="graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base Engine</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base Engine</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files\Base Engine</Filter>
+    </ClInclude>
     <ClInclude Include="textureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameError.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Base Engine</Filter>
     </ClInclude>
     <ClInclude Include="HealthComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
     <ClInclude Include="Cipher.h">
       <Filter>Header Files</Filter>
@@ -185,59 +217,56 @@
     <ClInclude Include="Necrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bullet.h">
+    <ClInclude Include="Agent47QComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bomb.h">
+    <ClInclude Include="Agent47WComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Agent47EComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47QComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Agent47RComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47WComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxEComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CyraxQComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxRComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CyraxWComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FreidEComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+    <ClInclude Include="CyraxEComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CyraxRComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FreidQComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidRComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FreidWComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NecridEComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+    <ClInclude Include="FreidEComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FreidRComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NecridQComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridRComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NecridWComponent.h">
-      <Filter>Header Files\Skill Components</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NecridEComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NecridRComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="characterFSM.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
