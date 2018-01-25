@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
+    <Filter Include="Header Files\Skill Components">
+      <UniqueIdentifier>{97f58af5-cb07-44e7-b7c2-a308f9ac3276}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -182,59 +185,59 @@
     <ClInclude Include="Necrid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Agent47QComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47WComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47EComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47RComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxQComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxWComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxEComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxRComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidQComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidWComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidEComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidRComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridQComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridWComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridEComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridRComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bomb.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent47EComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent47QComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent47RComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent47WComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CyraxEComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CyraxQComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CyraxRComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CyraxWComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FreidEComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FreidQComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FreidRComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FreidWComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NecridEComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NecridQComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NecridRComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NecridWComponent.h">
+      <Filter>Header Files\Skill Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
