@@ -11,6 +11,8 @@
 #include "textureManager.h"
 #include "image.h"
 
+#include "characters.h"
+
 //=============================================================================
 // This class is the core of the game
 //=============================================================================
@@ -21,6 +23,9 @@ private:
 	//TextureManager
 	//Object
 
+	TextureManager characterTexture;     // player texture
+
+	Characters player;
 
 public:
     // Constructor

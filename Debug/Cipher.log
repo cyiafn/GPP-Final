@@ -1,0 +1,8 @@
+﻿  characters.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(45): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(47): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  MoveComponent.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(45): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(47): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Cipher.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Final Assignment\GPP-Final\Debug\Cipher.exe

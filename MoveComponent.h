@@ -8,7 +8,8 @@
 
 namespace moveComponentNS
 {
-	const float GRAVITY = 9.78033;         // gravitational constant
+	//const float GRAVITY = 9.78033;         // gravitational constant
+	const float JUMPFORCE = 10;
 }
 
 class MoveComponent
@@ -16,31 +17,79 @@ class MoveComponent
 private:
 	VECTOR2 velocity;       // velocity
 	VECTOR2 deltaV;         // added to velocity during next call to update()
+
+	float acceleration;
 	float   mass;           // Mass of entity
 	float   gravity;        // gravitational constant of the game universe
-	float   force;          // Force of gravity
+	float	jumpForce;		// Force of Jump
+
+	int onPlatformCheck;   //checks if player is on platform
+	int jumpingCheck;   //checks if player is jumping
 
 public:
+	MoveComponent();
+
+//  Get functions
+//---------------------------------------------------------------------------------------------------
 	//return velocity vector
 	VECTOR2 getVelocity() const { return velocity; }
-	// Return mass.
+	//Return mass.
 	float getMass()           const { return mass; }
-	// Return gravitational constant.
-	float getGravity()        const { return gravity; }
-	// Set velocity.
+	////Return gravitational constant.
+	//float getGravity()        const { return gravity; }
+	//Return Acceleration
+	float getAcceleration() { return acceleration; }
+	//Return force of jump
+	float getJumpForce() { return jumpForce; }
+	//Return whether character is on platform
+	float getOnPlatformCheck() { return onPlatformCheck; }
+	//Return whether character is jumping
+	float getJumpingCheck() { return jumpingCheck; }
+//----------------------------------------------------------------------------------------------------
+//  Set functions
+//----------------------------------------------------------------------------------------------------
+	//Set velocity.
 	void  setVelocity(VECTOR2 v) { velocity = v; }
-
-	// Set delta velocity. Added to velocity in update().
+	//Set delta velocity. Added to velocity in update().
 	void  setDeltaV(VECTOR2 dv) { deltaV = dv; }
-	// Set mass.
+	//Set mass.
 	void  setMass(float m) { mass = m; }
+	////Set gravitational constant. Default is 6.67428e-11
+	//void  setGravity(float g) { gravity = g; }
+	//Set Acceleration.
+	void setAcceleration(float accel) { acceleration = accel; }
+	//Set Jumping Force
+	void setJumpForce(float jForce) { jumpForce = jForce; }
+	//Set whether character on Platform
+	void setOnPlatformCheck(int isOnPlatform) { onPlatformCheck = isOnPlatform; }
+	//Set whether character jumping
+	void setJumpingCheck(int isJumping) { jumpingCheck = isJumping; }
+// --------------------------------------------------------------------------------------------------
 
-	// Set gravitational constant. Default is 6.67428e-11
-	void  setGravity(float g) { gravity = g; }
-
+// Other Functions 
+//---------------------------------------------------------------------------------------------------
 	void update(float frameTime, Entity &ent);
 
 	//void bounce(VECTOR2 &collisionVector, Entity &ent);
 	//void gravityForce(Entity *ent, float frameTime);
+//---------------------------------------------------------------------------------------------------
+
+
+
+// Enum classes
+//---------------------------------------------------------------------------------------------------
+	enum onPlatform
+	{
+		standingOnPlatform = 0,
+		NotOnPlatform = 1
+	};
+
+	enum playerJump
+	{
+		notJumping = 0,
+		singleJump = 1,
+		doubleJumpAllowed = 2,
+		doubleJump = 3
+	};
 };
 #endif
