@@ -23,7 +23,7 @@ private:
     // game items
 	//TextureManager
 	//Object
-	Map* map1;
+	Map *map1;
 
 	TextureManager characterTexture;     // player texture
 

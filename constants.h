@@ -39,7 +39,6 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const float GRAVITY = 6.67428e-11f;             // gravitational constant
 
 // graphic images
-const char PLATFORM1_IMAGE[] = "pictures\\platform1.png";
 const char PLATFORM1_IMAGE[] = "pictures\\Background\\platform1.png";
 const char BACKGROUND1_IMAGE[] = "pictures\\Background\\background1.png";
 const char MIDDLEGROUND1_IMAGE[] = "pictures\\Background\\middleground1.png";

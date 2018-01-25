@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _MAP_H             // Prevent multiple definitions if this 
+#define _MAP_H             // file is included in more than one place
+#define WIN32_LEAN_AND_MEAN
 #include "constants.h"
 #include "platform.h"
 #include <vector>
@@ -7,11 +9,11 @@
 
 namespace mapNS
 {
-	int centerX = 640;
-	int centerY = 360;
-	int maximumXFalloff = 300;
-	int maximumYFalloff = 200;
-	float timeForMapMovement = 1.5;
+	const int centerX = 640;
+	const int centerY = 360;
+	const int maximumXFalloff = 300;
+	const int maximumYFalloff = 200;
+	const float timeForMapMovement = 1.5;
 }
 
 
@@ -51,3 +53,5 @@ public:
 	void cameraMovement(std::vector<Platform*> characters, float frameTime);
 	void vibration(std::vector<Platform*> characters, float frameTime);
 };
+
+#endif

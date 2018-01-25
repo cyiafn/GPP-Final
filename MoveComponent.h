@@ -66,9 +66,9 @@ public:
 	// Set gravitational constant. Default is 6.67428e-11
 	void  setGravity(float g) { gravity = g; }
 
-	float getAcceleration() { return acceleration; }
+	//float getAcceleration() { return acceleration; }
 
-	void setAcceleration(float accel) { acceleration = accel; }
+	//void setAcceleration(float accel) { acceleration = accel; }
 
 	void update(float frameTime, Entity &ent);
 
