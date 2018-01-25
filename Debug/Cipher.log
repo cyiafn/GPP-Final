@@ -1,3 +1,12 @@
 ﻿  map.cpp
 c:\users\chenyifan\desktop\gpp-final\movecomponent.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(74): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(80): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(88): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(96): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(104): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(112): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(120): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(128): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\chenyifan\desktop\gpp-final\map.cpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
   Cipher.vcxproj -> C:\Users\chenyifan\Desktop\GPP-Final\Debug\Cipher.exe
