@@ -7,11 +7,11 @@
 
 namespace mapNS
 {
-	int centerX = 640;
-	int centerY = 360;
-	int maximumXFalloff = 300;
-	int maximumYFalloff = 200;
-	float timeForMapMovement = 1.5;
+	const int centerX = 640;
+	const int centerY = 360;
+	const int maximumXFalloff = 300;
+	const int maximumYFalloff = 200;
+	const float timeForMapMovement = 1.5;
 }
 
 
@@ -25,6 +25,9 @@ private:
 	TextureManager middlegroundTexture;
 	TextureManager frontgroundTexture;
 	std::vector<Platform*> platforms;
+	int pseudonumberBuffer[100];
+	int percentageX;
+	int percentageY;
 	Platform *background1;
 	Platform *middleground1;
 	Platform *frontground1;
