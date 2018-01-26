@@ -9,7 +9,12 @@ MoveComponent::MoveComponent()
 	velocity.y = 0.0;
 	deltaV.x = 0.0;
 	deltaV.y = 0.0;
-	gravity = moveComponentNS::GRAVITY;
+
+//	gravity = moveComponentNS::GRAVITY;
+	jumpForce = moveComponentNS::JUMPFORCE;
+
+	onPlatformCheck = onPlatform::NotOnPlatform;
+	jumpingCheck = playerJump::notJumping;
 }
 MoveComponent::~MoveComponent()
 {

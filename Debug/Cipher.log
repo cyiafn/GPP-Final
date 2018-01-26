@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  map.cpp
 c:\users\chenyifan\desktop\gpp-final\movecomponent.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\users\chenyifan\desktop\gpp-final\map.cpp(74): warning C4305: 'argument': truncation from 'double' to 'float'
@@ -10,3 +11,13 @@ c:\users\chenyifan\desktop\gpp-final\map.cpp(120): warning C4305: 'argument': tr
 c:\users\chenyifan\desktop\gpp-final\map.cpp(128): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\chenyifan\desktop\gpp-final\map.cpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
   Cipher.vcxproj -> C:\Users\chenyifan\Desktop\GPP-Final\Debug\Cipher.exe
+=======
+﻿  characters.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(45): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(47): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  MoveComponent.cpp
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(45): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(47): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Cipher.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Final Assignment\GPP-Final\Debug\Cipher.exe
+>>>>>>> justin
