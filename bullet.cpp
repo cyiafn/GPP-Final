@@ -11,12 +11,12 @@ Bullet::Bullet() : Entity()
 	collisionType = entityNS::CIRCLE;
 	movement = new MoveComponent();
 }
-Bullet::~Bullet()
-{
-	delete movement;
-	movement = NULL;
-	delete this;
-}
+//Bullet::~Bullet()
+//{
+//	delete movement;
+//	movement = NULL;
+//	delete this;
+//}
 void Bullet::update(float frameTime)
 {
 	movement->update(frameTime, *this);

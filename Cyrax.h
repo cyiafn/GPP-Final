@@ -27,13 +27,18 @@ private:
 	CyraxWComponent *Wcomponent;
 	CyraxEComponent *Ecomponent;
 	CyraxRComponent *Rcomponent;
-	Game* cipher;
+
+	TextureManager characterTexture;
 public:
 	// constructor
 	Cyrax(Game *cipher);
-	void update(float frameTime);
-	void coolDownChecking();
+	void skillUpdate(float frameTime);
+	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
+	void useQ();
+	void useW();
+	void useE();
+	void useR();
 };
 
 

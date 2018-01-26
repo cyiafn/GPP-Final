@@ -36,10 +36,6 @@ protected:
 	bool Q_on_CoolDown = false;
 	bool W_on_CoolDown = false;
 	bool E_on_CoolDown = false;
-	bool useQ = false;
-	bool useW = false;
-	bool useE = false;
-	bool useR = false;
 	int Q_CoolDown = 0;
 	int W_CoolDown = 0;
 	int E_CoolDown = 0;
@@ -84,10 +80,13 @@ public:
 
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
-	//virtual void useQ();
-	//virtual void useW();
-	//virtual void useE();
-	//virtual void useR();
+	virtual void useQ() {};
+	virtual void useW() {};
+	virtual void useE() {};
+	virtual void useR() {};
+	virtual void skillUpdate(float frameTime) {};
+	void coolDownChecking();
+	virtual void resetSkill(std::string letter) {};
 //-----------------------------------------------------------------------------------------------------------------------------
 
 

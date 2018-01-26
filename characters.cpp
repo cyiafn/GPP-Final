@@ -85,28 +85,22 @@ void Characters::update(float frameTime)
 	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ = true;
-		else
-			useQ = false;
+			useQ();
 	}
 	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
 	{
 		if (!W_on_CoolDown)
-			useW = true;
-		else
-			useW = false;
+			useW();
 	}
 	if (input->isKeyDown(P1SKILL3_KEY)) //U or /
 	{
 		if (!E_on_CoolDown)
-			useE = true;
-		else
-			useE = false;
+			useE();
 	}
 	//Ultimate
 	if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
 	{
-		useR = true;
+		useR();
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------------------
@@ -115,31 +109,25 @@ void Characters::update(float frameTime)
 	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ = true;
-		else
-			useQ = false;
+			useQ();
 	}
 	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 	{
 		if (!W_on_CoolDown)
-			useW = true;
-		else
-			useW = false;
+			useW();
 	}
 	if (input->isKeyDown(P2SKILL3_KEY)) //U or /
 	{
 		if (!E_on_CoolDown)
-			useE = true;
-		else
-			useE = false;
+			useE();
 	}
 	//Ultimate
 	if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
 	{
-		useR = true;
+		useR();
 	}
 
-	
+	skillUpdate(frameTime);
 }
 
 //void Characters::changeState(const CharacterFSM * newState)
@@ -161,22 +149,42 @@ void Characters::revertLocation()
 }
 
 //Skills by Ee Zher
-//void Characters::useQ()
-//{
-//
-//}
-//
-//void Characters::useW()
-//{
-//
-//}
-//
-//void Characters::useE()
-//{
-//
-//}
-//
-//void Characters::useR()
-//{
-//
-//}
+void Characters::coolDownChecking() 
+{
+	if (Q_on_CoolDown)
+	{
+		QframeTime++;
+		if (QframeTime % 60)
+		{
+			Q_CoolDown--;
+			if (Q_CoolDown = 0)
+			{
+				resetSkill("Q");
+			}
+		}
+	}
+	if (W_on_CoolDown)
+	{
+		WframeTime++;
+		if (WframeTime % 60)
+		{
+			W_CoolDown--;
+			if (W_CoolDown = 0)
+			{
+				resetSkill("W");
+			}
+		}
+	}
+	if (E_on_CoolDown)
+	{
+		EframeTime++;
+		if (EframeTime % 60)
+		{
+			E_CoolDown--;
+			if (E_CoolDown = 0)
+			{
+				resetSkill("E");
+			}
+		}
+	}
+}

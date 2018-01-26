@@ -31,6 +31,7 @@ void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 	map1 = new Map(0, this);
+	player = new Cyrax(this);
     // demo texture initialize
     /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/
@@ -41,11 +42,9 @@ void Cipher::initialize(HWND hwnd)
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));*/
 
 	//Testing
-	if(!characterTexture.initialize(graphics, KEN_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
+	
 
-	if (!player.initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	
 
     return;
 }
@@ -56,7 +55,7 @@ void Cipher::initialize(HWND hwnd)
 void Cipher::update()
 {
 	map1->update(frameTime);
-	player.update(frameTime);
+	player->update(frameTime);
 }
 
 //=============================================================================
@@ -81,7 +80,7 @@ void Cipher::render()
     graphics->spriteBegin();                // begin drawing sprites
 	
 	map1->draw();
-	player.draw();
+	player->draw();
 	//draw here
 
     graphics->spriteEnd();                  // end drawing sprites

@@ -4,6 +4,7 @@
 
 CyraxQComponent::CyraxQComponent(Game *cipher)
 {
+	Qbullet = new Bullet();
 	this->bulletList = new std::vector<Bullet>(10);
 	if (!QbulletTexture.initialize(cipher->getGraphics(), CYRAXQ_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cyrax Q image"));
@@ -22,7 +23,7 @@ void CyraxQComponent::update(float frameTime)
 				
 		if (Qbullet->getCurrRange() == CyraxQComponentNS::QBULLET_MAX_RANGE)
 		{
-			Qbullet->~Bullet();
+			//Qbullet->~Bullet();
 			bulletList->erase(bulletList->begin());
 		}
 		Qbullet->update(frameTime);

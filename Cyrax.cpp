@@ -9,73 +9,26 @@ Cyrax::Cyrax(Game *cipher)
 	Q_CoolDown = cyraxNS::QSkillCD;
 	W_CoolDown = cyraxNS::WSkillCD;
 	E_CoolDown = cyraxNS::ESkillCD;
+	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
+	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 }
 
-void Cyrax::update(float frameTime)
+bool Cyrax::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
 {
-	this->coolDownChecking();
-	if (useQ)
-	{
-		Qcomponent->activate(facing, cipher);
-	}
-	if (useW)
-	{
-		//Wcomponent->activate(facing);
-	}
-	if (useE)
-	{
-		//Ecomponent->activate(facing);
-	}
-	if (useR)
-	{
-		//Rcomponent->activate(facing);
-	}
+
+	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
+}
+
+void Cyrax::skillUpdate(float frameTime)
+{
 	Qcomponent->update(frameTime);
 	//Wcomponent->update(frameTime);
 	//Ecomponent->update(frameTime);
 	//Rcomponent->update(frameTime);
 }
 
-
-void Cyrax::coolDownChecking()
-{
-	if (Q_on_CoolDown)
-	{
-		QframeTime++;
-		if (QframeTime % 60)
-		{
-			Q_CoolDown--;
-			if (Q_CoolDown = 0)
-			{
-				resetSkill("Q");
-			}
-		}
-	}
-	if (W_on_CoolDown)
-	{
-		WframeTime++;
-		if (WframeTime % 60)
-		{
-			W_CoolDown--;
-			if (W_CoolDown = 0)
-			{
-				resetSkill("W");				
-			}
-		}
-	}
-	if (E_on_CoolDown)
-	{
-		EframeTime++;
-		if (EframeTime % 60)
-		{
-			E_CoolDown--;
-			if (E_CoolDown = 0)
-			{
-				resetSkill("E");
-			}
-		}
-	}
-}
 
 void Cyrax::resetSkill(std::string letter)
 {
@@ -103,4 +56,21 @@ void Cyrax::resetSkill(std::string letter)
 		W_on_CoolDown = false;
 		E_on_CoolDown = false;
 	}
+}
+
+void Cyrax::useQ()
+{
+	//Qcomponent->activate(facing, cipher);
+}
+void Cyrax::useW()
+{
+
+}
+void Cyrax::useE()
+{
+
+}
+void Cyrax::useR()
+{
+
 }

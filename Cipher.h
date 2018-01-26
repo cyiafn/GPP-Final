@@ -33,8 +33,9 @@ private:
 	Freid *freid;
 	Agent47 *agent47;
 	Necrid *necrid;
-	//Characters *player = &cyrax;
-	Characters player;
+	Characters *player = cyrax;
+	//Characters player;
+	/*Cyrax *player;*/
 
 public:
     // Constructor
