@@ -20,6 +20,7 @@ namespace CyraxQComponentNS
 	const int Y = GAME_HEIGHT / 2;			// location on screen
 	const int QBULLET_START_FRAME = 2;      // bullet starts at frame 2
 	const int QBULLET_END_FRAME = 2;       // bullet end at frame 2
+	const int QBULLET_MAX_RANGE = 500;
 }
 
 class CyraxQComponent
@@ -28,8 +29,6 @@ private:
 	TextureManager QbulletTexture;
 	std::vector<Bullet> *bulletList;
 	Bullet *Qbullet;
-	int MaxRange = 500;
-	int CurRange = 0;
 
 public:
 	CyraxQComponent(Game *cipher);
@@ -38,5 +37,7 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
+	void activate(int facing, Game *cipher);
+
 };
 #endif

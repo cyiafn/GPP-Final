@@ -15,11 +15,13 @@ Bullet::~Bullet()
 {
 	delete movement;
 	movement = NULL;
+	delete this;
 }
 void Bullet::update(float frameTime)
 {
 	movement->update(frameTime, *this);
 	Entity::update(frameTime);
+	CurrRange++;
 }
 void Bullet::draw()
 {
@@ -27,6 +29,11 @@ void Bullet::draw()
 	{
 		Image::draw();
 	}
+}
+
+int Bullet::getCurrRange()
+{
+	return CurrRange;
 }
 
 bool Bullet::initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM)

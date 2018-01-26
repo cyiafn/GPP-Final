@@ -57,12 +57,14 @@ void Characters::update(float frameTime)
 
 	if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
 	{
+		facing = 0;
 		spriteData.x = spriteData.x + frameTime * 100;
 		if (spriteData.x > GAME_WIDTH)               // if off screen right
 			spriteData.x = ((float)-spriteData.width);  // position off screen left
 	}
 	if (input->isKeyDown(P1LEFT_KEY)||input->isKeyDown(P2LEFT_KEY))             // if move left
 	{
+		facing = 1;
 		spriteData.x = spriteData.x - frameTime * 100;
 		if (spriteData.x < -spriteData.width)         // if off screen left
 			spriteData.x = ((float)GAME_WIDTH);      // position off screen right
@@ -76,7 +78,68 @@ void Characters::update(float frameTime)
 
 		spriteData.y += velo.y + frameTime * GRAVITY;
 	}
+	//-----------------------------------------------------------------------------------------------------------------------------
+	//Player 1
+	//-----------------------------------------------------------------------------------------------------------------------------
 
+	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
+	{
+		if (!Q_on_CoolDown)
+			useQ = true;
+		else
+			useQ = false;
+	}
+	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
+	{
+		if (!W_on_CoolDown)
+			useW = true;
+		else
+			useW = false;
+	}
+	if (input->isKeyDown(P1SKILL3_KEY)) //U or /
+	{
+		if (!E_on_CoolDown)
+			useE = true;
+		else
+			useE = false;
+	}
+	//Ultimate
+	if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
+	{
+		useR = true;
+	}
+
+	//-----------------------------------------------------------------------------------------------------------------------------
+	//Player 2
+	//-----------------------------------------------------------------------------------------------------------------------------
+	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
+	{
+		if (!Q_on_CoolDown)
+			useQ = true;
+		else
+			useQ = false;
+	}
+	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
+	{
+		if (!W_on_CoolDown)
+			useW = true;
+		else
+			useW = false;
+	}
+	if (input->isKeyDown(P2SKILL3_KEY)) //U or /
+	{
+		if (!E_on_CoolDown)
+			useE = true;
+		else
+			useE = false;
+	}
+	//Ultimate
+	if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
+	{
+		useR = true;
+	}
+
+	
 }
 
 //void Characters::changeState(const CharacterFSM * newState)
@@ -97,3 +160,23 @@ void Characters::revertLocation()
 	this->spriteData.y = prevY;
 }
 
+//Skills by Ee Zher
+//void Characters::useQ()
+//{
+//
+//}
+//
+//void Characters::useW()
+//{
+//
+//}
+//
+//void Characters::useE()
+//{
+//
+//}
+//
+//void Characters::useR()
+//{
+//
+//}

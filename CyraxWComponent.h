@@ -10,7 +10,8 @@
 
 namespace CyraxWComponentNS
 {
-
+	const int X = GAME_WIDTH / 2;			// location on screen
+	const int Y = GAME_HEIGHT / 2;			// location on screen
 }
 
 class CyraxWComponent

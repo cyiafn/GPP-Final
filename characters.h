@@ -9,6 +9,7 @@
 #include "MoveComponent.h"
 
 #include "characterFSM.h"
+#include <string>
 
 namespace charactersNS
 {
@@ -27,11 +28,24 @@ namespace charactersNS
 // inherits from Entity class
 class Characters : public Entity
 {
-private:	
+protected:	
 	int playerNo;
 	float prevX;
 	float prevY;
-
+	int facing = 0; //0 is facing right, 1 is facing left
+	bool Q_on_CoolDown = false;
+	bool W_on_CoolDown = false;
+	bool E_on_CoolDown = false;
+	bool useQ = false;
+	bool useW = false;
+	bool useE = false;
+	bool useR = false;
+	int Q_CoolDown = 0;
+	int W_CoolDown = 0;
+	int E_CoolDown = 0;
+	int QframeTime = 0;
+	int WframeTime = 0;
+	int EframeTime = 0;
 	HealthComponent * healthcomponent;
 	MoveComponent * movecomponent;
 
@@ -68,6 +82,13 @@ public:
 	void revertLocation();
 //-----------------------------------------------------------------------------------------------------------------------------
 
+//Skills - by Ee Zher
+//-----------------------------------------------------------------------------------------------------------------------------
+	//virtual void useQ();
+	//virtual void useW();
+	//virtual void useE();
+	//virtual void useR();
+//-----------------------------------------------------------------------------------------------------------------------------
 
 
 //Enum classes 

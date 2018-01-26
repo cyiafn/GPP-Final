@@ -28,14 +28,14 @@ class Bullet : public Entity
 {
 private:
 	MoveComponent *movement;
-	float MaxRange = 0;
-	float CurrRange = 0;
+	int CurrRange = 0;
 public:
 	Bullet();
 	~Bullet();
 	void update(float frameTime);
 	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM);
+	int getCurrRange();
 	MoveComponent* getMotion() { return movement; }
 };
 

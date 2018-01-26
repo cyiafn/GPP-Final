@@ -10,10 +10,13 @@
 #include "CyraxWComponent.h"
 #include "CyraxEComponent.h"
 #include "CyraxRComponent.h"
+#include "game.h"
 
 namespace cyraxNS
 {
-
+	const int QSkillCD = 1;
+	const int WSkillCD = 3;
+	const int ESkillCD = 5;
 }
 
 //Player.h
@@ -24,10 +27,13 @@ private:
 	CyraxWComponent *Wcomponent;
 	CyraxEComponent *Ecomponent;
 	CyraxRComponent *Rcomponent;
+	Game* cipher;
 public:
 	// constructor
-	Cyrax();
+	Cyrax(Game *cipher);
 	void update(float frameTime);
+	void coolDownChecking();
+	void resetSkill(std::string Letter);
 };
 
 
