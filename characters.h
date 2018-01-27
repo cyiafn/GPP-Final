@@ -10,13 +10,14 @@
 
 #include "characterFSM.h"
 #include <string>
+#include "game.h"
 
 namespace charactersNS
 {
 	const int WIDTH = 70;                   // image width
 	const int HEIGHT = 80;                  // image height
-	const int X = GAME_WIDTH / 8 - WIDTH / 8;   // location on screen
-	const int Y = GAME_HEIGHT / 8 - HEIGHT / 8;
+	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
+	const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
 	const float MASS = 250.0f;              // mass
 	const int   TEXTURE_COLS = 7;           // texture has 2 columns
 
@@ -32,7 +33,8 @@ protected:
 	int playerNo;
 	float prevX;
 	float prevY;
-	int facing = 0; //0 is facing right, 1 is facing left
+	VECTOR2 center;
+	int facing; //1 is facing right, 2 is facing left
 	bool Q_on_CoolDown = false;
 	bool W_on_CoolDown = false;
 	bool E_on_CoolDown = false;
@@ -80,7 +82,7 @@ public:
 
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
-	virtual void useQ(int facing, Game *cipher) {};
+	virtual void useQ(int facing, VECTOR2 center, Game *cipher) {};
 	virtual void useW() {};
 	virtual void useE() {};
 	virtual void useR() {};

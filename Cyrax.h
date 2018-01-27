@@ -10,7 +10,6 @@
 #include "CyraxWComponent.h"
 #include "CyraxEComponent.h"
 #include "CyraxRComponent.h"
-#include "game.h"
 
 namespace cyraxNS
 {
@@ -33,9 +32,10 @@ public:
 	// constructor
 	Cyrax(Game *cipher);
 	void skillUpdate(float frameTime);
+	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
-	void useQ(int facing, Game *cipher);
+	void useQ(int facing, VECTOR2 center, Game *cipher);
 	void useW();
 	void useE();
 	void useR();

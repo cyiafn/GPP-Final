@@ -11,9 +11,12 @@
 #include "Agent47EComponent.h"
 #include "Agent47RComponent.h"
 
-namespace agent47NS
-{
 
+namespace Agent47NS
+{
+	const int QSkillCD = 1;
+	const int WSkillCD = 3;
+	const int ESkillCD = 5;
 }
 
 //Player.h
@@ -24,10 +27,19 @@ private:
 	Agent47WComponent *Wcomponent;
 	Agent47EComponent *Ecomponent;
 	Agent47RComponent *Rcomponent;
+	TextureManager characterTexture;
+
 public:
 	// constructor
-	Agent47();
-	void update(float frameTime);
+	Agent47(Game *cipher);
+	void skillUpdate(float frameTime);
+	void draw();
+	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
+	void resetSkill(std::string Letter);
+	void useQ(int facing, VECTOR2 center, Game *cipher);
+	void useW();
+	void useE();
+	void useR();
 };
 
 

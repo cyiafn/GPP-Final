@@ -6,7 +6,9 @@
 #include "input.h"
 #include "game.h"
 #include "entity.h"
-
+#include <vector>
+#include "textureManager.h"
+#include "constants.h"
 
 namespace CyraxWComponentNS
 {
@@ -20,7 +22,12 @@ private:
 
 
 public:
-	CyraxWComponent();
-	void update(float frameTime, Entity &ent);
+	CyraxWComponent(Game *cipher);
+	~CyraxWComponent();
+	void update(float frameTime);
+	void draw();
+	void releaseAll();
+	void resetAll();
+	void activate(int facing, VECTOR2 center, Game *cipher);
 };
 #endif

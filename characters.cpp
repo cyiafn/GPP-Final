@@ -37,7 +37,7 @@ bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 //=============================================================================
 void Characters::draw()
 {
-	Image::draw();              // draw ship
+	//getting overwritten
 }
 
 //=============================================================================
@@ -49,7 +49,10 @@ void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
 	//currentState->Execute(this);
-
+	float centerX = this->getCenterX();
+	float centerY = this->getCenterY();
+	center = VECTOR2(centerX, centerY);
+	this->coolDownChecking();
 	//if ( &movecomponent->getOnPlatformCheck == movecomponent->NotOnPlatform)
 	//{
 	//	spriteData.y = spriteData.y - frameTime * 100;
@@ -57,14 +60,14 @@ void Characters::update(float frameTime, Game *cipher)
 
 	if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
 	{
-		facing = 0;
+		facing = 1;
 		spriteData.x = spriteData.x + frameTime * 100;
 		if (spriteData.x > GAME_WIDTH)               // if off screen right
 			spriteData.x = ((float)-spriteData.width);  // position off screen left
 	}
 	if (input->isKeyDown(P1LEFT_KEY)||input->isKeyDown(P2LEFT_KEY))             // if move left
 	{
-		facing = 1;
+		facing = 2;
 		spriteData.x = spriteData.x - frameTime * 100;
 		if (spriteData.x < -spriteData.width)         // if off screen left
 			spriteData.x = ((float)GAME_WIDTH);      // position off screen right
@@ -85,7 +88,11 @@ void Characters::update(float frameTime, Game *cipher)
 	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ(facing, cipher);
+		{
+			useQ(facing, center, cipher);
+			Q_on_CoolDown = true;
+		}
+			
 	}
 	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
 	{
@@ -109,7 +116,7 @@ void Characters::update(float frameTime, Game *cipher)
 	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ(facing, cipher);
+			useQ(facing, center, cipher);
 	}
 	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 	{
@@ -154,10 +161,10 @@ void Characters::coolDownChecking()
 	if (Q_on_CoolDown)
 	{
 		QframeTime++;
-		if (QframeTime % 60)
+		if (QframeTime % 60 == 0)
 		{
 			Q_CoolDown--;
-			if (Q_CoolDown = 0)
+			if (Q_CoolDown == 0)
 			{
 				resetSkill("Q");
 			}
@@ -166,10 +173,10 @@ void Characters::coolDownChecking()
 	if (W_on_CoolDown)
 	{
 		WframeTime++;
-		if (WframeTime % 60)
+		if (WframeTime % 60 == 0)
 		{
 			W_CoolDown--;
-			if (W_CoolDown = 0)
+			if (W_CoolDown == 0)
 			{
 				resetSkill("W");
 			}
@@ -178,10 +185,10 @@ void Characters::coolDownChecking()
 	if (E_on_CoolDown)
 	{
 		EframeTime++;
-		if (EframeTime % 60)
+		if (EframeTime % 60 == 0)
 		{
 			E_CoolDown--;
-			if (E_CoolDown = 0)
+			if (E_CoolDown == 0)
 			{
 				resetSkill("E");
 			}

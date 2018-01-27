@@ -11,9 +11,11 @@
 #include "NecridEComponent.h"
 #include "NecridRComponent.h"
 
-namespace necridNS
+namespace NecridNS
 {
-
+	const int QSkillCD = 1;
+	const int WSkillCD = 3;
+	const int ESkillCD = 5;
 }
 
 //Player.h
@@ -24,10 +26,19 @@ private:
 	NecridWComponent *Wcomponent;
 	NecridEComponent *Ecomponent;
 	NecridRComponent *Rcomponent;
+	TextureManager characterTexture;
+
 public:
 	// constructor
-	Necrid();
-	void update(float frameTime);
+	Necrid(Game *cipher);
+	void skillUpdate(float frameTime);
+	void draw();
+	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
+	void resetSkill(std::string Letter);
+	void useQ(int facing, VECTOR2 center, Game *cipher);
+	void useW();
+	void useE();
+	void useR();
 };
 
 

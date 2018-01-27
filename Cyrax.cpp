@@ -3,9 +3,9 @@
 Cyrax::Cyrax(Game *cipher)
 {
 	Qcomponent = new CyraxQComponent(cipher);
-	Wcomponent = new CyraxWComponent();
-	Ecomponent = new CyraxEComponent();
-	Rcomponent = new CyraxRComponent();
+	Wcomponent = new CyraxWComponent(cipher);
+	Ecomponent = new CyraxEComponent(cipher);
+	Rcomponent = new CyraxRComponent(cipher);
 	Q_CoolDown = cyraxNS::QSkillCD;
 	W_CoolDown = cyraxNS::WSkillCD;
 	E_CoolDown = cyraxNS::ESkillCD;
@@ -19,6 +19,15 @@ bool Cyrax::initialize(Game *gamePtr, int width, int height, int ncols, TextureM
 {
 
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
+}
+
+void Cyrax::draw()
+{
+	Image::draw();              // draw ship
+	Qcomponent->draw();
+	//Wcomponent->draw();
+	//Ecomponent->draw();
+	//Rcomponent->draw();
 }
 
 void Cyrax::skillUpdate(float frameTime)
@@ -58,9 +67,9 @@ void Cyrax::resetSkill(std::string letter)
 	}
 }
 
-void Cyrax::useQ(int facing, Game *cipher)
+void Cyrax::useQ(int facing, VECTOR2 center, Game *cipher)
 {
-	Qcomponent->activate(facing, cipher);
+	Qcomponent->activate(facing, center, cipher);
 }
 void Cyrax::useW()
 {

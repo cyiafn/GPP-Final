@@ -12,14 +12,14 @@
 
 namespace bulletNS
 {
-	const int	WIDTH = 60;                   // image width
-	const int	HEIGHT = 20;                  // image height
-	const int   TEXTURE_COLS = 3;           // texture has 3 columns
+	const int	WIDTH = 30;                   // image width
+	const int	HEIGHT = 30;                  // image height
+	const int   TEXTURE_COLS = 1;           // texture has 3 columns
 	const int	X = GAME_WIDTH/2;
 	const int	Y = GAME_HEIGHT/2;
 	const float SPEED = 100;                // 100 pixels per second
-	const int   BULLET_START_FRAME = 2;     
-	const int   BULLET_END_FRAME = 2;
+	const int   BULLET_START_FRAME = 0;     
+	const int   BULLET_END_FRAME = 0;
 	
 }
 
@@ -37,6 +37,7 @@ public:
 	bool initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM);
 	int getCurrRange();
 	MoveComponent* getMotion() { return movement; }
+	void setDirection(VECTOR2 direction);
 };
 
 

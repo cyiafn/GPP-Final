@@ -13,14 +13,13 @@
 
 namespace CyraxQComponentNS
 {
-	const int WIDTH = 60;                   // image width
-	const int HEIGHT = 20;                  // image height
-	const int TEXTURE_COLS = 3;           // texture has 2 columns
-	const int X = GAME_WIDTH / 2;			// location on screen
-	const int Y = GAME_HEIGHT / 2;			// location on screen
-	const int QBULLET_START_FRAME = 2;      // bullet starts at frame 2
-	const int QBULLET_END_FRAME = 2;       // bullet end at frame 2
-	const int QBULLET_MAX_RANGE = 500;
+	const int WIDTH = 30;                   // image width
+	const int HEIGHT = 30;                  // image height
+	const int TEXTURE_COLS = 1;           // texture has 1 columns
+	const int QBULLET_START_FRAME = 0;      // bullet starts at frame 0
+	const int QBULLET_END_FRAME = 0;       // bullet end at frame 0
+	const int QBULLET_MAX_RANGE = 800;	// range by frametime
+	const float QBULLET_SPEED = 80;		// velocity.x for Bullet speed
 }
 
 class CyraxQComponent
@@ -28,7 +27,7 @@ class CyraxQComponent
 private:
 	TextureManager QbulletTexture;
 	std::vector<Bullet> *bulletList;
-
+	Bullet newBullet;
 public:
 	CyraxQComponent(Game *cipher);
 	~CyraxQComponent();
@@ -36,7 +35,7 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
-	void activate(int facing, Game *cipher);
+	void activate(int facing, VECTOR2 center, Game *cipher);
 
 };
 #endif

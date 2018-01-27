@@ -13,9 +13,7 @@ Bullet::Bullet() : Entity()
 }
 Bullet::~Bullet()
 {
-	delete movement;
-	movement = NULL;
-	delete this;
+	//this destructor is useless AF
 }
 void Bullet::update(float frameTime)
 {
@@ -30,7 +28,6 @@ void Bullet::draw()
 {
 	if (this->getActive())
 	{
-		//MessageBox(NULL, "Testing", "Test", MB_OKCANCEL); --> use this to check if code comes here
 		Image::draw();
 	}
 }
@@ -38,6 +35,11 @@ void Bullet::draw()
 int Bullet::getCurrRange()
 {
 	return CurrRange;
+}
+
+void Bullet::setDirection(VECTOR2 direction)
+{
+	movement->setVelocity(direction);
 }
 
 bool Bullet::initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM)
