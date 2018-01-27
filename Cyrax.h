@@ -35,7 +35,7 @@ public:
 	void skillUpdate(float frameTime);
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
-	void useQ();
+	void useQ(int facing, Game *cipher);
 	void useW();
 	void useE();
 	void useR();

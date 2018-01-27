@@ -31,7 +31,7 @@ private:
 	int CurrRange = 0;
 public:
 	Bullet();
-	//~Bullet();
+	~Bullet();
 	void update(float frameTime);
 	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM);

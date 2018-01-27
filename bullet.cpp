@@ -11,22 +11,26 @@ Bullet::Bullet() : Entity()
 	collisionType = entityNS::CIRCLE;
 	movement = new MoveComponent();
 }
-//Bullet::~Bullet()
-//{
-//	delete movement;
-//	movement = NULL;
-//	delete this;
-//}
+Bullet::~Bullet()
+{
+	delete movement;
+	movement = NULL;
+	delete this;
+}
 void Bullet::update(float frameTime)
 {
+	if (this->getActive())
+	{
+		CurrRange++;
+	}	
 	movement->update(frameTime, *this);
 	Entity::update(frameTime);
-	CurrRange++;
 }
 void Bullet::draw()
 {
-	if (this->getActive() == true)
+	if (this->getActive())
 	{
+		//MessageBox(NULL, "Testing", "Test", MB_OKCANCEL); --> use this to check if code comes here
 		Image::draw();
 	}
 }

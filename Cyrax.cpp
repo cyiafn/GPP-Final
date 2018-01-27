@@ -58,9 +58,9 @@ void Cyrax::resetSkill(std::string letter)
 	}
 }
 
-void Cyrax::useQ()
+void Cyrax::useQ(int facing, Game *cipher)
 {
-	//Qcomponent->activate(facing, cipher);
+	Qcomponent->activate(facing, cipher);
 }
 void Cyrax::useW()
 {

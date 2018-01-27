@@ -55,7 +55,7 @@ void Cipher::initialize(HWND hwnd)
 void Cipher::update()
 {
 	map1->update(frameTime);
-	player->update(frameTime);
+	player->update(frameTime, this);
 }
 
 //=============================================================================

@@ -73,14 +73,14 @@ public:
 
 //Other Functions
 //-----------------------------------------------------------------------------------------------------------------------------
-	void update(float frameTime);
+	void update(float frameTime, Game *cipher);
 	//void changeState(const CharacterFSM * newState) {};
 	void revertLocation();
 //-----------------------------------------------------------------------------------------------------------------------------
 
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
-	virtual void useQ() {};
+	virtual void useQ(int facing, Game *cipher) {};
 	virtual void useW() {};
 	virtual void useE() {};
 	virtual void useR() {};

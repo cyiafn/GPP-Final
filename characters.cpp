@@ -45,7 +45,7 @@ void Characters::draw()
 // typically called once per frame
 // frameTime is used to regulate the speed of movement and animation
 //=============================================================================
-void Characters::update(float frameTime)
+void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
 	//currentState->Execute(this);
@@ -85,7 +85,7 @@ void Characters::update(float frameTime)
 	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ();
+			useQ(facing, cipher);
 	}
 	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
 	{
@@ -109,7 +109,7 @@ void Characters::update(float frameTime)
 	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ();
+			useQ(facing, cipher);
 	}
 	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 	{
