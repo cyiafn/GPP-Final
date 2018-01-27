@@ -11,6 +11,11 @@
 #include "textureManager.h"
 #include "image.h"
 #include "map.h"
+#include "Cyrax.h"
+#include "Freid.h"
+#include "Agent47.h"
+#include "Necrid.h"
+#include "characters.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -21,7 +26,16 @@ private:
     // game items
 	//TextureManager
 	//Object
-	Map* map1;
+	Map *map1;
+
+	TextureManager characterTexture;     // player texture
+	Cyrax *cyrax;
+	Freid *freid;
+	Agent47 *agent47;
+	Necrid *necrid;
+	Characters *player = cyrax;
+	//Characters player;
+	/*Cyrax *player;*/
 
 public:
     // Constructor

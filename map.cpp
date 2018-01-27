@@ -4,15 +4,21 @@
 
 Map::Map(int type, Game* cipher)
 {
-	platforms = new std::vector<Platform>(100);
+	//platforms = new std::vector<Platform>(100);
+	background1 = new Platform();
+	middleground1 = new Platform();
+	middleground2 = new Platform();
+	frontground1 = new Platform();
+	frontground2 = new Platform();
+
+
+	prevX = 0;
+	prevY = 0;
+
+
+	vibrationOn = false;
 	if (type == 0)
 	{
-		background1 = new Platform();
-		middleground1 = new Platform();
-		middleground2 = new Platform();
-		frontground1 = new Platform();
-		frontground2 = new Platform();
-
 		if (!platformTexture.initialize(cipher->getGraphics(), PLATFORM1_IMAGE))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platform image"));
 		if (!backgroundTexture.initialize(cipher->getGraphics(), BACKGROUND1_IMAGE))
@@ -32,8 +38,8 @@ Map::Map(int type, Game* cipher)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing middleground"));
 		middleground1->setScale(5);
 		middleground1->setX(0);
-		middleground1->setY(-40);
-		vel.x = -25;
+		middleground1->setY(-80);
+		vel.x = -200;
 		vel.y = 0;
 		middleground1->getMotion()->setVelocity(vel);
 
@@ -41,8 +47,8 @@ Map::Map(int type, Game* cipher)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing middleground"));
 		middleground2->setScale(5);
 		middleground2->setX(2720);
-		middleground2->setY(-40);
-		vel.x = -25;
+		middleground2->setY(-80);
+		vel.x = -200;
 		vel.y = 0;
 		middleground2->getMotion()->setVelocity(vel);
 
@@ -50,8 +56,8 @@ Map::Map(int type, Game* cipher)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing frontground"));
 		frontground1->setScale(5);
 		frontground1->setX(0);
-		frontground1->setY(-40);
-		vel.x = -50;
+		frontground1->setY(-80);
+		vel.x = -400;
 		vel.y = 0;
 		frontground1->getMotion()->setVelocity(vel);
 
@@ -59,17 +65,89 @@ Map::Map(int type, Game* cipher)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing frontground"));
 		frontground2->setScale(5);
 		frontground2->setX(2720);
-		frontground2->setY(-40);
-		vel.x = -50;
+		frontground2->setY(-80);
+		vel.x = -400;
 		vel.y = 0;
 		frontground2->getMotion()->setVelocity(vel);
+
+
+		platforms.push_back(new Platform());
+		size_t pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255,106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2);
+		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setScale(0.3);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255*platforms.at(pos)->getScale());
+		platforms.at(pos)->setY(500);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2*(255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(500);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(500);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(500);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(500);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - (-255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(500);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2*(-255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(500);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setScale(0.3);
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(500);
 	}
 }
 
 Map::~Map()
 {
-	platforms->clear();
-	delete platforms;
+	platforms.clear();
 	delete background1;
 	delete middleground1;
 	delete middleground2;
@@ -80,38 +158,21 @@ Map::~Map()
 	middleground2 = NULL;
 	frontground1 = NULL;
 	frontground2 = NULL;
-	platforms = NULL;
 }
 
 void Map::update(float frameTime)
 {
 	backgroundCheck();
+	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+		platforms[i]->update(frameTime);
+	}
 	middleground1->update(frameTime);
 	frontground1->update(frameTime);
 	middleground2->update(frameTime);
 	frontground2->update(frameTime);
-
+	//cameraMovement(std::vector<Platform*> characters, float frameTime);
 }
 
-void Map::backgroundCheck()
-{
-	if (middleground1->getX() <= -(middleground2->getWidth() * middleground2->getScale()))
-	{
-		middleground1->setX(middleground1->getWidth() * middleground1->getScale() + middleground2->getX());
-	}
-	if (middleground2->getX() <= -(middleground1->getWidth() * middleground1->getScale()))
-	{
-		middleground2->setX(middleground2->getWidth() * middleground2->getHeight() + middleground1->getX());
-	}
-	if (frontground1->getX() <= -(frontground2->getWidth() * frontground2->getScale()))
-	{
-		frontground1->setX(frontground1->getWidth() * frontground1->getScale() + frontground2->getX());
-	}
-	if (frontground2->getX() <= -(frontground1->getWidth() * frontground1->getScale()))
-	{
-		frontground2->setX(frontground2->getWidth() * frontground2->getScale() + frontground1->getX());
-	}
-}
 
 void Map::draw()
 {
@@ -120,6 +181,9 @@ void Map::draw()
 	middleground2->draw();
 	frontground1->draw();
 	frontground2->draw();
+	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+		platforms[i]->draw();
+	}
 }
 
 void Map::releaseAll()
@@ -136,4 +200,93 @@ void Map::resetAll()
 	backgroundTexture.onResetDevice();
 	middlegroundTexture.onResetDevice();
 	frontgroundTexture.onResetDevice();
+}
+
+void Map::backgroundCheck()
+{
+	if (middleground1->getX() <= -(middleground2->getWidth() * middleground2->getScale()))
+	{
+		middleground1->setX(middleground1->getWidth() * middleground1->getScale() + middleground2->getX());
+	}
+	if (middleground2->getX() <= -(middleground1->getWidth() * middleground1->getScale()))
+	{
+		middleground2->setX(middleground2->getWidth() * middleground2->getScale() + middleground1->getX());
+	}
+	if (frontground1->getX() <= -(frontground2->getWidth() * frontground2->getScale()))
+	{
+		frontground1->setX(frontground1->getWidth() * frontground1->getScale() + frontground2->getX());
+	}
+	if (frontground2->getX() <= -(frontground1->getWidth() * frontground1->getScale()))
+	{
+		frontground2->setX(frontground2->getWidth() * frontground2->getScale() + frontground1->getX());
+	}
+}
+
+void Map::cameraMovement(std::vector<Platform*> characters, float frameTime)
+{
+	float averageX = 0;
+	float averageY = 0;
+
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		averageX += characters[i]->getX();
+		averageY += characters[i]->getY();
+	}
+
+	averageX = averageX / characters.size();
+	averageY = averageY / characters.size();
+
+	if (averageX > mapNS::centerX + mapNS::maximumXFalloff)
+	{
+		averageX = mapNS::centerX + mapNS::maximumXFalloff;
+	}
+	else if (averageX < mapNS::centerX - mapNS::maximumXFalloff)
+	{
+		averageX = mapNS::centerX - mapNS::maximumXFalloff;
+	}
+	if (averageY > mapNS::centerY + mapNS::maximumYFalloff)
+	{
+		averageY = mapNS::centerY + mapNS::maximumYFalloff;
+	}
+	else if (averageY < mapNS::centerY - mapNS::maximumYFalloff)
+	{
+		averageY = mapNS::centerY - mapNS::maximumYFalloff;
+	}
+
+	//Movement Engine
+	float displacementX = averageX - prevX;
+	float displacementY = averageY - prevY;
+	VECTOR2 currentVelocity;
+	currentVelocity.x = (displacementX / mapNS::timeForMapMovement);
+	currentVelocity.y = (displacementY / mapNS::timeForMapMovement);
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		characters[i]->setX(characters[i]->getX() + currentVelocity.x * frameTime);
+		characters[i]->setY(characters[i]->getY() + currentVelocity.y * frameTime);
+	}
+	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++ )
+	{
+		platforms[i]->setX(platforms[i]->getX() + currentVelocity.x * frameTime);
+		platforms[i]->setY(platforms[i]->getY() + currentVelocity.x * frameTime);
+	}
+
+
+	/*projectedMaxVelocity.x = 2* ((displacementX) / (mapNS::timeForMapMovement));
+	projectedMaxVelocity.y = 2*((displacementY) / (mapNS::timeForMapMovement));*/
+
+	/*if (currentVelocity.x < projectedMaxVelocity.x)
+	{
+		float currentAccelX = (projectedMaxVelocity.x - currentVelocity.x) / (mapNS::timeForMapMovement / 2);
+	}
+	else
+	{
+		()
+	}
+	float projectedUniformAccelX = projectedMaxVelocity.x / (mapNS::timeForMapMovement);
+	float projectedUniformAccelY = projectedMaxVelocity.y / (mapNS::timeForMapMovement);*/
+	//finalVelocity = currentVel + acceleration * time
+	
+}
+
+void Map::vibration(std::vector<Platform*> characters, float frameTime)
+{
+
 }

@@ -1,9 +1,22 @@
-#pragma once
+#ifndef _MAP_H             // Prevent multiple definitions if this 
+#define _MAP_H             // file is included in more than one place
+#define WIN32_LEAN_AND_MEAN
 #include "constants.h"
 #include "platform.h"
 #include <vector>
 #include "textureManager.h"
 #include "game.h"
+
+namespace mapNS
+{
+	const int centerX = 640;
+	const int centerY = 360;
+	const int maximumXFalloff = 300;
+	const int maximumYFalloff = 200;
+	const float timeForMapMovement = 1.5;
+}
+
+
 
 class Map
 {
@@ -13,12 +26,22 @@ private:
 	TextureManager backgroundTexture;
 	TextureManager middlegroundTexture;
 	TextureManager frontgroundTexture;
-	std::vector<Platform> *platforms;
+	std::vector<Platform*> platforms;
 	Platform *background1;
 	Platform *middleground1;
 	Platform *frontground1;
 	Platform *middleground2;
 	Platform *frontground2;
+	bool vibrationOn;
+	float prevX;
+	float prevY;
+	//VECTOR2 currentVelocity;
+
+
+
+	//This is temporary filler vector for vector of Characters
+	std::vector<Platform*> characters;
+
 public:
 	Map(int type, Game *cipher);
 	~Map();
@@ -27,4 +50,8 @@ public:
 	void releaseAll();
 	void resetAll();
 	void backgroundCheck();
+	void cameraMovement(std::vector<Platform*> characters, float frameTime);
+	void vibration(std::vector<Platform*> characters, float frameTime);
 };
+
+#endif
