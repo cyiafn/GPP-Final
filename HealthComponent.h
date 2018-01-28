@@ -4,29 +4,45 @@
 
 #include "input.h"
 #include "game.h"
-#include "entity.h"
 #include "characters.h"
 #include <math.h>
 #include <stdio.h>
 
 
-
-namespace healthComponentNS
-{
-	
-}
+//
+//namespace healthComponentNS
+//{
+//	
+//}
 
 class HealthComponent
 {
 private:
-	float perc;        
+	float perc;       
 	int lives;
 
 public:
 	HealthComponent();
-	void update(float frameTime, Characters &chars);
-	void removeLife(Characters &chars);
-	void damageMe(Characters &chars, int dmg);
-	void knockback(Characters &chars);
+	~HealthComponent();
+	void update(float frameTime, Characters *chars);
+	void removeLife(Characters *chars);
+	void damageMe(Characters *chars, int dmg);
+	void knockback(Characters *chars);
+	float getPerc()
+	{
+		return perc;
+	}
+	void setPerc(float er)
+	{
+		perc = er;
+	}
+	float getLives()
+	{
+		return lives;
+	}
+	void setLives(int li)
+	{
+		lives = li;
+	}
 };
 #endif

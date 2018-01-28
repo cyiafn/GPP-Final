@@ -1,6 +1,5 @@
 #include "MoveComponent.h"
 
-
 //notice for modification, ALL MOVEMENT HANDLING IS IN THIS CLASS, PLEASE DONT GO AND REFERENCE NON-EXISTANT MOVEMENT DATA ATTRIBUTES FROM ENTITY, MANIPULATION OF ENTITY MOVEMENT IS ALSO DONE HERE BY PASSING IN OBJECT REFERENCE
 MoveComponent::MoveComponent()
 {
@@ -9,7 +8,8 @@ MoveComponent::MoveComponent()
 	velocity.y = 0.0;
 	deltaV.x = 0.0;
 	deltaV.y = 0.0;
-
+	actualX = 0;
+	actualY = 0;
 //	gravity = moveComponentNS::GRAVITY;
 	jumpForce = moveComponentNS::JUMPFORCE;
 
@@ -21,13 +21,13 @@ MoveComponent::~MoveComponent()
 
 }
 
-void MoveComponent::update(float frameTime, Entity &ent)
+void MoveComponent::update(float frameTime, Entity *ent)
 {
 	/*velocity += deltaV;
 	deltaV.x = 0;
 	deltaV.y = 0;*/
-	ent.setX(ent.getX() + velocity.x * frameTime);
-	ent.setY(ent.getY() + velocity.y * frameTime);
+	ent->setX(ent->getX() + velocity.x * frameTime);
+	ent->setY(ent->getY() + velocity.y * frameTime);
 }
 //=============================================================================
 // Entity bounces after collision with another entity

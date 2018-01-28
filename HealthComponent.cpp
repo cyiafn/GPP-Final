@@ -6,36 +6,41 @@ HealthComponent::HealthComponent()
 	lives = 3;
 }
 
-void HealthComponent::update(float frameTime, Characters &chars)
+HealthComponent::~HealthComponent()
+{
+
+}
+
+void HealthComponent::update(float frameTime, Characters *chars)
 {
 	removeLife(chars);
 }
 
-void HealthComponent::removeLife(Characters &chars)
+void HealthComponent::removeLife(Characters *chars)
 {
-	if (chars.getActive())
+	if (chars->getActive())
 	{
-		if (chars.getMoveComponent()->getActualX() > 1500 || chars.getMoveComponent()->getActualX() < -300 || chars.getMoveComponent()->getActualY() > 1000 || chars.getMoveComponent()->getActualY() < -300)
+		if (chars->getMoveComponent()->getActualX() > 1500 || chars->getMoveComponent()->getActualX() < -300 || chars->getMoveComponent()->getActualY() > 1000 || chars->getMoveComponent()->getActualY() < -300)
 		{
 			if (lives == 1)
 			{
 				lives -= 1;
-				chars.setActive(false);
+				chars->setActive(false);
 			}
 			else if(lives > 1)
 			{
 				//respawn engine based on map
 				lives -= 1;
-				chars.setX(GAME_WIDTH / 2);
-				chars.setY(GAME_HEIGHT / 2);
-				chars.getMoveComponent()->setActualX(GAME_WIDTH / 2);
-				chars.getMoveComponent()->setActualY(GAME_HEIGHT / 2);
+				chars->setX(GAME_WIDTH / 2);
+				chars->setY(GAME_HEIGHT / 2);
+				chars->getMoveComponent()->setActualX(GAME_WIDTH / 2);
+				chars->getMoveComponent()->setActualY(GAME_HEIGHT / 2);
 			}
 		}
 	}
 }
 
-void HealthComponent::knockback(Characters &chars)
+void HealthComponent::knockback(Characters *chars)
 {
 	double knockbackDegree = 33 * (PI / 180);
 	int baseKnockback = 25;
@@ -46,7 +51,7 @@ void HealthComponent::knockback(Characters &chars)
 		VECTOR2 vel;
 		vel.x = xVel;
 		vel.y = yVel;
-		chars.getMoveComponent()->setVelocity(vel);
+		chars->getMoveComponent()->setVelocity(vel);
 	}
 	else
 	{
@@ -55,12 +60,12 @@ void HealthComponent::knockback(Characters &chars)
 		VECTOR2 vel;
 		vel.x = xVel;
 		vel.y = yVel;
-		chars.getMoveComponent()->setVelocity(vel);
+		chars->getMoveComponent()->setVelocity(vel);
 	}
 }
 
 
-void HealthComponent::damageMe(Characters &chars, int dmg)
+void HealthComponent::damageMe(Characters *chars, int dmg)
 {
 	perc += dmg;
 	knockback(chars);

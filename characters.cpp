@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "characters.h"
+#include "HealthComponent.h"
 #include <math.h>
 
 //=============================================================================
@@ -29,10 +30,11 @@ bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM)
 {
 	movecomponent = new MoveComponent();
-	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
+	healthcomponent = new HealthComponent();
 	this->movecomponent->setActualX(this->getX());
 	this->movecomponent->setActualY(this->getY());
 	this->onFloor = true;
+	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
 //=============================================================================
@@ -40,7 +42,10 @@ bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 //=============================================================================
 void Characters::draw()
 {
-	//getting overwritten
+	if (this->getActive() == true)
+	{
+		Image::draw();
+	}
 }
 
 //=============================================================================
@@ -51,8 +56,8 @@ void Characters::draw()
 void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
-	movecomponent->update(frameTime, *this);
-	healthcomponent->update(frameTime, *this);
+	movecomponent->update(frameTime, this);
+	healthcomponent->update(frameTime, this);
 	//currentState->Execute(this);
 	float centerX = this->getCenterX();
 	float centerY = this->getCenterY();
