@@ -37,7 +37,7 @@ void HealthComponent::removeLife(Characters &chars)
 
 void HealthComponent::knockback(Characters &chars)
 {
-	int knockbackDegree = 33;
+	double knockbackDegree = 33 * (PI / 180);
 	int baseKnockback = 25;
 	if (perc == 0 || perc == 1 || perc == 2 || perc == 3)
 	{
@@ -46,6 +46,7 @@ void HealthComponent::knockback(Characters &chars)
 		VECTOR2 vel;
 		vel.x = xVel;
 		vel.y = yVel;
+		chars.getMoveComponent()->setVelocity(vel);
 	}
 	else
 	{
@@ -54,6 +55,7 @@ void HealthComponent::knockback(Characters &chars)
 		VECTOR2 vel;
 		vel.x = xVel;
 		vel.y = yVel;
+		chars.getMoveComponent()->setVelocity(vel);
 	}
 }
 
