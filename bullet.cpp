@@ -21,7 +21,7 @@ void Bullet::update(float frameTime)
 	{
 		CurrRange++;
 	}	
-	movement->update(frameTime, *this);
+	movement->update(frameTime, this);
 	Entity::update(frameTime);
 }
 void Bullet::draw()

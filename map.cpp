@@ -171,7 +171,7 @@ Map::~Map()
 void Map::update(float frameTime, std::vector<Characters*> characters)
 {
 	backgroundCheck();
-	cameraMovement(characters, frameTime);
+	//cameraMovement(characters, frameTime);
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 		platforms[i]->update(frameTime);
 	}

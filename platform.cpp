@@ -37,6 +37,6 @@ void Platform::draw()
 
 void Platform::update(float frameTime)
 {
-	motion->update(frameTime, *this);
+	motion->update(frameTime, this);
 	Entity::update(frameTime);
 }
