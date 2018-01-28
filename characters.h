@@ -33,6 +33,8 @@ protected:
 	int playerNo;
 	float prevX;
 	float prevY;
+	bool onFloor;
+
 	VECTOR2 center;
 	int facing; //1 is facing right, 2 is facing left
 	bool Q_on_CoolDown = false;
@@ -60,6 +62,10 @@ public:
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,TextureManager *textureM);
 //-----------------------------------------------------------------------------------------------------------------------------		
 
+	MoveComponent* getMoveComponent()
+	{
+		return movecomponent;
+	}
 
 //Get Functions
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -80,6 +86,10 @@ public:
 	void revertLocation();
 //-----------------------------------------------------------------------------------------------------------------------------
 
+	bool getOnFloor()
+	{
+		return onFloor;
+	}
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
 	virtual void useQ(int facing, VECTOR2 center, Game *cipher) {};
@@ -90,6 +100,11 @@ public:
 	void coolDownChecking();
 	virtual void resetSkill(std::string letter) {};
 //-----------------------------------------------------------------------------------------------------------------------------
+
+	void setOnFloor(bool floor)
+	{
+		onFloor = floor;
+	}
 
 
 //Enum classes 

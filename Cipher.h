@@ -15,6 +15,8 @@
 #include "Freid.h"
 #include "Agent47.h"
 #include "Necrid.h"
+#include <vector>
+
 #include "characters.h"
 
 //=============================================================================
@@ -36,6 +38,8 @@ private:
 	Characters *player = cyrax;
 	//Characters player;
 	/*Cyrax *player;*/
+
+	std::vector<Characters*> characters;
 
 public:
     // Constructor

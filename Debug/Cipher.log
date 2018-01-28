@@ -1,0 +1,13 @@
+﻿  map.cpp
+d:\visual studio projects\cipher\movecomponent.h(61): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\cipher\movecomponent.h(63): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\cipher\map.cpp(81): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(87): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(95): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(103): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(111): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(119): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(127): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(135): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(143): warning C4305: 'argument': truncation from 'double' to 'float'
+  Cipher.vcxproj -> D:\Visual Studio Projects\Cipher\Debug\Cipher.exe

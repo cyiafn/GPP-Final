@@ -36,7 +36,7 @@ const float FRAME_RATE = 100.0f;                // the target frame rate (frames
 const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
-const float GRAVITY = 6.67428e-11f;             // gravitational constant
+const float GRAVITY = 9.81;             // gravitational constant
 
 // graphic images
 const char PLATFORM1_IMAGE[] = "pictures\\Background\\platform1.png";

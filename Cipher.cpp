@@ -20,6 +20,9 @@ Cipher::~Cipher()
 {
     releaseAll();           // call onLostDevice() for every graphics item
 	delete map1;
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		delete characters[i];
+	}
 	map1 = NULL;
 }
 
@@ -30,7 +33,6 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-	map1 = new Map(0, this);
 	player = new Cyrax(this);
     // demo texture initialize
     /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
@@ -42,10 +44,16 @@ void Cipher::initialize(HWND hwnd)
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));*/
 
 	//Testing
-	
+	if(!characterTexture.initialize(graphics, KEN_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
+	characters.push_back(new Characters());
+	int pos = characters.size() - 1;
+	if (!characters.at(pos)->initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT,charactersNS::TEXTURE_COLS, &characterTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 
-	
-
+	/*if (!player.initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));*/
+	map1 = new Map(0, this, characters);
     return;
 }
 
@@ -54,7 +62,10 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-	map1->update(frameTime);
+	map1->update(frameTime, characters);
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		characters[i]->update(frameTime);
+	}
 	player->update(frameTime, this);
 }
 
@@ -81,6 +92,9 @@ void Cipher::render()
 	
 	map1->draw();
 	player->draw();
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		characters[i]->draw();
+	}
 	//draw here
 
     graphics->spriteEnd();                  // end drawing sprites
