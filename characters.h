@@ -31,6 +31,7 @@ private:
 	int playerNo;
 	float prevX;
 	float prevY;
+	bool onFloor;
 
 	HealthComponent * healthcomponent;
 	MoveComponent * movecomponent;
@@ -48,6 +49,10 @@ public:
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,TextureManager *textureM);
 //-----------------------------------------------------------------------------------------------------------------------------		
 
+	MoveComponent* getMoveComponent()
+	{
+		return movecomponent;
+	}
 
 //Get Functions
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -68,6 +73,15 @@ public:
 	void revertLocation();
 //-----------------------------------------------------------------------------------------------------------------------------
 
+	bool getOnFloor()
+	{
+		return onFloor;
+	}
+
+	void setOnFloor(bool floor)
+	{
+		onFloor = floor;
+	}
 
 
 //Enum classes 

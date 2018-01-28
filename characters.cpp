@@ -28,8 +28,11 @@ Characters::Characters() : Entity()
 bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM)
 {
-
+	movecomponent = new MoveComponent();
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
+	this->movecomponent->setActualX(this->getX());
+	this->movecomponent->setActualY(this->getY());
+	this->onFloor = true;
 }
 
 //=============================================================================
@@ -48,6 +51,8 @@ void Characters::draw()
 void Characters::update(float frameTime)
 {
 	Entity::update(frameTime);
+	movecomponent->update(frameTime, *this);
+	healthcomponent->update(frameTime, *this);
 	//currentState->Execute(this);
 
 	//if ( &movecomponent->getOnPlatformCheck == movecomponent->NotOnPlatform)
@@ -58,12 +63,14 @@ void Characters::update(float frameTime)
 	if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
 	{
 		spriteData.x = spriteData.x + frameTime * 100;
+		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x > GAME_WIDTH)               // if off screen right
 			spriteData.x = ((float)-spriteData.width);  // position off screen left
 	}
 	if (input->isKeyDown(P1LEFT_KEY)||input->isKeyDown(P2LEFT_KEY))             // if move left
 	{
 		spriteData.x = spriteData.x - frameTime * 100;
+		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x < -spriteData.width)         // if off screen left
 			spriteData.x = ((float)GAME_WIDTH);      // position off screen right
 	}

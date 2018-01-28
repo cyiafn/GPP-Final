@@ -5,6 +5,8 @@
 #include "input.h"
 #include "game.h"
 #include "entity.h"
+#include "characters.h"
+#include <math.h>
 
 
 namespace healthComponentNS
@@ -20,6 +22,9 @@ private:
 
 public:
 	HealthComponent();
-	void update(float frameTime, Entity &ent);
+	void update(float frameTime, Characters &chars);
+	void removeLife(Characters &chars);
+	void damageMe(Characters &chars, int dmg);
+	void knockback(Characters &chars);
 };
 #endif
