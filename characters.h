@@ -4,11 +4,8 @@
 
 #include "entity.h"
 #include "constants.h"
-
-#include "HealthComponent.h"
 #include "MoveComponent.h"
 
-#include "characterFSM.h"
 #include <string>
 #include "game.h"
 
@@ -25,14 +22,18 @@ namespace charactersNS
 	const int   PLAYER_END_FRAME = 25;        // player animation frames 0,1,2
 	const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
 }
+class HealthComponent;
 
 // inherits from Entity class
 class Characters : public Entity
 {
 protected:	
+
 	int playerNo;
 	float prevX;
 	float prevY;
+	bool onFloor;
+
 	VECTOR2 center;
 	int facing; //1 is facing right, 2 is facing left
 	bool Q_on_CoolDown = false;
@@ -44,12 +45,14 @@ protected:
 	int QframeTime = 0;
 	int WframeTime = 0;
 	int EframeTime = 0;
-	HealthComponent * healthcomponent;
-	MoveComponent * movecomponent;
+	
 
 
 	//CharacterFSM * currentState;
-	
+
+private:
+	HealthComponent* healthcomponent;
+	MoveComponent* movecomponent;
 public:
 	Characters();
 	// inherited member functions
@@ -60,6 +63,15 @@ public:
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,TextureManager *textureM);
 //-----------------------------------------------------------------------------------------------------------------------------		
 
+	MoveComponent* getMoveComponent()
+	{
+		return movecomponent;
+	}
+
+	HealthComponent* getHealthComponent()
+	{
+		return healthcomponent;
+	}
 
 //Get Functions
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -80,6 +92,10 @@ public:
 	void revertLocation();
 //-----------------------------------------------------------------------------------------------------------------------------
 
+	bool getOnFloor()
+	{
+		return onFloor;
+	}
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
 	virtual void useQ(int facing, VECTOR2 center, Game *cipher) {};
@@ -90,6 +106,11 @@ public:
 	void coolDownChecking();
 	virtual void resetSkill(std::string letter) {};
 //-----------------------------------------------------------------------------------------------------------------------------
+
+	void setOnFloor(bool floor)
+	{
+		onFloor = floor;
+	}
 
 
 //Enum classes 

@@ -1,10 +1,10 @@
 #ifndef _MOVECOMPONENT_H               // Prevent multiple definitions if this 
 #define _MOVECOMPONENT_H               // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
-
 #include "input.h"
 #include "game.h"
-#include "entity.h"
+#include "Entity.h"
+
 
 namespace moveComponentNS
 {
@@ -25,9 +25,28 @@ private:
 	int onPlatformCheck;   //checks if player is on platform
 	int jumpingCheck;   //checks if player is jumping
 
+	float actualX;
+	float actualY;
+
 public:
 	MoveComponent();
 	~MoveComponent();
+	void setActualX(float x)
+	{
+		this->actualX = x;
+	}
+	float getActualX()
+	{
+		return this->actualX;
+	}
+	void setActualY(float y)
+	{
+		this->actualY = y;
+	}
+	float  getActualY()
+	{
+		return this->actualY;
+	}
 	//return velocity vector
 	VECTOR2 getVelocity() const { return velocity; }
 	//Return mass.
@@ -66,11 +85,7 @@ public:
 	// Set gravitational constant. Default is 6.67428e-11
 	void  setGravity(float g) { gravity = g; }
 
-	//float getAcceleration() { return acceleration; }
-
-	//void setAcceleration(float accel) { acceleration = accel; }
-
-	void update(float frameTime, Entity &ent);
+	void update(float frameTime, Entity *ent);
 
 	//void bounce(VECTOR2 &collisionVector, Entity &ent);
 	//void gravityForce(Entity *ent, float frameTime);

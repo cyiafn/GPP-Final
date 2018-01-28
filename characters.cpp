@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "characters.h"
+#include "HealthComponent.h"
 #include <math.h>
 
 //=============================================================================
@@ -28,7 +29,11 @@ Characters::Characters() : Entity()
 bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM)
 {
-
+	movecomponent = new MoveComponent();
+	healthcomponent = new HealthComponent();
+	this->movecomponent->setActualX(this->getX());
+	this->movecomponent->setActualY(this->getY());
+	this->onFloor = true;
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
@@ -37,7 +42,10 @@ bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 //=============================================================================
 void Characters::draw()
 {
-	//getting overwritten
+	if (this->getActive() == true)
+	{
+		Image::draw();
+	}
 }
 
 //=============================================================================
@@ -48,6 +56,8 @@ void Characters::draw()
 void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
+	movecomponent->update(frameTime, this);
+	healthcomponent->update(frameTime, this);
 	//currentState->Execute(this);
 	float centerX = this->getCenterX();
 	float centerY = this->getCenterY();
@@ -62,6 +72,7 @@ void Characters::update(float frameTime, Game *cipher)
 	{
 		facing = 1;
 		spriteData.x = spriteData.x + frameTime * 100;
+		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x > GAME_WIDTH)               // if off screen right
 			spriteData.x = ((float)-spriteData.width);  // position off screen left
 	}
@@ -69,6 +80,7 @@ void Characters::update(float frameTime, Game *cipher)
 	{
 		facing = 2;
 		spriteData.x = spriteData.x - frameTime * 100;
+		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x < -spriteData.width)         // if off screen left
 			spriteData.x = ((float)GAME_WIDTH);      // position off screen right
 	}

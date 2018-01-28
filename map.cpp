@@ -2,7 +2,7 @@
 #include <vector>
 #include "platform.h"
 
-Map::Map(int type, Game* cipher)
+Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 {
 	//platforms = new std::vector<Platform>(100);
 	background1 = new Platform();
@@ -11,9 +11,10 @@ Map::Map(int type, Game* cipher)
 	frontground1 = new Platform();
 	frontground2 = new Platform();
 
+	float averageX = 0;
+	float averageY = 0;
 
-	prevX = 0;
-	prevY = 0;
+	
 
 
 	vibrationOn = false;
@@ -142,6 +143,13 @@ Map::Map(int type, Game* cipher)
 		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
+
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+			averageX += characters[i]->getMoveComponent()->getActualX();
+			averageX += characters[i]->getMoveComponent()->getActualX();
+		}
+		mapCurrentPosX = averageX / characters.size();
+		mapCurrentPosY = averageY / characters.size();
 	}
 }
 
@@ -160,9 +168,10 @@ Map::~Map()
 	frontground2 = NULL;
 }
 
-void Map::update(float frameTime)
+void Map::update(float frameTime, std::vector<Characters*> characters)
 {
 	backgroundCheck();
+	//cameraMovement(characters, frameTime);
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 		platforms[i]->update(frameTime);
 	}
@@ -222,24 +231,26 @@ void Map::backgroundCheck()
 	}
 }
 
-void Map::cameraMovement(std::vector<Platform*> characters, float frameTime)
+void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 {
 	float averageX = 0;
 	float averageY = 0;
 
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		averageX += characters[i]->getX();
-		averageY += characters[i]->getY();
+		averageX += characters[i]->getMoveComponent()->getActualX();
+		averageY += characters[i]->getMoveComponent()->getActualY();
 	}
-
 	averageX = averageX / characters.size();
 	averageY = averageY / characters.size();
+
+	float DisX = averageX - mapCurrentPosX;
+	float DisY = averageY - mapCurrentPosY;
 
 	if (averageX > mapNS::centerX + mapNS::maximumXFalloff)
 	{
 		averageX = mapNS::centerX + mapNS::maximumXFalloff;
 	}
-	else if (averageX < mapNS::centerX - mapNS::maximumXFalloff)
+	else if (averageX <= mapNS::centerX - mapNS::maximumXFalloff)
 	{
 		averageX = mapNS::centerX - mapNS::maximumXFalloff;
 	}
@@ -247,46 +258,28 @@ void Map::cameraMovement(std::vector<Platform*> characters, float frameTime)
 	{
 		averageY = mapNS::centerY + mapNS::maximumYFalloff;
 	}
-	else if (averageY < mapNS::centerY - mapNS::maximumYFalloff)
+	else if (averageY <= mapNS::centerY - mapNS::maximumYFalloff)
 	{
 		averageY = mapNS::centerY - mapNS::maximumYFalloff;
 	}
+	VECTOR2 setVel;
+	setVel.x = DisX / mapNS::timeForMapMovement;
+	setVel.y = DisY / mapNS::timeForMapMovement;
 
-	//Movement Engine
-	float displacementX = averageX - prevX;
-	float displacementY = averageY - prevY;
-	VECTOR2 currentVelocity;
-	currentVelocity.x = (displacementX / mapNS::timeForMapMovement);
-	currentVelocity.y = (displacementY / mapNS::timeForMapMovement);
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		characters[i]->setX(characters[i]->getX() + currentVelocity.x * frameTime);
-		characters[i]->setY(characters[i]->getY() + currentVelocity.y * frameTime);
+		characters[i]->setX(characters[i]->getX() + setVel.x * frameTime);
+		characters[i]->setY(characters[i]->getY() + setVel.y * frameTime);
 	}
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++ )
 	{
-		platforms[i]->setX(platforms[i]->getX() + currentVelocity.x * frameTime);
-		platforms[i]->setY(platforms[i]->getY() + currentVelocity.x * frameTime);
+		platforms[i]->setX(platforms[i]->getX() + setVel.x * frameTime);
+		platforms[i]->setY(platforms[i]->getY() + setVel.x * frameTime);
 	}
 
-
-	/*projectedMaxVelocity.x = 2* ((displacementX) / (mapNS::timeForMapMovement));
-	projectedMaxVelocity.y = 2*((displacementY) / (mapNS::timeForMapMovement));*/
-
-	/*if (currentVelocity.x < projectedMaxVelocity.x)
-	{
-		float currentAccelX = (projectedMaxVelocity.x - currentVelocity.x) / (mapNS::timeForMapMovement / 2);
-	}
-	else
-	{
-		()
-	}
-	float projectedUniformAccelX = projectedMaxVelocity.x / (mapNS::timeForMapMovement);
-	float projectedUniformAccelY = projectedMaxVelocity.y / (mapNS::timeForMapMovement);*/
-	//finalVelocity = currentVel + acceleration * time
 	
 }
 
-void Map::vibration(std::vector<Platform*> characters, float frameTime)
+void Map::vibration(std::vector<Characters*> characters, float frameTime)
 {
 
 }

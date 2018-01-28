@@ -1,0 +1,6 @@
+﻿  characters.cpp
+d:\visual studio projects\cipher\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\movecomponent.h(61): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\cipher\movecomponent.h(63): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\cipher\healthcomponent.h(41): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Cipher.vcxproj -> D:\Visual Studio Projects\Cipher\Debug\Cipher.exe

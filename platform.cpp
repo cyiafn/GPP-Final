@@ -23,6 +23,8 @@ Platform::~Platform()
 bool Platform::initialize(Game *gamePtr, int width, int height, TextureManager *textureM)
 {
 	return(Entity::initialize(gamePtr, width, height, platformNS::TEXTURE_COLS, textureM));
+	motion->setActualX(getX());
+	motion->setActualY(getY());
 }
 
 void Platform::draw()
@@ -35,6 +37,6 @@ void Platform::draw()
 
 void Platform::update(float frameTime)
 {
-	motion->update(frameTime, *this);
+	motion->update(frameTime, this);
 	Entity::update(frameTime);
 }
