@@ -33,7 +33,7 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-	
+	player = new Cyrax(this);
     // demo texture initialize
     /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/
@@ -44,12 +44,12 @@ void Cipher::initialize(HWND hwnd)
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));*/
 
 	//Testing
-	if(!characterTexture.initialize(graphics, KEN_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-	characters.push_back(new Characters());
-	int pos = characters.size() - 1;
-	if (!characters.at(pos)->initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT,charactersNS::TEXTURE_COLS, &characterTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+	//if(!characterTexture.initialize(graphics, KEN_IMAGE))
+	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
+	characters.push_back(player);
+	//int pos = characters.size() - 1;
+	//if (!characters.at(pos)->initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT,charactersNS::TEXTURE_COLS, &characterTexture))
+	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 
 	/*if (!player.initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));*/
