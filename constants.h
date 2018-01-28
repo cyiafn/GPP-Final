@@ -43,6 +43,7 @@ const char PLATFORM1_IMAGE[] = "pictures\\Background\\platform1.png";
 const char BACKGROUND1_IMAGE[] = "pictures\\Background\\background1.png";
 const char MIDDLEGROUND1_IMAGE[] = "pictures\\Background\\middleground1.png";
 const char FRONTGROUND1_IMAGE[] = "pictures\\Background\\frontground1.png";
+const char CYRAXQ_IMAGE[] = "pictures\\Bullets\\CyraxQ.png";
 
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
 

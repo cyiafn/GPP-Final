@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _MAP_H             // Prevent multiple definitions if this 
+#define _MAP_H             // file is included in more than one place
+#define WIN32_LEAN_AND_MEAN
 #include "constants.h"
 #include "platform.h"
 #include <vector>
@@ -54,3 +56,5 @@ public:
 	void cameraMovement(std::vector<Characters*> characters, float frameTime);
 	void vibration(std::vector<Characters*> characters, float frameTime);
 };
+
+#endif

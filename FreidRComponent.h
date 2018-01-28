@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _FREIDRCOMPONENT_H               // Prevent multiple definitions if this 
 #define _FREIDRCOMPONENT_H               // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
