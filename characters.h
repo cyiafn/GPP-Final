@@ -29,7 +29,7 @@ namespace charactersNS
 // inherits from Entity class
 class Characters : public Entity
 {
-private:	
+	protected:	
 	int playerNo;
 	float prevX;
 	float prevY;
