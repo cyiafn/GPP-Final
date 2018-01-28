@@ -31,6 +31,8 @@ private:
 	Map *map1;
 
 	TextureManager characterTexture;     // player texture
+	Cyrax *cyrax;
+	Characters *player = cyrax;
 	//Characters player;
 	/*Cyrax *player;*/
 

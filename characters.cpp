@@ -20,6 +20,8 @@ Characters::Characters() : Entity()
 	radius = charactersNS::WIDTH / 2.0;
 	frameDelay = charactersNS::PLAYER_ANIMATION_DELAY;
 	collisionType = entityNS::CIRCLE;
+	movecomponent = new MoveComponent();
+	healthcomponent = new HealthComponent();
 }
 
 //=============================================================================
@@ -29,8 +31,8 @@ Characters::Characters() : Entity()
 bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 	TextureManager *textureM)
 {
-	movecomponent = new MoveComponent();
-	healthcomponent = new HealthComponent();
+	//movecomponent = new MoveComponent();			//moved to Characters::Characters()
+	//healthcomponent = new HealthComponent();		//moved to Characters::Characters()
 	this->movecomponent->setActualX(this->getX());
 	this->movecomponent->setActualY(this->getY());
 	this->onFloor = true;
