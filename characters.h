@@ -29,7 +29,7 @@ namespace charactersNS
 // inherits from Entity class
 class Characters : public Entity
 {
-protected:	
+private:	
 	int playerNo;
 	float prevX;
 	float prevY;
@@ -46,8 +46,8 @@ protected:
 	int QframeTime = 0;
 	int WframeTime = 0;
 	int EframeTime = 0;
-	HealthComponent * healthcomponent;
-	MoveComponent * movecomponent;
+	HealthComponent* healthcomponent;
+	MoveComponent* movecomponent;
 
 
 	//CharacterFSM * currentState;

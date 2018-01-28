@@ -7,6 +7,8 @@
 #include "entity.h"
 #include "characters.h"
 #include <math.h>
+#include <stdio.h>
+
 
 
 namespace healthComponentNS

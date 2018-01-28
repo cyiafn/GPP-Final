@@ -15,7 +15,7 @@ void HealthComponent::removeLife(Characters &chars)
 {
 	if (chars.getActive())
 	{
-		if (chars.getMoveComponent()->getActualX() > 1500 || chars.getMoveComponent()->getActualX() < -300 || chars.getMoveComponent()->getActualY > 1000 || chars.getMoveComponent()->getActualY< -300)
+		if (chars.getMoveComponent()->getActualX() > 1500 || chars.getMoveComponent()->getActualX() < -300 || chars.getMoveComponent()->getActualY() > 1000 || chars.getMoveComponent()->getActualY() < -300)
 		{
 			if (lives == 1)
 			{
@@ -28,8 +28,8 @@ void HealthComponent::removeLife(Characters &chars)
 				lives -= 1;
 				chars.setX(GAME_WIDTH / 2);
 				chars.setY(GAME_HEIGHT / 2);
-				chars.getMoveComponent->setActualX(GAME_WIDTH / 2);
-				chars.getMoveComponent->setActualY(GAME_HEIGHT / 2);
+				chars.getMoveComponent()->setActualX(GAME_WIDTH / 2);
+				chars.getMoveComponent()->setActualY(GAME_HEIGHT / 2);
 			}
 		}
 	}
@@ -37,7 +37,7 @@ void HealthComponent::removeLife(Characters &chars)
 
 void HealthComponent::knockback(Characters &chars)
 {
-	int knockbackDegree = 33;
+	double knockbackDegree = 33 * (PI / 180);
 	int baseKnockback = 25;
 	if (perc == 0 || perc == 1 || perc == 2 || perc == 3)
 	{
@@ -46,6 +46,7 @@ void HealthComponent::knockback(Characters &chars)
 		VECTOR2 vel;
 		vel.x = xVel;
 		vel.y = yVel;
+		chars.getMoveComponent()->setVelocity(vel);
 	}
 	else
 	{
@@ -54,6 +55,7 @@ void HealthComponent::knockback(Characters &chars)
 		VECTOR2 vel;
 		vel.x = xVel;
 		vel.y = yVel;
+		chars.getMoveComponent()->setVelocity(vel);
 	}
 }
 
