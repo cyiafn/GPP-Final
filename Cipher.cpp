@@ -64,7 +64,7 @@ void Cipher::update()
 {
 	map1->update(frameTime, characters);
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		characters[i]->update(frameTime);
+		characters[i]->update(frameTime, this);
 	}
 	player->update(frameTime, this);
 }

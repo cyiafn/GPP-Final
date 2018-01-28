@@ -15,7 +15,7 @@ void HealthComponent::removeLife(Characters &chars)
 {
 	if (chars.getActive())
 	{
-		if (chars.getMoveComponent()->getActualX() > 1500 || chars.getMoveComponent()->getActualX() < -300 || chars.getMoveComponent()->getActualY > 1000 || chars.getMoveComponent()->getActualY< -300)
+		if (chars.getMoveComponent()->getActualX() > 1500 || chars.getMoveComponent()->getActualX() < -300 || chars.getMoveComponent()->getActualY() > 1000 || chars.getMoveComponent()->getActualY() < -300)
 		{
 			if (lives == 1)
 			{
@@ -28,8 +28,8 @@ void HealthComponent::removeLife(Characters &chars)
 				lives -= 1;
 				chars.setX(GAME_WIDTH / 2);
 				chars.setY(GAME_HEIGHT / 2);
-				chars.getMoveComponent->setActualX(GAME_WIDTH / 2);
-				chars.getMoveComponent->setActualY(GAME_HEIGHT / 2);
+				chars.getMoveComponent()->setActualX(GAME_WIDTH / 2);
+				chars.getMoveComponent()->setActualY(GAME_HEIGHT / 2);
 			}
 		}
 	}
