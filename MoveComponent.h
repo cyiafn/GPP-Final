@@ -25,9 +25,28 @@ private:
 	int onPlatformCheck;   //checks if player is on platform
 	int jumpingCheck;   //checks if player is jumping
 
+	float actualX;
+	float actualY;
+
 public:
 	MoveComponent();
 	~MoveComponent();
+	void setActualX(float x)
+	{
+		this->actualX = x;
+	}
+	float getActualX()
+	{
+		return this->actualX;
+	}
+	void setActualY(float y)
+	{
+		this->actualY = y;
+	}
+	float  getActualY()
+	{
+		return this->actualY;
+	}
 	//return velocity vector
 	VECTOR2 getVelocity() const { return velocity; }
 	//Return mass.
@@ -65,10 +84,6 @@ public:
 
 	// Set gravitational constant. Default is 6.67428e-11
 	void  setGravity(float g) { gravity = g; }
-
-	float getAcceleration() { return acceleration; }
-
-	void setAcceleration(float accel) { acceleration = accel; }
 
 	void update(float frameTime, Entity &ent);
 

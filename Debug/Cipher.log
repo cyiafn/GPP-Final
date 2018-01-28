@@ -1,23 +1,13 @@
-<<<<<<< HEAD
 ﻿  map.cpp
-c:\users\chenyifan\desktop\gpp-final\movecomponent.h(11): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(74): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(80): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(88): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(96): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(104): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(112): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(120): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(128): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\chenyifan\desktop\gpp-final\map.cpp(136): warning C4305: 'argument': truncation from 'double' to 'float'
-  Cipher.vcxproj -> C:\Users\chenyifan\Desktop\GPP-Final\Debug\Cipher.exe
-=======
-﻿  characters.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(45): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(47): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-  MoveComponent.cpp
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(45): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\justin\desktop\studies\year 3 sem 2\gpp\assignment\final assignment\gpp-final\movecomponent.h(47): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  Cipher.vcxproj -> C:\Users\Justin\Desktop\Studies\Year 3 Sem 2\GPP\Assignment\Final Assignment\GPP-Final\Debug\Cipher.exe
->>>>>>> justin
+d:\visual studio projects\cipher\movecomponent.h(61): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\cipher\movecomponent.h(63): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\visual studio projects\cipher\map.cpp(81): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(87): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(95): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(103): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(111): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(119): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(127): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(135): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\visual studio projects\cipher\map.cpp(143): warning C4305: 'argument': truncation from 'double' to 'float'
+  Cipher.vcxproj -> D:\Visual Studio Projects\Cipher\Debug\Cipher.exe

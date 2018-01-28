@@ -11,6 +11,7 @@
 #include "textureManager.h"
 #include "image.h"
 #include "map.h"
+#include <vector>
 
 #include "characters.h"
 
@@ -27,7 +28,7 @@ private:
 
 	TextureManager characterTexture;     // player texture
 
-	Characters player;
+	std::vector<Characters*> characters;
 
 public:
     // Constructor

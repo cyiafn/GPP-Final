@@ -4,6 +4,7 @@
 #include <vector>
 #include "textureManager.h"
 #include "game.h"
+#include "characters.h"
 
 namespace mapNS
 {
@@ -25,7 +26,6 @@ private:
 	TextureManager middlegroundTexture;
 	TextureManager frontgroundTexture;
 	std::vector<Platform*> platforms;
-	int pseudonumberBuffer[100];
 	int percentageX;
 	int percentageY;
 	Platform *background1;
@@ -34,23 +34,23 @@ private:
 	Platform *middleground2;
 	Platform *frontground2;
 	bool vibrationOn;
-	float prevX;
-	float prevY;
+	float mapCurrentPosX;
+	float mapCurrentPosY;
 	//VECTOR2 currentVelocity;
 
 
 
 	//This is temporary filler vector for vector of Characters
-	std::vector<Platform*> characters;
+	//std::vector<Platform*> characters;
 
 public:
-	Map(int type, Game *cipher);
+	Map(int type, Game *cipher, std::vector<Characters*> characters);
 	~Map();
-	void update(float frameTime);
+	void update(float frameTime, std::vector<Characters*> characters);
 	void draw();
 	void releaseAll();
 	void resetAll();
 	void backgroundCheck();
-	void cameraMovement(std::vector<Platform*> characters, float frameTime);
-	void vibration(std::vector<Platform*> characters, float frameTime);
+	void cameraMovement(std::vector<Characters*> characters, float frameTime);
+	void vibration(std::vector<Characters*> characters, float frameTime);
 };
