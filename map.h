@@ -4,6 +4,7 @@
 #include "constants.h"
 #include "platform.h"
 #include <vector>
+#include <time.h>
 #include "textureManager.h"
 #include "game.h"
 #include "characters.h"
@@ -15,6 +16,7 @@ namespace mapNS
 	const int maximumXFalloff = 300;
 	const int maximumYFalloff = 200;
 	const float timeForMapMovement = 1.5;
+	const int maxSpawnItem = 4;
 }
 
 
@@ -38,6 +40,12 @@ private:
 	bool vibrationOn;
 	float mapCurrentPosX;
 	float mapCurrentPosY;
+	int secondBuffer;
+	int secondTracker;
+	int minuteTracker;
+	int spawnedInMinute;
+	int probability;
+
 	//VECTOR2 currentVelocity;
 
 
@@ -55,6 +63,8 @@ public:
 	void backgroundCheck();
 	void cameraMovement(std::vector<Characters*> characters, float frameTime);
 	void vibration(std::vector<Characters*> characters, float frameTime);
+	void dropGeneration(float frameTime);
+	void mapTime(float frameTime);
 };
 
 #endif
