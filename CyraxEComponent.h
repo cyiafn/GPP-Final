@@ -6,14 +6,12 @@
 #include "input.h"
 #include "game.h"
 #include "entity.h"
-#include <vector>
 #include "textureManager.h"
 #include "constants.h"
 
 namespace CyraxEComponentNS
 {
-	const int X = GAME_WIDTH / 2;			// location on screen
-	const int Y = GAME_HEIGHT / 2;			// location on screen
+	const int TELEPORT_RANGE = 200;
 }
 
 class CyraxEComponent
@@ -28,6 +26,6 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
-	void activate(int facing, VECTOR2 center, Game *cipher);
+	float activate(bool facingRight);
 };
 #endif
