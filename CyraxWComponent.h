@@ -9,17 +9,26 @@
 #include <vector>
 #include "textureManager.h"
 #include "constants.h"
+#include "bullet.h"
 
 namespace CyraxWComponentNS
 {
-	const int X = GAME_WIDTH / 2;			// location on screen
-	const int Y = GAME_HEIGHT / 2;			// location on screen
+	const int WIDTH = 32;                   // image width
+	const int HEIGHT = 32;                  // image height
+	const int TEXTURE_COLS = 2;           // texture has 1 columns
+	const int WBULLET_START_FRAME = 0;      // bullet starts at frame 0
+	const int WBULLET_END_FRAME = 1;       // bullet end at frame 1
+	const float WBULLET_ANIMATION_DELAY = 1.0f; // Delay timer
+	const int WBULLET_MAX_RANGE = 240;	// range by frametime
+	const float WBULLET_MIN_SPEED = 80;		// velocity.x for Bullet speed
+	const float WBULLET_MAX_SPEED = 400;		// velocity.x for Bullet speed
 }
 
 class CyraxWComponent
 {
 private:
-
+	TextureManager WbulletTexture;
+	std::vector<Bullet> *bulletList;
 
 public:
 	CyraxWComponent(Game *cipher);
@@ -28,6 +37,6 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
-	void activate(int facing, VECTOR2 center, Game *cipher);
+	void activate(bool facingRight, float x, float y, Game *cipher);
 };
 #endif

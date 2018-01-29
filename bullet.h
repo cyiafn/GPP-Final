@@ -12,18 +12,9 @@
 
 namespace bulletNS
 {
-	const int	WIDTH = 30;                   // image width
-	const int	HEIGHT = 30;                  // image height
-	const int   TEXTURE_COLS = 1;           // texture has 3 columns
-	const int	X = GAME_WIDTH/2;
-	const int	Y = GAME_HEIGHT/2;
-	const float SPEED = 100;                // 100 pixels per second
-	const int   BULLET_START_FRAME = 0;     
-	const int   BULLET_END_FRAME = 0;
 	
 }
 
-//Player.h
 class Bullet : public Entity
 {
 private:
@@ -38,6 +29,8 @@ public:
 	int getCurrRange();
 	MoveComponent* getMotion() { return movement; }
 	void setDirection(VECTOR2 direction);
+	void accelerate(int value);
+	void setBulletSprite(int width, int height, int start, int end, float delay);
 };
 
 

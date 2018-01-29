@@ -46,26 +46,27 @@ void CyraxQComponent::resetAll()
 	QbulletTexture.onResetDevice();
 }
 
-void CyraxQComponent::activate(int facing, VECTOR2 center, Game *cipher)
+void CyraxQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 {
 	bool found = false;
 	Bullet *newBullet = new Bullet();
+	newBullet->setBulletSprite(CyraxQComponentNS::WIDTH, CyraxQComponentNS::HEIGHT, CyraxQComponentNS::QBULLET_START_FRAME, CyraxQComponentNS::QBULLET_END_FRAME, CyraxQComponentNS::QBULLET_ANIMATION_DELAY);
 	if (!newBullet->initialize(cipher, CyraxQComponentNS::WIDTH, CyraxQComponentNS::HEIGHT, CyraxQComponentNS::TEXTURE_COLS, &QbulletTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cyrax Q"));
 	}
-	newBullet->setX(center.x);
-	newBullet->setY(center.y);
+	newBullet->setX(x);
+	newBullet->setY(y);
 	newBullet->setActive(true);
 	bulletList->push_back(*newBullet);
 	VECTOR2 direction;
-	if (facing = 1) //shoot right
+	if (facingRight) //shoot right
 	{		
 		direction.x = CyraxQComponentNS::QBULLET_SPEED;
 		direction.y = 0;
 		newBullet->setDirection(direction);
 	}
-	else if (facing = 2) //shoot left
+	else if (!facingRight) //shoot left
 	{
 		direction.x = -CyraxQComponentNS::QBULLET_SPEED;
 		direction.y = 0;

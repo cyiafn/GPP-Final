@@ -28,7 +28,14 @@ void CyraxEComponent::resetAll()
 	//____Texture.onResetDevice();
 }
 
-void CyraxEComponent::activate(int facing, VECTOR2 center, Game *cipher)
+float CyraxEComponent::activate(bool facingRight)
 {
-
+	if (facingRight) //shoot right
+	{
+		return -CyraxEComponentNS::TELEPORT_RANGE;
+	}
+	else if (!facingRight)
+	{
+		return CyraxEComponentNS::TELEPORT_RANGE;
+	}
 }

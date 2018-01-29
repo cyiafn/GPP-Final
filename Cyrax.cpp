@@ -25,7 +25,7 @@ void Cyrax::draw()
 {
 	Image::draw();              // draw ship
 	Qcomponent->draw();
-	//Wcomponent->draw();
+	Wcomponent->draw();
 	//Ecomponent->draw();
 	//Rcomponent->draw();
 }
@@ -33,7 +33,7 @@ void Cyrax::draw()
 void Cyrax::skillUpdate(float frameTime)
 {
 	Qcomponent->update(frameTime);
-	//Wcomponent->update(frameTime);
+	Wcomponent->update(frameTime);
 	//Ecomponent->update(frameTime);
 	//Rcomponent->update(frameTime);
 }
@@ -67,17 +67,40 @@ void Cyrax::resetSkill(std::string letter)
 	}
 }
 
-void Cyrax::useQ(int facing, VECTOR2 center, Game *cipher)
+void Cyrax::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	Qcomponent->activate(facing, center, cipher);
+	if (facingRight) //facing right
+	{
+		float infrontX = center.x + (spriteData.width / 2);
+		Qcomponent->activate(facingRight, infrontX,center.y, cipher);
+	}
+	else if (!facingRight) //facing left
+	{
+		float infrontX = center.x - (spriteData.width / 2);
+		Qcomponent->activate(facingRight, infrontX, center.y, cipher);
+	}
 }
-void Cyrax::useW()
+void Cyrax::useW(bool facingRight, VECTOR2 center, Game *cipher)
 {
-
+	if (facingRight) //facing right
+	{
+		float infrontX = center.x + (spriteData.width / 2);
+		Wcomponent->activate(facingRight, infrontX, center.y, cipher);
+	}
+	else if (!facingRight) //facing left
+	{
+		float infrontX = center.x - (spriteData.width / 2);
+		Wcomponent->activate(facingRight, infrontX, center.y, cipher);
+	}
 }
-void Cyrax::useE()
+void Cyrax::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
-
+	float range = Ecomponent->activate(facingRight);
+	VECTOR2 newLocation;
+	newLocation.x = center.x + range;
+	newLocation.y = center.y;
+	this->setX(newLocation.x - spriteData.width/2);
+	this->setY(newLocation.y - spriteData.height/2);
 }
 void Cyrax::useR()
 {

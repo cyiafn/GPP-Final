@@ -72,7 +72,7 @@ void Characters::update(float frameTime, Game *cipher)
 
 	if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
 	{
-		facing = 1;
+		facingRight = true;
 		spriteData.x = spriteData.x + frameTime * 100;
 		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x > GAME_WIDTH)               // if off screen right
@@ -80,7 +80,7 @@ void Characters::update(float frameTime, Game *cipher)
 	}
 	if (input->isKeyDown(P1LEFT_KEY)||input->isKeyDown(P2LEFT_KEY))             // if move left
 	{
-		facing = 2;
+		facingRight = false;
 		spriteData.x = spriteData.x - frameTime * 100;
 		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x < -spriteData.width)         // if off screen left
@@ -103,7 +103,7 @@ void Characters::update(float frameTime, Game *cipher)
 	{
 		if (!Q_on_CoolDown)
 		{
-			useQ(facing, center, cipher);
+			useQ(facingRight, center, cipher);
 			Q_on_CoolDown = true;
 		}
 			
@@ -111,12 +111,20 @@ void Characters::update(float frameTime, Game *cipher)
 	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
 	{
 		if (!W_on_CoolDown)
-			useW();
+		{
+			useW(facingRight, center, cipher);
+			W_on_CoolDown = true;
+		}
+			
 	}
 	if (input->isKeyDown(P1SKILL3_KEY)) //U or /
 	{
 		if (!E_on_CoolDown)
-			useE();
+		{
+			useE(facingRight, center, cipher);
+			E_on_CoolDown = true;
+		}
+			
 	}
 	//Ultimate
 	if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
@@ -130,17 +138,28 @@ void Characters::update(float frameTime, Game *cipher)
 	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ(facing, center, cipher);
+		{
+			useQ(facingRight, center, cipher);
+			Q_on_CoolDown = true;
+		}			
 	}
 	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 	{
 		if (!W_on_CoolDown)
-			useW();
+		{
+			useW(facingRight, center, cipher);
+			W_on_CoolDown = true;
+		}
+			
 	}
 	if (input->isKeyDown(P2SKILL3_KEY)) //U or /
 	{
 		if (!E_on_CoolDown)
-			useE();
+		{
+			useE(facingRight, center, cipher);
+			E_on_CoolDown = true;
+		}
+			
 	}
 	//Ultimate
 	if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))

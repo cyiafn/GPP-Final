@@ -35,7 +35,7 @@ protected:
 	bool onFloor;
 
 	VECTOR2 center;
-	int facing; //1 is facing right, 2 is facing left
+	bool facingRight; //1 is facing right, 2 is facing left
 	bool Q_on_CoolDown = false;
 	bool W_on_CoolDown = false;
 	bool E_on_CoolDown = false;
@@ -98,9 +98,9 @@ public:
 	}
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
-	virtual void useQ(int facing, VECTOR2 center, Game *cipher) {};
-	virtual void useW() {};
-	virtual void useE() {};
+	virtual void useQ(bool facingRight, VECTOR2 center, Game *cipher) {};
+	virtual void useW(bool facingRight, VECTOR2 center, Game *cipher) {};
+	virtual void useE(bool facingRight, VECTOR2 center, Game *cipher) {};
 	virtual void useR() {};
 	virtual void skillUpdate(float frameTime) {};
 	void coolDownChecking();
