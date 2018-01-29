@@ -9,10 +9,10 @@ Freid::Freid(Game *cipher)
 	Q_CoolDown = FreidNS::QSkillCD;
 	W_CoolDown = FreidNS::WSkillCD;
 	E_CoolDown = FreidNS::ESkillCD;
-	/*if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
 	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));*/
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 }
 
 bool Freid::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
@@ -67,9 +67,18 @@ void Freid::resetSkill(std::string letter)
 	}
 }
 
-void Freid::useQ(int facing, VECTOR2 center, Game *cipher)
+void Freid::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	Qcomponent->activate(facing, center, cipher);
+	if (facingRight) //facing right
+	{
+		float infrontX = center.x + (spriteData.width / 2);
+		Qcomponent->activate(facingRight, infrontX, center.y, cipher);
+	}
+	else if (!facingRight) //facing left
+	{
+		float infrontX = center.x - (spriteData.width / 2);
+		Qcomponent->activate(facingRight, infrontX, center.y, cipher);
+	}
 }
 void Freid::useW()
 {

@@ -19,8 +19,8 @@ namespace CyraxQComponentNS
 	const int QBULLET_START_FRAME = 0;      // bullet starts at frame 0
 	const int QBULLET_END_FRAME = 0;       // bullet end at frame 0
 	const float QBULLET_ANIMATION_DELAY = 0; // No delay
-	const int QBULLET_MAX_RANGE = 800;	// range by frametime
-	const float QBULLET_SPEED = 80;		// velocity.x for Bullet speed
+	const int QBULLET_MAX_RANGE = 600;	// range by frametime
+	const float QBULLET_SPEED = 150;		// velocity.x for Bullet speed
 }
 
 class CyraxQComponent
