@@ -176,7 +176,7 @@ void Map::update(float frameTime, std::vector<Characters*> characters)
 {
 	mapTime(frameTime);
 	backgroundCheck();
-	//cameraMovement(characters, frameTime);
+	cameraMovement(characters, frameTime);
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 		platforms[i]->update(frameTime);
 	}
@@ -268,8 +268,8 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 		averageY = mapNS::centerY - mapNS::maximumYFalloff;
 	}
 	VECTOR2 setVel;
-	setVel.x = DisX / mapNS::timeForMapMovement;
-	setVel.y = DisY / mapNS::timeForMapMovement;
+	setVel.x = -DisX / mapNS::timeForMapMovement;
+	setVel.y = -DisY / mapNS::timeForMapMovement;
 
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		characters[i]->setX(characters[i]->getX() + setVel.x * frameTime);
@@ -280,6 +280,8 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 		platforms[i]->setX(platforms[i]->getX() + setVel.x * frameTime);
 		platforms[i]->setY(platforms[i]->getY() + setVel.x * frameTime);
 	}
+	mapCurrentPosX = setVel.x * frameTime + mapCurrentPosX;
+	mapCurrentPosY = setVel.y * frameTime + mapCurrentPosY;
 
 	
 }
@@ -306,7 +308,7 @@ void Map::dropGeneration(float frameTime)
 				randomList[10 - probability + i] = 1;
 			}
 			int position = rand() % 10;
-			if (randomList[position] == 1)
+			if (randomList[randomList[position]] == 1)
 			{
 				//code to spawn new drop
 				probability = 0;

@@ -65,6 +65,7 @@ public:
 	void vibration(std::vector<Characters*> characters, float frameTime);
 	void dropGeneration(float frameTime);
 	void mapTime(float frameTime);
+	std::vector<Platform*> getPlatforms() { return platforms; }
 };
 
 #endif
