@@ -37,9 +37,15 @@ private:
 	Platform *frontground1;
 	Platform *middleground2;
 	Platform *frontground2;
+	Game* gamePointer;
+
 	bool vibrationOn;
+	int startingBuffer;
+	int currentVibrationDirection;
+
 	float mapCurrentPosX;
 	float mapCurrentPosY;
+
 	int secondBuffer;
 	int secondTracker;
 	int minuteTracker;
