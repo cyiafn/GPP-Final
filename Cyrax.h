@@ -35,9 +35,9 @@ public:
 	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
-	void useQ(int facing, VECTOR2 center, Game *cipher);
-	void useW();
-	void useE();
+	void useQ(bool facingRight, VECTOR2 center, Game *cipher);
+	void useW(bool facingRight, VECTOR2 center, Game *cipher);
+	void useE(bool facingRight, VECTOR2 center, Game *cipher);
 	void useR();
 };
 
