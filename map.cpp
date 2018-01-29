@@ -14,7 +14,11 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 	float averageX = 0;
 	float averageY = 0;
 
-	
+	secondBuffer = 0;
+	secondTracker = 0;
+	minuteTracker = 0;
+	spawnedInMinute = 0;
+	probability = 1;
 
 
 	vibrationOn = false;
@@ -170,6 +174,7 @@ Map::~Map()
 
 void Map::update(float frameTime, std::vector<Characters*> characters)
 {
+	mapTime(frameTime);
 	backgroundCheck();
 	//cameraMovement(characters, frameTime);
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
@@ -282,4 +287,62 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 void Map::vibration(std::vector<Characters*> characters, float frameTime)
 {
 
+}
+
+void Map::dropGeneration(float frameTime)
+{
+	srand((unsigned)time(NULL));
+	int randomList[11];
+	if (spawnedInMinute != mapNS::maxSpawnItem)
+	{
+		if (secondBuffer == 0)
+		{
+			for (int i = 0; i < 10-(probability); i++)
+			{
+				randomList[i] = 0;
+			}
+			for (int i = 0; i < probability; i++)
+			{
+				randomList[10 - probability + i] = 1;
+			}
+			int position = rand() % 10;
+			if (randomList[position] == 1)
+			{
+				//code to spawn new drop
+				probability = 0;
+			}
+		}
+	}
+}
+
+void Map::mapTime(float frameTime)
+{
+	if (secondBuffer != 60)
+	{
+		secondBuffer += 1;
+	}
+	else
+	{
+		secondBuffer = 0;
+		secondTracker += 1;
+		if (probability != 0)
+		{
+			if ((secondTracker != 2 || secondTracker != 0) && secondTracker % 2 == 0)
+			{
+				probability += 1;
+			}
+		}
+	}
+
+	if ((secondBuffer == 0 && secondTracker == 0) || (secondBuffer == 20 && secondTracker == 0) || (secondBuffer == 40 && secondTracker == 0) || (secondBuffer == 60&&secondTracker == 0))
+	{
+		probability = 1;
+	}
+
+	if (secondTracker == 60)
+	{
+		secondTracker = 0;
+		minuteTracker += 1;
+		spawnedInMinute = 0;
+	}
 }
