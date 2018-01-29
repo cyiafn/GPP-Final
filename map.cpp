@@ -10,6 +10,7 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 	middleground2 = new Platform();
 	frontground1 = new Platform();
 	frontground2 = new Platform();
+	gamePointer = cipher;
 
 	float averageX = 0;
 	float averageY = 0;
@@ -19,7 +20,10 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 	minuteTracker = 0;
 	spawnedInMinute = 0;
 	probability = 1;
+	startingBuffer = -1;
+	currentVibrationDirection = -1;
 
+	srand((unsigned)time(NULL));
 
 	vibrationOn = false;
 	if (type == 0)
@@ -152,8 +156,16 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 			averageX += characters[i]->getMoveComponent()->getActualX();
 			averageX += characters[i]->getMoveComponent()->getActualX();
 		}
-		mapCurrentPosX = averageX / characters.size();
-		mapCurrentPosY = averageY / characters.size();
+
+		mapCurrentPosX = 0;
+		mapCurrentPosY = 0;
+
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+			mapCurrentPosX += characters[i]->getX();
+			mapCurrentPosY += characters[i]->getY();
+		}
+		mapCurrentPosX = mapCurrentPosX / characters.size();
+		mapCurrentPosY = mapCurrentPosY / characters.size();
 	}
 }
 
@@ -174,17 +186,21 @@ Map::~Map()
 
 void Map::update(float frameTime, std::vector<Characters*> characters)
 {
+	if (gamePointer->getInput()->getMouseLButton())
+	{
+		vibrationOn = true;
+	}
 	mapTime(frameTime);
 	backgroundCheck();
 	cameraMovement(characters, frameTime);
+	vibration(characters, frameTime);
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 		platforms[i]->update(frameTime);
 	}
 	middleground1->update(frameTime);
 	frontground1->update(frameTime);
 	middleground2->update(frameTime);
-	frontground2->update(frameTime);
-	//cameraMovement(std::vector<Platform*> characters, float frameTime);
+	frontground2->update(frameTime);;
 }
 
 
@@ -242,8 +258,8 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 	float averageY = 0;
 
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		averageX += characters[i]->getMoveComponent()->getActualX();
-		averageY += characters[i]->getMoveComponent()->getActualY();
+		averageX += characters[i]->getX();
+		averageY += characters[i]->getY();
 	}
 	averageX = averageX / characters.size();
 	averageY = averageY / characters.size();
@@ -251,7 +267,7 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 	float DisX = averageX - mapCurrentPosX;
 	float DisY = averageY - mapCurrentPosY;
 
-	if (averageX > mapNS::centerX + mapNS::maximumXFalloff)
+	/*if (averageX > mapNS::centerX + mapNS::maximumXFalloff)
 	{
 		averageX = mapNS::centerX + mapNS::maximumXFalloff;
 	}
@@ -266,8 +282,8 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 	else if (averageY <= mapNS::centerY - mapNS::maximumYFalloff)
 	{
 		averageY = mapNS::centerY - mapNS::maximumYFalloff;
-	}
-	VECTOR2 setVel;
+	}*/
+	/*VECTOR2 setVel;
 	setVel.x = -DisX / mapNS::timeForMapMovement;
 	setVel.y = -DisY / mapNS::timeForMapMovement;
 
@@ -279,21 +295,139 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 	{
 		platforms[i]->setX(platforms[i]->getX() + setVel.x * frameTime);
 		platforms[i]->setY(platforms[i]->getY() + setVel.x * frameTime);
+	}*/
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		characters[i]->setX(characters[i]->getX() - DisX);
+		characters[i]->setY(characters[i]->getY() - DisY);
 	}
-	mapCurrentPosX = setVel.x * frameTime + mapCurrentPosX;
-	mapCurrentPosY = setVel.y * frameTime + mapCurrentPosY;
+	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+	{
+		platforms[i]->setX(platforms[i]->getX() - DisX);
+		platforms[i]->setY(platforms[i]->getY() - DisY);
+	}
+	//mapCurrentPosX = averageX;
+	//mapCurrentPosY = averageY;
 
 	
 }
 
 void Map::vibration(std::vector<Characters*> characters, float frameTime)
 {
-
+	if (vibrationOn)
+	{
+		if (startingBuffer == -1)
+		{
+			startingBuffer = 0;
+		}
+		else
+		{
+			if ((0 < startingBuffer  && startingBuffer <= 20)  || (20 < startingBuffer  && startingBuffer <= 40) || (40 < startingBuffer  && startingBuffer <= 60) || (60 < startingBuffer  && startingBuffer <= 80))
+			{
+				if (startingBuffer == 1 || startingBuffer == 21 || startingBuffer == 41 || startingBuffer == 61 )
+				{
+					currentVibrationDirection = rand() % 4;
+				}
+				if( (0 < startingBuffer && startingBuffer <= 10) || (20 < startingBuffer && startingBuffer <= 30) || (40 < startingBuffer && startingBuffer <= 50) || (60 < startingBuffer && startingBuffer <= 70))
+				{
+					if (currentVibrationDirection == 0)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setY(characters[i]->getY() + 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setY(platforms[i]->getY() + 20);
+						}
+					}
+					else if (currentVibrationDirection == 1)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setX(characters[i]->getX() + 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setX(platforms[i]->getX() + 20);
+						}
+					}
+					else if (currentVibrationDirection == 2)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setY(characters[i]->getY() - 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setY(platforms[i]->getY() - 20);
+						}
+					}
+					else if (currentVibrationDirection == 3)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setX(characters[i]->getX() - 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setX(platforms[i]->getX() - 20);
+						}
+					}
+				}
+				else if ((10 < startingBuffer && startingBuffer <= 20) || (30 < startingBuffer && startingBuffer <= 40) || (50 < startingBuffer && startingBuffer <= 60) || (70 < startingBuffer && startingBuffer <= 80))
+				{
+					if (currentVibrationDirection == 0)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setY(characters[i]->getY() - 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setY(platforms[i]->getY() - 20);
+						}
+					}
+					else if (currentVibrationDirection == 1)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setX(characters[i]->getX() - 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setX(platforms[i]->getX() - 20);
+						}
+					}
+					else if (currentVibrationDirection == 2)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setY(characters[i]->getY() + 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setY(platforms[i]->getY() + 20);
+						}
+					}
+					else if (currentVibrationDirection == 3)
+					{
+						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+							characters[i]->setX(characters[i]->getX() + 20);
+						}
+						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+						{
+							platforms[i]->setX(platforms[i]->getX() + 20);
+						}
+					}
+				}
+				
+			}
+			
+			if (startingBuffer == 81)
+			{
+				vibrationOn = false;
+				currentVibrationDirection = -1;
+				startingBuffer = -1;
+			}
+		}
+	}
 }
 
 void Map::dropGeneration(float frameTime)
 {
-	srand((unsigned)time(NULL));
 	int randomList[11];
 	if (spawnedInMinute != mapNS::maxSpawnItem)
 	{
@@ -322,6 +456,10 @@ void Map::mapTime(float frameTime)
 	if (secondBuffer != 60)
 	{
 		secondBuffer += 1;
+		if (startingBuffer != -1)
+		{
+			startingBuffer += 1;
+		}
 	}
 	else
 	{
