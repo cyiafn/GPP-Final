@@ -24,6 +24,7 @@ private:
 
 	int onPlatformCheck;   //checks if player is on platform
 	int jumpingCheck;   //checks if player is jumping
+	int characterDirection; //checks where player is facing
 
 	float actualX;
 	float actualY;
@@ -61,6 +62,8 @@ public:
 	float getOnPlatformCheck() { return onPlatformCheck; }
 	//Return whether character is jumping
 	float getJumpingCheck() { return jumpingCheck; }
+	//Return direction of character
+	float getCharacterDirection() { return characterDirection; }
 //----------------------------------------------------------------------------------------------------
 //  Set functions
 //----------------------------------------------------------------------------------------------------
@@ -80,6 +83,8 @@ public:
 	void setOnPlatformCheck(int isOnPlatform) { onPlatformCheck = isOnPlatform; }
 	//Set whether character jumping
 	void setJumpingCheck(int isJumping) { jumpingCheck = isJumping; }
+	//Set Character Direction
+	void setCharacterDirection(int direction) { characterDirection = direction; }
 // --------------------------------------------------------------------------------------------------
 
 	// Set gravitational constant. Default is 6.67428e-11
@@ -105,8 +110,13 @@ public:
 	{
 		notJumping = 0,
 		singleJump = 1,
-		doubleJumpAllowed = 2,
-		doubleJump = 3
+		doubleJump = 2
+	};
+
+	enum Direction
+	{
+		right = 0,
+		left = 1
 	};
 };
 #endif

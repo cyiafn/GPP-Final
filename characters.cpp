@@ -36,6 +36,7 @@ bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 	this->movecomponent->setActualX(this->getX());
 	this->movecomponent->setActualY(this->getY());
 	this->onFloor = true;
+	this->movecomponent->setAcceleration(150);
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
@@ -65,36 +66,17 @@ void Characters::update(float frameTime, Game *cipher)
 	float centerY = this->getCenterY();
 	center = VECTOR2(centerX, centerY);
 	this->coolDownChecking();
+	int state = handleInput(frameTime);
+
+	//if (state == droppingState)
+	//{
+	//	spriteData.y += frameTime * GRAVITY;
+	//}
 	//if ( &movecomponent->getOnPlatformCheck == movecomponent->NotOnPlatform)
 	//{
 	//	spriteData.y = spriteData.y - frameTime * 100;
 	//}
 
-	if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
-	{
-		facing = 1;
-		spriteData.x = spriteData.x + frameTime * 100;
-		movecomponent->setActualX(spriteData.x + frameTime * 100);
-		if (spriteData.x > GAME_WIDTH)               // if off screen right
-			spriteData.x = ((float)-spriteData.width);  // position off screen left
-	}
-	if (input->isKeyDown(P1LEFT_KEY)||input->isKeyDown(P2LEFT_KEY))             // if move left
-	{
-		facing = 2;
-		spriteData.x = spriteData.x - frameTime * 100;
-		movecomponent->setActualX(spriteData.x + frameTime * 100);
-		if (spriteData.x < -spriteData.width)         // if off screen left
-			spriteData.x = ((float)GAME_WIDTH);      // position off screen right
-	}
-
-	if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
-	{
-		
-		VECTOR2 velo = movecomponent->getVelocity();
-		velo.y = 
-
-		spriteData.y += velo.y + frameTime * GRAVITY;
-	}
 	//-----------------------------------------------------------------------------------------------------------------------------
 	//Player 1
 	//-----------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +85,7 @@ void Characters::update(float frameTime, Game *cipher)
 	{
 		if (!Q_on_CoolDown)
 		{
-			useQ(facing, center, cipher);
+			useQ(movecomponent->getCharacterDirection(), center, cipher);
 			Q_on_CoolDown = true;
 		}
 			
@@ -130,7 +112,7 @@ void Characters::update(float frameTime, Game *cipher)
 	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-			useQ(facing, center, cipher);
+			useQ(movecomponent->getCharacterDirection(), center, cipher);
 	}
 	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 	{
@@ -151,11 +133,102 @@ void Characters::update(float frameTime, Game *cipher)
 	skillUpdate(frameTime);
 }
 
-//void Characters::changeState(const CharacterFSM * newState)
-//{
-//	//delete currentState;
-//	//currentState = newState;
-//}
+int Characters::handleInput(float frameTime)
+{
+	switch (state)
+	{
+	case standingState:
+		if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY) || input->isKeyDown(P1LEFT_KEY) || input->isKeyDown(P2LEFT_KEY))            // if move right
+		{
+			state = walkingState;
+			if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
+			{
+				facing = 1;
+				spriteData.x = spriteData.x + frameTime * 100;
+				this->movecomponent->setActualX(spriteData.x + frameTime * 100);
+				this->movecomponent->setCharacterDirection(movecomponent->right);
+				if (spriteData.x > GAME_WIDTH)               // if off screen right
+					spriteData.x = ((float)-spriteData.width);  // position off screen left
+			}
+			if (input->isKeyDown(P1LEFT_KEY) || input->isKeyDown(P2LEFT_KEY))             // if move left
+			{
+				facing = 2;
+				spriteData.x = spriteData.x - frameTime * 100;
+				this->movecomponent->setActualX(spriteData.x + frameTime * 100);
+				this->movecomponent->setCharacterDirection(movecomponent->left);
+				if (spriteData.x < -spriteData.width)         // if off screen left
+					spriteData.x = ((float)GAME_WIDTH);      // position off screen right
+			}
+
+		}
+		else if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
+		{
+			state = singleJumpState;
+			this->movecomponent->setJumpingCheck(movecomponent->singleJump);
+			this->movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
+			//VECTOR2 velo;
+		}
+
+		else if (input->isKeyDown(P1DROP_KEY || P2DROP_KEY))
+		{
+			state = droppingState;
+			this->movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
+		}
+		return state;
+		break;
+	case walkingState:
+		if (!input->isKeyDown(P1RIGHT_KEY) || !input->isKeyDown(P2RIGHT_KEY) || !input->isKeyDown(P1LEFT_KEY) || !input->isKeyDown(P2LEFT_KEY))            // if move right
+		{
+			state = standingState;
+		}
+		else if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
+		{
+			state = singleJumpState;
+			this->movecomponent->setJumpingCheck(movecomponent->singleJump);
+		}
+		else if (input->isKeyDown(P1DROP_KEY || P2DROP_KEY))
+		{
+			state = droppingState;
+			this->movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
+		}
+		return state;
+		break;
+	case singleJumpState:
+		spriteData.y -= frameTime * 100;
+		if (this->movecomponent->getOnPlatformCheck() == movecomponent->standingOnPlatform)
+		{
+			state = standingState;
+			this->movecomponent->setJumpingCheck(movecomponent->notJumping);
+		}
+		else if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
+		{
+			state = doubleJumpState;
+			this->movecomponent->setJumpingCheck(movecomponent->doubleJump);
+		}
+		return state;
+		break;
+	case doubleJumpState:
+		if (this->movecomponent->getOnPlatformCheck() == movecomponent->standingOnPlatform)
+		{
+			state = standingState;
+			this->movecomponent->setJumpingCheck(movecomponent->notJumping);
+			//movecomponent->setOnPlatformCheck(movecomponent->standingOnPlatform);
+		}
+		return state;
+		break;
+	case droppingState:
+		
+		if (this->movecomponent->getOnPlatformCheck() == movecomponent->standingOnPlatform)
+		{
+			state = standingState;
+			//movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
+		}
+		return state;
+		break;
+	}
+}
+
+
 
 void Characters::setPrev(float x, float y)
 {

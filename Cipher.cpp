@@ -34,6 +34,9 @@ void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 	player = new Cyrax(this);
+	player->setPlayerNo(player->P1);
+
+
     // demo texture initialize
     /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/
@@ -94,6 +97,7 @@ void Cipher::render()
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		characters[i]->draw();
 	}
+
 	//draw here
 
     graphics->spriteEnd();                  // end drawing sprites
