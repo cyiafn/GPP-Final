@@ -13,13 +13,13 @@
 
 namespace CyraxWComponentNS
 {
-	const int WIDTH = 32;                   // image width
-	const int HEIGHT = 32;                  // image height
+	const int WIDTH = 30;                   // image width
+	const int HEIGHT = 30;                  // image height
 	const int TEXTURE_COLS = 2;           // texture has 1 columns
 	const int WBULLET_START_FRAME = 0;      // bullet starts at frame 0
 	const int WBULLET_END_FRAME = 1;       // bullet end at frame 1
 	const float WBULLET_ANIMATION_DELAY = 1.0f; // Delay timer
-	const int WBULLET_MAX_RANGE = 240;	// range by frametime
+	const int WBULLET_MAX_RANGE = 230;	// range by frametime
 	const float WBULLET_MIN_SPEED = 80;		// velocity.x for Bullet speed
 	const float WBULLET_MAX_SPEED = 400;		// velocity.x for Bullet speed
 }

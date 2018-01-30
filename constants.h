@@ -45,6 +45,9 @@ const char MIDDLEGROUND1_IMAGE[] = "pictures\\Background\\middleground1.png";
 const char FRONTGROUND1_IMAGE[] = "pictures\\Background\\frontground1.png";
 const char CYRAXQ_IMAGE[] = "pictures\\Bullets\\CyraxQ.png";
 const char CYRAXW_IMAGE[] = "pictures\\Bullets\\CyraxW.png";
+const char FREIDQ_IMAGE[] = "pictures\\Bullets\\FreidQ.png";
+const char FREIDW_IMAGE[] = "pictures\\Bullets\\FreidW.png";
+const char FREIDE_IMAGE[] = "pictures\\Bullets\\FreidE.png";
 
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
 
