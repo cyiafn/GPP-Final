@@ -4,7 +4,7 @@ Freid::Freid(Game *cipher)
 {
 	Qcomponent = new FreidQComponent(cipher);
 	//Wcomponent = new FreidWComponent();
-	//Ecomponent = new FreidEComponent();
+	Ecomponent = new FreidEComponent(cipher);
 	//Rcomponent = new FreidRComponent();
 	Q_CoolDown = FreidNS::QSkillCD;
 	W_CoolDown = FreidNS::WSkillCD;
@@ -26,7 +26,7 @@ void Freid::draw()
 	Image::draw();              // draw ship
 	Qcomponent->draw();
 	//Wcomponent->draw();
-	//Ecomponent->draw();
+	Ecomponent->draw();
 	//Rcomponent->draw();
 }
 
@@ -34,7 +34,7 @@ void Freid::skillUpdate(float frameTime)
 {
 	Qcomponent->update(frameTime);
 	//Wcomponent->update(frameTime);
-	//Ecomponent->update(frameTime);
+	Ecomponent->update(frameTime);
 	//Rcomponent->update(frameTime);
 }
 
@@ -80,13 +80,14 @@ void Freid::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 		Qcomponent->activate(facingRight, infrontX, center.y, cipher);
 	}
 }
-void Freid::useW()
+void Freid::useW(bool facingRight, VECTOR2 center, Game *cipher)
 {
 
 }
-void Freid::useE()
+void Freid::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
-
+	center.y = center.y + spriteData.height / 2;
+	Ecomponent->activate(facingRight, center, cipher);
 }
 void Freid::useR()
 {

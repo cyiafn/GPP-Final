@@ -20,8 +20,8 @@ namespace FreidQComponentNS
 	const int QARROW_MID_FRAME = 1;      // bullet starts at frame 1
 	const int QARROW_BOT_FRAME = 2;      // bullet starts at frame 2
 	const int QARROW_MAX_RANGE = 800;	// range by frametime
-	const float QARROW_SPEED = 200;		// velocity.x for Bullet speed
-	const float QARROW_DIAGONAL = 100;		// velocity.x for Bullet speed
+	const float QARROW_SPEED = 250;		// velocity.x for Bullet speed
+	const float QARROW_DIAGONAL = 150;		// velocity.x for Bullet speed
 }
 
 class FreidQComponent

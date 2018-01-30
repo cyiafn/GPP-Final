@@ -48,15 +48,16 @@ void FreidQComponent::resetAll()
 
 void FreidQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 {
-	bool found = false;
 	Bullet *topArrow = new Bullet();
 	Bullet *midArrow = new Bullet();
 	Bullet *botArrow = new Bullet();
+	
 	topArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_TOP_FRAME, FreidQComponentNS::QARROW_TOP_FRAME, 0);
 	if (!topArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid top Q"));
 	}
+
 	midArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_MID_FRAME, FreidQComponentNS::QARROW_MID_FRAME, 0);
 
 	if (!midArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
@@ -80,14 +81,11 @@ void FreidQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 	botArrow->setX(x);
 	botArrow->setY(y);
 	botArrow->setActive(true);
-	arrowList->push_back(*topArrow);
-	arrowList->push_back(*midArrow);
-	arrowList->push_back(*botArrow);
 	VECTOR2 direction;
 	if (facingRight) //shoot right
 	{
 		direction.x = FreidQComponentNS::QARROW_SPEED;
-		direction.y = -FreidQComponentNS::QARROW_DIAGONAL;
+		direction.y = -FreidQComponentNS::QARROW_DIAGONAL;		
 		topArrow->setDirection(direction);
 		direction.y = 0;
 		midArrow->setDirection(direction);
@@ -97,11 +95,17 @@ void FreidQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 	else if (!facingRight) //shoot left
 	{
 		direction.x = -FreidQComponentNS::QARROW_SPEED;
-		direction.y = FreidQComponentNS::QARROW_DIAGONAL;
+		direction.y = -FreidQComponentNS::QARROW_DIAGONAL;
+		topArrow->flipHorizontal(true);
 		topArrow->setDirection(direction);
 		direction.y = 0;
+		midArrow->flipHorizontal(true);
 		midArrow->setDirection(direction);
-		direction.y = -FreidQComponentNS::QARROW_DIAGONAL;
+		direction.y = FreidQComponentNS::QARROW_DIAGONAL;
+		botArrow->flipHorizontal(true);
 		botArrow->setDirection(direction);
 	}
+	arrowList->push_back(*topArrow);
+	arrowList->push_back(*midArrow);
+	arrowList->push_back(*botArrow);
 }

@@ -55,6 +55,7 @@ void Bullet::setBulletSprite(int width, int height, int start, int end, float de
 	radius = width / 2;
 }
 
+
 bool Bullet::initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM)
 {
 	return(Entity::initialize(gamePtr, width, height, text_col, textureM));

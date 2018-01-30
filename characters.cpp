@@ -73,6 +73,7 @@ void Characters::update(float frameTime, Game *cipher)
 	if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
 	{
 		facingRight = true;
+		this->flipHorizontal(false);
 		spriteData.x = spriteData.x + frameTime * 100;
 		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x > GAME_WIDTH)               // if off screen right
@@ -81,6 +82,7 @@ void Characters::update(float frameTime, Game *cipher)
 	if (input->isKeyDown(P1LEFT_KEY)||input->isKeyDown(P2LEFT_KEY))             // if move left
 	{
 		facingRight = false;
+		this->flipHorizontal(true);
 		spriteData.x = spriteData.x - frameTime * 100;
 		movecomponent->setActualX(spriteData.x + frameTime * 100);
 		if (spriteData.x < -spriteData.width)         // if off screen left
