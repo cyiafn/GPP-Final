@@ -133,8 +133,8 @@
     <ClInclude Include="Agent47QComponent.h" />
     <ClInclude Include="Agent47RComponent.h" />
     <ClInclude Include="Agent47WComponent.h" />
+    <ClInclude Include="BehaviourTree.h" />
     <ClInclude Include="characters.h" />
-    <ClInclude Include="characterFSM.h" />
     <ClInclude Include="bomb.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="constants.h" />

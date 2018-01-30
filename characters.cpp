@@ -19,7 +19,15 @@ Characters::Characters() : Entity()
 	endFrame = charactersNS::PLAYER_END_FRAME;     // last frame of ship animation
 	radius = charactersNS::WIDTH / 2.0;
 	frameDelay = charactersNS::PLAYER_ANIMATION_DELAY;
-	collisionType = entityNS::CIRCLE;
+	collisionType = entityNS::BOX;
+	edge.left = -charactersNS::WIDTH*getScale() / 2;;
+	edge.top = -charactersNS::HEIGHT*getScale() / 2;;
+	edge.right = charactersNS::WIDTH*getScale()/2;
+	edge.bottom = charactersNS::HEIGHT*getScale() /2;
+	/*edge.left = 0;
+	edge.top = 0;
+	edge.right = charactersNS::WIDTH*getScale();
+	edge.bottom = charactersNS::HEIGHT*getScale();*/
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
 }
@@ -33,9 +41,6 @@ bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 {
 	//movecomponent = new MoveComponent();			//moved to Characters::Characters()
 	//healthcomponent = new HealthComponent();		//moved to Characters::Characters()
-	this->movecomponent->setActualX(this->getX());
-	this->movecomponent->setActualY(this->getY());
-	this->onFloor = true;
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
@@ -60,121 +65,80 @@ void Characters::update(float frameTime, Game *cipher)
 	Entity::update(frameTime);
 	movecomponent->update(frameTime, this);
 	healthcomponent->update(frameTime, this);
-	//currentState->Execute(this);
-	float centerX = this->getCenterX();
-	float centerY = this->getCenterY();
-	center = VECTOR2(centerX, centerY);
 	this->coolDownChecking();
-	//if ( &movecomponent->getOnPlatformCheck == movecomponent->NotOnPlatform)
-	//{
-	//	spriteData.y = spriteData.y - frameTime * 100;
-	//}
-
-	if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
-	{
-		facingRight = true;
-		spriteData.x = spriteData.x + frameTime * 100;
-		movecomponent->setActualX(spriteData.x + frameTime * 100);
-		if (spriteData.x > GAME_WIDTH)               // if off screen right
-			spriteData.x = ((float)-spriteData.width);  // position off screen left
-	}
-	if (input->isKeyDown(P1LEFT_KEY)||input->isKeyDown(P2LEFT_KEY))             // if move left
-	{
-		facingRight = false;
-		spriteData.x = spriteData.x - frameTime * 100;
-		movecomponent->setActualX(spriteData.x + frameTime * 100);
-		if (spriteData.x < -spriteData.width)         // if off screen left
-			spriteData.x = ((float)GAME_WIDTH);      // position off screen right
-	}
-
-	if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
-	{
-		
-		VECTOR2 velo = movecomponent->getVelocity();
-		velo.y = 
-
-		spriteData.y += velo.y + frameTime * GRAVITY;
-	}
-	//-----------------------------------------------------------------------------------------------------------------------------
-	//Player 1
-	//-----------------------------------------------------------------------------------------------------------------------------
-
-	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
-	{
-		if (!Q_on_CoolDown)
-		{
-			useQ(facingRight, center, cipher);
-			Q_on_CoolDown = true;
-		}
-			
-	}
-	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
-	{
-		if (!W_on_CoolDown)
-		{
-			useW(facingRight, center, cipher);
-			W_on_CoolDown = true;
-		}
-			
-	}
-	if (input->isKeyDown(P1SKILL3_KEY)) //U or /
-	{
-		if (!E_on_CoolDown)
-		{
-			useE(facingRight, center, cipher);
-			E_on_CoolDown = true;
-		}
-			
-	}
-	//Ultimate
-	if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
-	{
-		useR();
-	}
-
-	//-----------------------------------------------------------------------------------------------------------------------------
-	//Player 2
-	//-----------------------------------------------------------------------------------------------------------------------------
-	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
-	{
-		if (!Q_on_CoolDown)
-		{
-			useQ(facingRight, center, cipher);
-			Q_on_CoolDown = true;
-		}			
-	}
-	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
-	{
-		if (!W_on_CoolDown)
-		{
-			useW(facingRight, center, cipher);
-			W_on_CoolDown = true;
-		}
-			
-	}
-	if (input->isKeyDown(P2SKILL3_KEY)) //U or /
-	{
-		if (!E_on_CoolDown)
-		{
-			useE(facingRight, center, cipher);
-			E_on_CoolDown = true;
-		}
-			
-	}
-	//Ultimate
-	if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
-	{
-		useR();
-	}
-
+	skillInputs(cipher);
+	movementInputs(frameTime);
 	skillUpdate(frameTime);
+	setPrev(getX(), getY());
 }
 
-//void Characters::changeState(const CharacterFSM * newState)
-//{
-//	//delete currentState;
-//	//currentState = newState;
-//}
+
+void Characters::movementInputs(float frameTime)
+{
+	if (input->isKeyDown(P1RIGHT_KEY))            // if move right
+	{
+		facingRight = true;
+		if (movecomponent->getVelocity().x != 300)
+		{
+			VECTOR2 vel;
+			vel.x = movecomponent->getVelocity().x + 20;
+			vel.y = movecomponent->getVelocity().y;
+			movecomponent->setVelocity(vel);
+		}
+	}
+	if (input->isKeyDown(P1LEFT_KEY))             // if move left
+	{
+		facingRight = false;
+		if (movecomponent->getVelocity().x != -300)
+		{
+			VECTOR2 vel;
+			vel.x = movecomponent->getVelocity().x - 20;
+			vel.y = movecomponent->getVelocity().y;
+			movecomponent->setVelocity(vel);
+		}
+	}
+	if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
+	{
+		if (movecomponent->getVelocity().x > 0)
+		{
+			VECTOR2 vel;
+			vel.x = movecomponent->getVelocity().x - 20;
+			vel.y = movecomponent->getVelocity().y;
+			movecomponent->setVelocity(vel);
+		}
+		else if (movecomponent->getVelocity().x < 0)
+		{
+			VECTOR2 vel;
+			vel.x = movecomponent->getVelocity().x + 20;
+			vel.y = movecomponent->getVelocity().y;
+			movecomponent->setVelocity(vel);
+		}
+	}
+
+	if (!input->isKeyDown(P1JUMP_KEY))
+	{
+		jumpLock = false;
+	}
+
+	if (input->isKeyDown(P1JUMP_KEY))
+	{
+		if (jumpCounter != 2)
+		{
+			if (!jumpLock)
+			{
+				//onGround = false;
+				movecomponent->setGravityActive(true);
+				jumpCounter += 1;
+				jumpLock = true;
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x;
+				vel.y = -550;
+				movecomponent->setVelocity(vel);
+			}
+
+		}
+	}
+}
 
 void Characters::setPrev(float x, float y)
 {
@@ -188,6 +152,74 @@ void Characters::revertLocation()
 	this->spriteData.y = prevY;
 }
 
+void Characters::skillInputs(Game *cipher)
+{
+	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
+	{
+		if (!Q_on_CoolDown)
+		{
+			useQ(facingRight, center, cipher);
+			Q_on_CoolDown = true;
+		}
+
+	}
+	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
+	{
+		if (!W_on_CoolDown)
+		{
+			useW(facingRight, center, cipher);
+			W_on_CoolDown = true;
+		}
+
+	}
+	if (input->isKeyDown(P1SKILL3_KEY)) //U or /
+	{
+		if (!E_on_CoolDown)
+		{
+			useE(facingRight, center, cipher);
+			E_on_CoolDown = true;
+		}
+
+	}
+	//Ultimate
+	if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
+	{
+		useR();
+	}
+
+
+	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
+	{
+		if (!Q_on_CoolDown)
+		{
+			useQ(facingRight, center, cipher);
+			Q_on_CoolDown = true;
+		}
+	}
+	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
+	{
+		if (!W_on_CoolDown)
+		{
+			useW(facingRight, center, cipher);
+			W_on_CoolDown = true;
+		}
+
+	}
+	if (input->isKeyDown(P2SKILL3_KEY)) //U or /
+	{
+		if (!E_on_CoolDown)
+		{
+			useE(facingRight, center, cipher);
+			E_on_CoolDown = true;
+		}
+
+	}
+	//Ultimate
+	if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
+	{
+		useR();
+	}
+}
 //Skills by Ee Zher
 void Characters::coolDownChecking() 
 {

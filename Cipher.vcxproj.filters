@@ -120,9 +120,6 @@
     <ClInclude Include="bomb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="characterFSM.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="characters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -235,6 +232,9 @@
       <Filter>Header Files\Characters</Filter>
     </ClInclude>
     <ClInclude Include="bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

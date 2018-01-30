@@ -32,7 +32,6 @@ protected:
 	int playerNo;
 	float prevX;
 	float prevY;
-	bool onFloor;
 
 	VECTOR2 center;
 	bool facingRight; //1 is facing right, 2 is facing left
@@ -45,18 +44,27 @@ protected:
 	int QframeTime = 0;
 	int WframeTime = 0;
 	int EframeTime = 0;
-	
-
-
-	//CharacterFSM * currentState;
+	int jumpCounter = 0;
+	bool jumpLock = false;
+	bool passThroughWall = false;
+	float currentWallY;
+	//bool onGround = false;
 
 private:
 	HealthComponent* healthcomponent;
 	MoveComponent* movecomponent;
+	int type;
 public:
 	Characters();
+	void setPassThroughWall(bool a) { passThroughWall = a; }
+	bool getPassThroughWall() { return passThroughWall; }
+	void setCurrentWallY(float a) { currentWallY = a; }
+	float getCurrentWallY() { return currentWallY; }
+	//void setOnGround(bool a) { onGround = a; }
+	//bool getOnGround() { return onGround; }
 	// inherited member functions
-
+	void setType(int a) { type = a; }
+	int getType() { return type; }
 //INIT 
 //-----------------------------------------------------------------------------------------------------------------------------
 	virtual void draw();
@@ -90,12 +98,9 @@ public:
 	void update(float frameTime, Game *cipher);
 	//void changeState(const CharacterFSM * newState) {};
 	void revertLocation();
+	void revertLocationY() { setY(prevY); }
 //-----------------------------------------------------------------------------------------------------------------------------
 
-	bool getOnFloor()
-	{
-		return onFloor;
-	}
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
 	virtual void useQ(bool facingRight, VECTOR2 center, Game *cipher) {};
@@ -105,12 +110,10 @@ public:
 	virtual void skillUpdate(float frameTime) {};
 	void coolDownChecking();
 	virtual void resetSkill(std::string letter) {};
+	void skillInputs(Game* cipher);
+	void movementInputs(float frameTime);
 //-----------------------------------------------------------------------------------------------------------------------------
-
-	void setOnFloor(bool floor)
-	{
-		onFloor = floor;
-	}
+	void resetJumpCounter() { jumpCounter = 0; }
 
 
 //Enum classes 

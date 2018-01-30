@@ -8,13 +8,13 @@ MoveComponent::MoveComponent()
 	velocity.y = 0.0;
 	deltaV.x = 0.0;
 	deltaV.y = 0.0;
-	actualX = 0;
-	actualY = 0;
 //	gravity = moveComponentNS::GRAVITY;
 	jumpForce = moveComponentNS::JUMPFORCE;
 
 	onPlatformCheck = onPlatform::NotOnPlatform;
 	jumpingCheck = playerJump::notJumping;
+
+	gravityActive = true;
 }
 MoveComponent::~MoveComponent()
 {
@@ -26,8 +26,18 @@ void MoveComponent::update(float frameTime, Entity *ent)
 	/*velocity += deltaV;
 	deltaV.x = 0;
 	deltaV.y = 0;*/
+	gravityHandler(frameTime, ent);
 	ent->setX(ent->getX() + velocity.x * frameTime);
 	ent->setY(ent->getY() + velocity.y * frameTime);
+
+}
+
+void MoveComponent::gravityHandler(float frameTime, Entity *ent)
+{
+	if (this->gravityActive == true)
+	{
+		velocity.y += 10;
+	}
 }
 //=============================================================================
 // Entity bounces after collision with another entity

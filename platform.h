@@ -14,6 +14,7 @@ namespace platformNS
 	const int PLATFORM_START_FRAME = 0;
 	const int PLATFORM_END_FRAME = 0;
 	const float PLATFORM_ANIMATION_DELAY = 0;
+	const int floorCoords = 0;
 }
 
 class Platform : public Entity

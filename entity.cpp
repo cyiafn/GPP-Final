@@ -136,32 +136,37 @@ bool Entity::collidesWith(Entity &ent)
 	return false;
 
 
-    //// if either entity is not active then no collision may occcur
-    //if (!active || !ent.getActive())    
-    //    return false;
+   
+}
 
-    //// If both entities are CIRCLE collision
-    //if (collisionType == entityNS::CIRCLE && ent.getCollisionType() == entityNS::CIRCLE)
-    //    return collideCircle(ent, collisionVector);
-    //// If both entities are BOX collision
-    //if (collisionType == entityNS::BOX && ent.getCollisionType() == entityNS::BOX)
-    //    return collideBox(ent, collisionVector);
-    //// All other combinations use separating axis test
-    //// If neither entity uses CIRCLE collision
-    //if (collisionType != entityNS::CIRCLE && ent.getCollisionType() != entityNS::CIRCLE)
-    //    return collideRotatedBox(ent, collisionVector);
-    //else    // one of the entities is a circle
-    //    if (collisionType == entityNS::CIRCLE)  // if this entity uses CIRCLE collision
-    //    {
-    //        // Check for collision from other box with our circle
-    //        bool collide = ent.collideRotatedBoxCircle(*this, collisionVector); 
-    //        // Put the collision vector in the proper direction
-    //        collisionVector *= -1;              // reverse collision vector
-    //        return collide;
-    //    }
-    //    else    // the other entity uses CIRCLE collision
-    //        return collideRotatedBoxCircle(ent, collisionVector);
-    //return false;
+bool Entity::OldCollidesWith(Entity& ent, VECTOR2& collisionVector)
+{
+	// if either entity is not active then no collision may occcur
+	if (!active || !ent.getActive())    
+	    return false;
+
+	// If both entities are CIRCLE collision
+	if (collisionType == entityNS::CIRCLE && ent.getCollisionType() == entityNS::CIRCLE)
+	    return collideCircle(ent, collisionVector);
+	// If both entities are BOX collision
+	if (collisionType == entityNS::BOX && ent.getCollisionType() == entityNS::BOX)
+	    return collideBox(ent, collisionVector);
+	// All other combinations use separating axis test
+	// If neither entity uses CIRCLE collision
+	if (collisionType != entityNS::CIRCLE && ent.getCollisionType() != entityNS::CIRCLE)
+	    return collideRotatedBox(ent, collisionVector);
+	else    // one of the entities is a circle
+	    if (collisionType == entityNS::CIRCLE)  // if this entity uses CIRCLE collision
+	    {
+	        // Check for collision from other box with our circle
+	        bool collide = ent.collideRotatedBoxCircle(*this, collisionVector); 
+	        // Put the collision vector in the proper direction
+	        collisionVector *= -1;              // reverse collision vector
+	        return collide;
+	    }
+	    else    // the other entity uses CIRCLE collision
+	        return collideRotatedBoxCircle(ent, collisionVector);
+	return false;
 }
 
 //=============================================================================

@@ -25,29 +25,15 @@ private:
 	int onPlatformCheck;   //checks if player is on platform
 	int jumpingCheck;   //checks if player is jumping
 
-	float actualX;
-	float actualY;
+	bool gravityActive;
+
 
 public:
 	MoveComponent();
 	~MoveComponent();
-	void setActualX(float x)
-	{
-		this->actualX = x;
-	}
-	float getActualX()
-	{
-		return this->actualX;
-	}
-	void setActualY(float y)
-	{
-		this->actualY = y;
-	}
-	float  getActualY()
-	{
-		return this->actualY;
-	}
 	//return velocity vector
+	void setGravityActive(bool a) { gravityActive = a; }
+	bool getGravityActive() { return gravityActive; }
 	VECTOR2 getVelocity() const { return velocity; }
 	//Return mass.
 	float getMass()           const { return mass; }
@@ -86,6 +72,8 @@ public:
 	void  setGravity(float g) { gravity = g; }
 
 	void update(float frameTime, Entity *ent);
+
+	void gravityHandler(float frameTime, Entity *ent);
 
 	//void bounce(VECTOR2 &collisionVector, Entity &ent);
 	//void gravityForce(Entity *ent, float frameTime);

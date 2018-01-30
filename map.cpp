@@ -86,13 +86,11 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2);
 		platforms.at(pos)->setY(500);
-		platforms.at(pos)->setScale(0.3);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255*platforms.at(pos)->getScale());
 		platforms.at(pos)->setY(500);
 
@@ -100,7 +98,6 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2*(255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
@@ -108,7 +105,6 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
@@ -116,7 +112,6 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
@@ -124,7 +119,6 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
@@ -132,7 +126,6 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - (-255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
@@ -140,7 +133,6 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2*(-255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
@@ -148,14 +140,39 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setScale(0.3);
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
-		for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-			averageX += characters[i]->getMoveComponent()->getActualX();
-			averageX += characters[i]->getMoveComponent()->getActualX();
-		}
+		//secondlayer
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(200);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - (-255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(200);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (-255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(200);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(200);
+
+
 
 		mapCurrentPosX = 0;
 		mapCurrentPosY = 0;
@@ -200,7 +217,9 @@ void Map::update(float frameTime, std::vector<Characters*> characters)
 	middleground1->update(frameTime);
 	frontground1->update(frameTime);
 	middleground2->update(frameTime);
-	frontground2->update(frameTime);;
+	frontground2->update(frameTime);
+	checkIfOnFloor(characters, frameTime);
+	//checkIfCharInFloor(characters);
 }
 
 
@@ -485,4 +504,77 @@ void Map::mapTime(float frameTime)
 		minuteTracker += 1;
 		spawnedInMinute = 0;
 	}
+}
+
+void Map::checkIfOnFloor(std::vector<Characters*> characters, float frameTime) {
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		if (characters[i]->getMoveComponent()->getGravityActive())
+		{
+			for (std::vector<int>::size_type z = 0; z != platforms.size(); z++)
+			{
+
+				VECTOR2 tempVec;
+
+				if (characters[i]->OldCollidesWith(*platforms[z], tempVec))
+				{
+					if (!characters[i]->getPassThroughWall())
+					{
+						
+							characters[i]->setY(characters[i]->getY() - 1);
+							VECTOR2 vel;
+							vel.x = characters[i]->getMoveComponent()->getVelocity().x;
+							vel.y = 0;
+							characters[i]->getMoveComponent()->setVelocity(vel);
+							characters[i]->resetJumpCounter();
+							characters[i]->getMoveComponent()->setGravityActive(false);
+					}
+						
+				}
+
+			}
+		}
+		else
+		{
+			bool floorUnder = false;
+			for (std::vector<int>::size_type z = 0; z != platforms.size(); z++)
+			{
+				if ((characters[i]->getY() + charactersNS::HEIGHT *characters[i]->getScale() + 1 >= platforms[z]->getY()) && (characters[i]->getY() + charactersNS::HEIGHT*characters[i]->getScale() - 1 <= platforms[z]->getY()) && (characters[i]->getX() + charactersNS::WIDTH/2 >= platforms[z]->getX() && characters[i]->getX()+charactersNS::WIDTH/2 <= platforms[z]->getX() + platformNS::WIDTH * platforms[z]->getScale()))
+				{
+					floorUnder = true;
+				}
+				
+			}
+			if (floorUnder == false)
+			{
+				characters[i]->getMoveComponent()->setGravityActive(true);
+			}
+		}
+	}
+}
+
+
+void Map::checkIfCharInFloor(std::vector < Characters*> characters)
+{
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		for (std::vector<int>::size_type z = 0; z != platforms.size(); z++)
+		{
+			if (!characters[i]->getPassThroughWall())
+			{
+				if (characters[i]->getY() == platforms[z]->getY() + platformNS::WIDTH * platforms[z]->getScale())
+				{
+					characters[i]->setPassThroughWall(true);
+					characters[i]->setCurrentWallY(platforms[z]->getY());
+				}
+			}
+			if (characters[i]->getPassThroughWall())
+			{
+				if (characters[i]->getY() + charactersNS::HEIGHT >= characters[i]->getCurrentWallY() || characters[i]->getY() < platforms[z]->getY() + platformNS::WIDTH * platforms[z]->getScale())
+				{
+					characters[i]->setPassThroughWall(false);
+				}
+			}
+		}
+		
+	}
+
 }

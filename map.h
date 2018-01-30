@@ -72,6 +72,8 @@ public:
 	void dropGeneration(float frameTime);
 	void mapTime(float frameTime);
 	std::vector<Platform*> getPlatforms() { return platforms; }
+	void checkIfOnFloor(std::vector<Characters*> characters, float frameTime);
+	void checkIfCharInFloor(std::vector < Characters*> characters);
 };
 
 #endif

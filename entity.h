@@ -140,6 +140,8 @@ class Entity : public Image
     // Does this entity collide with ent?
 	virtual bool collidesWith(Entity &ent);
 
+	virtual bool OldCollidesWith(Entity &ent, VECTOR2 &collisonVector);
+
     // Damage this Entity with weapon.
     // virtual void damage(int weapon);
 

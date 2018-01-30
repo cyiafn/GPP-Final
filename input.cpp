@@ -143,6 +143,7 @@ bool Input::isKeyDown(UCHAR vkey) const
         return false;
 }
 
+
 //=============================================================================
 // Return true if the specified VIRTUAL KEY has been pressed in the most recent
 // frame. Key presses are erased at the end of each frame.

@@ -62,10 +62,10 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-	map1->update(frameTime, characters);
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		characters[i]->update(frameTime, this);
 	}
+	map1->update(frameTime, characters);
 }
 
 //=============================================================================
