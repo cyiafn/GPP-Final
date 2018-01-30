@@ -21,8 +21,9 @@ void CyraxWComponent::update(float frameTime)
 		bulletList->at(i).update(frameTime);
 		if (bulletList->at(i).getActive())
 		{
-			if (bulletList->at(i).getCurrRange() == 50)
+			if (bulletList->at(i).getCurrRange() == 30)
 			{
+				bulletList->at(i).setCurrentFrame(CyraxWComponentNS::WBULLET_END_FRAME);
 				VECTOR2 newSpeed;				
 				if (bulletList->at(i).getMotion()->getVelocity().x >= 0)
 				{
@@ -62,28 +63,29 @@ void CyraxWComponent::resetAll()
 
 void CyraxWComponent::activate(bool facingRight, float x, float y, Game *cipher)
 {
-	bool found = false;
 	Bullet *newBullet = new Bullet();
-	newBullet->setBulletSprite(CyraxWComponentNS::WIDTH, CyraxWComponentNS::HEIGHT, CyraxWComponentNS::WBULLET_START_FRAME, CyraxWComponentNS::WBULLET_END_FRAME, CyraxWComponentNS::WBULLET_ANIMATION_DELAY);
+	newBullet->setBulletSprite(CyraxWComponentNS::WIDTH, CyraxWComponentNS::HEIGHT, CyraxWComponentNS::WBULLET_START_FRAME, CyraxWComponentNS::WBULLET_END_FRAME, 100);
+	newBullet->setCurrentFrame(CyraxWComponentNS::WBULLET_START_FRAME);
 	if (!newBullet->initialize(cipher, CyraxWComponentNS::WIDTH, CyraxWComponentNS::HEIGHT, CyraxWComponentNS::TEXTURE_COLS, &WbulletTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cyrax W"));
 	}
 	newBullet->setX(x);
 	newBullet->setY(y);
-	newBullet->setActive(true);
-	bulletList->push_back(*newBullet);
+	newBullet->setActive(true);	
 	VECTOR2 direction;
 	if (facingRight) //shoot right
 	{
 		direction.x = CyraxWComponentNS::WBULLET_MIN_SPEED;
 		direction.y = CyraxWComponentNS::WBULLET_MIN_SPEED;
+		newBullet->flipHorizontal(true);
 		newBullet->setDirection(direction);
 	}
 	else if (!facingRight) //shoot left
 	{
 		direction.x = -CyraxWComponentNS::WBULLET_MIN_SPEED;
-		direction.y = CyraxWComponentNS::WBULLET_MIN_SPEED;
+		direction.y = CyraxWComponentNS::WBULLET_MIN_SPEED;		
 		newBullet->setDirection(direction);
 	}
+	bulletList->push_back(*newBullet);
 }

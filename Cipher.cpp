@@ -33,15 +33,9 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-	player = new Cyrax(this);
-    // demo texture initialize
-    /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/
-
+	//player = new Cyrax(this);
+	player = new Freid(this);
     
-    // planet demo object initalize
-    /*if (!planet.initialize(this, planetNS::WIDTH, planetNS::HEIGHT, 2, &gameTextures))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));*/
 
 	//Testing
 	//if(!characterTexture.initialize(graphics, KEN_IMAGE))

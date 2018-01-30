@@ -4,26 +4,26 @@
 
 FreidQComponent::FreidQComponent(Game *cipher)
 {
-	this->bulletList = new std::vector<Bullet>;
-	bulletList->reserve(10);
-	//if (!QbulletTexture.initialize(cipher->getGraphics(), FreidQ_IMAGE))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid Q image"));
+	this->arrowList = new std::vector<Bullet>;
+	arrowList->reserve(20);
+	if (!QbulletTexture.initialize(cipher->getGraphics(), FREIDQ_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid Q image"));
 }
 FreidQComponent::~FreidQComponent()
 {
-	bulletList->clear();
-	delete bulletList;
+	arrowList->clear();
+	delete arrowList;
 }
 void FreidQComponent::update(float frameTime)
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	for (int i = 0; i < arrowList->size(); i++)
 	{
-		bulletList->at(i).update(frameTime);
-		if (bulletList->at(i).getActive())
+		arrowList->at(i).update(frameTime);
+		if (arrowList->at(i).getActive())
 		{
-			if (bulletList->at(i).getCurrRange() == FreidQComponentNS::QBULLET_MAX_RANGE)
+			if (arrowList->at(i).getCurrRange() == FreidQComponentNS::QARROW_MAX_RANGE)
 			{
-				bulletList->erase(bulletList->begin() + i);
+				arrowList->erase(arrowList->begin() + i);
 			}
 		}
 	}
@@ -31,9 +31,9 @@ void FreidQComponent::update(float frameTime)
 }
 void FreidQComponent::draw()
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	for (int i = 0; i < arrowList->size(); i++)
 	{
-		bulletList->at(i).draw();
+		arrowList->at(i).draw();
 
 	}
 }
@@ -46,29 +46,66 @@ void FreidQComponent::resetAll()
 	QbulletTexture.onResetDevice();
 }
 
-void FreidQComponent::activate(int facing, VECTOR2 center, Game *cipher)
+void FreidQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 {
-	bool found = false;
-	Bullet *newBullet = new Bullet();
-	if (!newBullet->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
+	Bullet *topArrow = new Bullet();
+	Bullet *midArrow = new Bullet();
+	Bullet *botArrow = new Bullet();
+	
+	topArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_TOP_FRAME, FreidQComponentNS::QARROW_TOP_FRAME, 0);
+	if (!topArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
 	{
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid Q"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid top Q"));
 	}
-	newBullet->setX(center.x);
-	newBullet->setY(center.y);
-	newBullet->setActive(true);
-	bulletList->push_back(*newBullet);
+
+	midArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_MID_FRAME, FreidQComponentNS::QARROW_MID_FRAME, 0);
+
+	if (!midArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid mid Q"));
+	}
+	botArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_BOT_FRAME, FreidQComponentNS::QARROW_BOT_FRAME, 0);
+	if (!botArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid bottom Q"));
+	}
+	//top arrow
+	topArrow->setX(x);
+	topArrow->setY(y);
+	topArrow->setActive(true);
+	//mid arrow
+	midArrow->setX(x);
+	midArrow->setY(y);
+	midArrow->setActive(true);
+	//bottom arrow
+	botArrow->setX(x);
+	botArrow->setY(y);
+	botArrow->setActive(true);
 	VECTOR2 direction;
-	if (facing = 1) //shoot right
+	if (facingRight) //shoot right
 	{
-		direction.x = FreidQComponentNS::QBULLET_SPEED;
+		direction.x = FreidQComponentNS::QARROW_SPEED;
+		direction.y = -FreidQComponentNS::QARROW_DIAGONAL;		
+		topArrow->setDirection(direction);
 		direction.y = 0;
-		newBullet->setDirection(direction);
+		midArrow->setDirection(direction);
+		direction.y = FreidQComponentNS::QARROW_DIAGONAL;
+		botArrow->setDirection(direction);
 	}
-	else if (facing = 2) //shoot left
+	else if (!facingRight) //shoot left
 	{
-		direction.x = -FreidQComponentNS::QBULLET_SPEED;
+		direction.x = -FreidQComponentNS::QARROW_SPEED;
+		direction.y = -FreidQComponentNS::QARROW_DIAGONAL;
+		topArrow->flipHorizontal(true);
+		topArrow->setDirection(direction);
 		direction.y = 0;
-		newBullet->setDirection(direction);
+		midArrow->flipHorizontal(true);
+		midArrow->setDirection(direction);
+		direction.y = FreidQComponentNS::QARROW_DIAGONAL;
+		botArrow->flipHorizontal(true);
+		botArrow->setDirection(direction);
 	}
+	arrowList->push_back(*topArrow);
+	arrowList->push_back(*midArrow);
+	arrowList->push_back(*botArrow);
 }

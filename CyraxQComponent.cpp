@@ -48,7 +48,6 @@ void CyraxQComponent::resetAll()
 
 void CyraxQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 {
-	bool found = false;
 	Bullet *newBullet = new Bullet();
 	newBullet->setBulletSprite(CyraxQComponentNS::WIDTH, CyraxQComponentNS::HEIGHT, CyraxQComponentNS::QBULLET_START_FRAME, CyraxQComponentNS::QBULLET_END_FRAME, CyraxQComponentNS::QBULLET_ANIMATION_DELAY);
 	if (!newBullet->initialize(cipher, CyraxQComponentNS::WIDTH, CyraxQComponentNS::HEIGHT, CyraxQComponentNS::TEXTURE_COLS, &QbulletTexture))
@@ -58,7 +57,6 @@ void CyraxQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 	newBullet->setX(x);
 	newBullet->setY(y);
 	newBullet->setActive(true);
-	bulletList->push_back(*newBullet);
 	VECTOR2 direction;
 	if (facingRight) //shoot right
 	{		
@@ -70,6 +68,8 @@ void CyraxQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 	{
 		direction.x = -CyraxQComponentNS::QBULLET_SPEED;
 		direction.y = 0;
-		newBullet->setDirection(direction);
+		newBullet->flipHorizontal(true);
+		newBullet->setDirection(direction);	
 	}
+	bulletList->push_back(*newBullet);
 }

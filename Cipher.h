@@ -32,9 +32,8 @@ private:
 
 	TextureManager characterTexture;     // player texture
 	Cyrax *cyrax;
-	Characters *player = cyrax;
-	//Characters player;
-	/*Cyrax *player;*/
+	Freid *freid;
+	Characters *player;
 
 	std::vector<Characters*> characters;
 
