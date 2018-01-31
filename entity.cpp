@@ -130,10 +130,12 @@ bool Entity::collidesWith(Entity &ent)
 				}
 			}
 		}
+		this->spriteData.texture->UnlockRect(0);
+		ent.spriteData.texture->UnlockRect(0);
+		return false;
 	}
-	this->spriteData.texture->UnlockRect(0);
-	ent.spriteData.texture->UnlockRect(0);
 	return false;
+	
 
 
    
