@@ -9,10 +9,10 @@ Necrid::Necrid(Game *cipher)
 	Q_CoolDown = NecridNS::QSkillCD;
 	W_CoolDown = NecridNS::WSkillCD;
 	E_CoolDown = NecridNS::ESkillCD;
-	/*if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
 	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
 	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
-	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));*/
+	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 }
 
 bool Necrid::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)

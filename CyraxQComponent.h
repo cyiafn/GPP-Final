@@ -27,7 +27,7 @@ class CyraxQComponent
 {
 private:
 	TextureManager QbulletTexture;
-	std::vector<Bullet> *bulletList;
+	std::vector<Bullet*> bulletList;
 
 public:
 	CyraxQComponent(Game *cipher);
@@ -37,6 +37,6 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
-
+	std::vector<Bullet*>* getBulletList() { return &bulletList; }
 };
 #endif

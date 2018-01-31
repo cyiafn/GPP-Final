@@ -29,7 +29,6 @@ public:
 	int getCurrRange();
 	MoveComponent* getMotion() { return movement; }
 	void setDirection(VECTOR2 direction);
-	void accelerate(int value);
 	void setBulletSprite(int width, int height, int start, int end, float delay);
 };
 

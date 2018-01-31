@@ -76,8 +76,8 @@ bool Entity::collidesWith(Entity &ent)
 	RECT rect2;
 	rect2.left = ent.getX();
 	rect2.top = ent.getY();
-	rect2.right = ent.getX() + ent.getWidth();
-	rect2.bottom = ent.getX() + ent.getWidth();
+	rect2.right = ent.getX() + ent.getWidth() * this->getScale();
+	rect2.bottom = ent.getX() + ent.getWidth() * this->getScale();
 
 	RECT dest;
 	if (IntersectRect(&dest, &rect1, &rect2))

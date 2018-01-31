@@ -4,26 +4,24 @@
 
 CyraxQComponent::CyraxQComponent(Game *cipher)
 {	
-	this->bulletList = new std::vector<Bullet>;
-	bulletList->reserve(10);
+	bulletList.reserve(10);
 	if (!QbulletTexture.initialize(cipher->getGraphics(), CYRAXQ_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cyrax Q image"));
 }
 CyraxQComponent::~CyraxQComponent()
 {
-	bulletList->clear();
-	delete bulletList;
+	bulletList.clear();
 }
 void CyraxQComponent::update(float frameTime)
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	for (int i = 0; i < bulletList.size(); i++)
 	{
-		bulletList->at(i).update(frameTime);
-		if (bulletList->at(i).getActive())
+		bulletList.at(i)->update(frameTime);
+		if (bulletList.at(i)->getActive())
 		{
-			if (bulletList->at(i).getCurrRange() == CyraxQComponentNS::QBULLET_MAX_RANGE)
+			if (bulletList.at(i)->getCurrRange() == CyraxQComponentNS::QBULLET_MAX_RANGE)
 			{
-				bulletList->erase(bulletList->begin()+i);
+				bulletList.erase(bulletList.begin()+i);
 			}
 		}
 	}
@@ -31,11 +29,15 @@ void CyraxQComponent::update(float frameTime)
 }
 void CyraxQComponent::draw()
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	if (!bulletList.size() <= 0)
 	{
-		bulletList->at(i).draw();
-		
+		for (int i = 0; i < bulletList.size(); i++)
+		{
+			bulletList[i]->draw();
+
+		}
 	}
+	
 }
 void CyraxQComponent::releaseAll()
 {
@@ -71,5 +73,5 @@ void CyraxQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 		newBullet->flipHorizontal(true);
 		newBullet->setDirection(direction);	
 	}
-	bulletList->push_back(*newBullet);
+	bulletList.push_back(newBullet);
 }

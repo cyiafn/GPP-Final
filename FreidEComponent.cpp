@@ -11,6 +11,7 @@ FreidEComponent::FreidEComponent(Game *cipher)
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid E"));
 	}
+	icePlatform->setActive(false);
 }
 FreidEComponent::~FreidEComponent()
 {
@@ -18,6 +19,7 @@ FreidEComponent::~FreidEComponent()
 }
 void FreidEComponent::update(float frameTime)
 {
+	icePlatform->update(frameTime);
 	if (icePlatform->getActive() == true)
 	{
 		platformTimer++;
