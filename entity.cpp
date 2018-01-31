@@ -112,8 +112,8 @@ bool Entity::collidesWith(Entity &ent)
 				int s1y = ry - this->getY();
 
 				// Translation from the "dest" rect to sprite2 coordinates
-				int s2x = rx - this->getX();
-				int s2y = ry - this->getY();
+				int s2x = rx - ent.getX();
+				int s2y = ry - ent.getY();
 
 				// Check the alpha value of each texture pixel
 				// The alpha value is the leftmost byte
