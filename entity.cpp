@@ -70,8 +70,8 @@ bool Entity::collidesWith(Entity &ent)
 	RECT rect1;
 	rect1.left = this->getX();
 	rect1.top = this->getY();
-	rect1.right = this->getX() + this->getWidth();
-	rect1.bottom = this->getY() + this->getHeight();
+	rect1.right = this->getX() + this->getWidth() * this->getScale();
+	rect1.bottom = this->getY() + this->getHeight() * this->getScale();
 
 	RECT rect2;
 	rect2.left = ent.getX();

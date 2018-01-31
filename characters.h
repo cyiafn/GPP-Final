@@ -113,7 +113,11 @@ public:
 	virtual void resetSkill(std::string letter) {};
 	void skillInputs(Game* cipher);
 	void movementInputs(float frameTime);
-//-----------------------------------------------------------------------------------------------------------------------------
+	void moveRight(float frameTime);
+	void moveLeft(float frameTime);
+	void jump(float frameTime);
+	void drop(float frameTime);
+	//-----------------------------------------------------------------------------------------------------------------------------
 	void resetJumpCounter() { jumpCounter = 0; }
 
 

@@ -11,7 +11,7 @@
 #include "characters.h"
 #include "map.h"
 #include "platform.h"
-
+#include "constants.h"
 
 class BehaviourTree
 {
@@ -66,26 +66,51 @@ class BehaviourTree
 		};
 
 		//Types of Behaviors (Escape (Branch into Side of Walls and general running away) , Fighting, Picking up Items)
-		class checkIfPlatformBeneath : public Node {
+		class checkPlatformBeneath : public Node {
 		private:
 			Characters* chars;
 			std::vector<Platform*> platforms;
 		public:
-			checkIfPlatformBeneath(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
+			checkPlatformBeneath(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
 			virtual bool run() override {
+				bool platformBelow = false;
 				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
-					if (((chars->getX() + charactersNS::WIDTH + 1 == platforms[i]->getX()) || chars->getX() + charactersNS::WIDTH == platforms[i]->getX()) && ((chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords) || chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords - 1) )
+					if ((chars->getX() + charactersNS::WIDTH/2 * chars->getScale() >= platforms[i]->getY()) && (chars->getX() + charactersNS::WIDTH/2 * chars->getScale() <= platforms[i]->getY() + platformNS::WIDTH * platforms[i]->getScale()))
 					{
-						return true;
+						platformBelow = true;
 					}
-					else if (((chars->getX() == platforms[i]->getX() + platformNS::WIDTH) || chars->getX() + 1 == platforms[i]->getX() + platformNS::WIDTH) && ((chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords) || chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords - 1))
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
+				}
+				if (platformBelow == true)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		};
+
+		class jumpToNearestPlatform : public Node {
+		private:
+			Characters* chars;
+			std::vector<Platform*> platforms;
+		public:
+			jumpToNearestPlatform(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
+			virtual bool run() override {
+				int indexOfMostPreferrablePlatform;
+				float distanceToClosestPlatform = GAME_WIDTH * GAME_HEIGHT;
+				float currentCharX = chars->getX() + charactersNS::WIDTH/2 * chars->getScale();
+				float currentCharY = chars->getY() + charactersNS::HEIGHT / 2 * chars->getScale();
+				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+					float disX = currentCharX - (platforms[i]->getX() + platformNS::WIDTH * platforms[i]->getScale() / 2 );
+					if (disX < 0)
+						disX *= -1;
+					float disY = currentCharY - (platforms[i]->getY() + platformNS::HEIGHT * platforms[i]->getScale() / 2);
+					if (disY < 0)
+						disX *= -1;
+					float totalDist = sqrt(disX * disX + disY * disY);
+					if (totalDist < )
 				}
 			}
 		};

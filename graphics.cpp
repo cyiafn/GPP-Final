@@ -159,7 +159,7 @@ HRESULT Graphics::loadTexture(const char *filename, COLOR_ARGB transcolor,
             1,                  //mip-map levels (1 for no chain)
             0,                  //usage
             D3DFMT_UNKNOWN,     //surface format (default)
-            D3DPOOL_DEFAULT,    //memory class for the texture
+            D3DPOOL_MANAGED,    //memory class for the texture
             D3DX_DEFAULT,       //image filter
             D3DX_DEFAULT,       //mip filter
             transcolor,         //color key for transparency

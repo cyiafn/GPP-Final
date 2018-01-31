@@ -73,30 +73,57 @@ void Characters::update(float frameTime, Game *cipher)
 	setPrev(getX(), getY());
 }
 
+void Characters::moveRight(float frameTime)
+{
+	facingRight = true;
+	if (movecomponent->getVelocity().x != 300)
+	{
+		VECTOR2 vel;
+		vel.x = movecomponent->getVelocity().x + 20;
+		vel.y = movecomponent->getVelocity().y;
+		movecomponent->setVelocity(vel);
+	}
+}
+
+void Characters::moveLeft(float frameTime)
+{
+	facingRight = false;
+	if (movecomponent->getVelocity().x != -300)
+	{
+		VECTOR2 vel;
+		vel.x = movecomponent->getVelocity().x - 20;
+		vel.y = movecomponent->getVelocity().y;
+		movecomponent->setVelocity(vel);
+	}
+}
+
+void Characters::drop(float frameTime)
+{
+		movecomponent->setGravityActive(true);
+		passThroughWall = true;
+		setY(getY() + 11);
+}
+
+void Characters::jump(float frameTime)
+{
+	movecomponent->setGravityActive(true);
+	passThroughWall = true;
+	jumpCounter += 1;
+	VECTOR2 vel;
+	vel.x = movecomponent->getVelocity().x;
+	vel.y = -550;
+	movecomponent->setVelocity(vel);
+}
 
 void Characters::movementInputs(float frameTime)
 {
 	if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 	{
-		facingRight = true;
-		if (movecomponent->getVelocity().x != 300)
-		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x + 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
-		}
+		moveRight(frameTime);
 	}
 	if (input->isKeyDown(P1LEFT_KEY))             // if move left
 	{
-		facingRight = false;
-		if (movecomponent->getVelocity().x != -300)
-		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x - 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
-		}
+		moveLeft(frameTime);
 	}
 	if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
 	{
@@ -130,20 +157,7 @@ void Characters::movementInputs(float frameTime)
 	{
 		if (dropLock == false)
 		{
-			movecomponent->setGravityActive(true);
-			passThroughWall = true;
-			setY(getY() + 11);
-			/*VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x;
-			if (movecomponent->getVelocity().y < 0)
-			{
-				vel.y = movecomponent->getVelocity().y;
-			}
-			else
-			{
-				vel.y = 0;
-			}
-			movecomponent->setVelocity(vel);*/
+			drop(frameTime);
 			dropLock = true;
 		}
 ;	}
@@ -153,15 +167,8 @@ void Characters::movementInputs(float frameTime)
 		{
 			if (!jumpLock)
 			{
-				//onGround = false;
-				movecomponent->setGravityActive(true);
-				passThroughWall = true;
-				jumpCounter += 1;
 				jumpLock = true;
-				VECTOR2 vel;
-				vel.x = movecomponent->getVelocity().x;
-				vel.y = -550;
-				movecomponent->setVelocity(vel);
+				jump(frameTime);
 			}
 
 		}
