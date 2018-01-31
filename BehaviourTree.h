@@ -66,12 +66,12 @@ class BehaviourTree
 		};
 
 		//Types of Behaviors (Escape (Branch into Side of Walls and general running away) , Fighting, Picking up Items)
-		class checkIfFallingEdge : public Node {
+		class checkIfPlatformBeneath : public Node {
 		private:
 			Characters* chars;
 			std::vector<Platform*> platforms;
 		public:
-			checkIfFallingEdge(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
+			checkIfPlatformBeneath(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
 			virtual bool run() override {
 				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 					if (((chars->getX() + charactersNS::WIDTH + 1 == platforms[i]->getX()) || chars->getX() + charactersNS::WIDTH == platforms[i]->getX()) && ((chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords) || chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords - 1) )
@@ -85,48 +85,6 @@ class BehaviourTree
 					else
 					{
 						return false;
-					}
-				}
-			}
-		};
-
-		class jumpFallingEdge : public Node {
-		private:
-			Characters * chars;
-			std::vector<Platform*> platforms;
-		public:
-			jumpFallingEdge(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
-			virtual bool run() override {
-				if (chars->getMoveComponent()->getVelocity().y != 0)
-				{
-					return false;
-				}
-				else
-				{
-					VECTOR2 vel;
-					vel.x = 0;
-					vel.y = 200;
-					chars->getMoveComponent()->setVelocity(vel);
-					return true;
-				}
-			}
-		};
-
-		class checkIfPlatformBelow : public Node {
-		private:
-			Characters * chars;
-			std::vector<Platform*> platforms;
-		public:
-			checkIfPlatformBelow(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
-			virtual bool run() override {
-				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
-					if (chars->getMoveComponent->getVelocity().y >= 0 && ((chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords) || chars->getY() + charactersNS::HEIGHT != platforms[i]->getY() + platformNS::floorCoords - 1))
-					{
-						return false;
-					}
-					else
-					{
-						return true;
 					}
 				}
 			}

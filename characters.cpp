@@ -28,6 +28,7 @@ Characters::Characters() : Entity()
 	edge.top = 0;
 	edge.right = charactersNS::WIDTH*getScale();
 	edge.bottom = charactersNS::HEIGHT*getScale();*/
+	passThroughWall = true;
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
 }
@@ -119,8 +120,34 @@ void Characters::movementInputs(float frameTime)
 	{
 		jumpLock = false;
 	}
+	if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
+	{
+		dropLock = false;
+	}
 
-	if (input->isKeyDown(P1JUMP_KEY))
+
+	if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
+	{
+		if (dropLock == false)
+		{
+			movecomponent->setGravityActive(true);
+			passThroughWall = true;
+			setY(getY() + 11);
+			/*VECTOR2 vel;
+			vel.x = movecomponent->getVelocity().x;
+			if (movecomponent->getVelocity().y < 0)
+			{
+				vel.y = movecomponent->getVelocity().y;
+			}
+			else
+			{
+				vel.y = 0;
+			}
+			movecomponent->setVelocity(vel);*/
+			dropLock = true;
+		}
+;	}
+	else if (input->isKeyDown(P1JUMP_KEY))
 	{
 		if (jumpCounter != 2)
 		{
@@ -128,6 +155,7 @@ void Characters::movementInputs(float frameTime)
 			{
 				//onGround = false;
 				movecomponent->setGravityActive(true);
+				passThroughWall = true;
 				jumpCounter += 1;
 				jumpLock = true;
 				VECTOR2 vel;

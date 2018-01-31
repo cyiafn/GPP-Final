@@ -46,7 +46,8 @@ protected:
 	int EframeTime = 0;
 	int jumpCounter = 0;
 	bool jumpLock = false;
-	bool passThroughWall = false;
+	bool dropLock = false;
+	bool passThroughWall;
 	float currentWallY;
 	//bool onGround = false;
 
