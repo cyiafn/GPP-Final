@@ -218,8 +218,9 @@ void Map::update(float frameTime, std::vector<Characters*> characters)
 	frontground1->update(frameTime);
 	middleground2->update(frameTime);
 	frontground2->update(frameTime);
-	checkIfOnFloor(characters, frameTime);
 	//checkIfCharInFloor(characters);
+	checkIfOnFloor(characters, frameTime);
+	
 }
 
 
@@ -517,16 +518,22 @@ void Map::checkIfOnFloor(std::vector<Characters*> characters, float frameTime) {
 
 				if (characters[i]->OldCollidesWith(*platforms[z], tempVec))
 				{
-					if (!characters[i]->getPassThroughWall())
+					if (characters[i]->getPassThroughWall())
 					{
-						
-							characters[i]->setY(characters[i]->getY() - 1);
+						if (!(characters[i]->getY() + charactersNS::HEIGHT * characters[i]->getScale() >= platforms[z]->getY() + 10))
+						{
+							characters[i]->resetJumpCounter();
+							characters[i]->setY(platforms[z]->getY() - charactersNS::HEIGHT - 1);
 							VECTOR2 vel;
 							vel.x = characters[i]->getMoveComponent()->getVelocity().x;
 							vel.y = 0;
 							characters[i]->getMoveComponent()->setVelocity(vel);
-							characters[i]->resetJumpCounter();
 							characters[i]->getMoveComponent()->setGravityActive(false);
+							characters[i]->setPassThroughWall(false);
+						}
+						
+						
+
 					}
 						
 				}
@@ -547,6 +554,7 @@ void Map::checkIfOnFloor(std::vector<Characters*> characters, float frameTime) {
 			if (floorUnder == false)
 			{
 				characters[i]->getMoveComponent()->setGravityActive(true);
+				characters[i]->setPassThroughWall(true);
 			}
 		}
 	}
@@ -560,10 +568,14 @@ void Map::checkIfCharInFloor(std::vector < Characters*> characters)
 		{
 			if (!characters[i]->getPassThroughWall())
 			{
-				if (characters[i]->getY() == platforms[z]->getY() + platformNS::WIDTH * platforms[z]->getScale())
+				VECTOR2 tempVec;
+				if (characters[i]->OldCollidesWith(*platforms[z], tempVec))
 				{
-					characters[i]->setPassThroughWall(true);
-					characters[i]->setCurrentWallY(platforms[z]->getY());
+					if ((characters[i]->getY() + charactersNS::HEIGHT * characters[i]->getScale() >= platforms[z]->getY() && characters[i]->getY() + charactersNS::HEIGHT * characters[i]->getScale() <= platforms[z]->getY() + platformNS::HEIGHT * platforms[z]->getScale()) || (characters[i]->getY() <= platforms[z]->getY() + platformNS::HEIGHT * platforms[z]->getScale() && characters[i]->getY() >= platforms[z]->getY()))
+					{
+						characters[i]->setPassThroughWall(true);
+						characters[i]->setCurrentWallY(platforms[z]->getY());
+					}
 				}
 			}
 			if (characters[i]->getPassThroughWall())

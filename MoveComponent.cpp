@@ -36,7 +36,7 @@ void MoveComponent::gravityHandler(float frameTime, Entity *ent)
 {
 	if (this->gravityActive == true)
 	{
-		velocity.y += 10;
+		velocity.y += 7.5;
 	}
 }
 //=============================================================================
