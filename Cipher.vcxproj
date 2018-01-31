@@ -93,6 +93,7 @@
     <ClCompile Include="Agent47QComponent.cpp" />
     <ClCompile Include="Agent47RComponent.cpp" />
     <ClCompile Include="Agent47WComponent.cpp" />
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="bomb.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="characters.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Agent47QComponent.h" />
     <ClInclude Include="Agent47RComponent.h" />
     <ClInclude Include="Agent47WComponent.h" />
+    <ClInclude Include="audio.h" />
     <ClInclude Include="BehaviourTree.h" />
     <ClInclude Include="characters.h" />
     <ClInclude Include="bomb.h" />

@@ -33,14 +33,16 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-	//player = new Cyrax(this);
-	player = new Freid(this);
-    
+	player1 = new Cyrax(this);
+	player2 = new Freid(this);
+	player2->setX(900);
+	player2->setY(GAME_HEIGHT / 2 - player2->getHeight()/2);
 
 	//Testing
 	//if(!characterTexture.initialize(graphics, KEN_IMAGE))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-	characters.push_back(player);
+	characters.push_back(player1);
+	characters.push_back(player2);
 	//int pos = characters.size() - 1;
 	//if (!characters.at(pos)->initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT,charactersNS::TEXTURE_COLS, &characterTexture))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
@@ -73,7 +75,57 @@ void Cipher::ai()
 //=============================================================================
 void Cipher::collisions()
 {
-    
+	//if (player1->getQcomponent()->getBulletList().size() > 0)
+	//{
+	//	auto i = std::end(player1->getQcomponent()->getBulletList());
+	//	int index = 0;
+	//	while (i != std::end(player1->getQcomponent()->getBulletList())) {
+	//		// Do some stuff
+	//		if (player1->getQcomponent()->getBulletList()[index]->collidesWith(*player2))
+	//		{
+	//			player2->setX(player2->getX() + 10);
+	//			//i = player1->getQcomponent()->getBulletList().erase(i);
+	//		}
+
+	//		else
+	//		{
+	//			++i;
+	//		}
+	//		index++;
+	//	}
+	//}
+		//int index = 0;
+		//for (auto itr = player1->getQcomponent()->getBulletList().begin(); itr != player1->getQcomponent()->getBulletList().end();)
+		//{
+		//	// Do some stuff
+		//	if (player1->getQcomponent()->getBulletList()[index]->collidesWith(*player2))
+		//	{
+		//		itr = player1->getQcomponent()->getBulletList().erase(itr);
+		//	}
+		//		
+		//	else
+		//	{
+		//		++itr;
+		//	}
+		//	index++
+		//}
+
+	std::vector<Bullet*>::iterator it;
+	for (it = player1->getQcomponent()->getBulletList()->begin(); it != player1->getQcomponent()->getBulletList()->end();)
+	{
+		if ((*it)->collidesWith(*player2))
+		{
+			//player2->setY(player2->getY() - 30);
+			
+			delete (*it);
+			it = player1->getQcomponent()->getBulletList()->erase(it);
+		}
+		else
+			it++;
+	}
+	
+	
+
 }
 
 //=============================================================================

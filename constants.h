@@ -51,6 +51,15 @@ const char FREIDE_IMAGE[] = "pictures\\Bullets\\FreidE.png";
 
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
 
+// audio files
+const char WAVE_BANK[] = "audio\\Win\\waveBank.xwb";
+const char SOUND_BANK[] = "audio\\Win\\soundBank.xsb";
+
+// audio cues
+const char BM_MUSIC[] = "music";
+const char GUN_SHOT[] = "gunshot";
+const char MOB_DAMAGE[] = "getHit";
+const char PLAYER_DAMAGE[] = "scream";
 
 // key mappings
 

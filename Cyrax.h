@@ -22,10 +22,10 @@ namespace cyraxNS
 class Cyrax : public Characters
 {
 private:
-	CyraxQComponent *Qcomponent;
-	CyraxWComponent *Wcomponent;
-	CyraxEComponent *Ecomponent;
-	CyraxRComponent *Rcomponent;
+	CyraxQComponent* Qcomponent;
+	CyraxWComponent* Wcomponent;
+	CyraxEComponent* Ecomponent;
+	CyraxRComponent* Rcomponent;
 
 	TextureManager characterTexture;
 public:
@@ -35,6 +35,10 @@ public:
 	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
+	CyraxQComponent* getQcomponent() { return Qcomponent; }
+	CyraxWComponent* getWcomponent() { return Wcomponent; }
+	CyraxEComponent* getEcomponent() { return Ecomponent; }
+	CyraxRComponent* getRcomponent() { return Rcomponent; }
 	void useQ(bool facingRight, VECTOR2 center, Game *cipher);
 	void useW(bool facingRight, VECTOR2 center, Game *cipher);
 	void useE(bool facingRight, VECTOR2 center, Game *cipher);

@@ -4,6 +4,7 @@ Bullet::Bullet() : Entity()
 {
 	collisionType = entityNS::CIRCLE;
 	movement = new MoveComponent();
+	movement->setGravityActive(false);
 }
 Bullet::~Bullet()
 {
@@ -34,13 +35,6 @@ int Bullet::getCurrRange()
 void Bullet::setDirection(VECTOR2 direction)
 {
 	movement->setVelocity(direction);
-}
-
-void Bullet::accelerate(int value)
-{
-	VECTOR2 newVelocity;
-	newVelocity = (movement->getVelocity()) * value;
-	movement->setVelocity(newVelocity);
 }
 
 

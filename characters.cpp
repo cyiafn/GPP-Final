@@ -189,6 +189,9 @@ void Characters::revertLocation()
 
 void Characters::skillInputs(Game *cipher)
 {
+	float centerX = this->getCenterX();
+	float centerY = this->getCenterY();
+	center = VECTOR2(centerX, centerY);
 	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
