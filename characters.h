@@ -28,10 +28,14 @@ class HealthComponent;
 class Characters : public Entity
 {
 protected:	
-
 	int playerNo;
 	float prevX;
 	float prevY;
+<<<<<<< HEAD
+=======
+	bool onFloor;
+	int state = standingState;
+>>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 
 	VECTOR2 center;
 	bool facingRight; //1 is facing right, 2 is facing left
@@ -92,12 +96,14 @@ public:
 //-------------------------------------------------------------------------------------------------x--------------------------- -
 	void setPlayerNo(int player) { playerNo = player; }
 	void setPrev(float x, float y);
+	void setMoveComponent(MoveComponent* move) { movecomponent = move; }
+	void setHealthComponent(HealthComponent* health) { healthcomponent = health; }
 //-----------------------------------------------------------------------------------------------------------------------------
 
 //Other Functions
 //-----------------------------------------------------------------------------------------------------------------------------
 	void update(float frameTime, Game *cipher);
-	//void changeState(const CharacterFSM * newState) {};
+	int handleInput(float frameTime);
 	void revertLocation();
 	void revertLocationY() { setY(prevY); }
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -124,6 +130,15 @@ public:
 		P2 = 1,
 		AI1 = 2,
 		AI2 = 3,
+	};
+
+	enum CharacterState
+	{
+		standingState = 0,
+		walkingState,
+		singleJumpState,
+		doubleJumpState,
+		droppingState,
 	};
 };
 #endif

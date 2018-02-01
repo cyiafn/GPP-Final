@@ -37,11 +37,22 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
+<<<<<<< HEAD
 	//player = new Cyrax(this);
 	player1 = new Freid(this);
 	player2 = new Cyrax(this);
 	//P1on = true;
 	//P2on = true;
+=======
+	player = new Cyrax(this);
+	player->setPlayerNo(player->P1);
+
+
+    // demo texture initialize
+    /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/
+
+>>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
     
 
 	//Testing
@@ -175,6 +186,7 @@ void Cipher::render()
 		characters[i]->draw();
 	}
 
+<<<<<<< HEAD
 	if (player1 != NULL)
 	{
 		P1.draw();
@@ -199,6 +211,9 @@ void Cipher::render()
 		dxFontKnockBack4.print("Knockback", 495, GAME_HEIGHT - 150);
 		dxFontP4.print("heart", 515, GAME_HEIGHT - 128);
 	}
+=======
+	//draw here
+>>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 
     graphics->spriteEnd();                  // end drawing sprites
 }
