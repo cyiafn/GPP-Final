@@ -115,6 +115,18 @@
     <ClCompile Include="Necrid.cpp">
       <Filter>Source Files\Characters</Filter>
     </ClCompile>
+    <ClCompile Include="TextDX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="startMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menuBtn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="heart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bomb.h">
@@ -235,6 +247,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BehaviourTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="startMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menuBtn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="heart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

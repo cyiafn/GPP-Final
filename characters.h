@@ -53,6 +53,7 @@ protected:
 private:
 	HealthComponent* healthcomponent;
 	MoveComponent* movecomponent;
+	//std::vector<>
 	int type;
 public:
 	Characters();
@@ -71,14 +72,14 @@ public:
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,TextureManager *textureM);
 //-----------------------------------------------------------------------------------------------------------------------------		
 
-	MoveComponent* getMoveComponent()
+	MoveComponent &getMoveComponent()
 	{
-		return movecomponent;
+		return *movecomponent;
 	}
 
-	HealthComponent* getHealthComponent()
+	HealthComponent &getHealthComponent()
 	{
-		return healthcomponent;
+		return *healthcomponent;
 	}
 
 //Get Functions
