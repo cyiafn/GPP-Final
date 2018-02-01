@@ -22,8 +22,8 @@ Characters::Characters() : Entity()
 	collisionType = entityNS::BOX;
 	edge.left = -charactersNS::WIDTH*getScale() / 2;;
 	edge.top = -charactersNS::HEIGHT*getScale() / 2;;
-	edge.right = charactersNS::WIDTH*getScale()/2;
-	edge.bottom = charactersNS::HEIGHT*getScale() /2;
+	edge.right = charactersNS::WIDTH*getScale() / 2;
+	edge.bottom = charactersNS::HEIGHT*getScale() / 2;
 	/*edge.left = 0;
 	edge.top = 0;
 	edge.right = charactersNS::WIDTH*getScale();
@@ -99,9 +99,15 @@ void Characters::moveLeft(float frameTime)
 
 void Characters::drop(float frameTime)
 {
+<<<<<<< HEAD
 		movecomponent->setGravityActive(true);
 		passThroughWall = true;
 		setY(getY() + 11);
+=======
+	movecomponent->setGravityActive(true);
+	passThroughWall = true;
+	setY(getY() + 11);
+>>>>>>> justin
 }
 
 void Characters::jump(float frameTime)
@@ -151,8 +157,13 @@ void Characters::movementInputs(float frameTime)
 	{
 		dropLock = false;
 	}
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> justin
 	if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
 	{
 		if (dropLock == false)
@@ -160,7 +171,12 @@ void Characters::movementInputs(float frameTime)
 			drop(frameTime);
 			dropLock = true;
 		}
+<<<<<<< HEAD
 ;	}
+=======
+		;
+	}
+>>>>>>> justin
 	else if (input->isKeyDown(P1JUMP_KEY))
 	{
 		if (jumpCounter != 2)
@@ -259,7 +275,7 @@ void Characters::skillInputs(Game *cipher)
 	}
 }
 //Skills by Ee Zher
-void Characters::coolDownChecking() 
+void Characters::coolDownChecking()
 {
 	if (Q_on_CoolDown)
 	{

@@ -49,6 +49,18 @@ const char FREIDQ_IMAGE[] = "pictures\\Bullets\\FreidQ.png";
 const char FREIDW_IMAGE[] = "pictures\\Bullets\\FreidW.png";
 const char FREIDE_IMAGE[] = "pictures\\Bullets\\FreidE.png";
 
+const char STARTSCREEN_IMAGE[] = "pictures\\StartScreen\\Menu1.png";
+const char STARTBTN_IMAGE[] = "pictures\\StartScreen\\StartButton.png";
+const char CREDITSBTN_IMAGE[] = "pictures\\StartScreen\\CreditsButton.png";
+const char INSTRUCTIONSBTN_IMAGE[] = "pictures\\StartScreen\\InstructionsButton.png";
+
+const char P1LOGO_IMAGE[] = "pictures\\HUD\\P1.png";
+const char P2LOGO_IMAGE[] = "pictures\\HUD\\P2.png";
+const char P3LOGO_IMAGE[] = "pictures\\HUD\\P3.png";
+const char P4LOGO_IMAGE[] = "pictures\\HUD\\P4.png";
+const char CROSS_IMAGE[] = "pictures\\HUD\\redCross.png";
+const char HEART_IMAGE[] = "pictures\\HUD\heart.png";
+
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
 
 // audio files
