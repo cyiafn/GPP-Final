@@ -583,6 +583,7 @@ void Map::checkIfCharInFloor(std::vector < Characters*> characters)
 				if (characters[i]->getY() + charactersNS::HEIGHT >= characters[i]->getCurrentWallY() || characters[i]->getY() < platforms[z]->getY() + platformNS::WIDTH * platforms[z]->getScale())
 				{
 					characters[i]->setPassThroughWall(false);
+					characters[i]->getHealthComponent().getLives();
 				}
 			}
 		}

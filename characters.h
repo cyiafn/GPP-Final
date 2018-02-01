@@ -22,7 +22,6 @@ namespace charactersNS
 	const int   PLAYER_END_FRAME = 25;        // player animation frames 0,1,2
 	const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
 }
-class HealthComponent;
 
 // inherits from Entity class
 class Characters : public Entity
@@ -116,6 +115,7 @@ public:
 	void moveRight(float frameTime);
 	void moveLeft(float frameTime);
 	void jump(float frameTime);
+	void knockback(float frameTime);
 	void drop(float frameTime);
 	//-----------------------------------------------------------------------------------------------------------------------------
 	void resetJumpCounter() { jumpCounter = 0; }

@@ -65,7 +65,6 @@ void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
 	movecomponent->update(frameTime, this);
-	healthcomponent->update(frameTime, this);
 	this->coolDownChecking();
 	skillInputs(cipher);
 	movementInputs(frameTime);
@@ -312,5 +311,29 @@ void Characters::coolDownChecking()
 				resetSkill("E");
 			}
 		}
+	}
+}
+
+void Characters::knockback(float frameTime)
+{
+	double knockbackDegree = 33 * (PI / 180);
+	int baseKnockback = 25;
+	if (healthcomponent->getPerc() == 0 || healthcomponent->getPerc() == 1 || healthcomponent->getPerc() == 2 || healthcomponent->getPerc() == 3)
+	{
+		float xVel = (1 * baseKnockback * cos(knockbackDegree));
+		float yVel = (1 * baseKnockback * sin(knockbackDegree));
+		VECTOR2 vel;
+		vel.x = xVel;
+		vel.y = yVel;
+		movecomponent->setVelocity(vel);
+	}
+	else
+	{
+		float xVel = (healthcomponent->getPerc() / 3 * baseKnockback * cos(knockbackDegree));
+		float yVel = (healthcomponent->getPerc() / 3 * baseKnockback * sin(knockbackDegree));
+		VECTOR2 vel;
+		vel.x = xVel;
+		vel.y = yVel;
+		movecomponent->setVelocity(vel);
 	}
 }
