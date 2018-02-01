@@ -4,26 +4,25 @@
 
 FreidQComponent::FreidQComponent(Game *cipher)
 {
-	this->arrowList = new std::vector<Bullet>;
-	arrowList->reserve(20);
-	if (!QbulletTexture.initialize(cipher->getGraphics(), FREIDQ_IMAGE))
+	arrowList.reserve(20);
+	if (!QarrowTexture.initialize(cipher->getGraphics(), FREIDQ_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid Q image"));
 }
 FreidQComponent::~FreidQComponent()
 {
-	arrowList->clear();
-	delete arrowList;
+	arrowList.clear();
+
 }
 void FreidQComponent::update(float frameTime)
 {
-	for (int i = 0; i < arrowList->size(); i++)
+	for (int i = 0; i < arrowList.size(); i++)
 	{
-		arrowList->at(i).update(frameTime);
-		if (arrowList->at(i).getActive())
+		arrowList[i]->update(frameTime);
+		if (arrowList[i]->getActive())
 		{
-			if (arrowList->at(i).getCurrRange() == FreidQComponentNS::QARROW_MAX_RANGE)
+			if (arrowList[i]->getCurrRange() == FreidQComponentNS::QARROW_MAX_RANGE)
 			{
-				arrowList->erase(arrowList->begin() + i);
+				arrowList.erase(arrowList.begin() + i);
 			}
 		}
 	}
@@ -31,19 +30,19 @@ void FreidQComponent::update(float frameTime)
 }
 void FreidQComponent::draw()
 {
-	for (int i = 0; i < arrowList->size(); i++)
+	for (int i = 0; i < arrowList.size(); i++)
 	{
-		arrowList->at(i).draw();
+		arrowList[i]->draw();
 
 	}
 }
 void FreidQComponent::releaseAll()
 {
-	QbulletTexture.onLostDevice();
+	QarrowTexture.onLostDevice();
 }
 void FreidQComponent::resetAll()
 {
-	QbulletTexture.onResetDevice();
+	QarrowTexture.onResetDevice();
 }
 
 void FreidQComponent::activate(bool facingRight, float x, float y, Game *cipher)
@@ -53,19 +52,19 @@ void FreidQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 	Bullet *botArrow = new Bullet();
 	
 	topArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_TOP_FRAME, FreidQComponentNS::QARROW_TOP_FRAME, 0);
-	if (!topArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
+	if (!topArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QarrowTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid top Q"));
 	}
 
 	midArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_MID_FRAME, FreidQComponentNS::QARROW_MID_FRAME, 0);
 
-	if (!midArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
+	if (!midArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QarrowTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid mid Q"));
 	}
 	botArrow->setBulletSprite(FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::QARROW_BOT_FRAME, FreidQComponentNS::QARROW_BOT_FRAME, 0);
-	if (!botArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QbulletTexture))
+	if (!botArrow->initialize(cipher, FreidQComponentNS::WIDTH, FreidQComponentNS::HEIGHT, FreidQComponentNS::TEXTURE_COLS, &QarrowTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid bottom Q"));
 	}
@@ -105,7 +104,7 @@ void FreidQComponent::activate(bool facingRight, float x, float y, Game *cipher)
 		botArrow->flipHorizontal(true);
 		botArrow->setDirection(direction);
 	}
-	arrowList->push_back(*topArrow);
-	arrowList->push_back(*midArrow);
-	arrowList->push_back(*botArrow);
+	arrowList.push_back(topArrow);
+	arrowList.push_back(midArrow);
+	arrowList.push_back(botArrow);
 }

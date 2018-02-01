@@ -76,6 +76,7 @@ void Characters::update(float frameTime, Game *cipher)
 void Characters::moveRight(float frameTime)
 {
 	facingRight = true;
+	this->flipHorizontal(false);
 	if (movecomponent->getVelocity().x != 300)
 	{
 		VECTOR2 vel;
@@ -88,6 +89,7 @@ void Characters::moveRight(float frameTime)
 void Characters::moveLeft(float frameTime)
 {
 	facingRight = false;
+	this->flipHorizontal(true);
 	if (movecomponent->getVelocity().x != -300)
 	{
 		VECTOR2 vel;
@@ -197,7 +199,6 @@ void Characters::skillInputs(Game *cipher)
 		if (!Q_on_CoolDown)
 		{
 			useQ(facingRight, center, cipher);
-			Q_on_CoolDown = true;
 		}
 
 	}
@@ -206,7 +207,6 @@ void Characters::skillInputs(Game *cipher)
 		if (!W_on_CoolDown)
 		{
 			useW(facingRight, center, cipher);
-			W_on_CoolDown = true;
 		}
 
 	}
@@ -215,7 +215,6 @@ void Characters::skillInputs(Game *cipher)
 		if (!E_on_CoolDown)
 		{
 			useE(facingRight, center, cipher);
-			E_on_CoolDown = true;
 		}
 
 	}

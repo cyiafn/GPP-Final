@@ -27,8 +27,8 @@ namespace FreidQComponentNS
 class FreidQComponent
 {
 private:
-	TextureManager QbulletTexture;
-	std::vector<Bullet> *arrowList;
+	TextureManager QarrowTexture;
+	std::vector<Bullet*> arrowList;
 
 public:
 	FreidQComponent(Game *cipher);
@@ -38,5 +38,6 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
+	std::vector<Bullet*> *getArrowList() { return &arrowList; }
 };
 #endif

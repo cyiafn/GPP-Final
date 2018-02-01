@@ -48,6 +48,7 @@ const char CYRAXW_IMAGE[] = "pictures\\Bullets\\CyraxW.png";
 const char FREIDQ_IMAGE[] = "pictures\\Bullets\\FreidQ.png";
 const char FREIDW_IMAGE[] = "pictures\\Bullets\\FreidW.png";
 const char FREIDE_IMAGE[] = "pictures\\Bullets\\FreidE.png";
+const char AGENT47Q_IMAGE[] = "pictures\\Bullets\\Agent47Q.png";
 
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
 

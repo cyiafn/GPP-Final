@@ -2,7 +2,8 @@
 
 Bomb::Bomb()
 {
-
+	collisionType = entityNS::CIRCLE;
+	movement = new MoveComponent();
 }
 Bomb::~Bomb()
 {
@@ -10,25 +11,33 @@ Bomb::~Bomb()
 }
 void Bomb::update(float frameTime)
 {
-
+	if (this->getActive())
+	{
+		CurrRange++;
+	}
+	movement->update(frameTime, this);
+	Entity::update(frameTime);
 }
 void Bomb::draw()
 {
-
+	if (this->getActive())
+	{
+		Image::draw();
+	}
 }
 bool Bomb::initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM)
 {
-	return false;
+	return(Entity::initialize(gamePtr, width, height, text_col, textureM));
 }
 int Bomb::getCurrRange()
 {
-	return 0;
+	return CurrRange;
 }
 void Bomb::setDirection(VECTOR2 direction)
 {
-
+	movement->setVelocity(direction);
 }
-void Bomb::setBulletSprite(int width, int height, int start, int end, float delay)
+void Bomb::setBombSprite(int width, int height, int start, int end, float delay)
 {
 
 }

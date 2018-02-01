@@ -102,6 +102,17 @@ public:
 	void revertLocationY() { setY(prevY); }
 //-----------------------------------------------------------------------------------------------------------------------------
 
+//Movements & Inputs - by Yifan
+//-----------------------------------------------------------------------------------------------------------------------------
+	void skillInputs(Game* cipher);
+	void movementInputs(float frameTime);
+	void moveRight(float frameTime);
+	void moveLeft(float frameTime);
+	void jump(float frameTime);
+	void drop(float frameTime);
+	void resetJumpCounter() { jumpCounter = 0; }
+//-----------------------------------------------------------------------------------------------------------------------------
+
 //Skills - by Ee Zher
 //-----------------------------------------------------------------------------------------------------------------------------
 	virtual void useQ(bool facingRight, VECTOR2 center, Game *cipher) {};
@@ -111,14 +122,8 @@ public:
 	virtual void skillUpdate(float frameTime) {};
 	void coolDownChecking();
 	virtual void resetSkill(std::string letter) {};
-	void skillInputs(Game* cipher);
-	void movementInputs(float frameTime);
-	void moveRight(float frameTime);
-	void moveLeft(float frameTime);
-	void jump(float frameTime);
-	void drop(float frameTime);
-	//-----------------------------------------------------------------------------------------------------------------------------
-	void resetJumpCounter() { jumpCounter = 0; }
+//-----------------------------------------------------------------------------------------------------------------------------
+	
 
 
 //Enum classes 

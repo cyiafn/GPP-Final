@@ -4,26 +4,24 @@
 
 NecridQComponent::NecridQComponent(Game *cipher)
 {
-	this->bulletList = new std::vector<Bullet>;
-	bulletList->reserve(10);
+	bombList.reserve(10);
 	//if (!QbulletTexture.initialize(cipher->getGraphics(), NecridQ_IMAGE))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Necrid Q image"));
 }
 NecridQComponent::~NecridQComponent()
 {
-	bulletList->clear();
-	delete bulletList;
+	bombList.clear();
 }
 void NecridQComponent::update(float frameTime)
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	for (int i = 0; i < bombList.size(); i++)
 	{
-		bulletList->at(i).update(frameTime);
-		if (bulletList->at(i).getActive())
+		bombList[i]->update(frameTime);
+		if (bombList[i]->getActive())
 		{
-			if (bulletList->at(i).getCurrRange() == NecridQComponentNS::QBULLET_MAX_RANGE)
+			if (bombList[i]->getCurrRange() == NecridQComponentNS::QBULLET_MAX_RANGE)
 			{
-				bulletList->erase(bulletList->begin() + i);
+				bombList.erase(bombList.begin() + i);
 			}
 		}
 	}
@@ -31,44 +29,44 @@ void NecridQComponent::update(float frameTime)
 }
 void NecridQComponent::draw()
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	for (int i = 0; i < bombList.size(); i++)
 	{
-		bulletList->at(i).draw();
+		bombList[i]->draw();
 
 	}
 }
 void NecridQComponent::releaseAll()
 {
-	QbulletTexture.onLostDevice();
+	QbombTexture.onLostDevice();
 }
 void NecridQComponent::resetAll()
 {
-	QbulletTexture.onResetDevice();
+	QbombTexture.onResetDevice();
 }
 
-void NecridQComponent::activate(int facing, VECTOR2 center, Game *cipher)
+void NecridQComponent::activate(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	bool found = false;
-	Bullet *newBullet = new Bullet();
-	if (!newBullet->initialize(cipher, NecridQComponentNS::WIDTH, NecridQComponentNS::HEIGHT, NecridQComponentNS::TEXTURE_COLS, &QbulletTexture))
+	Bomb *newBomb = new Bomb();
+	if (!newBomb->initialize(cipher, NecridQComponentNS::WIDTH, NecridQComponentNS::HEIGHT, NecridQComponentNS::TEXTURE_COLS, &QbombTexture))
 	{
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Necrid Q"));
 	}
-	newBullet->setX(center.x);
-	newBullet->setY(center.y);
-	newBullet->setActive(true);
-	bulletList->push_back(*newBullet);
+	newBomb->setX(center.x);
+	newBomb->setY(center.y);
+	newBomb->setActive(true);
+	
 	VECTOR2 direction;
-	if (facing = 1) //shoot right
+	if (facingRight) //shoot right
 	{
 		direction.x = NecridQComponentNS::QBULLET_SPEED;
 		direction.y = 0;
-		newBullet->setDirection(direction);
+		newBomb->setDirection(direction);
 	}
-	else if (facing = 2) //shoot left
+	else if (!facingRight) //shoot left
 	{
 		direction.x = -NecridQComponentNS::QBULLET_SPEED;
 		direction.y = 0;
-		newBullet->setDirection(direction);
+		newBomb->setDirection(direction);
 	}
+	bombList.push_back(newBomb);
 }

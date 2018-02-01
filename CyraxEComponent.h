@@ -11,7 +11,7 @@
 
 namespace CyraxEComponentNS
 {
-	const int TELEPORT_RANGE = 200;
+	const float TELEPORT_RANGE = 200;
 }
 
 class CyraxEComponent

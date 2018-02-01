@@ -9,7 +9,7 @@
 #include <vector>
 #include "textureManager.h"
 #include "constants.h"
-#include "bullet.h"
+#include "bomb.h"
 
 namespace NecridQComponentNS
 {
@@ -25,9 +25,9 @@ namespace NecridQComponentNS
 class NecridQComponent
 {
 private:
-	TextureManager QbulletTexture;
-	std::vector<Bullet> *bulletList;
-	Bullet newBullet;
+	TextureManager QbombTexture;
+	std::vector<Bomb*> bombList;
+	Bomb newBullet;
 
 public:
 	NecridQComponent(Game *cipher);
@@ -36,6 +36,6 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
-	void activate(int facing, VECTOR2 center, Game *cipher);
+	void activate(bool facingRight, VECTOR2 center, Game *cipher);
 };
 #endif

@@ -1,74 +1,70 @@
 #include "Agent47QComponent.h"
-#include <vector>
 #include "bullet.h"
 
 Agent47QComponent::Agent47QComponent(Game *cipher)
 {
-	this->bulletList = new std::vector<Bullet>;
-	bulletList->reserve(10);
-	//if (!QbulletTexture.initialize(cipher->getGraphics(), Agent47Q_IMAGE))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Agent47 Q image"));
+	Punch = new Bullet();
+	if (!QpunchTexture.initialize(cipher->getGraphics(), AGENT47Q_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Agent47 Q image"));
+	if (!Punch->initialize(cipher, Agent47QComponentNS::WIDTH, Agent47QComponentNS::HEIGHT, Agent47QComponentNS::TEXTURE_COLS,&QpunchTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Agent 47 Q"));
+	}
+	Punch->setActive(false);
 }
 Agent47QComponent::~Agent47QComponent()
 {
-	bulletList->clear();
-	delete bulletList;
+	
 }
 void Agent47QComponent::update(float frameTime)
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	Punch->update(frameTime);
+	if (Punch->getActive())
 	{
-		bulletList->at(i).update(frameTime);
-		if (bulletList->at(i).getActive())
+		current_Duration++;		
+		if (current_Duration == Agent47QComponentNS::QPUNCH_DURATION)
 		{
-			if (bulletList->at(i).getCurrRange() == Agent47QComponentNS::QBULLET_MAX_RANGE)
-			{
-				bulletList->erase(bulletList->begin() + i);
-			}
+			Punch->setActive(false);
+			pow = false;
+			current_Duration = 0;
 		}
 	}
-
 }
 void Agent47QComponent::draw()
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	if (pow)
 	{
-		bulletList->at(i).draw();
-
+		Punch->draw();
 	}
 }
 void Agent47QComponent::releaseAll()
 {
-	QbulletTexture.onLostDevice();
+	QpunchTexture.onLostDevice();
 }
 void Agent47QComponent::resetAll()
 {
-	QbulletTexture.onResetDevice();
+	QpunchTexture.onResetDevice();
 }
 
-void Agent47QComponent::activate(int facing, VECTOR2 center, Game *cipher)
+void Agent47QComponent::activate(bool facingRight, float x, float y, Game *cipher)
 {
-	bool found = false;
-	Bullet *newBullet = new Bullet();
-	if (!newBullet->initialize(cipher, Agent47QComponentNS::WIDTH, Agent47QComponentNS::HEIGHT, Agent47QComponentNS::TEXTURE_COLS, &QbulletTexture))
+	Punch->setBulletSprite(Agent47QComponentNS::WIDTH, Agent47QComponentNS::HEIGHT, Agent47QComponentNS::QPUNCH_START_FRAME, Agent47QComponentNS::QPUNCH_END_FRAME, Agent47QComponentNS::QPUNCH_ANIMATION_DELAY);
+	if (facingRight) //shoot right
 	{
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Agent47 Q"));
+		Punch->setX(x);
+		Punch->setY(y);
 	}
-	newBullet->setX(center.x);
-	newBullet->setY(center.y);
-	newBullet->setActive(true);
-	bulletList->push_back(*newBullet);
-	VECTOR2 direction;
-	if (facing = 1) //shoot right
+	else if (!facingRight) //shoot left
 	{
-		direction.x = Agent47QComponentNS::QBULLET_SPEED;
-		direction.y = 0;
-		newBullet->setDirection(direction);
+		Punch->setX(x- Agent47QComponentNS::WIDTH);
+		Punch->setY(y);
 	}
-	else if (facing = 2) //shoot left
-	{
-		direction.x = -Agent47QComponentNS::QBULLET_SPEED;
-		direction.y = 0;
-		newBullet->setDirection(direction);
-	}
+	Punch->setActive(true);
+	pow = false;
+}
+
+float Agent47QComponent::hit()
+{
+	pow = true;
+	return Agent47QComponentNS::QPUNCH_DAMAGE;
 }

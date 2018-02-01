@@ -79,6 +79,7 @@ void Cyrax::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 		float infrontX = center.x - (spriteData.width / 2);
 		Qcomponent->activate(facingRight, infrontX, center.y, cipher);
 	}
+	Q_on_CoolDown = true;
 }
 void Cyrax::useW(bool facingRight, VECTOR2 center, Game *cipher)
 {
@@ -92,6 +93,7 @@ void Cyrax::useW(bool facingRight, VECTOR2 center, Game *cipher)
 		float infrontX = center.x - (spriteData.width / 2);
 		Wcomponent->activate(facingRight, infrontX, center.y, cipher);
 	}
+	W_on_CoolDown = true;
 }
 void Cyrax::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
@@ -101,6 +103,7 @@ void Cyrax::useE(bool facingRight, VECTOR2 center, Game *cipher)
 	newLocation.y = center.y;
 	this->setX(newLocation.x - spriteData.width/2);
 	this->setY(newLocation.y - spriteData.height/2);
+	E_on_CoolDown = true;
 }
 void Cyrax::useR()
 {

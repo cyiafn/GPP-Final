@@ -37,6 +37,6 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
-	std::vector<Bullet*>* getBulletList() { return &bulletList; }
+	std::vector<Bullet*> *getBulletList() { return &bulletList; }
 };
 #endif
