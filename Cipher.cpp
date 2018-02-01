@@ -11,23 +11,19 @@
 // Constructor
 //=============================================================================
 Cipher::Cipher()
-{
-}
+{}
 
 //=============================================================================
 // Destructor
 //=============================================================================
 Cipher::~Cipher()
 {
-    releaseAll();           // call onLostDevice() for every graphics item
-	delete startmenu;
+	releaseAll();           // call onLostDevice() for every graphics item
 	delete map1;
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		delete characters[i];
 	}
-	startmenu = NULL;
 	map1 = NULL;
-
 }
 
 //=============================================================================
@@ -36,32 +32,23 @@ Cipher::~Cipher()
 //=============================================================================
 void Cipher::initialize(HWND hwnd)
 {
-    Game::initialize(hwnd); // throws GameError
-<<<<<<< HEAD
-	//player = new Cyrax(this);
-	player1 = new Freid(this);
-	player2 = new Cyrax(this);
-	//P1on = true;
-	//P2on = true;
-=======
-	player = new Cyrax(this);
-	player->setPlayerNo(player->P1);
-
-
-    // demo texture initialize
-    /*if (!nebulaTexture.initialize(graphics,NEBULA_IMAGE))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));*/
-
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
-    
+	Game::initialize(hwnd); // throws GameError
+	player1 = new Cyrax(this);
+	player2 = new Freid(this);
+	player2->setX(900);
+	player2->setY(GAME_HEIGHT / 2 - player2->getHeight() / 2);
 
 	//Testing
 	//if(!characterTexture.initialize(graphics, KEN_IMAGE))
 	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-
 	characters.push_back(player1);
 	characters.push_back(player2);
-	
+	//int pos = characters.size() - 1;
+	//if (!characters.at(pos)->initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT,charactersNS::TEXTURE_COLS, &characterTexture))
+	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+
+	/*if (!player.initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
+	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));*/
 	if (!txtP1.initialize(graphics, P1LOGO_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P1 logo texture"));
 	if (!txtP2.initialize(graphics, P2LOGO_IMAGE))
@@ -74,7 +61,7 @@ void Cipher::initialize(HWND hwnd)
 	if (!P1.initialize(graphics, 150, 150, 1, &txtP1))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P1 logo"));
 	P1.setX(0);
-	P1.setY(GAME_HEIGHT-150);
+	P1.setY(GAME_HEIGHT - 150);
 	P1.setScale(0.3);
 	if (!P2.initialize(graphics, 150, 150, 1, &txtP2))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P2 logo"));
@@ -92,7 +79,7 @@ void Cipher::initialize(HWND hwnd)
 	P4.setY(GAME_HEIGHT - 150);
 	P4.setScale(0.3);
 
-	if (dxFontP1.initialize(graphics,20, false, false, "Arial") == false)
+	if (dxFontP1.initialize(graphics, 20, false, false, "Arial") == false)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
 	if (dxFontP2.initialize(graphics, 20, false, false, "Arial") == false)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
@@ -135,10 +122,8 @@ void Cipher::initialize(HWND hwnd)
 	Hearts[0].setScale(0.1125);
 
 
-	//startmenu = new StartMenu(0, this);
 	map1 = new Map(0, this, characters);
-
-    return;
+	return;
 }
 
 //=============================================================================
@@ -146,11 +131,11 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-	//startmenu->update(frameTime);
-
-	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	{
 		characters[i]->update(frameTime, this);
 	}
+
 	P1.update(frameTime);
 	P2.update(frameTime);
 	P3.update(frameTime);
@@ -170,7 +155,57 @@ void Cipher::ai()
 //=============================================================================
 void Cipher::collisions()
 {
-    
+	//if (player1->getQcomponent()->getBulletList().size() > 0)
+	//{
+	//	auto i = std::end(player1->getQcomponent()->getBulletList());
+	//	int index = 0;
+	//	while (i != std::end(player1->getQcomponent()->getBulletList())) {
+	//		// Do some stuff
+	//		if (player1->getQcomponent()->getBulletList()[index]->collidesWith(*player2))
+	//		{
+	//			player2->setX(player2->getX() + 10);
+	//			//i = player1->getQcomponent()->getBulletList().erase(i);
+	//		}
+
+	//		else
+	//		{
+	//			++i;
+	//		}
+	//		index++;
+	//	}
+	//}
+	//int index = 0;
+	//for (auto itr = player1->getQcomponent()->getBulletList().begin(); itr != player1->getQcomponent()->getBulletList().end();)
+	//{
+	//	// Do some stuff
+	//	if (player1->getQcomponent()->getBulletList()[index]->collidesWith(*player2))
+	//	{
+	//		itr = player1->getQcomponent()->getBulletList().erase(itr);
+	//	}
+	//		
+	//	else
+	//	{
+	//		++itr;
+	//	}
+	//	index++
+	//}
+
+	std::vector<Bullet*>::iterator it;
+	for (it = player1->getQcomponent()->getBulletList()->begin(); it != player1->getQcomponent()->getBulletList()->end();)
+	{
+		if ((*it)->collidesWith(*player2))
+		{
+			//player2->setY(player2->getY() - 30);
+
+			delete (*it);
+			it = player1->getQcomponent()->getBulletList()->erase(it);
+		}
+		else
+			it++;
+	}
+
+
+
 }
 
 //=============================================================================
@@ -178,19 +213,18 @@ void Cipher::collisions()
 //=============================================================================
 void Cipher::render()
 {
-    graphics->spriteBegin();                // begin 
+	graphics->spriteBegin();                // begin 
 
-	//startmenu->draw();
+
 	map1->draw();
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		characters[i]->draw();
 	}
 
-<<<<<<< HEAD
 	if (player1 != NULL)
 	{
 		P1.draw();
-		dxFontKnockBack1.print("Knockback",45, GAME_HEIGHT - 150);
+		dxFontKnockBack1.print("Knockback", 45, GAME_HEIGHT - 150);
 		dxFontP1.print("heart", 65, GAME_HEIGHT - 128);
 	}
 	if (player2 != NULL)
@@ -211,11 +245,9 @@ void Cipher::render()
 		dxFontKnockBack4.print("Knockback", 495, GAME_HEIGHT - 150);
 		dxFontP4.print("heart", 515, GAME_HEIGHT - 128);
 	}
-=======
 	//draw here
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 
-    graphics->spriteEnd();                  // end drawing sprites
+	graphics->spriteEnd();                  // end drawing sprites
 }
 
 //=============================================================================
@@ -239,8 +271,8 @@ void Cipher::releaseAll()
 	txtP3.onLostDevice();
 	txtP4.onLostDevice();
 	map1->releaseAll();
-    Game::releaseAll();
-    return;
+	Game::releaseAll();
+	return;
 }
 
 //=============================================================================
@@ -249,8 +281,8 @@ void Cipher::releaseAll()
 //=============================================================================
 void Cipher::resetAll()
 {
-    
-    // demo reset device nebulaTexture.onResetDevice();
+
+	// demo reset device nebulaTexture.onResetDevice();
 	dxFontP1.onResetDevice();
 	dxFontP2.onResetDevice();
 	dxFontP3.onResetDevice();
@@ -265,6 +297,6 @@ void Cipher::resetAll()
 	txtP3.onResetDevice();
 	txtP4.onResetDevice();
 	map1->resetAll();
-    Game::resetAll();
-    return;
+	Game::resetAll();
+	return;
 }

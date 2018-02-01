@@ -27,15 +27,11 @@ class HealthComponent;
 // inherits from Entity class
 class Characters : public Entity
 {
-protected:	
+protected:
+
 	int playerNo;
 	float prevX;
 	float prevY;
-<<<<<<< HEAD
-=======
-	bool onFloor;
-	int state = standingState;
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 
 	VECTOR2 center;
 	bool facingRight; //1 is facing right, 2 is facing left
@@ -50,14 +46,14 @@ protected:
 	int EframeTime = 0;
 	int jumpCounter = 0;
 	bool jumpLock = false;
-	bool passThroughWall = false;
+	bool dropLock = false;
+	bool passThroughWall;
 	float currentWallY;
 	//bool onGround = false;
 
 private:
 	HealthComponent* healthcomponent;
 	MoveComponent* movecomponent;
-	//std::vector<>
 	int type;
 public:
 	Characters();
@@ -70,46 +66,44 @@ public:
 	// inherited member functions
 	void setType(int a) { type = a; }
 	int getType() { return type; }
-//INIT 
-//-----------------------------------------------------------------------------------------------------------------------------
+	//INIT 
+	//-----------------------------------------------------------------------------------------------------------------------------
 	virtual void draw();
-	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,TextureManager *textureM);
-//-----------------------------------------------------------------------------------------------------------------------------		
+	virtual bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
+	//-----------------------------------------------------------------------------------------------------------------------------		
 
-	MoveComponent &getMoveComponent()
+	MoveComponent* getMoveComponent()
 	{
-		return *movecomponent;
+		return movecomponent;
 	}
 
-	HealthComponent &getHealthComponent()
+	HealthComponent* getHealthComponent()
 	{
-		return *healthcomponent;
+		return healthcomponent;
 	}
 
-//Get Functions
-//-----------------------------------------------------------------------------------------------------------------------------
+	//Get Functions
+	//-----------------------------------------------------------------------------------------------------------------------------
 	int getPlayerNo() { return playerNo; }
 
-//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
 
-//Set Functions
-//-------------------------------------------------------------------------------------------------x--------------------------- -
+	//Set Functions
+	//-------------------------------------------------------------------------------------------------x--------------------------- -
 	void setPlayerNo(int player) { playerNo = player; }
 	void setPrev(float x, float y);
-	void setMoveComponent(MoveComponent* move) { movecomponent = move; }
-	void setHealthComponent(HealthComponent* health) { healthcomponent = health; }
-//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
 
-//Other Functions
-//-----------------------------------------------------------------------------------------------------------------------------
+	//Other Functions
+	//-----------------------------------------------------------------------------------------------------------------------------
 	void update(float frameTime, Game *cipher);
-	int handleInput(float frameTime);
+	//void changeState(const CharacterFSM * newState) {};
 	void revertLocation();
 	void revertLocationY() { setY(prevY); }
-//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
 
-//Skills - by Ee Zher
-//-----------------------------------------------------------------------------------------------------------------------------
+	//Skills - by Ee Zher
+	//-----------------------------------------------------------------------------------------------------------------------------
 	virtual void useQ(bool facingRight, VECTOR2 center, Game *cipher) {};
 	virtual void useW(bool facingRight, VECTOR2 center, Game *cipher) {};
 	virtual void useE(bool facingRight, VECTOR2 center, Game *cipher) {};
@@ -119,26 +113,21 @@ public:
 	virtual void resetSkill(std::string letter) {};
 	void skillInputs(Game* cipher);
 	void movementInputs(float frameTime);
-//-----------------------------------------------------------------------------------------------------------------------------
+	void moveRight(float frameTime);
+	void moveLeft(float frameTime);
+	void jump(float frameTime);
+	void drop(float frameTime);
+	//-----------------------------------------------------------------------------------------------------------------------------
 	void resetJumpCounter() { jumpCounter = 0; }
 
 
-//Enum classes 
+	//Enum classes 
 	enum PlayerNo
 	{
 		P1 = 0,
 		P2 = 1,
 		AI1 = 2,
 		AI2 = 3,
-	};
-
-	enum CharacterState
-	{
-		standingState = 0,
-		walkingState,
-		singleJumpState,
-		doubleJumpState,
-		droppingState,
 	};
 };
 #endif

@@ -22,12 +22,13 @@ Characters::Characters() : Entity()
 	collisionType = entityNS::BOX;
 	edge.left = -charactersNS::WIDTH*getScale() / 2;;
 	edge.top = -charactersNS::HEIGHT*getScale() / 2;;
-	edge.right = charactersNS::WIDTH*getScale()/2;
-	edge.bottom = charactersNS::HEIGHT*getScale() /2;
+	edge.right = charactersNS::WIDTH*getScale() / 2;
+	edge.bottom = charactersNS::HEIGHT*getScale() / 2;
 	/*edge.left = 0;
 	edge.top = 0;
 	edge.right = charactersNS::WIDTH*getScale();
 	edge.bottom = charactersNS::HEIGHT*getScale();*/
+	passThroughWall = true;
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
 }
@@ -41,13 +42,6 @@ bool Characters::initialize(Game *gamePtr, int width, int height, int ncols,
 {
 	//movecomponent = new MoveComponent();			//moved to Characters::Characters()
 	//healthcomponent = new HealthComponent();		//moved to Characters::Characters()
-<<<<<<< HEAD
-=======
-	this->movecomponent->setActualX(this->getX());
-	this->movecomponent->setActualY(this->getY());
-	this->onFloor = true;
-	this->movecomponent->setAcceleration(150);
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
 
@@ -73,37 +67,63 @@ void Characters::update(float frameTime, Game *cipher)
 	movecomponent->update(frameTime, this);
 	healthcomponent->update(frameTime, this);
 	this->coolDownChecking();
-<<<<<<< HEAD
 	skillInputs(cipher);
 	movementInputs(frameTime);
 	skillUpdate(frameTime);
 	setPrev(getX(), getY());
 }
 
+void Characters::moveRight(float frameTime)
+{
+	facingRight = true;
+	if (movecomponent->getVelocity().x != 300)
+	{
+		VECTOR2 vel;
+		vel.x = movecomponent->getVelocity().x + 20;
+		vel.y = movecomponent->getVelocity().y;
+		movecomponent->setVelocity(vel);
+	}
+}
+
+void Characters::moveLeft(float frameTime)
+{
+	facingRight = false;
+	if (movecomponent->getVelocity().x != -300)
+	{
+		VECTOR2 vel;
+		vel.x = movecomponent->getVelocity().x - 20;
+		vel.y = movecomponent->getVelocity().y;
+		movecomponent->setVelocity(vel);
+	}
+}
+
+void Characters::drop(float frameTime)
+{
+	movecomponent->setGravityActive(true);
+	passThroughWall = true;
+	setY(getY() + 11);
+}
+
+void Characters::jump(float frameTime)
+{
+	movecomponent->setGravityActive(true);
+	passThroughWall = true;
+	jumpCounter += 1;
+	VECTOR2 vel;
+	vel.x = movecomponent->getVelocity().x;
+	vel.y = -550;
+	movecomponent->setVelocity(vel);
+}
 
 void Characters::movementInputs(float frameTime)
 {
 	if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 	{
-		facingRight = true;
-		if (movecomponent->getVelocity().x != 300)
-		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x + 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
-		}
+		moveRight(frameTime);
 	}
 	if (input->isKeyDown(P1LEFT_KEY))             // if move left
 	{
-		facingRight = false;
-		if (movecomponent->getVelocity().x != -300)
-		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x - 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
-		}
+		moveLeft(frameTime);
 	}
 	if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
 	{
@@ -127,21 +147,29 @@ void Characters::movementInputs(float frameTime)
 	{
 		jumpLock = false;
 	}
+	if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
+	{
+		dropLock = false;
+	}
 
-	if (input->isKeyDown(P1JUMP_KEY))
+
+	if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
+	{
+		if (dropLock == false)
+		{
+			drop(frameTime);
+			dropLock = true;
+		}
+		;
+	}
+	else if (input->isKeyDown(P1JUMP_KEY))
 	{
 		if (jumpCounter != 2)
 		{
 			if (!jumpLock)
 			{
-				//onGround = false;
-				movecomponent->setGravityActive(true);
-				jumpCounter += 1;
 				jumpLock = true;
-				VECTOR2 vel;
-				vel.x = movecomponent->getVelocity().x;
-				vel.y = -550;
-				movecomponent->setVelocity(vel);
+				jump(frameTime);
 			}
 
 		}
@@ -159,34 +187,17 @@ void Characters::revertLocation()
 	this->spriteData.x = prevX;
 	this->spriteData.y = prevY;
 }
-=======
-	int state = handleInput(frameTime);
-
-	//if (state == droppingState)
-	//{
-	//	spriteData.y += frameTime * GRAVITY;
-	//}
-	//if ( &movecomponent->getOnPlatformCheck == movecomponent->NotOnPlatform)
-	//{
-	//	spriteData.y = spriteData.y - frameTime * 100;
-	//}
-
-	//-----------------------------------------------------------------------------------------------------------------------------
-	//Player 1
-	//-----------------------------------------------------------------------------------------------------------------------------
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 
 void Characters::skillInputs(Game *cipher)
 {
+	float centerX = this->getCenterX();
+	float centerY = this->getCenterY();
+	center = VECTOR2(centerX, centerY);
 	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
 		{
-<<<<<<< HEAD
 			useQ(facingRight, center, cipher);
-=======
-			useQ(movecomponent->getCharacterDirection(), center, cipher);
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 			Q_on_CoolDown = true;
 		}
 
@@ -219,14 +230,10 @@ void Characters::skillInputs(Game *cipher)
 	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 	{
 		if (!Q_on_CoolDown)
-<<<<<<< HEAD
 		{
 			useQ(facingRight, center, cipher);
 			Q_on_CoolDown = true;
 		}
-=======
-			useQ(movecomponent->getCharacterDirection(), center, cipher);
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 	}
 	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 	{
@@ -252,121 +259,8 @@ void Characters::skillInputs(Game *cipher)
 		useR();
 	}
 }
-<<<<<<< HEAD
-=======
-
-int Characters::handleInput(float frameTime)
-{
-	switch (state)
-	{
-	case standingState:
-		if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY) || input->isKeyDown(P1LEFT_KEY) || input->isKeyDown(P2LEFT_KEY))            // if move right
-		{
-			state = walkingState;
-			if (input->isKeyDown(P1RIGHT_KEY) || input->isKeyDown(P2RIGHT_KEY))            // if move right
-			{
-				facing = 1;
-				spriteData.x = spriteData.x + frameTime * 100;
-				this->movecomponent->setActualX(spriteData.x + frameTime * 100);
-				this->movecomponent->setCharacterDirection(movecomponent->right);
-				if (spriteData.x > GAME_WIDTH)               // if off screen right
-					spriteData.x = ((float)-spriteData.width);  // position off screen left
-			}
-			if (input->isKeyDown(P1LEFT_KEY) || input->isKeyDown(P2LEFT_KEY))             // if move left
-			{
-				facing = 2;
-				spriteData.x = spriteData.x - frameTime * 100;
-				this->movecomponent->setActualX(spriteData.x + frameTime * 100);
-				this->movecomponent->setCharacterDirection(movecomponent->left);
-				if (spriteData.x < -spriteData.width)         // if off screen left
-					spriteData.x = ((float)GAME_WIDTH);      // position off screen right
-			}
-
-		}
-		else if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
-		{
-			state = singleJumpState;
-			this->movecomponent->setJumpingCheck(movecomponent->singleJump);
-			this->movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
-			//VECTOR2 velo;
-		}
-
-		else if (input->isKeyDown(P1DROP_KEY || P2DROP_KEY))
-		{
-			state = droppingState;
-			this->movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
-		}
-		return state;
-		break;
-	case walkingState:
-		if (!input->isKeyDown(P1RIGHT_KEY) || !input->isKeyDown(P2RIGHT_KEY) || !input->isKeyDown(P1LEFT_KEY) || !input->isKeyDown(P2LEFT_KEY))            // if move right
-		{
-			state = standingState;
-		}
-		else if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
-		{
-			state = singleJumpState;
-			this->movecomponent->setJumpingCheck(movecomponent->singleJump);
-		}
-		else if (input->isKeyDown(P1DROP_KEY || P2DROP_KEY))
-		{
-			state = droppingState;
-			this->movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
-		}
-		return state;
-		break;
-	case singleJumpState:
-		spriteData.y -= frameTime * 100;
-		if (this->movecomponent->getOnPlatformCheck() == movecomponent->standingOnPlatform)
-		{
-			state = standingState;
-			this->movecomponent->setJumpingCheck(movecomponent->notJumping);
-		}
-		else if (input->isKeyDown(P1JUMP_KEY) || input->isKeyDown(P2JUMP_KEY))
-		{
-			state = doubleJumpState;
-			this->movecomponent->setJumpingCheck(movecomponent->doubleJump);
-		}
-		return state;
-		break;
-	case doubleJumpState:
-		if (this->movecomponent->getOnPlatformCheck() == movecomponent->standingOnPlatform)
-		{
-			state = standingState;
-			this->movecomponent->setJumpingCheck(movecomponent->notJumping);
-			//movecomponent->setOnPlatformCheck(movecomponent->standingOnPlatform);
-		}
-		return state;
-		break;
-	case droppingState:
-		
-		if (this->movecomponent->getOnPlatformCheck() == movecomponent->standingOnPlatform)
-		{
-			state = standingState;
-			//movecomponent->setOnPlatformCheck(movecomponent->NotOnPlatform);
-		}
-		return state;
-		break;
-	}
-}
-
-
-
-void Characters::setPrev(float x, float y)
-{
-	this->prevX = x;
-	this->prevY = y;
-}
-
-void Characters::revertLocation()
-{
-	this->spriteData.x = prevX;
-	this->spriteData.y = prevY;
-}
-
->>>>>>> 7890d85838cbfc173c3155942f300897764fff0a
 //Skills by Ee Zher
-void Characters::coolDownChecking() 
+void Characters::coolDownChecking()
 {
 	if (Q_on_CoolDown)
 	{

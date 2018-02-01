@@ -16,10 +16,9 @@
 #include "Agent47.h"
 #include "Necrid.h"
 #include <vector>
-#include "startMenu.h"
-#include "characters.h"
-#include "TextDX.h"
 #include "heart.h"
+#include "TextDX.h"
+#include "characters.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -27,26 +26,19 @@
 class Cipher : public Game
 {
 private:
-    // game items
-	float knockback1;
-	float knockback2;
-	float knockback3;
-	float knockback4;
-
-	//bool P1on = false;
-	//bool P2on = false;
-	//bool P3on= false;
-	//bool P4on= false;
+	// game items
 	//TextureManager
 	//Object
-	StartMenu *startmenu;
 	Map *map1;
 
 	TextureManager characterTexture;     // player texture
 	Cyrax *cyrax;
 	Freid *freid;
-	Characters *player1 = NULL;
-	Characters *player2 = NULL;
+	Cyrax *player1;
+	Freid *player2;
+
+	//Characters *player1 = NULL;
+	//Characters *player2 = NULL;
 	Characters *player3 = NULL;
 	Characters *player4 = NULL;
 
@@ -59,7 +51,7 @@ private:
 	Image P2;
 	Image P3;
 	Image P4;
-	
+
 	TextDX dxFontP1;
 	TextDX dxFontP2;
 	TextDX dxFontP3;
@@ -75,21 +67,22 @@ private:
 	Heart Hearts[4];
 
 	std::vector<Characters*> characters;
+
 public:
-    // Constructor
-    Cipher();
+	// Constructor
+	Cipher();
 
-    // Destructor
-    virtual ~Cipher();
+	// Destructor
+	virtual ~Cipher();
 
-    // Initialize the game
-    void initialize(HWND hwnd);
-    void update();      // must override pure virtual from Game
-    void ai();          // "
-    void collisions();  // "
-    void render();      // "
-    void releaseAll();
-    void resetAll();
+	// Initialize the game
+	void initialize(HWND hwnd);
+	void update();      // must override pure virtual from Game
+	void ai();          // "
+	void collisions();  // "
+	void render();      // "
+	void releaseAll();
+	void resetAll();
 };
 
 #endif
