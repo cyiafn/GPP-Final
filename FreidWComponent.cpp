@@ -4,26 +4,24 @@
 
 FreidWComponent::FreidWComponent(Game *cipher)
 {
-	this->cometList = new std::vector<Bullet>;
-	cometList->reserve(10);
+	cometList.reserve(10);
 	if (!WcometTexture.initialize(cipher->getGraphics(), FREIDW_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing freid W image"));
 }
 FreidWComponent::~FreidWComponent()
 {
-	cometList->clear();
-	delete cometList;
+	cometList.clear();
 }
 void FreidWComponent::update(float frameTime)
 {
-	for (int i = 0; i < cometList->size(); i++)
+	for (int i = 0; i < cometList.size(); i++)
 	{
-		cometList->at(i).update(frameTime);
-		if (cometList->at(i).getActive())
+		cometList[i]->update(frameTime);
+		if (cometList[i]->getActive())
 		{
-			if (cometList->at(i).getCurrRange() == FreidWComponentNS::WCOMET_MAX_RANGE)
+			if (cometList[i]->getCurrRange() == FreidWComponentNS::WCOMET_MAX_DURATION)
 			{
-				cometList->erase(cometList->begin() + i);
+				cometList.erase(cometList.begin() + i);
 			}
 		}
 	}
@@ -31,9 +29,9 @@ void FreidWComponent::update(float frameTime)
 }
 void FreidWComponent::draw()
 {
-	for (int i = 0; i < cometList->size(); i++)
+	for (int i = 0; i < cometList.size(); i++)
 	{
-		cometList->at(i).draw();
+		cometList[i]->draw();
 
 	}
 }
@@ -61,18 +59,23 @@ void FreidWComponent::activate(bool facingRight, VECTOR2 center, Game *cipher)
 	newComet->setY(startPoint.y);
 	newComet->setActive(true);
 	VECTOR2 endPoint;
-	endPoint.x = center.x + 500;
+	endPoint.x = center.x + FreidWComponentNS::WCOMET_RANGE;
 	endPoint.y = center.y;
-	float angle = atan2(endPoint.y - startPoint.y, endPoint.x - startPoint.x) * (180 / PI) + 90;
-	newComet->setDegrees(angle);
-
+	float angle = atan2(startPoint.y - endPoint.y, startPoint.x - endPoint.x) * (180 / PI) + 90;
+	VECTOR2 direction;
 	if (facingRight) //shoot right
 	{
-		
+		direction.x = endPoint.x - startPoint.x;
+		direction.y = endPoint.y - startPoint.y;
+		newComet->setDegrees(angle);
+		newComet->setDirection(direction);
 	}
 	else if (!facingRight) //shoot left
 	{
-		
+		direction.x = startPoint.x - endPoint.x;
+		direction.y = endPoint.y - startPoint.y;
+		newComet->setDegrees(-angle);
+		newComet->setDirection(direction);
 	}
-	cometList->push_back(*newComet);
+	cometList.push_back(newComet);
 }

@@ -6,28 +6,29 @@
 #include "input.h"
 #include "game.h"
 #include "entity.h"
-#include <vector>
 #include "textureManager.h"
 #include "constants.h"
 #include "bullet.h"
 
 namespace Agent47QComponentNS
 {
-	const int WIDTH = 30;                   // image width
-	const int HEIGHT = 30;                  // image height
+	const int WIDTH = 60;                   // image width
+	const int HEIGHT = 40;                  // image height
 	const int TEXTURE_COLS = 1;           // texture has 1 columns
-	const int QBULLET_START_FRAME = 0;      // bullet starts at frame 0
-	const int QBULLET_END_FRAME = 0;       // bullet end at frame 0
-	const int QBULLET_MAX_RANGE = 800;	// range by frametime
-	const float QBULLET_SPEED = 80;		// velocity.x for Bullet speed
+	const int QPUNCH_START_FRAME = 0;      // bullet starts at frame 0
+	const int QPUNCH_END_FRAME = 0;       // bullet end at frame 0
+	const float QPUNCH_ANIMATION_DELAY = 0;
+	const int QPUNCH_DURATION = 30;	// range by frametime
+	const float QPUNCH_DAMAGE = 10.0f;
 }
 
 class Agent47QComponent
 {
 private:
-	TextureManager QbulletTexture;
-	std::vector<Bullet> *bulletList;
-	Bullet newBullet;
+	TextureManager QpunchTexture;
+	Bullet* Punch;
+	int current_Duration = 0;
+	bool pow = false;
 
 public:
 	Agent47QComponent(Game *cipher);
@@ -36,6 +37,9 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
-	void activate(int facing, VECTOR2 center, Game *cipher);
+	void activate(bool facingRight, float x, float y, Game *cipher);
+	float hit();
+	int getRange() { return Agent47QComponentNS::WIDTH; }
+	Bullet* getPunch() { return Punch; }
 };
 #endif

@@ -28,7 +28,7 @@ class CyraxWComponent
 {
 private:
 	TextureManager WbulletTexture;
-	std::vector<Bullet> *bulletList;
+	std::vector<Bullet*> bulletList;
 
 public:
 	CyraxWComponent(Game *cipher);
@@ -38,5 +38,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
+	int getRange() { return CyraxWComponentNS::WBULLET_MAX_RANGE; }
+	std::vector<Bullet*>* getBulletList() { return &bulletList; }
 };
 #endif

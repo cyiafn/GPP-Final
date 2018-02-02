@@ -4,15 +4,15 @@ Agent47::Agent47(Game *cipher)
 {
 	Qcomponent = new Agent47QComponent(cipher);
 	//Wcomponent = new Agent47WComponent();
-	//Ecomponent = new Agent47EComponent();
+	Ecomponent = new Agent47EComponent(cipher);
 	//Rcomponent = new Agent47RComponent();
 	Q_CoolDown = Agent47NS::QSkillCD;
 	W_CoolDown = Agent47NS::WSkillCD;
 	E_CoolDown = Agent47NS::ESkillCD;
-	/*if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
 	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
 	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
-	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));*/
+	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 }
 
 bool Agent47::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)
@@ -34,7 +34,7 @@ void Agent47::skillUpdate(float frameTime)
 {
 	Qcomponent->update(frameTime);
 	//Wcomponent->update(frameTime);
-	//Ecomponent->update(frameTime);
+	Ecomponent->update(frameTime);
 	//Rcomponent->update(frameTime);
 }
 
@@ -67,17 +67,45 @@ void Agent47::resetSkill(std::string letter)
 	}
 }
 
-void Agent47::useQ(int facing, VECTOR2 center, Game *cipher)
+void Agent47::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	Qcomponent->activate(facing, center, cipher);
+	if (facingRight)
+	{
+		float punchX = center.x + spriteData.width / 2;
+		float punchY = center.y - spriteData.height / 4;
+		Qcomponent->activate(facingRight, punchX, punchY, cipher);
+	}
+	else if (!facingRight)
+	{
+		float punchX = center.x - spriteData.width / 2;
+		float punchY = center.y - spriteData.height / 4;
+		Qcomponent->activate(facingRight, punchX, punchY, cipher);
+	}
+	Q_on_CoolDown = true;
 }
-void Agent47::useW()
+void Agent47::useW(bool facingRight, VECTOR2 center, Game *cipher)
 {
+	if (this->getMoveComponent()->getOnPlatformCheck() == 0) //on platform
+	{
+
+	}
+	W_on_CoolDown = true;
 
 }
-void Agent47::useE()
+void Agent47::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
-
+	float range = Ecomponent->activate(facingRight);
+	VECTOR2 newLocation;
+	newLocation.x = center.x + range;
+	newLocation.y = center.y;
+	this->setX(newLocation.x - spriteData.width / 2);
+	this->setY(newLocation.y - spriteData.height / 2);
+	/*float buff = Ecomponent->speedBoost();
+	VECTOR2 buffspeed;
+	buffspeed.x = this->getMoveComponent()->getVelocity().x + buff;
+	buffspeed.y = this->getMoveComponent()->getVelocity().y;
+	this->getMoveComponent()->setVelocity(buffspeed);*/
+	E_on_CoolDown = true;
 }
 void Agent47::useR()
 {
