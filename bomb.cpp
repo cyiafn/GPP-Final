@@ -2,7 +2,7 @@
 
 Bomb::Bomb()
 {
-	collisionType = entityNS::CIRCLE;
+	collisionType = entityNS::BOX;
 	movement = new MoveComponent();
 }
 Bomb::~Bomb()
@@ -37,7 +37,22 @@ void Bomb::setDirection(VECTOR2 direction)
 {
 	movement->setVelocity(direction);
 }
-void Bomb::setBombSprite(int width, int height, int start, int end, float delay)
+void Bomb::setBombSprite(int width, int height, int start, int end)
 {
+	spriteData.width = width;
+	spriteData.height = height;
+	startFrame = start;
+	endFrame = end;
+	currentFrame = start;
+	spriteData.rect.bottom = height;    // rectangle to select parts of an image
+	spriteData.rect.right = width;
+	edge.left = -width*getScale() / 2;;
+	edge.top = -height*getScale() / 2;;
+	edge.right = width*getScale() / 2;
+	edge.bottom = height*getScale() / 2;
+}
 
+void Bomb::explode()
+{
+	this->setCurrentFrame(endFrame);
 }

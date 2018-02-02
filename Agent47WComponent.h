@@ -20,6 +20,7 @@ private:
 
 public:
 	Agent47WComponent();
+	bool charging(int chargeTime);
 	void update(float frameTime, Entity &ent);
 };
 #endif

@@ -3,7 +3,7 @@
 Necrid::Necrid(Game *cipher)
 {
 	Qcomponent = new NecridQComponent(cipher);
-	//Wcomponent = new NecridWComponent();
+	Wcomponent = new NecridWComponent(cipher);
 	//Ecomponent = new NecridEComponent();
 	//Rcomponent = new NecridRComponent();
 	Q_CoolDown = NecridNS::QSkillCD;
@@ -25,7 +25,7 @@ void Necrid::draw()
 {
 	Image::draw();              // draw ship
 	Qcomponent->draw();
-	//Wcomponent->draw();
+	Wcomponent->draw();
 	//Ecomponent->draw();
 	//Rcomponent->draw();
 }
@@ -33,7 +33,7 @@ void Necrid::draw()
 void Necrid::skillUpdate(float frameTime)
 {
 	Qcomponent->update(frameTime);
-	//Wcomponent->update(frameTime);
+	Wcomponent->update(frameTime);
 	//Ecomponent->update(frameTime);
 	//Rcomponent->update(frameTime);
 }
@@ -67,13 +67,15 @@ void Necrid::resetSkill(std::string letter)
 	}
 }
 
-void Necrid::useQ(int facing, VECTOR2 center, Game *cipher)
+void Necrid::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	Qcomponent->activate(facing, center, cipher);
+	Qcomponent->activate(facingRight, center, cipher);
+	Q_on_CoolDown = true;
 }
-void Necrid::useW()
+void Necrid::useW(bool facingRight, VECTOR2 center, Game *cipher)
 {
-
+	Wcomponent->activate(facingRight, center, cipher);
+	W_on_CoolDown = true;
 }
 void Necrid::useE()
 {

@@ -27,5 +27,6 @@ public:
 	void releaseAll();
 	void resetAll();
 	float activate(bool facingRight);
+	int getRange() { return CyraxEComponentNS::TELEPORT_RANGE; }
 };
 #endif

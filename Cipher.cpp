@@ -34,7 +34,7 @@ void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 	player1 = new Agent47(this);
-	player2 = new Cyrax(this);
+	player2 = new Necrid(this);
 	player2->setX(900);
 	player2->setY(GAME_HEIGHT / 2 - player2->getHeight()/2);
 
@@ -76,38 +76,38 @@ void Cipher::ai()
 void Cipher::collisions()
 {
 	//Cyrax Q
-	for (std::vector<Bullet*>::iterator it = player2->getQcomponent()->getBulletList()->begin(); it != player2->getQcomponent()->getBulletList()->end();)
-	{
-		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-		//{
-			if ((*it)->collidesWith(*player1))
-			{
-				delete (*it);
-				it = player2->getQcomponent()->getBulletList()->erase(it);
-			}
-			else
-			{
-				it++;
-			}		
-		//}
-		
-	}
+	//for (std::vector<Bullet*>::iterator it = player2->getQcomponent()->getBulletList()->begin(); it != player2->getQcomponent()->getBulletList()->end();)
+	//{
+	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	//	//{
+	//		if ((*it)->collidesWith(*player1))
+	//		{
+	//			delete (*it);
+	//			it = player2->getQcomponent()->getBulletList()->erase(it);
+	//		}
+	//		else
+	//		{
+	//			it++;
+	//		}		
+	//	//}
+	//	
+	//}
 	//Cyrax W
-	for (std::vector<Bullet*>::iterator it = player2->getWcomponent()->getBulletList()->begin(); it != player2->getWcomponent()->getBulletList()->end();)
-	{
-		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-		//{
-		if ((*it)->collidesWith(*player1))
-		{
-			//player2->setY(player2->getY() - 30);
+	//for (std::vector<Bullet*>::iterator it = player2->getWcomponent()->getBulletList()->begin(); it != player2->getWcomponent()->getBulletList()->end();)
+	//{
+	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	//	//{
+	//	if ((*it)->collidesWith(*player1))
+	//	{
+	//		//player2->setY(player2->getY() - 30);
 
-			delete (*it);
-			it = player2->getWcomponent()->getBulletList()->erase(it);
-		}
-		else
-			it++;
-		//}
-	}
+	//		delete (*it);
+	//		it = player2->getWcomponent()->getBulletList()->erase(it);
+	//	}
+	//	else
+	//		it++;
+	//	//}
+	//}
 //=============================================================================
 
 	////Freid Q
@@ -163,7 +163,24 @@ void Cipher::collisions()
 
 	//Agent 47 W
 
-
+//=============================================================================
+	//Necrid Q
+	for (std::vector<Bomb*>::iterator it = player2->getQcomponent()->getBombList()->begin(); it != player2->getQcomponent()->getBombList()->end();)
+	{
+		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		//{
+			if ((*it)->collidesWith(*player1))
+			{
+				delete (*it);
+				it = player2->getQcomponent()->getBombList()->erase(it);
+			}
+			else
+			{
+				it++;
+			}		
+		//}
+		
+	}
 }
 
 //=============================================================================

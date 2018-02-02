@@ -39,6 +39,7 @@ public:
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
 	float hit();
+	int getRange() { return Agent47QComponentNS::WIDTH; }
 	Bullet* getPunch() { return Punch; }
 };
 #endif

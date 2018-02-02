@@ -39,6 +39,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, VECTOR2 center, Game *cipher);
+	int getRange() { return FreidWComponentNS::WCOMET_RANGE; }
 	std::vector<Bullet*> *getCometList() { return &cometList; }
 };
 #endif

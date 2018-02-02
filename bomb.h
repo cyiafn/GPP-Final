@@ -32,7 +32,8 @@ public:
 	int getCurrRange();
 	MoveComponent* getMotion() { return movement; }
 	void setDirection(VECTOR2 direction);
-	void setBombSprite(int width, int height, int start, int end, float delay);
+	void setBombSprite(int width, int height, int start, int end);
+	void explode();
 	void setAngle(float angle);
 	void setSpeed(float speed);
 };

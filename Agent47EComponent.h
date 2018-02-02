@@ -25,6 +25,7 @@ public:
 	Agent47EComponent(Game *cipher);
 	~Agent47EComponent();
 	void update(float frameTime);
+	int getRange() { return Agent47EComponentNS::DASH_RANGE; }
 	//float speedBoost();
 	float activate(bool facingRight);
 };

@@ -19,7 +19,7 @@ namespace FreidQComponentNS
 	const int QARROW_TOP_FRAME = 0;      // bullet starts at frame 0
 	const int QARROW_MID_FRAME = 1;      // bullet starts at frame 1
 	const int QARROW_BOT_FRAME = 2;      // bullet starts at frame 2
-	const int QARROW_MAX_RANGE = 800;	// range by frametime
+	const int QARROW_MAX_RANGE = 600;	// range by frametime
 	const float QARROW_SPEED = 250;		// velocity.x for Bullet speed
 	const float QARROW_DIAGONAL = 150;		// velocity.x for Bullet speed
 }
@@ -38,6 +38,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
+	int getRange() { return FreidQComponentNS::QARROW_MAX_RANGE; }
 	std::vector<Bullet*> *getArrowList() { return &arrowList; }
 };
 #endif

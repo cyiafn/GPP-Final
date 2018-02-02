@@ -1,25 +1,25 @@
-#include "bullet.h"
+#include "structure.h"
 
-Bullet::Bullet() : Entity()
+Structure::Structure() : Entity()
 {
 	collisionType = entityNS::BOX;
 	movement = new MoveComponent();
 	movement->setGravityActive(false);
 }
-Bullet::~Bullet()
+Structure::~Structure()
 {
 	//this destructor is useless AF
 }
-void Bullet::update(float frameTime)
+void Structure::update(float frameTime)
 {
 	if (this->getActive())
 	{
-		CurrRange++;
-	}	
+		Duration++;
+	}
 	movement->update(frameTime, this);
 	Entity::update(frameTime);
 }
-void Bullet::draw()
+void Structure::draw()
 {
 	if (this->getActive())
 	{
@@ -27,18 +27,23 @@ void Bullet::draw()
 	}
 }
 
-int Bullet::getCurrRange()
+int Structure::getDuration()
 {
-	return CurrRange;
+	return Duration;
 }
 
-void Bullet::setDirection(VECTOR2 direction)
+void Structure::resetDuration()
+{
+	Duration = 0;
+}
+
+void Structure::setDirection(VECTOR2 direction)
 {
 	movement->setVelocity(direction);
 }
 
 
-void Bullet::setBulletSprite(int width, int height, int start, int end, float delay)
+void Structure::setSprite(int width, int height, int start, int end, float delay)
 {
 	spriteData.width = width;
 	spriteData.height = height;
@@ -48,14 +53,14 @@ void Bullet::setBulletSprite(int width, int height, int start, int end, float de
 	currentFrame = start;
 	spriteData.rect.bottom = height;    // rectangle to select parts of an image
 	spriteData.rect.right = width;
-	edge.left = -width*getScale() / 2;;
-	edge.top = -height*getScale() / 2;;
+	edge.left = -width*getScale() / 2;
+	edge.top = -height*getScale() / 2;
 	edge.right = width*getScale() / 2;
 	edge.bottom = height*getScale() / 2;
 }
 
 
-bool Bullet::initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM)
+bool Structure::initialize(Game *gamePtr, int width, int height, int text_col, TextureManager *textureM)
 {
 	return(Entity::initialize(gamePtr, width, height, text_col, textureM));
 }

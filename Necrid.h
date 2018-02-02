@@ -35,8 +35,12 @@ public:
 	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
-	void useQ(int facing, VECTOR2 center, Game *cipher);
-	void useW();
+	NecridQComponent* getQcomponent() { return Qcomponent; }
+	NecridWComponent* getWcomponent() { return Wcomponent; }
+	NecridEComponent* getEcomponent() { return Ecomponent; }
+	NecridRComponent* getRcomponent() { return Rcomponent; }
+	void useQ(bool facingRight, VECTOR2 center, Game *cipher);
+	void useW(bool facingRight, VECTOR2 center, Game *cipher);
 	void useE();
 	void useR();
 };
