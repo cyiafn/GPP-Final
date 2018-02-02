@@ -43,6 +43,8 @@ const char PLATFORM1_IMAGE[] = "pictures\\Background\\platform1.png";
 const char BACKGROUND1_IMAGE[] = "pictures\\Background\\background1.png";
 const char MIDDLEGROUND1_IMAGE[] = "pictures\\Background\\middleground1.png";
 const char FRONTGROUND1_IMAGE[] = "pictures\\Background\\frontground1.png";
+
+//Skill images -by Ee Zher
 const char CYRAXQ_IMAGE[] = "pictures\\Bullets\\CyraxQ.png";
 const char CYRAXW_IMAGE[] = "pictures\\Bullets\\CyraxW.png";
 const char FREIDQ_IMAGE[] = "pictures\\Bullets\\FreidQ.png";
@@ -52,7 +54,9 @@ const char AGENT47Q_IMAGE[] = "pictures\\Bullets\\Agent47Q.png";
 const char NECRIDQ_IMAGE[] = "pictures\\Bullets\\NecridQ.png";
 const char NECRIDW1_IMAGE[] = "pictures\\Bullets\\NecridW1.png";
 const char NECRIDW2_IMAGE[] = "pictures\\Bullets\\NecridW2.png";
+const char NECRIDE_IMAGE[] = "pictures\\Bullets\\NecridE.png";
 
+//Character sprites
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
 
 // audio files

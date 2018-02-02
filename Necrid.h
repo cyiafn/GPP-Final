@@ -14,7 +14,7 @@
 namespace NecridNS
 {
 	const int QSkillCD = 1;
-	const int WSkillCD = 3;
+	const int WSkillCD = 4;
 	const int ESkillCD = 5;
 }
 
@@ -41,7 +41,7 @@ public:
 	NecridRComponent* getRcomponent() { return Rcomponent; }
 	void useQ(bool facingRight, VECTOR2 center, Game *cipher);
 	void useW(bool facingRight, VECTOR2 center, Game *cipher);
-	void useE();
+	void useE(bool facingRight, VECTOR2 center, Game *cipher);
 	void useR();
 };
 

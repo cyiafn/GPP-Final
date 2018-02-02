@@ -21,31 +21,25 @@ NecridWComponent::~NecridWComponent()
 }
 void NecridWComponent::update(float frameTime)
 {
-	cloud->update(frameTime);
 	if (cloud->getActive())
 	{
+		cloud->update(frameTime);
 		if (cloud->getDuration() == NecridWComponentNS::RAIN_DURATION)
 		{
 			cloud->setActive(false);
 		}
-	}
-	if (spawnTimer % 20 == 0)
-	{
-
-	}
-	spawnTimer++;
-	for (int i = 0; i < dropletList.size(); i++)
-	{
-		dropletList[i]->update(frameTime);
-		if (dropletList[i]->getActive())
+		for (int i = 0; i < dropletList.size(); i++)
 		{
-			if (dropletList[i]->getCurrRange() == NecridWComponentNS::DROPLET_RANGE)
+			if (dropletList[i]->getActive())
 			{
-				dropletList.erase(dropletList.begin() + i);
+				dropletList[i]->update(frameTime);
+				if (dropletList[i]->getCurrRange() == NecridWComponentNS::DROPLET_RANGE)
+				{
+					dropletList.erase(dropletList.begin()+i);
+				}
 			}
 		}
 	}
-
 }
 void NecridWComponent::draw()
 {
@@ -75,5 +69,31 @@ void NecridWComponent::activate(bool facingRight, VECTOR2 center, Game *cipher)
 	cloud->setY(center.y - NecridWComponentNS::CLOUD_SPAWN - NecridWComponentNS::CLOUD_HEIGHT);
 	cloud->resetDuration();
 	cloud->setActive(true);
-	
+	int value = 0;
+	for (int i = 0; i < 10; i++) // insert 12 raindroplets into dropletList
+	{
+		Bullet *newDroplet = new Bullet();
+		newDroplet->setBulletSprite(NecridWComponentNS::RAIN_WIDTH, NecridWComponentNS::RAIN_HEIGHT, NecridWComponentNS::RAIN_START_FRAME, NecridWComponentNS::RAIN_START_FRAME, 0);
+		if (!newDroplet->initialize(cipher, NecridWComponentNS::RAIN_WIDTH, NecridWComponentNS::RAIN_HEIGHT, NecridWComponentNS::TEXTURE_COLS, &WdropletsTexture))
+		{
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Necrid droplet"));
+		}
+		newDroplet->setX(cloud->getX()+value);
+		value += 20;
+		newDroplet->setY(cloud->getY() + NecridWComponentNS::CLOUD_HEIGHT);
+		int chance = rand() % 2;
+		if (chance == 0) //Not spawn
+		{
+			newDroplet->setActive(false);
+		}
+		else if (chance == 1) //spawn
+		{
+			newDroplet->setActive(true);
+		}
+		VECTOR2 direction;
+		direction.x = 0;
+		direction.y = NecridWComponentNS::RAIN_SPEED;
+		newDroplet->setDirection(direction);
+		dropletList.push_back(newDroplet);
+	}
 }
