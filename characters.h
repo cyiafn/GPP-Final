@@ -56,6 +56,7 @@ private:
 	int type;
 public:
 	Characters();
+
 	void setPassThroughWall(bool a) { passThroughWall = a; }
 	bool getPassThroughWall() { return passThroughWall; }
 	void setCurrentWallY(float a) { currentWallY = a; }
@@ -112,11 +113,12 @@ public:
 	virtual void resetSkill(std::string letter) {};
 	void skillInputs(Game* cipher);
 	void movementInputs(float frameTime);
-	void moveRight(float frameTime);
-	void moveLeft(float frameTime);
-	void jump(float frameTime);
+	void moveRight();
+	void moveLeft();
+	void jump();
 	void knockback(float frameTime);
-	void drop(float frameTime);
+	void drop();
+	int getJumpCounter() { return jumpCounter; }
 	//-----------------------------------------------------------------------------------------------------------------------------
 	void resetJumpCounter() { jumpCounter = 0; }
 

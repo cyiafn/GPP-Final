@@ -34,17 +34,19 @@ class BehaviourTree
 				std::vector<Node*> childrenShuffled() const {std::vector<Node*> temp = children;  std::random_shuffle (temp.begin(), temp.end());  return temp;}
 		};
 		
-		class Selector : public CompositeNode {
-			public:
-				virtual bool run() override {
-					for (Node* child : getChildren()) {  // The generic Selector implementation
-						if (child->run())  // If one child succeeds, the entire operation run() succeeds.  Failure only results if all children fail.
-							return true;
-					}
-					return false;  // All children failed so the entire run() operation fails.
-				}
 
-		};
+		//class Selector : public CompositeNode {
+		//	public:
+		//		virtual bool run() override {
+		//			for (Node* child : getChildren()) {  // The generic Selector implementation
+		//				if (child->run())  // If one child succeeds, the entire operation run() succeeds.  Failure only results if all children fail.
+		//					return true;
+		//			}
+		//			return false;  // All children failed so the entire run() operation fails.
+		//		}
+
+		//};
+
 
 		class Sequence : public CompositeNode {
 			public:
@@ -57,6 +59,7 @@ class BehaviourTree
 				}
 		};
 
+
 		class Root : public Node {
 			private:
 				Node* child;
@@ -65,13 +68,14 @@ class BehaviourTree
 				virtual bool run() override {return child->run();}
 		};
 
+
 		//Types of Behaviors (Escape (Branch into Side of Walls and general running away) , Fighting, Picking up Items)
-		class checkPlatformBeneath : public Node {
+		class MainSelector : public CompositeNode {
 		private:
 			Characters* chars;
 			std::vector<Platform*> platforms;
 		public:
-			checkPlatformBeneath(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
+			MainSelector(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
 			virtual bool run() override {
 				bool platformBelow = false;
 				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
@@ -82,11 +86,11 @@ class BehaviourTree
 				}
 				if (platformBelow == true)
 				{
-					return false;
+					return getChildren()[1]->run();
 				}
-				else
+				else if (chars->getHealthComponent()->getPerc() > 100)
 				{
-					return true;
+					return getChildren()[0]->run();
 				}
 			}
 		};
@@ -110,11 +114,69 @@ class BehaviourTree
 					if (disY < 0)
 						disX *= -1;
 					float totalDist = sqrt(disX * disX + disY * disY);
-					if (totalDist < )
+					if (totalDist < distanceToClosestPlatform)
+					{
+						distanceToClosestPlatform = totalDist;
+					}
+				}
+				if (distanceToClosestPlatform > 0)
+				{
+					chars->moveRight();
+				}
+				else if (distanceToClosestPlatform < 0)
+				{
+					chars->moveLeft();
+				}
+				else
+				{
+
+				}
+
+				if (!(chars->getJumpCounter() >= 2) && chars->getMoveComponent()->getVelocity().y >= 0)
+				{
+					chars->jump();
 				}
 			}
 		};
 
+		class escapePlayers : public Node {
+		private:
+			Characters * chars;
+			std::vector<Platform*> platforms;
+			std::vector<Characters*> characters;
+		public:
+			escapePlayers(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
+			virtual bool run() override {
+				Platform* targetedPlatform;
+				float highestTotalDis = 0;
+				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+					float totalDistance = 0;
+					for (std::vector<int>::size_type z = 0; z != characters.size(); z++)
+					{
+						float xDis = characters[z]->getX() - platforms[i]->getX();
+						float yDis = characters[z]->getY() - platforms[i]->getY();
+						if (xDis < 0)
+							xDis *= -1;
+						if (yDis < 0)
+							yDis *= -1;
+						totalDistance += sqrt(xDis * xDis + yDis * yDis);
+					}
+					if (targetedPlatform == NULL)
+					{
+						targetedPlatform = platforms[i];
+						highestTotalDis = totalDistance;
+					}
+					else
+					{
+						if (highestTotalDis < totalDistance)
+						{
+							targetedPlatform = platforms[i];
+							highestTotalDis = totalDistance;
+						}
+					}
+				}
+			}
+		};
 
 	private:
 		Root* root;

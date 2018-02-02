@@ -72,7 +72,7 @@ void Characters::update(float frameTime, Game *cipher)
 	setPrev(getX(), getY());
 }
 
-void Characters::moveRight(float frameTime)
+void Characters::moveRight()
 {
 	facingRight = true;
 	if (movecomponent->getVelocity().x != 300)
@@ -84,7 +84,7 @@ void Characters::moveRight(float frameTime)
 	}
 }
 
-void Characters::moveLeft(float frameTime)
+void Characters::moveLeft()
 {
 	facingRight = false;
 	if (movecomponent->getVelocity().x != -300)
@@ -96,20 +96,17 @@ void Characters::moveLeft(float frameTime)
 	}
 }
 
-void Characters::drop(float frameTime)
+void Characters::drop()
 {
-<<<<<<< HEAD
-		movecomponent->setGravityActive(true);
-		passThroughWall = true;
-		setY(getY() + 11);
-=======
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
 	setY(getY() + 11);
->>>>>>> justin
+	movecomponent->setGravityActive(true);
+	passThroughWall = true;
+	setY(getY() + 11);
 }
 
-void Characters::jump(float frameTime)
+void Characters::jump()
 {
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
@@ -124,11 +121,11 @@ void Characters::movementInputs(float frameTime)
 {
 	if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 	{
-		moveRight(frameTime);
+		moveRight();
 	}
 	if (input->isKeyDown(P1LEFT_KEY))             // if move left
 	{
-		moveLeft(frameTime);
+		moveLeft();
 	}
 	if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
 	{
@@ -156,26 +153,15 @@ void Characters::movementInputs(float frameTime)
 	{
 		dropLock = false;
 	}
-<<<<<<< HEAD
 
-
-=======
-
-
->>>>>>> justin
 	if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
 	{
 		if (dropLock == false)
 		{
-			drop(frameTime);
+			drop();
 			dropLock = true;
 		}
-<<<<<<< HEAD
-;	}
-=======
-		;
 	}
->>>>>>> justin
 	else if (input->isKeyDown(P1JUMP_KEY))
 	{
 		if (jumpCounter != 2)
@@ -183,7 +169,7 @@ void Characters::movementInputs(float frameTime)
 			if (!jumpLock)
 			{
 				jumpLock = true;
-				jump(frameTime);
+				jump();
 			}
 
 		}
