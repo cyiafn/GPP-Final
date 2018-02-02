@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "constants.h"
 #include "MoveComponent.h"
+#include "HealthComponent.h"
 
 #include <string>
 #include "game.h"

@@ -237,32 +237,32 @@ void Cipher::collisions()
 //=============================================================================
 
 	//Agent 47 Q
-	Bullet *punch = player1->getQcomponent()->getPunch();
+	/*Bullet *punch = player1->getQcomponent()->getPunch();
 	if (punch->collidesWith(*player2))
 	{
 		float damage = player1->getQcomponent()->hit();
-	}
+	}*/
 
 	//Agent 47 W
 
 //=============================================================================
 	//Necrid Q
-	for (std::vector<Bomb*>::iterator it = player2->getQcomponent()->getBombList()->begin(); it != player2->getQcomponent()->getBombList()->end();)
-	{
-		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-		//{
-			if ((*it)->collidesWith(*player1))
-			{
-				delete (*it);
-				it = player2->getQcomponent()->getBombList()->erase(it);
-			}
-			else
-			{
-				it++;
-			}		
-		//}
-		
-	}
+	//for (std::vector<Bomb*>::iterator it = player2->getQcomponent()->getBombList()->begin(); it != player2->getQcomponent()->getBombList()->end();)
+	//{
+	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	//	//{
+	//		if ((*it)->collidesWith(*player1))
+	//		{
+	//			delete (*it);
+	//			it = player2->getQcomponent()->getBombList()->erase(it);
+	//		}
+	//		else
+	//		{
+	//			it++;
+	//		}		
+	//	//}
+	//	
+	//}
 }
 
 //=============================================================================
