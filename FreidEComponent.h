@@ -6,29 +6,16 @@
 #include "input.h"
 #include "game.h"
 #include "entity.h"
-#include <vector>
-#include "textureManager.h"
 #include "constants.h"
-#include "platform.h"
 
 namespace FreidEComponentNS
 {
-	const int WIDTH = 120;                   // image width
-	const int HEIGHT = 20;                  // image height
-	const int TEXTURE_COLS = 1;           // texture has 1 columns
-	const int EPLATFORM_START_FRAME = 0;      // bullet starts at frame 0
-	const int EPLATFORM_END_FRAME = 0;       // bullet end at frame 0
-	const float EPLATFORM_ANIMATION_DELAY = 0; // No delay
-	const int EPLATFORM_DURATION = 200;	// range by frametime
-	const int TELEPORT_RANGE = 200;
+	const float TELEPORT_RANGE = 200;
 }
 
 class FreidEComponent
 {
 private:
-	TextureManager EplatformTexture;
-	int platformTimer = 0;
-	Platform *icePlatform;
 
 public:
 	FreidEComponent(Game *cipher);
@@ -37,7 +24,7 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
-	int getDuration() { return FreidEComponentNS::EPLATFORM_DURATION; }
-	void activate(bool facingRight, VECTOR2 center, Game *cipher);
+	int getRange() { return FreidEComponentNS::TELEPORT_RANGE; }
+	float activate(bool facingRight);
 };
 #endif

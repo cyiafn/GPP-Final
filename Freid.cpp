@@ -88,8 +88,19 @@ void Freid::useW(bool facingRight, VECTOR2 center, Game *cipher)
 }
 void Freid::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	center.y = center.y + spriteData.height / 2;
-	Ecomponent->activate(facingRight, center, cipher);
+	float range =  Ecomponent->activate(facingRight);
+	VECTOR2 newLocation;
+	if (facingRight)
+	{
+		newLocation.x = this->getX() - range;
+	}
+	else
+	{
+		newLocation.x = this->getX() + range;
+	}
+	newLocation.y = this->getY() - range;
+	this->setX(newLocation.x - spriteData.width / 2);
+	this->setY(newLocation.y - spriteData.height / 2);
 	E_on_CoolDown = true;
 }
 void Freid::useR()
