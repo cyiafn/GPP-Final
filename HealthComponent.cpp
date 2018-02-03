@@ -11,7 +11,7 @@ HealthComponent::~HealthComponent()
 
 }
 
-void HealthComponent::update(float frameTime, Entity &chars)
+void HealthComponent::update(float frameTime)
 {
 	
 }
@@ -19,8 +19,7 @@ void HealthComponent::update(float frameTime, Entity &chars)
 
 
 
-void HealthComponent::damageMe(int dmg,Entity &chars)
+void HealthComponent::damageMe(int dmg)
 {
 	perc += dmg;
-	knockback(chars);
 }

@@ -176,11 +176,7 @@ class BehaviourTree
 						}
 					}
 				}
-				if (targetedPlatform->getX() > chars->getX())
-				{
-					chars->moveRight();
-					chars->useE(chars->getFacingRight(), *chars->getCenter(), cipher);
-				}
+				if ()
 			}
 		};
 

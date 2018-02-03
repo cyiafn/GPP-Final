@@ -1,6 +1,5 @@
 #define _USE_MATH_DEFINES
 #include "characters.h"
-#include "HealthComponent.h"
 #include <math.h>
 
 //=============================================================================
