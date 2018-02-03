@@ -127,6 +127,9 @@ public:
 	void coolDownChecking();
 	void gainUltimate(bool gain);
 	virtual void resetSkill(std::string letter) {};
+	virtual int getQRange() { return 0; }
+	virtual int getWRange() { return 0; }
+	virtual int getERange() { return 0; }
 //-----------------------------------------------------------------------------------------------------------------------------
 	
 

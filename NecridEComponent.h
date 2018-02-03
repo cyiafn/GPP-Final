@@ -13,7 +13,7 @@
 namespace NecridEComponentNS
 {
 	const int WIDTH = 50;                   // image width
-	const int HEIGHT = 60;                  // image height
+	const int HEIGHT = 120;                  // image height
 	const int TEXTURE_COLS = 5;           // texture has 1 columns
 	const int EWALL_START_FRAME = 0;      // bullet starts at frame 0
 	const int EWALL_END_FRAME = 9;       // bullet end at frame 9

@@ -43,6 +43,9 @@ public:
 	void useW(bool facingRight, VECTOR2 center, Game *cipher);
 	void useE(bool facingRight, VECTOR2 center, Game *cipher);
 	void useR();
+	int getQRange() { return FreidQComponentNS::QARROW_MAX_RANGE; }
+	int getWRange() { return FreidWComponentNS::WCOMET_RANGE; }
+	int getERange() { return FreidEComponentNS::TELEPORT_RANGE; }
 };
 
 

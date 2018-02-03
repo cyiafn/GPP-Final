@@ -43,6 +43,9 @@ public:
 	void useW(bool facingRight, VECTOR2 center, Game *cipher);
 	void useE(bool facingRight, VECTOR2 center, Game *cipher);
 	void useR();
+	int getQRange() { return CyraxQComponentNS::QBULLET_MAX_RANGE; }
+	int getWRange() { return CyraxWComponentNS::WBULLET_MAX_RANGE; }
+	int getERange() { return CyraxEComponentNS::TELEPORT_RANGE; }
 };
 
 

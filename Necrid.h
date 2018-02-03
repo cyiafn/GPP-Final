@@ -43,6 +43,9 @@ public:
 	void useW(bool facingRight, VECTOR2 center, Game *cipher);
 	void useE(bool facingRight, VECTOR2 center, Game *cipher);
 	void useR();
+	int getQRange() { return NecridQComponentNS::QBOMB_MAX_RANGE; }
+	int getWRange() { return NecridWComponentNS::DROPLET_RANGE; }
+	int getERange() { return NecridEComponentNS::SPAWN_DISTANCE; }
 };
 
 

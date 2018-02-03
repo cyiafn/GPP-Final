@@ -44,6 +44,9 @@ public:
 	void useW(bool facingRight, VECTOR2 center, Game *cipher);
 	void useE(bool facingRight, VECTOR2 center, Game *cipher);
 	void useR();
+	int getQRange() { return Agent47QComponentNS::WIDTH; }
+	int getWRange() { return Agent47WComponentNS::WIDTH; }
+	int getERange() { return Agent47EComponentNS::DASH_RANGE; }
 };
 
 
