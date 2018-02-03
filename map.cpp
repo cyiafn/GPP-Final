@@ -38,7 +38,7 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing frontground image"));
 
 		VECTOR2 vel;
-		if (!background1->initialize(cipher,272,160, &backgroundTexture))
+		if (!background1->initialize(cipher, 272, 160, &backgroundTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 		background1->setScale(5);
 		background1->setX(-40);
@@ -82,7 +82,7 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 
 		platforms.push_back(new Platform());
 		size_t pos = platforms.size() - 1;
-		if (!platforms.at(pos)->initialize(cipher, 255,106, &platformTexture))
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2);
 		platforms.at(pos)->setY(500);
@@ -91,14 +91,14 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255*platforms.at(pos)->getScale());
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255 * platforms.at(pos)->getScale());
 		platforms.at(pos)->setY(500);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2*(255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
 		platforms.push_back(new Platform());
@@ -133,7 +133,7 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2*(-255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (-255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(500);
 
 		platforms.push_back(new Platform());
@@ -220,7 +220,7 @@ void Map::update(float frameTime, std::vector<Characters*> characters)
 	frontground2->update(frameTime);
 	//checkIfCharInFloor(characters);
 	checkIfOnFloor(characters, frameTime);
-	
+
 }
 
 
@@ -289,32 +289,32 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 
 	/*if (averageX > mapNS::centerX + mapNS::maximumXFalloff)
 	{
-		averageX = mapNS::centerX + mapNS::maximumXFalloff;
+	averageX = mapNS::centerX + mapNS::maximumXFalloff;
 	}
 	else if (averageX <= mapNS::centerX - mapNS::maximumXFalloff)
 	{
-		averageX = mapNS::centerX - mapNS::maximumXFalloff;
+	averageX = mapNS::centerX - mapNS::maximumXFalloff;
 	}
 	if (averageY > mapNS::centerY + mapNS::maximumYFalloff)
 	{
-		averageY = mapNS::centerY + mapNS::maximumYFalloff;
+	averageY = mapNS::centerY + mapNS::maximumYFalloff;
 	}
 	else if (averageY <= mapNS::centerY - mapNS::maximumYFalloff)
 	{
-		averageY = mapNS::centerY - mapNS::maximumYFalloff;
+	averageY = mapNS::centerY - mapNS::maximumYFalloff;
 	}*/
 	/*VECTOR2 setVel;
 	setVel.x = -DisX / mapNS::timeForMapMovement;
 	setVel.y = -DisY / mapNS::timeForMapMovement;
 
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		characters[i]->setX(characters[i]->getX() + setVel.x * frameTime);
-		characters[i]->setY(characters[i]->getY() + setVel.y * frameTime);
+	characters[i]->setX(characters[i]->getX() + setVel.x * frameTime);
+	characters[i]->setY(characters[i]->getY() + setVel.y * frameTime);
 	}
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++ )
 	{
-		platforms[i]->setX(platforms[i]->getX() + setVel.x * frameTime);
-		platforms[i]->setY(platforms[i]->getY() + setVel.x * frameTime);
+	platforms[i]->setX(platforms[i]->getX() + setVel.x * frameTime);
+	platforms[i]->setY(platforms[i]->getY() + setVel.x * frameTime);
 	}*/
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		characters[i]->setX(characters[i]->getX() - DisX);
@@ -328,7 +328,7 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 	//mapCurrentPosX = averageX;
 	//mapCurrentPosY = averageY;
 
-	
+
 }
 
 void Map::vibration(std::vector<Characters*> characters, float frameTime)
@@ -341,13 +341,13 @@ void Map::vibration(std::vector<Characters*> characters, float frameTime)
 		}
 		else
 		{
-			if ((0 < startingBuffer  && startingBuffer <= 20)  || (20 < startingBuffer  && startingBuffer <= 40) || (40 < startingBuffer  && startingBuffer <= 60) || (60 < startingBuffer  && startingBuffer <= 80))
+			if ((0 < startingBuffer  && startingBuffer <= 20) || (20 < startingBuffer  && startingBuffer <= 40) || (40 < startingBuffer  && startingBuffer <= 60) || (60 < startingBuffer  && startingBuffer <= 80))
 			{
-				if (startingBuffer == 1 || startingBuffer == 21 || startingBuffer == 41 || startingBuffer == 61 )
+				if (startingBuffer == 1 || startingBuffer == 21 || startingBuffer == 41 || startingBuffer == 61)
 				{
 					currentVibrationDirection = rand() % 4;
 				}
-				if( (0 < startingBuffer && startingBuffer <= 10) || (20 < startingBuffer && startingBuffer <= 30) || (40 < startingBuffer && startingBuffer <= 50) || (60 < startingBuffer && startingBuffer <= 70))
+				if ((0 < startingBuffer && startingBuffer <= 10) || (20 < startingBuffer && startingBuffer <= 30) || (40 < startingBuffer && startingBuffer <= 50) || (60 < startingBuffer && startingBuffer <= 70))
 				{
 					if (currentVibrationDirection == 0)
 					{
@@ -433,9 +433,9 @@ void Map::vibration(std::vector<Characters*> characters, float frameTime)
 						}
 					}
 				}
-				
+
 			}
-			
+
 			if (startingBuffer == 81)
 			{
 				vibrationOn = false;
@@ -453,7 +453,7 @@ void Map::dropGeneration(float frameTime)
 	{
 		if (secondBuffer == 0)
 		{
-			for (int i = 0; i < 10-(probability); i++)
+			for (int i = 0; i < 10 - (probability); i++)
 			{
 				randomList[i] = 0;
 			}
@@ -494,7 +494,7 @@ void Map::mapTime(float frameTime)
 		}
 	}
 
-	if ((secondBuffer == 0 && secondTracker == 0) || (secondBuffer == 20 && secondTracker == 0) || (secondBuffer == 40 && secondTracker == 0) || (secondBuffer == 60&&secondTracker == 0))
+	if ((secondBuffer == 0 && secondTracker == 0) || (secondBuffer == 20 && secondTracker == 0) || (secondBuffer == 40 && secondTracker == 0) || (secondBuffer == 60 && secondTracker == 0))
 	{
 		probability = 1;
 	}
@@ -531,11 +531,11 @@ void Map::checkIfOnFloor(std::vector<Characters*> characters, float frameTime) {
 							characters[i]->getMoveComponent()->setGravityActive(false);
 							characters[i]->setPassThroughWall(false);
 						}
-						
-						
+
+
 
 					}
-						
+
 				}
 
 			}
@@ -545,11 +545,11 @@ void Map::checkIfOnFloor(std::vector<Characters*> characters, float frameTime) {
 			bool floorUnder = false;
 			for (std::vector<int>::size_type z = 0; z != platforms.size(); z++)
 			{
-				if ((characters[i]->getY() + charactersNS::HEIGHT *characters[i]->getScale() + 1 >= platforms[z]->getY()) && (characters[i]->getY() + charactersNS::HEIGHT*characters[i]->getScale() - 1 <= platforms[z]->getY()) && (characters[i]->getX() + charactersNS::WIDTH/2 >= platforms[z]->getX() && characters[i]->getX()+charactersNS::WIDTH/2 <= platforms[z]->getX() + platformNS::WIDTH * platforms[z]->getScale()))
+				if ((characters[i]->getY() + charactersNS::HEIGHT *characters[i]->getScale() + 1 >= platforms[z]->getY()) && (characters[i]->getY() + charactersNS::HEIGHT*characters[i]->getScale() - 1 <= platforms[z]->getY()) && (characters[i]->getX() + charactersNS::WIDTH / 2 >= platforms[z]->getX() && characters[i]->getX() + charactersNS::WIDTH / 2 <= platforms[z]->getX() + platformNS::WIDTH * platforms[z]->getScale()))
 				{
 					floorUnder = true;
 				}
-				
+
 			}
 			if (floorUnder == false)
 			{
@@ -583,11 +583,11 @@ void Map::checkIfCharInFloor(std::vector < Characters*> characters)
 				if (characters[i]->getY() + charactersNS::HEIGHT >= characters[i]->getCurrentWallY() || characters[i]->getY() < platforms[z]->getY() + platformNS::WIDTH * platforms[z]->getScale())
 				{
 					characters[i]->setPassThroughWall(false);
-					characters[i]->getHealthComponent().getLives();
+					characters[i]->getHealthComponent()->getLives();
 				}
 			}
 		}
-		
+
 	}
 
 }

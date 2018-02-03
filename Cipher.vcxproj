@@ -111,12 +111,10 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
-    <ClCompile Include="heart.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="ItemPortal.cpp" />
     <ClCompile Include="map.cpp" />
-    <ClCompile Include="menuBtn.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Cipher.cpp" />
     <ClCompile Include="Necrid.cpp" />
@@ -127,8 +125,6 @@
     <ClCompile Include="projectile.cpp" />
     <ClCompile Include="structure.cpp" />
     <ClCompile Include="platform.cpp" />
-    <ClCompile Include="startMenu.cpp" />
-    <ClCompile Include="TextDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
@@ -159,7 +155,6 @@
     <ClInclude Include="gameError.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="HealthComponent.h" />
-    <ClInclude Include="heart.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="ItemPortal.h" />
@@ -174,9 +169,6 @@
     <ClInclude Include="projectile.h" />
     <ClInclude Include="structure.h" />
     <ClInclude Include="platform.h" />
-    <ClInclude Include="startMenu.h" />
-    <ClInclude Include="menuBtn.h" />
-    <ClInclude Include="TextDX.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

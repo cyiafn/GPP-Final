@@ -22,6 +22,8 @@ namespace charactersNS
 	const int   PLAYER_START_FRAME = 21;      // player starts at frame 0
 	const int   PLAYER_END_FRAME = 25;        // player animation frames 0,1,2
 	const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
+
+	
 }
 
 // inherits from Entity class
@@ -61,7 +63,8 @@ private:
 	int type;
 public:
 	Characters();
-
+	void removeLife();
+	bool getFacingRight() { return facingRight; }
 	void setPassThroughWall(bool a) { passThroughWall = a; }
 	bool getPassThroughWall() { return passThroughWall; }
 	void setCurrentWallY(float a) { currentWallY = a; }

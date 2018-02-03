@@ -144,8 +144,9 @@ class BehaviourTree
 			Characters * chars;
 			std::vector<Platform*> platforms;
 			std::vector<Characters*> characters;
+			Game* cipher;
 		public:
-			escapePlayers(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
+			escapePlayers(Characters* chars, std::vector<Platform*> platforms, Game* cip) { this->chars = chars; this->platforms = platforms; this->cipher = cip; }
 			virtual bool run() override {
 				Platform* targetedPlatform;
 				float highestTotalDis = 0;
@@ -175,6 +176,7 @@ class BehaviourTree
 						}
 					}
 				}
+				if ()
 			}
 		};
 
