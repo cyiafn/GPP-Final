@@ -64,6 +64,7 @@ void Characters::draw()
 void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
+	removeLife();
 	movecomponent->update(frameTime, this);
 	this->coolDownChecking();
 	skillInputs(cipher);
@@ -320,5 +321,27 @@ void Characters::knockback(float frameTime)
 		vel.x = xVel;
 		vel.y = yVel;
 		movecomponent->setVelocity(vel);
+	}
+}
+
+void Characters::removeLife()
+{
+	if (getActive())
+	{
+		if (this->getX() > 1500 || this->getX() < -300 || this->getY() > 1000 || this->getY() < -300)
+		{
+			if (healthcomponent->getLives() == 1)
+			{
+				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				this->setActive(false);
+			}
+			else if (healthcomponent->getLives() > 1)
+			{
+				//respawn engine based on map
+				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				this->setX(GAME_WIDTH / 2);
+				this->setY(GAME_HEIGHT / 2);
+			}
+		}
 	}
 }

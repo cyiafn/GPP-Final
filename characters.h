@@ -61,7 +61,8 @@ private:
 	int type;
 public:
 	Characters();
-
+	void removeLife();
+	bool getFacingRight() { return facingRight; }
 	void setPassThroughWall(bool a) { passThroughWall = a; }
 	bool getPassThroughWall() { return passThroughWall; }
 	void setCurrentWallY(float a) { currentWallY = a; }
