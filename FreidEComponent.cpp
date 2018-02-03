@@ -12,6 +12,7 @@ FreidEComponent::FreidEComponent(Game *cipher)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid E"));
 	}
 	icePlatform->setActive(false);
+	icePlatform->setScale(1);
 }
 FreidEComponent::~FreidEComponent()
 {
@@ -45,7 +46,7 @@ void FreidEComponent::resetAll()
 
 void FreidEComponent::activate(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	icePlatform->setX(center.x - FreidEComponentNS::WIDTH/2);
+	icePlatform->setX(center.x - FreidEComponentNS::WIDTH);
 	icePlatform->setY(center.y + FreidEComponentNS::HEIGHT);
 	icePlatform->setActive(true);
 }

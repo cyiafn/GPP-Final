@@ -23,10 +23,10 @@ namespace Agent47NS
 class Agent47 : public Characters
 {
 private:
-	Agent47QComponent *Qcomponent;
-	Agent47WComponent *Wcomponent;
-	Agent47EComponent *Ecomponent;
-	Agent47RComponent *Rcomponent;
+	Agent47QComponent* Qcomponent;
+	Agent47WComponent* Wcomponent;
+	Agent47EComponent* Ecomponent;
+	Agent47RComponent* Rcomponent;
 	TextureManager characterTexture;
 
 public:
@@ -36,9 +36,13 @@ public:
 	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
-	void useQ(int facing, VECTOR2 center, Game *cipher);
-	void useW();
-	void useE();
+	Agent47QComponent* getQcomponent() { return Qcomponent; }
+	Agent47WComponent* getWcomponent() { return Wcomponent; }
+	Agent47EComponent* getEcomponent() { return Ecomponent; }
+	Agent47RComponent* getRcomponent() { return Rcomponent; }
+	void useQ(bool facingRight, VECTOR2 center, Game *cipher);
+	void useW(bool facingRight, VECTOR2 center, Game *cipher);
+	void useE(bool facingRight, VECTOR2 center, Game *cipher);
 	void useR();
 };
 

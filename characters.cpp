@@ -64,6 +64,7 @@ void Characters::draw()
 void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
+	removeLife();
 	movecomponent->update(frameTime, this);
 	this->coolDownChecking();
 	skillInputs(cipher);
@@ -75,6 +76,7 @@ void Characters::update(float frameTime, Game *cipher)
 void Characters::moveRight()
 {
 	facingRight = true;
+	this->flipHorizontal(false);
 	if (movecomponent->getVelocity().x != 300)
 	{
 		VECTOR2 vel;
@@ -87,6 +89,7 @@ void Characters::moveRight()
 void Characters::moveLeft()
 {
 	facingRight = false;
+	this->flipHorizontal(true);
 	if (movecomponent->getVelocity().x != -300)
 	{
 		VECTOR2 vel;
@@ -198,7 +201,6 @@ void Characters::skillInputs(Game *cipher)
 		if (!Q_on_CoolDown)
 		{
 			useQ(facingRight, center, cipher);
-			Q_on_CoolDown = true;
 		}
 
 	}
@@ -207,7 +209,6 @@ void Characters::skillInputs(Game *cipher)
 		if (!W_on_CoolDown)
 		{
 			useW(facingRight, center, cipher);
-			W_on_CoolDown = true;
 		}
 
 	}
@@ -216,7 +217,6 @@ void Characters::skillInputs(Game *cipher)
 		if (!E_on_CoolDown)
 		{
 			useE(facingRight, center, cipher);
-			E_on_CoolDown = true;
 		}
 
 	}
@@ -321,5 +321,27 @@ void Characters::knockback(float frameTime)
 		vel.x = xVel;
 		vel.y = yVel;
 		movecomponent->setVelocity(vel);
+	}
+}
+
+void Characters::removeLife()
+{
+	if (getActive())
+	{
+		if (this->getX() > 1500 || this->getX() < -300 || this->getY() > 1000 || this->getY() < -300)
+		{
+			if (healthcomponent->getLives() == 1)
+			{
+				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				this->setActive(false);
+			}
+			else if (healthcomponent->getLives() > 1)
+			{
+				//respawn engine based on map
+				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				this->setX(GAME_WIDTH / 2);
+				this->setY(GAME_HEIGHT / 2);
+			}
+		}
 	}
 }

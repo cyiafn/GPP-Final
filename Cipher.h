@@ -34,6 +34,9 @@ private:
 	TextureManager characterTexture;     // player texture
 	Cyrax *cyrax;
 	Freid *freid;
+	Agent47 *agent47;
+	Necrid *necrid;
+
 	Cyrax *player1;
 	Freid *player2;
 

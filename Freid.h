@@ -22,10 +22,10 @@ namespace FreidNS
 class Freid : public Characters
 {
 private:
-	FreidQComponent *Qcomponent;
-	FreidWComponent *Wcomponent;
-	FreidEComponent *Ecomponent;
-	FreidRComponent *Rcomponent;
+	FreidQComponent* Qcomponent;
+	FreidWComponent* Wcomponent;
+	FreidEComponent* Ecomponent;
+	FreidRComponent* Rcomponent;
 	TextureManager characterTexture;
 
 public:
@@ -35,6 +35,10 @@ public:
 	void draw();
 	bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
 	void resetSkill(std::string Letter);
+	FreidQComponent* getQcomponent() { return Qcomponent; }
+	FreidWComponent* getWcomponent() { return Wcomponent; }
+	FreidEComponent* getEcomponent() { return Ecomponent; }
+	FreidRComponent* getRcomponent() { return Rcomponent; }
 	void useQ(bool facingRight, VECTOR2 center, Game *cipher);
 	void useW(bool facingRight, VECTOR2 center, Game *cipher);
 	void useE(bool facingRight, VECTOR2 center, Game *cipher);

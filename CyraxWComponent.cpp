@@ -4,51 +4,49 @@
 
 CyraxWComponent::CyraxWComponent(Game *cipher)
 {
-	this->bulletList = new std::vector<Bullet>;
-	bulletList->reserve(10);
+	bulletList.reserve(10);
 	if (!WbulletTexture.initialize(cipher->getGraphics(), CYRAXW_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing cyrax W image"));
 }
 CyraxWComponent::~CyraxWComponent()
 {
-	bulletList->clear();
-	delete bulletList;
+	bulletList.clear();
 }
 void CyraxWComponent::update(float frameTime)
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	for (int i = 0; i < bulletList.size(); i++)
 	{
-		bulletList->at(i).update(frameTime);
-		if (bulletList->at(i).getActive())
+		bulletList[i]->update(frameTime);
+		if (bulletList[i]->getActive())
 		{
-			if (bulletList->at(i).getCurrRange() == 30)
+			if (bulletList[i]->getCurrRange() == 30)
 			{
-				bulletList->at(i).setCurrentFrame(CyraxWComponentNS::WBULLET_END_FRAME);
-				VECTOR2 newSpeed;				
-				if (bulletList->at(i).getMotion()->getVelocity().x >= 0)
+				bulletList[i]->setCurrentFrame(CyraxWComponentNS::WBULLET_END_FRAME);
+				VECTOR2 newSpeed;
+				if (bulletList[i]->getMotion()->getVelocity().x >= 0)
 				{
 					newSpeed.x = -CyraxWComponentNS::WBULLET_MAX_SPEED;
-					newSpeed.y = 0;					
+					newSpeed.y = 0;
 				}
 				else
 				{
 					newSpeed.x = CyraxWComponentNS::WBULLET_MAX_SPEED;
 					newSpeed.y = 0;
 				}
-				bulletList->at(i).setDirection(newSpeed);
+				bulletList[i]->setDirection(newSpeed);
 			}
-			if (bulletList->at(i).getCurrRange() == CyraxWComponentNS::WBULLET_MAX_RANGE)
+			if (bulletList[i]->getCurrRange() == CyraxWComponentNS::WBULLET_MAX_RANGE)
 			{
-				bulletList->erase(bulletList->begin() + i);
+				bulletList.erase(bulletList.begin() + i);
 			}
 		}
 	}
 }
 void CyraxWComponent::draw()
 {
-	for (int i = 0; i < bulletList->size(); i++)
+	for (int i = 0; i < bulletList.size(); i++)
 	{
-		bulletList->at(i).draw();
+		bulletList[i]->draw();
 
 	}
 }
@@ -87,5 +85,5 @@ void CyraxWComponent::activate(bool facingRight, float x, float y, Game *cipher)
 		direction.y = CyraxWComponentNS::WBULLET_MIN_SPEED;		
 		newBullet->setDirection(direction);
 	}
-	bulletList->push_back(*newBullet);
+	bulletList.push_back(newBullet);
 }

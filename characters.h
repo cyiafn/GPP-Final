@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "constants.h"
 #include "MoveComponent.h"
+#include "HealthComponent.h"
 
 #include <string>
 #include "game.h"
@@ -33,7 +34,7 @@ protected:
 	float prevY;
 
 	VECTOR2 center;
-	bool facingRight; //1 is facing right, 2 is facing left
+	bool facingRight; //true if facing right, false if facing left
 	bool Q_on_CoolDown = false;
 	bool W_on_CoolDown = false;
 	bool E_on_CoolDown = false;
@@ -43,6 +44,10 @@ protected:
 	int QframeTime = 0;
 	int WframeTime = 0;
 	int EframeTime = 0;
+	bool haveUlti = false;
+	bool frozen = false;
+	bool slowed = false;
+	float slow = 0;
 	int jumpCounter = 0;
 	bool jumpLock = false;
 	bool dropLock = false;
@@ -56,7 +61,8 @@ private:
 	int type;
 public:
 	Characters();
-
+	void removeLife();
+	bool getFacingRight() { return facingRight; }
 	void setPassThroughWall(bool a) { passThroughWall = a; }
 	bool getPassThroughWall() { return passThroughWall; }
 	void setCurrentWallY(float a) { currentWallY = a; }
@@ -110,6 +116,7 @@ public:
 	virtual void useR() {};
 	virtual void skillUpdate(float frameTime) {};
 	void coolDownChecking();
+	void gainUltimate(bool gain);
 	virtual void resetSkill(std::string letter) {};
 	void skillInputs(Game* cipher);
 	void movementInputs(float frameTime);
@@ -121,7 +128,14 @@ public:
 	int getJumpCounter() { return jumpCounter; }
 	//-----------------------------------------------------------------------------------------------------------------------------
 	void resetJumpCounter() { jumpCounter = 0; }
+//-----------------------------------------------------------------------------------------------------------------------------
+	
 
+//Crowd Control (cc) - by Ee Zher
+//-----------------------------------------------------------------------------------------------------------------------------
+	void setDebuff(std::string cc);
+	
+//-----------------------------------------------------------------------------------------------------------------------------
 
 	//Enum classes 
 	enum PlayerNo

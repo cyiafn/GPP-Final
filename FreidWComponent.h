@@ -14,22 +14,22 @@
 
 namespace FreidWComponentNS
 {
-	const int WIDTH = 30;                   // image width
-	const int HEIGHT = 30;                  // image height
-	const int TEXTURE_COLS = 2;           // texture has 1 columns
+	const int WIDTH = 40;                   // image width
+	const int HEIGHT = 40;                  // image height
+	const int TEXTURE_COLS = 1;           // texture has 1 columns
 	const int WCOMET_START_FRAME = 0;      // bullet starts at frame 0
-	const int WCOMET_END_FRAME = 1;       // bullet end at frame 0
+	const int WCOMET_END_FRAME = 0;       // bullet end at frame 0
 	const float WCOMET_ANIMATION_DELAY = 0; // No delay
-	const int WCOMET_MAX_RANGE = 300;	// range by frametime
-	const float WCOMET_START = 500;		// velocity.x for Bullet speed
-	const float WCOMET_SPEED = 300;		// velocity.x for Bullet speed
+	const int WCOMET_MAX_DURATION = 300;	// range by frametime
+	const float WCOMET_START = 300;		// velocity.x for Bullet speed
+	const float WCOMET_RANGE = 300;
 }
 
 class FreidWComponent
 {
 private:
 	TextureManager WcometTexture;
-	std::vector<Bullet> *cometList;
+	std::vector<Bullet*> cometList;
 
 public:
 	FreidWComponent(Game *cipher);
@@ -39,5 +39,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, VECTOR2 center, Game *cipher);
+	int getRange() { return FreidWComponentNS::WCOMET_RANGE; }
+	std::vector<Bullet*> *getCometList() { return &cometList; }
 };
 #endif

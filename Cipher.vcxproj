@@ -125,7 +125,7 @@
     <ClCompile Include="NecridRComponent.cpp" />
     <ClCompile Include="NecridWComponent.cpp" />
     <ClCompile Include="projectile.cpp" />
-    <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="structure.cpp" />
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="TextDX.cpp" />
@@ -172,7 +172,7 @@
     <ClInclude Include="NecridRComponent.h" />
     <ClInclude Include="NecridWComponent.h" />
     <ClInclude Include="projectile.h" />
-    <ClInclude Include="Skill.h" />
+    <ClInclude Include="structure.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="startMenu.h" />
     <ClInclude Include="menuBtn.h" />

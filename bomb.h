@@ -21,8 +21,6 @@ class Bomb : public Entity
 private:
 	MoveComponent *movement;
 	int CurrRange = 0;
-	float m_x;
-	float m_y;
 	float m_angle;
 	float m_speed;
 public:
@@ -34,7 +32,8 @@ public:
 	int getCurrRange();
 	MoveComponent* getMotion() { return movement; }
 	void setDirection(VECTOR2 direction);
-	void setBulletSprite(int width, int height, int start, int end, float delay);
+	void setBombSprite(int width, int height, int start, int end);
+	void explode();
 	void setAngle(float angle);
 	void setSpeed(float speed);
 };

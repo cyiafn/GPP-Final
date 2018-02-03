@@ -36,6 +36,7 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
+	int getDuration() { return FreidEComponentNS::EPLATFORM_DURATION; }
 	void activate(bool facingRight, VECTOR2 center, Game *cipher);
 };
 #endif
