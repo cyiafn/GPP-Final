@@ -6,21 +6,40 @@
 #include "input.h"
 #include "game.h"
 #include "entity.h"
-
+#include "textureManager.h"
+#include "constants.h"
+#include "bullet.h"
 
 namespace Agent47WComponentNS
 {
-
+	const int WIDTH = 50;                   // image width
+	const int HEIGHT = 50;                  // image height
+	const int TEXTURE_COLS = 1;           // texture has 1 columns
+	const int WZAP_START_FRAME = 0;      // bullet starts at frame 0
+	const int WZAP_END_FRAME = 0;       // bullet end at frame 0
+	const float WZAP_ANIMATION_DELAY = 0;
+	const int WZAP_DURATION = 30;	// range by frametime
+	const float WZAP_DAMAGE = 10.0f;
 }
 
 class Agent47WComponent
 {
 private:
-
+	TextureManager WzapTexture;
+	Bullet* Electrocute;
+	int current_Duration = 0;
+	bool zap = false;
 
 public:
-	Agent47WComponent();
-	bool charging(int chargeTime);
-	void update(float frameTime, Entity &ent);
+	Agent47WComponent(Game *cipher);
+	~Agent47WComponent();
+	void update(float frameTime);
+	void draw();
+	void releaseAll();
+	void resetAll();
+	void activate(bool facingRight, float x, float y, Game *cipher);
+	float hit();
+	int getRange() { return Agent47WComponentNS::WIDTH; }
+	Bullet* getPunch() { return Electrocute; }
 };
 #endif

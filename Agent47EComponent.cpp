@@ -10,15 +10,11 @@ Agent47EComponent::~Agent47EComponent()
 }
 void Agent47EComponent::update(float frameTime)
 {
-	/*buff_duration--;
-	if (buff_duration <= 0)
+	buff_duration--;
+	if (buff_duration == 0)
 	{
-		gain_buff = true;
+
 	}
-	else
-	{
-		gain_buff = false;
-	}*/
 }
 
 //float Agent47EComponent::speedBoost()
@@ -35,7 +31,7 @@ void Agent47EComponent::update(float frameTime)
 
 float Agent47EComponent::activate(bool facingRight)
 {
-	//buff_duration = Agent47EComponentNS::BUFF_DURATION;
+	buff_duration = Agent47EComponentNS::BUFF_DURATION;
 	if (facingRight) //shoot right
 	{
 		return Agent47EComponentNS::DASH_RANGE;

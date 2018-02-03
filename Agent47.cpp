@@ -95,11 +95,33 @@ void Agent47::useW(bool facingRight, VECTOR2 center, Game *cipher)
 void Agent47::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
 	float range = Ecomponent->activate(facingRight);
-	VECTOR2 newLocation;
+	VECTOR2 vel;
+	if (facingRight)
+	{
+		if (this->getMoveComponent()->getVelocity().x <= 300)
+		{
+			vel.x = this->getMoveComponent()->getVelocity().x + range;
+			vel.y = this->getMoveComponent()->getVelocity().y;
+			this->getMoveComponent()->setVelocity(vel);
+		}
+	}
+	else
+	{
+		if (this->getMoveComponent()->getVelocity().x <= 300)
+		{
+			vel.x = this->getMoveComponent()->getVelocity().x + range;
+			vel.y = this->getMoveComponent()->getVelocity().y;
+			this->getMoveComponent()->setVelocity(vel);
+		}
+	}
+
+	/*VECTOR2 newLocation;
 	newLocation.x = center.x + range;
 	newLocation.y = center.y;
 	this->setX(newLocation.x - spriteData.width / 2);
-	this->setY(newLocation.y - spriteData.height / 2);
+	this->setY(newLocation.y - spriteData.height / 2);*/
+
+
 	/*float buff = Ecomponent->speedBoost();
 	VECTOR2 buffspeed;
 	buffspeed.x = this->getMoveComponent()->getVelocity().x + buff;

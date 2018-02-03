@@ -51,6 +51,7 @@ const char FREIDQ_IMAGE[] = "pictures\\Bullets\\FreidQ.png";
 const char FREIDW_IMAGE[] = "pictures\\Bullets\\FreidW.png";
 const char FREIDE_IMAGE[] = "pictures\\Bullets\\FreidE.png";
 const char AGENT47Q_IMAGE[] = "pictures\\Bullets\\Agent47Q.png";
+const char AGENT47W1_IMAGE[] = "pictures\\Bullets\\Agent47W1.png";
 const char NECRIDQ_IMAGE[] = "pictures\\Bullets\\NecridQ.png";
 const char NECRIDW1_IMAGE[] = "pictures\\Bullets\\NecridW1.png";
 const char NECRIDW2_IMAGE[] = "pictures\\Bullets\\NecridW2.png";

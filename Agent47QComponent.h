@@ -18,7 +18,7 @@ namespace Agent47QComponentNS
 	const int QPUNCH_START_FRAME = 0;      // bullet starts at frame 0
 	const int QPUNCH_END_FRAME = 0;       // bullet end at frame 0
 	const float QPUNCH_ANIMATION_DELAY = 0;
-	const int QPUNCH_DURATION = 30;	// range by frametime
+	const int QPUNCH_DURATION = 20;	// range by frametime
 	const float QPUNCH_DAMAGE = 10.0f;
 }
 
@@ -38,7 +38,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
-	float hit();
+	float hit(); //return damage;
 	int getRange() { return Agent47QComponentNS::WIDTH; }
 	Bullet* getPunch() { return Punch; }
 };

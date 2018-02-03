@@ -20,6 +20,7 @@ namespace FreidEComponentNS
 	const int EPLATFORM_END_FRAME = 0;       // bullet end at frame 0
 	const float EPLATFORM_ANIMATION_DELAY = 0; // No delay
 	const int EPLATFORM_DURATION = 200;	// range by frametime
+	const int TELEPORT_RANGE = 200;
 }
 
 class FreidEComponent
