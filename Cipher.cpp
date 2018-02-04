@@ -33,18 +33,93 @@ Cipher::~Cipher()
 void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-	player1 = new Cyrax(this);
-	player2 = new Necrid(this);
-	AI1 = new Freid(this);
-	AI2 = new Agent47(this);
-	player2->setX(900);
-	player2->setY(GAME_HEIGHT / 2 - player2->getHeight()/2);
+	cyrax = new Cyrax(this);
+	necrid = new Necrid(this);
+	freid = new Freid(this);
+	agent47 = new Agent47(this);
+	necrid->setX(900);
+	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2);
 
-	characters.push_back(player1);
-	characters.push_back(player2);
-	characters.push_back(AI1);
-	characters.push_back(AI2);
+	characters.push_back(cyrax);
+	characters.push_back(necrid);
+	characters.push_back(freid);
+	characters.push_back(agent47);
 	
+	if (typeid(characters[0]).name() == "class Cyrax")
+	{
+		cyrax = dynamic_cast<Cyrax*>(characters[0]);
+	}
+	else if (typeid(characters[0]).name() == "class Freid")
+	{
+		freid = dynamic_cast<Freid*>(characters[0]);
+	}
+	else if (typeid(characters[0]).name() == "class Agent47")
+	{
+		agent47 = dynamic_cast<Agent47*>(characters[0]);
+	}
+	else if (typeid(characters[0]).name() == "class Necrid")
+	{
+		necrid = dynamic_cast<Necrid*>(characters[0]);
+	}
+	//=============================================================================
+	if (typeid(characters[1]).name() == "class Cyrax")
+	{
+		cyrax = dynamic_cast<Cyrax*>(characters[1]);
+	}
+	else if (typeid(characters[1]).name() == "class Freid")
+	{
+		freid = dynamic_cast<Freid*>(characters[1]);
+	}
+	else if (typeid(characters[1]).name() == "class Agent47")
+	{
+		agent47 = dynamic_cast<Agent47*>(characters[1]);
+	}
+	else if (typeid(characters[1]).name() == "class Necrid")
+	{
+		necrid = dynamic_cast<Necrid*>(characters[1]);
+	}
+	//=============================================================================
+	if (characters.size() > 2)
+	{
+		if (typeid(characters[2]).name() == "class Cyrax")
+		{
+			cyrax = dynamic_cast<Cyrax*>(characters[2]);
+		}
+		else if (typeid(characters[2]).name() == "class Freid")
+		{
+			freid = dynamic_cast<Freid*>(characters[2]);
+		}
+		else if (typeid(characters[2]).name() == "class Agent47")
+		{
+			agent47 = dynamic_cast<Agent47*>(characters[2]);
+		}
+		else if (typeid(characters[2]).name() == "class Necrid")
+		{
+			necrid = dynamic_cast<Necrid*>(characters[2]);
+		}
+	}
+	//=============================================================================
+	if (characters.size() > 3)
+	{
+		if (typeid(characters[3]).name() == "class Cyrax")
+		{
+			cyrax = dynamic_cast<Cyrax*>(characters[3]);
+		}
+		else if (typeid(characters[3]).name() == "class Freid")
+		{
+			freid = dynamic_cast<Freid*>(characters[3]);
+		}
+		else if (typeid(characters[3]).name() == "class Agent47")
+		{
+			agent47 = dynamic_cast<Agent47*>(characters[3]);
+		}
+		else if (typeid(characters[3]).name() == "class Necrid")
+		{
+			necrid = dynamic_cast<Necrid*>(characters[3]);
+		}
+	}
+	
+
 	map1 = new Map(0, this, characters);
     return;
 }
@@ -71,120 +146,175 @@ void Cipher::ai()
 //=============================================================================
 void Cipher::collisions()
 {
+	map1->collisions(frameTime, characters);
 	//=============================================================================
-	//Cyrax
+									//Cyrax//
 	//=============================================================================
 	//Cyrax Q
-	for (std::vector<Bullet*>::iterator it = player1->getQcomponent()->getBulletList()->begin(); it != player1->getQcomponent()->getBulletList()->end();)
+	for (std::vector<Bullet*>::iterator it = cyrax->getQcomponent()->getBulletList()->begin(); it != cyrax->getQcomponent()->getBulletList()->end();)
 	{
-		if ((*it)->collidesWith(*player2))
+		if ((*it)->collidesWith(*freid))
 		{
 			delete (*it);
-			it = player1->getQcomponent()->getBulletList()->erase(it);
+			it = cyrax->getQcomponent()->getBulletList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*agent47))
+		{
+			delete (*it);
+			it = cyrax->getQcomponent()->getBulletList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*necrid))
+		{
+			delete (*it);
+			it = cyrax->getQcomponent()->getBulletList()->erase(it);
 		}
 		else
 		{
 			it++;
-		}		
+		}
 	}
-	//Cyrax W
-	for (std::vector<Bullet*>::iterator it = player1->getWcomponent()->getBulletList()->begin(); it != player1->getWcomponent()->getBulletList()->end();)
-	{
-		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-		//{
-		if ((*it)->collidesWith(*player2))
-		{
-			//player2->setY(player2->getY() - 30);
 
+	//Cyrax W
+	for (std::vector<Bullet*>::iterator it = cyrax->getWcomponent()->getBulletList()->begin(); it != cyrax->getWcomponent()->getBulletList()->end();)
+	{
+		if ((*it)->collidesWith(*freid))
+		{
 			delete (*it);
-			it = player1->getWcomponent()->getBulletList()->erase(it);
+			it = cyrax->getWcomponent()->getBulletList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*agent47))
+		{
+			delete (*it);
+			it = cyrax->getWcomponent()->getBulletList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*necrid))
+		{
+			delete (*it);
+			it = cyrax->getWcomponent()->getBulletList()->erase(it);
 		}
 		else
+		{
 			it++;
-		//}
+		}
 	}
 	//=============================================================================
-	//Freid
+									//Freid//
 	//=============================================================================
 	//Freid Q
-	for (std::vector<Bullet*>::iterator it = AI1->getQcomponent()->getArrowList()->begin(); it != AI1->getQcomponent()->getArrowList()->end();)
+	for (std::vector<Bullet*>::iterator it = freid->getQcomponent()->getArrowList()->begin(); it != freid->getQcomponent()->getArrowList()->end();)
 	{
-		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-		//{
-		if ((*it)->collidesWith(*player1))
+		if ((*it)->collidesWith(*cyrax))
 		{
-			//player2->setY(player2->getY() - 30);
-
 			delete (*it);
-			it = AI1->getQcomponent()->getArrowList()->erase(it);
+			it = freid->getQcomponent()->getArrowList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*agent47))
+		{
+			delete (*it);
+			it = freid->getQcomponent()->getArrowList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*necrid))
+		{
+			delete (*it);
+			it = freid->getQcomponent()->getArrowList()->erase(it);
 		}
 		else
+		{
 			it++;
-		//}
+		}
 	}
 	//Freid W
-	for (std::vector<Bullet*>::iterator it = AI1->getWcomponent()->getCometList()->begin(); it != AI1->getWcomponent()->getCometList()->end();)
+	for (std::vector<Bullet*>::iterator it = freid->getWcomponent()->getCometList()->begin(); it != freid->getWcomponent()->getCometList()->end();)
 	{
-		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-		//{
-		if ((*it)->collidesWith(*player1))
-		{
-			//player2->setY(player2->getY() - 30);
-
-			delete (*it);		
-			it = AI1->getWcomponent()->getCometList()->erase(it);
-		}
-		else
-			it++;
-	// i want Freid Comet to collide with platform as well.
-		//else if ((*it)->collidesWith(*platform))
-		//{
-		//  delete (*it);
-		//	it = player2->getWcomponent()->getCometList()->erase(it);
-		//}
-		
-		//}
-	}
-	//=============================================================================
-	
-	//=============================================================================
-
-	//Agent 47 Q
-	Bullet *punch = AI2->getQcomponent()->getPunch();
-	if (punch->collidesWith(*player2))
-	{
-		float damage = AI2->getQcomponent()->hit();
-	} 
-
-	//Agent 47 W
-	Bullet *zap = AI2->getWcomponent()->getPunch();
-	if (zap->collidesWith(*player2))
-	{
-		float damage = AI2->getQcomponent()->hit();
-	}
-
-	//=============================================================================
-	//Necrid Q
-	for (std::vector<Bomb*>::iterator it = player2->getQcomponent()->getBombList()->begin(); it != player2->getQcomponent()->getBombList()->end();)
-	{
-		if ((*it)->collidesWith(*player1))
+		if ((*it)->collidesWith(*cyrax))
 		{
 			delete (*it);
-			it = player2->getQcomponent()->getBombList()->erase(it);
+			it = freid->getWcomponent()->getCometList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*agent47))
+		{
+			delete (*it);
+			it = freid->getWcomponent()->getCometList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*necrid))
+		{
+			delete (*it);
+			it = freid->getWcomponent()->getCometList()->erase(it);
 		}
 		else
 		{
 			it++;
-		}	
+		}
+	}
+	//=============================================================================
+									//Agent 47//
+	//=============================================================================
+	
+	//Agent 47 Q
+	Bullet *punch = agent47->getQcomponent()->getPunch();
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) 
+	{
+		if (punch->collidesWith(*characters[i]))
+		{
+			float damage = agent47->getQcomponent()->hit();
+			
+		}
+	}
+	
+
+	//Agent 47 W
+	Bullet *zap = agent47->getWcomponent()->getPunch();
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	{
+		if (zap->collidesWith(*characters[i]))
+		{
+			float damage = agent47->getWcomponent()->hit();
+		}
+	}
+	//=============================================================================
+									//Necrid//
+	//=============================================================================
+	//Necrid Q
+	for (std::vector<Bomb*>::iterator it = necrid->getQcomponent()->getBombList()->begin(); it != necrid->getQcomponent()->getBombList()->end();)
+	{
+		if ((*it)->collidesWith(*cyrax))
+		{
+			delete (*it);
+			it = necrid->getQcomponent()->getBombList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*freid))
+		{
+			delete (*it);
+			it = necrid->getQcomponent()->getBombList()->erase(it);
+		}
+		else if ((*it)->collidesWith(*agent47))
+		{
+			delete (*it);
+			it = necrid->getQcomponent()->getBombList()->erase(it);
+		}
+		else
+		{
+			it++;
+		}
 	}
 
 	//Necrid W
-	for (std::vector<Bullet*>::iterator it = player2->getWcomponent()->getRaindrops()->begin(); it != player2->getWcomponent()->getRaindrops()->end();)
+	for (std::vector<Bullet*>::iterator it = necrid->getWcomponent()->getRaindrops()->begin(); it != necrid->getWcomponent()->getRaindrops()->end();)
 	{
-		if ((*it)->collidesWith(*player1))
+		if ((*it)->collidesWith(*cyrax))
 		{
 			delete (*it);
-			it = player2->getWcomponent()->getRaindrops()->erase(it);
+			it = necrid->getWcomponent()->getRaindrops()->erase(it);
+		}
+		else if ((*it)->collidesWith(*freid))
+		{
+			delete (*it);
+			it = necrid->getWcomponent()->getRaindrops()->erase(it);
+		}
+		else if ((*it)->collidesWith(*agent47))
+		{
+			delete (*it);
+			it = necrid->getWcomponent()->getRaindrops()->erase(it);
 		}
 		else
 		{

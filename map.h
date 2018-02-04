@@ -8,6 +8,10 @@
 #include "textureManager.h"
 #include "game.h"
 #include "characters.h"
+#include "Cyrax.h"
+#include "Freid.h"
+#include "Agent47.h"
+#include "Necrid.h"
 
 namespace mapNS
 {
@@ -53,8 +57,11 @@ private:
 	int probability;
 
 	//VECTOR2 currentVelocity;
-
-
+	Cyrax *cyrax;
+	Freid *freid;
+	Agent47 *agent47;
+	Necrid *necrid;
+	
 
 	//This is temporary filler vector for vector of Characters
 	//std::vector<Platform*> characters;
@@ -74,6 +81,7 @@ public:
 	std::vector<Platform*> getPlatforms() { return platforms; }
 	void checkIfOnFloor(std::vector<Characters*> characters, float frameTime);
 	void checkIfCharInFloor(std::vector < Characters*> characters);
+	void collisions(float frameTime, std::vector < Characters*> characters);
 };
 
 #endif
