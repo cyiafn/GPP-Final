@@ -39,7 +39,6 @@ private:
 	Platform *middleground2;
 	Platform *frontground2;
 	Game* gamePointer;
-	BehaviourTree* behaviour;
 
 	bool vibrationOn;
 	int startingBuffer;
@@ -77,6 +76,7 @@ public:
 	void checkIfOnFloor(std::vector<Characters*> characters, float frameTime);
 	void checkIfCharInFloor(std::vector < Characters*> characters);
 	void ai(float frameTime, std::vector < Characters*> characters);
+	void collisions(float frameTime, std::vector < Characters*> characters);
 };
 
 #endif

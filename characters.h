@@ -8,7 +8,6 @@
 #include "HealthComponent.h"
 #include <string>
 #include "game.h"
-
 namespace charactersNS
 {
 	const int WIDTH = 70;                   // image width
@@ -24,6 +23,8 @@ namespace charactersNS
 	const float MAX_JUMP = 350;
 	
 }
+
+class BehaviourTree;
 
 // inherits from Entity class
 class Characters : public Entity
@@ -55,6 +56,7 @@ protected:
 	bool passThroughWall;
 	float currentWallY;
 	//bool onGround = false;
+	BehaviourTree* behaviour;
 
 private:
 	HealthComponent* healthcomponent;
@@ -64,6 +66,7 @@ private:
 public:
 	Characters();
 	void removeLife();
+	BehaviourTree* getBehaviour() { return behaviour; }
 	void setTargetedPlayer(Characters* target) { targetPlayer = target; }
 	Characters* getTargetedPlayer() { return targetPlayer; }
 	void setFacingRight(bool s) { facingRight = s; }

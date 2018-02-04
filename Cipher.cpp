@@ -36,6 +36,7 @@ void Cipher::initialize(HWND hwnd)
 	Game::initialize(hwnd); // throws GameError
 	
 	player1 = new Cyrax(this);
+	player1->setType(1);
 	player2 = new Freid(this);
 	player2->setX(900);
 	player2->setY(GAME_HEIGHT / 2 - player2->getHeight() / 2);
@@ -81,6 +82,7 @@ void Cipher::ai()
 //=============================================================================
 void Cipher::collisions()
 {
+	map1->collisions(frameTime, characters);
 	//Cyrax Q
 	//for (std::vector<Bullet*>::iterator it = player2->getQcomponent()->getBulletList()->begin(); it != player2->getQcomponent()->getBulletList()->end();)
 	//{

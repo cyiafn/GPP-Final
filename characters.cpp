@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "characters.h"
+#include "behaviourTree.h"
 #include <math.h>
 
 //=============================================================================
@@ -31,6 +32,8 @@ Characters::Characters() : Entity()
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
 	type = 0;
+
+	behaviour = new BehaviourTree();
 }
 
 //=============================================================================

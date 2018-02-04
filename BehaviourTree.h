@@ -8,9 +8,10 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
-#include "characters.h"
 #include "platform.h"
 #include "constants.h"
+
+class Characters;
 
 class BehaviourTree
 {
@@ -68,7 +69,6 @@ class BehaviourTree
 				void setChild (Node* newChild) {child = newChild;}
 				virtual bool run() override {return child->run();}
 		};
-		Sequence* rootNode;
 
 
 		//Types of Behaviors (Escape (Branch into Side of Walls and general running away) , Fighting, Picking up Items)
@@ -79,11 +79,11 @@ class BehaviourTree
 		public:
 			MainSelector(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
 			virtual bool run() override {
-				bool platformBelow = false;
+				bool platformBelow = true;
 				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 					if ((chars->getX() + charactersNS::WIDTH/2 * chars->getScale() >= platforms[i]->getY()) && (chars->getX() + charactersNS::WIDTH/2 * chars->getScale() <= platforms[i]->getY() + platformNS::WIDTH * platforms[i]->getScale()))
 					{
-						platformBelow = true;
+						platformBelow = false;
 					}
 				}
 				if (platformBelow == true)
@@ -110,13 +110,13 @@ class BehaviourTree
 		public:
 			attackSelector(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; }
 			virtual bool run() override {
-				bool targettedPlayer = false;
+				bool targettedPlayer = true;
 				for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 					if (characters[i] != chars)
 					{
-						if (characters[i]->getY() <= chars->getY() && characters[i]->getY() < chars->getY() + charactersNS::MAX_JUMP)
+						if (characters[i]->getY() <= chars->getY() + 20 && characters[i]->getY()  <= chars->getY() - charactersNS::MAX_JUMP + 75 )
 						{
-							targettedPlayer = true;
+							targettedPlayer = false;
 						}
 					}
 				}
@@ -153,7 +153,8 @@ class BehaviourTree
 							xDis *= -1;
 						if (yDis < 0)
 							yDis *= -1;
-						if (targetedCharacter == NULL)
+						totalDistance = sqrt(yDis * yDis + xDis * xDis);
+						if (lowestTotalDis == 0)
 						{
 							targetedCharacter = characters[z];
 							lowestTotalDis = totalDistance;
@@ -181,7 +182,7 @@ class BehaviourTree
 					if (yDis < 0)
 						yDis *= -1;
 					totalDistance = sqrt(xDis * xDis + yDis * yDis);
-					if (targetedPlatform == NULL)
+					if (onTop == 0)
 					{
 						targetedPlatform = platforms[i];
 						lowestTotalDis = totalDistance;
@@ -296,6 +297,36 @@ class BehaviourTree
 		public:
 			fightPlayer(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; }
 			virtual bool run() override {
+				Characters* targetedCharacter;
+				float lowestTotalDis = 0;
+				float totalDistance = 0;
+				for (std::vector<int>::size_type z = 0; z != characters.size(); z++)
+				{
+					if (characters[z] != chars)
+					{
+						float xDis = characters[z]->getX() - chars->getX();
+						float yDis = characters[z]->getY() - chars->getY();
+						if (xDis < 0)
+							xDis *= -1;
+						if (yDis < 0)
+							yDis *= -1;
+						if (lowestTotalDis == 0)
+						{
+							targetedCharacter = characters[z];
+							lowestTotalDis = totalDistance;
+						}
+						else
+						{
+							if (lowestTotalDis > totalDistance)
+							{
+								targetedCharacter = characters[z];
+								lowestTotalDis = totalDistance;
+							}
+						}
+					}
+
+				}
+				chars->setTargetedPlayer(targetedCharacter);
 				if (chars->getX() <= chars->getTargetedPlayer()->getX())
 				{
 					chars->setFacingRight(true);
@@ -512,7 +543,8 @@ class BehaviourTree
 	private:
 		Root* root;
 	public:
-		BehaviourTree() : root(new Root) {}
+		//BehaviourTree() : root(new Root) {}
+		BehaviourTree() { root = new Root(); }
 		void setRootChild (Node* rootChild) const {root->setChild (rootChild);}
 		bool run() const {return root->run();}
 };
