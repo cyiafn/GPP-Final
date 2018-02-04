@@ -8,36 +8,25 @@ Agent47EComponent::~Agent47EComponent()
 {
 
 }
-void Agent47EComponent::update(float frameTime)
+float Agent47EComponent::update(float frameTime)
 {
-	buff_duration--;
-	if (buff_duration == 0)
+	if (activated)
 	{
-
-	}
-}
-
-//float Agent47EComponent::speedBoost()
-//{
-//	if (gain_buff)
-//	{
-//		return Agent47EComponentNS::SPEED_BUFF;
-//	}
-//	else if (!gain_buff)
-//	{
-//		return 0;
-//	}
-//}
-
-float Agent47EComponent::activate(bool facingRight)
-{
-	buff_duration = Agent47EComponentNS::BUFF_DURATION;
-	if (facingRight) //shoot right
-	{
+		buff_duration--;
+		if (buff_duration == 0)
+		{
+			activated = false;
+			return -Agent47EComponentNS::DASH_RANGE;
+		}
 		return Agent47EComponentNS::DASH_RANGE;
 	}
-	else if (!facingRight)
-	{
-		return -Agent47EComponentNS::DASH_RANGE;
-	}
+	return 0;
 }
+
+
+void Agent47EComponent::activate()
+{
+	buff_duration = Agent47EComponentNS::BUFF_DURATION;
+	activated = true;
+}
+
