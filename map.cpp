@@ -345,6 +345,16 @@ Map::~Map()
 
 void Map::update(float frameTime, std::vector<Characters*> characters)
 {
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	{
+		if (characters[i]->getActive())
+		{
+			if (characters[i]->getX() > 1580 || characters[i]->getX() < -300 || characters[i]->getY() > 1020 || characters[i]->getY() < -300)
+			{
+				vibrationOn = true;
+			}
+		}
+	}
 	mapTime(frameTime);
 	backgroundCheck();
 	cameraMovement(characters, frameTime);
