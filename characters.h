@@ -6,10 +6,8 @@
 #include "constants.h"
 #include "MoveComponent.h"
 #include "HealthComponent.h"
-
 #include <string>
 #include "game.h"
-
 namespace charactersNS
 {
 	const int WIDTH = 70;                   // image width
@@ -22,9 +20,11 @@ namespace charactersNS
 	const int   PLAYER_START_FRAME = 21;      // player starts at frame 0
 	const int   PLAYER_END_FRAME = 25;        // player animation frames 0,1,2
 	const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
-
+	const float MAX_JUMP = 350;
 	
 }
+
+class BehaviourTree;
 
 // inherits from Entity class
 class Characters : public Entity
@@ -56,14 +56,20 @@ protected:
 	bool passThroughWall;
 	float currentWallY;
 	//bool onGround = false;
+	BehaviourTree* behaviour;
 
 private:
 	HealthComponent* healthcomponent;
 	MoveComponent* movecomponent;
+	Characters* targetPlayer;
 	int type;
 public:
 	Characters();
 	void removeLife();
+	BehaviourTree* getBehaviour() { return behaviour; }
+	void setTargetedPlayer(Characters* target) { targetPlayer = target; }
+	Characters* getTargetedPlayer() { return targetPlayer; }
+	void setFacingRight(bool s) { facingRight = s; }
 	bool getFacingRight() { return facingRight; }
 	void setPassThroughWall(bool a) { passThroughWall = a; }
 	bool getPassThroughWall() { return passThroughWall; }

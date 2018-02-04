@@ -8,14 +8,16 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
-#include "characters.h"
-#include "map.h"
 #include "platform.h"
 #include "constants.h"
+
+class Characters;
 
 class BehaviourTree
 {
 	public:
+
+
 		class Node {  // This class represents each node in the behaviour tree.
 			public:
 				virtual bool run() = 0;
@@ -77,23 +79,292 @@ class BehaviourTree
 		public:
 			MainSelector(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
 			virtual bool run() override {
-				bool platformBelow = false;
+				bool platformBelow = true;
 				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 					if ((chars->getX() + charactersNS::WIDTH/2 * chars->getScale() >= platforms[i]->getY()) && (chars->getX() + charactersNS::WIDTH/2 * chars->getScale() <= platforms[i]->getY() + platformNS::WIDTH * platforms[i]->getScale()))
 					{
-						platformBelow = true;
+						platformBelow = false;
 					}
 				}
 				if (platformBelow == true)
 				{
 					return getChildren()[1]->run();
 				}
-				else if (chars->getHealthComponent()->getPerc() > 100)
+				else if (chars->getHealthComponent()->getPerc() > 150)
 				{
 					return getChildren()[0]->run();
 				}
+				else
+				{
+					return getChildren()[2]->run();
+				}
 			}
 		};
+
+		class attackSelector : public CompositeNode {
+		private:
+			Characters * chars;
+			std::vector<Platform*> platforms;
+			std::vector<Characters*> characters;
+			Game* cipher;
+		public:
+			attackSelector(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; }
+			virtual bool run() override {
+				bool targettedPlayer = true;
+				for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+					if (characters[i] != chars)
+					{
+						if (characters[i]->getY() <= chars->getY() + 20 && characters[i]->getY()  <= chars->getY() - charactersNS::MAX_JUMP + 75 )
+						{
+							targettedPlayer = false;
+						}
+					}
+				}
+				if (targettedPlayer == false)
+				{
+					return getChildren()[0]->run();
+				}
+				else
+				{
+					return getChildren()[1]->run();
+				}
+			}
+		};
+
+		class navigateToNearestPlayer : public Node {
+		private:
+			Characters * chars;
+			std::vector<Platform*> platforms;
+			std::vector<Characters*> characters;
+			Game* cipher;
+		public:
+			navigateToNearestPlayer(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; }
+			virtual bool run() override {
+				Characters* targetedCharacter;
+				float lowestTotalDis = 0;
+				float totalDistance = 0;
+				for (std::vector<int>::size_type z = 0; z != characters.size(); z++)
+				{
+					if (characters[z] != chars)
+					{
+						float xDis = characters[z]->getX() - chars->getX();
+						float yDis = characters[z]->getY() - chars->getY();
+						if (xDis < 0)
+							xDis *= -1;
+						if (yDis < 0)
+							yDis *= -1;
+						totalDistance = sqrt(yDis * yDis + xDis * xDis);
+						if (lowestTotalDis == 0)
+						{
+							targetedCharacter = characters[z];
+							lowestTotalDis = totalDistance;
+						}
+						else
+						{
+							if (lowestTotalDis > totalDistance)
+							{
+								targetedCharacter = characters[z];
+								lowestTotalDis = totalDistance;
+							}
+						}
+					}
+					
+				}
+				chars->setTargetedPlayer(targetedCharacter);
+				Platform* targetedPlatform;
+				float onTop = 0;
+				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
+				{
+					float xDis = platforms[i]->getX() - targetedCharacter->getX();
+					float yDis = platforms[i]->getY() - targetedCharacter->getY();
+					if (xDis < 0)
+						xDis *= -1;
+					if (yDis < 0)
+						yDis *= -1;
+					totalDistance = sqrt(xDis * xDis + yDis * yDis);
+					if (onTop == 0)
+					{
+						targetedPlatform = platforms[i];
+						lowestTotalDis = totalDistance;
+					}
+					else
+					{
+						if (lowestTotalDis > totalDistance)
+						{
+							targetedPlatform = platforms[i];
+							lowestTotalDis = totalDistance;
+						}
+					}
+				}
+				float displacementX = targetedPlatform->getX() - chars->getX();
+				float displacementY = targetedPlatform->getY() - chars->getY();
+				float distanceX = displacementX;
+				if (distanceX < 0)
+					distanceX *= -1;
+				float distanceY = displacementY;
+				if (distanceY < 0)
+					distanceY *= -1;
+				if (distanceY > charactersNS::MAX_JUMP && displacementY < 0)
+				{
+					Platform* transitionPlatform;
+					float lowestTotalDisX = GAME_WIDTH * GAME_HEIGHT;
+					for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+						if (platforms[i]->getY() > targetedPlatform->getY() && platforms[i]->getY() < chars->getY())
+						{
+							float tempDisX = platforms[i]->getX() - targetedPlatform->getX();
+							if (tempDisX < 0)
+								tempDisX *= -1;
+							if (tempDisX < lowestTotalDisX)
+							{
+								transitionPlatform = platforms[i];
+								lowestTotalDisX = tempDisX;
+							}
+						}
+
+					}
+					if (!(chars->getX() + 50 <= transitionPlatform->getX()) && !(chars->getX() - 50 >= transitionPlatform->getX()))
+					{
+						if (transitionPlatform->getX() - chars->getX() < 0)
+						{
+							chars->moveLeft();
+						}
+						else
+						{
+							chars->moveRight();
+						}
+					}
+					else
+					{
+						if (chars->getMoveComponent()->getVelocity().y <= 0)
+						{
+							chars->jump();
+						}
+					}
+				}
+				else if (displacementY < 0)
+				{
+					if (!(chars->getX() + 50 <= targetedPlatform->getX()) && !(chars->getX() - 50 >= targetedPlatform->getX()))
+					{
+						if (targetedPlatform->getX() - chars->getX() < 0)
+						{
+							chars->moveLeft();
+						}
+						else
+						{
+							chars->moveRight();
+						}
+					}
+					else
+					{
+						if (chars->getMoveComponent()->getVelocity().y <= 0)
+						{
+							chars->jump();
+						}
+					}
+				}
+				else if (displacementY > 0)
+				{
+					if (!(chars->getX() + 50 <= targetedPlatform->getX()) && !(chars->getX() - 50 >= targetedPlatform->getX()))
+					{
+						if (targetedPlatform->getX() - chars->getX() < 0)
+						{
+							chars->moveLeft();
+						}
+						else
+						{
+							chars->moveRight();
+						}
+					}
+					else
+					{
+						if (chars->getY() < targetedPlatform->getY() - 10)
+						{
+							chars->drop();
+						}
+					}
+				}
+				return true;
+			}
+		};
+
+
+		class fightPlayer : public Node {
+		private:
+			Characters * chars;
+			std::vector<Platform*> platforms;
+			std::vector<Characters*> characters;
+			Game* cipher;
+		public:
+			fightPlayer(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; }
+			virtual bool run() override {
+				Characters* targetedCharacter;
+				float lowestTotalDis = 0;
+				float totalDistance = 0;
+				for (std::vector<int>::size_type z = 0; z != characters.size(); z++)
+				{
+					if (characters[z] != chars)
+					{
+						float xDis = characters[z]->getX() - chars->getX();
+						float yDis = characters[z]->getY() - chars->getY();
+						if (xDis < 0)
+							xDis *= -1;
+						if (yDis < 0)
+							yDis *= -1;
+						if (lowestTotalDis == 0)
+						{
+							targetedCharacter = characters[z];
+							lowestTotalDis = totalDistance;
+						}
+						else
+						{
+							if (lowestTotalDis > totalDistance)
+							{
+								targetedCharacter = characters[z];
+								lowestTotalDis = totalDistance;
+							}
+						}
+					}
+
+				}
+				chars->setTargetedPlayer(targetedCharacter);
+				if (chars->getX() <= chars->getTargetedPlayer()->getX())
+				{
+					chars->setFacingRight(true);
+				}
+				else
+				{
+					chars->setFacingRight(false);
+				}
+				float distance = chars->getX() - chars->getTargetedPlayer()->getX();
+				if (distance < 0)
+					distance *= -1;
+				if (chars->getQRange() < distance-150 && chars->getWRange() < distance-150)
+				{
+					if (chars->getQRange() < distance - 150)
+					{
+						chars->useQ(chars->getFacingRight(), *chars->getCenter(), cipher);
+					}
+					if (chars->getWRange() < distance - 150)
+					{
+						chars->useW(chars->getFacingRight(), *chars->getCenter(), cipher);
+					}
+				}
+				else
+				{
+					if (chars->getFacingRight() == true)
+					{
+						chars->moveRight();
+					}
+					else
+					{
+						chars->moveLeft();
+					}
+				}
+				//
+				return true;
+			}
+		};
+
 
 		class jumpToNearestPlatform : public Node {
 		private:
@@ -136,7 +407,9 @@ class BehaviourTree
 				{
 					chars->jump();
 				}
+				return true;
 			}
+			
 		};
 
 		class escapePlayers : public Node {
@@ -146,7 +419,7 @@ class BehaviourTree
 			std::vector<Characters*> characters;
 			Game* cipher;
 		public:
-			escapePlayers(Characters* chars, std::vector<Platform*> platforms, Game* cip) { this->chars = chars; this->platforms = platforms; this->cipher = cip; }
+			escapePlayers(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; }
 			virtual bool run() override {
 				Platform* targetedPlatform;
 				float highestTotalDis = 0;
@@ -176,14 +449,102 @@ class BehaviourTree
 						}
 					}
 				}
-				if ()
+				float displacementX = targetedPlatform->getX() - chars->getX();
+				float displacementY = targetedPlatform->getY() - chars->getY();
+				float distanceX = displacementX;
+				if (distanceX < 0)
+					distanceX *= -1;
+				float distanceY = displacementY;
+				if (distanceY < 0)
+					distanceY *= -1;
+				if (distanceY > charactersNS::MAX_JUMP && displacementY < 0)
+				{
+					Platform* transitionPlatform;
+					float lowestTotalDisX = GAME_WIDTH * GAME_HEIGHT;
+					for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+						if (platforms[i]->getY() > targetedPlatform->getY() && platforms[i]->getY() < chars->getY())
+						{
+							float tempDisX = platforms[i]->getX() - targetedPlatform->getX();
+							if (tempDisX < 0)
+								tempDisX *= -1;
+							if (tempDisX < lowestTotalDisX)
+							{
+								transitionPlatform = platforms[i];
+								lowestTotalDisX = tempDisX;
+							}
+						}
+
+					}
+					if (!(chars->getX() + 50 <= transitionPlatform->getX()) && !(chars->getX() - 50 >= transitionPlatform->getX()))
+					{
+						if (transitionPlatform->getX() - chars->getX() < 0)
+						{
+							chars->moveLeft();
+						}
+						else
+						{
+							chars->moveRight();
+						}
+					}
+					else
+					{
+						if (chars->getMoveComponent()->getVelocity().y <= 0)
+						{
+							chars->jump();
+						}
+					}
+				}
+				else if (displacementY < 0)
+				{
+					if (!(chars->getX() + 50 <= targetedPlatform->getX()) && !(chars->getX() - 50 >= targetedPlatform->getX()))
+					{
+						if (targetedPlatform->getX() - chars->getX() < 0)
+						{
+							chars->moveLeft();
+						}
+						else
+						{
+							chars->moveRight();
+						}
+					}
+					else
+					{
+						if (chars->getMoveComponent()->getVelocity().y <= 0)
+						{
+							chars->jump();
+						}
+					}
+				}
+				else if (displacementY > 0)
+				{
+					if (!(chars->getX() + 50 <= targetedPlatform->getX()) && !(chars->getX() - 50 >= targetedPlatform->getX()))
+					{
+						if (targetedPlatform->getX() - chars->getX() < 0)
+						{
+							chars->moveLeft();
+						}
+						else
+						{
+							chars->moveRight();
+						}
+					}
+					else
+					{
+						if (chars->getY() < targetedPlatform->getY() - 10)
+						{
+							chars->drop();
+						}
+					}
+				}
+				return true;
 			}
 		};
 
 	private:
 		Root* root;
 	public:
-		BehaviourTree() : root(new Root) {}
+		//BehaviourTree() : root(new Root) {}
+		BehaviourTree() { root = new Root(); }
 		void setRootChild (Node* rootChild) const {root->setChild (rootChild);}
 		bool run() const {return root->run();}
 };

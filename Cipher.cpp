@@ -37,6 +37,7 @@ void Cipher::initialize(HWND hwnd)
 	player2 = new Necrid(this);
 	AI1 = new Freid(this);
 	AI2 = new Agent47(this);
+	player1->setType(1);
 	player2->setX(900);
 	player2->setY(GAME_HEIGHT / 2 - player2->getHeight() / 2);
 
@@ -76,9 +77,7 @@ void Cipher::ai()
 //=============================================================================
 void Cipher::collisions()
 {
-	//=============================================================================
-	//Cyrax
-	//=============================================================================
+	map1->collisions(frameTime, characters);
 	//Cyrax Q
 	for (std::vector<Bullet*>::iterator it = player1->getQcomponent()->getBulletList()->begin(); it != player1->getQcomponent()->getBulletList()->end();)
 	{
