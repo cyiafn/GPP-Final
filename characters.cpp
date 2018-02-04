@@ -30,6 +30,7 @@ Characters::Characters() : Entity()
 	passThroughWall = true;
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
+	type = 0;
 }
 
 //=============================================================================
@@ -121,59 +122,62 @@ void Characters::jump()
 
 void Characters::movementInputs(float frameTime)
 {
-	if (input->isKeyDown(P1RIGHT_KEY))            // if move right
+	if (type == 1)
 	{
-		moveRight();
-	}
-	if (input->isKeyDown(P1LEFT_KEY))             // if move left
-	{
-		moveLeft();
-	}
-	if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
-	{
-		if (movecomponent->getVelocity().x > 0)
+		if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x - 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
+			moveRight();
 		}
-		else if (movecomponent->getVelocity().x < 0)
+		if (input->isKeyDown(P1LEFT_KEY))             // if move left
 		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x + 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
+			moveLeft();
 		}
-	}
-
-	if (!input->isKeyDown(P1JUMP_KEY))
-	{
-		jumpLock = false;
-	}
-	if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
-	{
-		dropLock = false;
-	}
-
-	if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
-	{
-		if (dropLock == false)
+		if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
 		{
-			drop();
-			dropLock = true;
-		}
-	}
-	else if (input->isKeyDown(P1JUMP_KEY))
-	{
-		if (jumpCounter != 2)
-		{
-			if (!jumpLock)
+			if (movecomponent->getVelocity().x > 0)
 			{
-				jumpLock = true;
-				jump();
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x - 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
 			}
+			else if (movecomponent->getVelocity().x < 0)
+			{
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x + 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
+			}
+		}
 
+		if (!input->isKeyDown(P1JUMP_KEY))
+		{
+			jumpLock = false;
+		}
+		if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
+		{
+			dropLock = false;
+		}
+
+		if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
+		{
+			if (dropLock == false)
+			{
+				drop();
+				dropLock = true;
+			}
+		}
+		else if (input->isKeyDown(P1JUMP_KEY))
+		{
+			if (jumpCounter != 2)
+			{
+				if (!jumpLock)
+				{
+					jumpLock = true;
+					jump();
+				}
+
+			}
 		}
 	}
 }

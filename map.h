@@ -8,6 +8,7 @@
 #include "textureManager.h"
 #include "game.h"
 #include "characters.h"
+#include "BehaviourTree.h"
 
 namespace mapNS
 {
@@ -20,7 +21,7 @@ namespace mapNS
 }
 
 
-
+//class BehaviourTree;
 class Map
 {
 private:
@@ -38,6 +39,7 @@ private:
 	Platform *middleground2;
 	Platform *frontground2;
 	Game* gamePointer;
+	BehaviourTree* behaviour;
 
 	bool vibrationOn;
 	int startingBuffer;
@@ -74,6 +76,7 @@ public:
 	std::vector<Platform*> getPlatforms() { return platforms; }
 	void checkIfOnFloor(std::vector<Characters*> characters, float frameTime);
 	void checkIfCharInFloor(std::vector < Characters*> characters);
+	void ai(float frameTime, std::vector < Characters*> characters);
 };
 
 #endif

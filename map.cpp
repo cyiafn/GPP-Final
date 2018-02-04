@@ -591,3 +591,47 @@ void Map::checkIfCharInFloor(std::vector < Characters*> characters)
 	}
 
 }
+
+
+void Map::ai(float frameTime, std::vector < Characters*> characters)
+{
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	{
+		if (characters[i]->getType() == 0)
+		{
+			if (behaviour == NULL)
+			{
+				BehaviourTree::Sequence* root = new BehaviourTree::Sequence();
+				BehaviourTree::MainSelector* mainselector = new BehaviourTree::MainSelector(characters[i], platforms);
+				BehaviourTree::Sequence* escapeSequence = new BehaviourTree::Sequence();
+				BehaviourTree::escapePlayers* escapeplayers = new BehaviourTree::escapePlayers(characters[i],platforms,gamePointer, characters);
+				BehaviourTree::Sequence* platformSequence = new BehaviourTree::Sequence();
+				BehaviourTree::jumpToNearestPlatform* jumptonearestplatform = new BehaviourTree::jumpToNearestPlatform(characters[i], platforms);
+				BehaviourTree::attackSelector* attackselector = new BehaviourTree::attackSelector(characters[i], platforms, gamePointer, characters);
+				BehaviourTree::navigateToNearestPlayer* navigate = new BehaviourTree::navigateToNearestPlayer(characters[i], platforms, gamePointer, characters);
+				BehaviourTree::fightPlayer* fight = new BehaviourTree::fightPlayer(characters[i], platforms, gamePointer, characters);
+				root->addChild(mainselector);
+				mainselector->addChild(escapeSequence);
+				escapeSequence->addChild(escapeplayers);
+				mainselector->addChild(platformSequence);
+				platformSequence->addChild(jumptonearestplatform);
+				mainselector->addChild(attackselector);
+				attackselector->addChild(navigate);
+				attackselector->addChild(fight);
+				behaviour->rootNode = root;
+				mainselector = NULL;
+				escapeSequence = NULL;
+				escapeplayers = NULL;
+				platformSequence = NULL;
+				jumptonearestplatform = NULL;
+				attackselector = NULL;
+				navigate = NULL;
+				fight = NULL;
+			}
+			else
+			{
+				behaviour->rootNode->run();
+			}
+		}
+	}
+}
