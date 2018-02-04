@@ -54,10 +54,6 @@ private:
 	int probability;
 
 	//VECTOR2 currentVelocity;
-	Cyrax *cyrax;
-	Freid *freid;
-	Agent47 *agent47;
-	Necrid *necrid;
 	
 
 	//This is temporary filler vector for vector of Characters

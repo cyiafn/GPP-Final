@@ -636,9 +636,3 @@ void Map::collisions(float frameTime, std::vector < Characters*> characters)
 {
 
 }
-
-void Map::collisions(float frameTime, std::vector < Characters*> characters)
-{
-	
-	
-}

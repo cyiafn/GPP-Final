@@ -22,6 +22,7 @@ namespace CyraxWComponentNS
 	const int WBULLET_MAX_RANGE = 230;	// range by frametime
 	const float WBULLET_MIN_SPEED = 80;		// velocity.x for Bullet speed
 	const float WBULLET_MAX_SPEED = 400;		// velocity.x for Bullet speed
+	const float DAMAGE = 15;
 }
 
 class CyraxWComponent
@@ -38,7 +39,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
-	int getRange() { return CyraxWComponentNS::WBULLET_MAX_RANGE; }
+	float getDamage() { return CyraxWComponentNS::DAMAGE; }
 	std::vector<Bullet*>* getBulletList() { return &bulletList; }
 };
 #endif

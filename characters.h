@@ -134,7 +134,7 @@ public:
 	void moveRight();
 	void moveLeft();
 	void jump();
-	void knockback(float frameTime);
+	void knockback(float value);
 	void drop();
 	int getJumpCounter() { return jumpCounter; }
 	//-----------------------------------------------------------------------------------------------------------------------------
