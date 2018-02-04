@@ -54,8 +54,7 @@ private:
 	int probability;
 
 	//VECTOR2 currentVelocity;
-
-
+	
 
 	//This is temporary filler vector for vector of Characters
 	//std::vector<Platform*> characters;

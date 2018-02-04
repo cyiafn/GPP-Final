@@ -23,6 +23,7 @@ namespace FreidWComponentNS
 	const int WCOMET_MAX_DURATION = 300;	// range by frametime
 	const float WCOMET_START = 300;		// velocity.x for Bullet speed
 	const float WCOMET_RANGE = 300;
+	const float DAMAGE = 20;
 }
 
 class FreidWComponent
@@ -39,7 +40,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, VECTOR2 center, Game *cipher);
-	int getRange() { return FreidWComponentNS::WCOMET_RANGE; }
+	float getDamage() { return FreidWComponentNS::DAMAGE; }
 	std::vector<Bullet*> *getCometList() { return &cometList; }
 };
 #endif

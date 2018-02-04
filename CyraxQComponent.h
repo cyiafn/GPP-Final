@@ -21,6 +21,7 @@ namespace CyraxQComponentNS
 	const float QBULLET_ANIMATION_DELAY = 0; // No delay
 	const int QBULLET_MAX_RANGE = 300;	// range by frametime
 	const float QBULLET_SPEED = 300;		// velocity.x for Bullet speed
+	const float DAMAGE = 8;
 }
 
 class CyraxQComponent
@@ -37,7 +38,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
-	int getRange() { return CyraxQComponentNS::QBULLET_MAX_RANGE; }
+	float getDamage() { return CyraxQComponentNS::DAMAGE; }
 	std::vector<Bullet*> *getBulletList() { return &bulletList; }
 };
 #endif

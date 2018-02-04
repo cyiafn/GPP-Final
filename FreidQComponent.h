@@ -22,6 +22,7 @@ namespace FreidQComponentNS
 	const int QARROW_MAX_RANGE = 600;	// range by frametime
 	const float QARROW_SPEED = 250;		// velocity.x for Bullet speed
 	const float QARROW_DIAGONAL = 150;		// velocity.x for Bullet speed
+	const float DAMAGE = 5;
 }
 
 class FreidQComponent
@@ -38,7 +39,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, float x, float y, Game *cipher);
-	int getRange() { return FreidQComponentNS::QARROW_MAX_RANGE; }
+	float getDamage() { return FreidQComponentNS::DAMAGE; }
 	std::vector<Bullet*> *getArrowList() { return &arrowList; }
 };
 #endif

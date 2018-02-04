@@ -183,6 +183,64 @@ void Characters::movementInputs(float frameTime)
 			}
 		}
 	}
+	else if (type == 2)
+	{
+		if (input->isKeyDown(P2RIGHT_KEY))            // if move right
+		{
+			moveRight();
+		}
+		if (input->isKeyDown(P2LEFT_KEY))             // if move left
+		{
+			moveLeft();
+		}
+		if ((!input->isKeyDown(P2RIGHT_KEY) && !input->isKeyDown(P2LEFT_KEY)))
+		{
+			if (movecomponent->getVelocity().x > 0)
+			{
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x - 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
+			}
+			else if (movecomponent->getVelocity().x < 0)
+			{
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x + 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
+			}
+		}
+
+		if (!input->isKeyDown(P2JUMP_KEY))
+		{
+			jumpLock = false;
+		}
+		if (!input->isKeyDown(P2JUMP_KEY) && !input->isKeyDown(P2DROP_KEY))
+		{
+			dropLock = false;
+		}
+
+		if (input->isKeyDown(P2JUMP_KEY) && input->isKeyDown(P2DROP_KEY))
+		{
+			if (dropLock == false)
+			{
+				drop();
+				dropLock = true;
+			}
+		}
+		else if (input->isKeyDown(P2JUMP_KEY))
+		{
+			if (jumpCounter != 2)
+			{
+				if (!jumpLock)
+				{
+					jumpLock = true;
+					jump();
+				}
+
+			}
+		}
+	}
 }
 
 void Characters::setPrev(float x, float y)
@@ -306,28 +364,23 @@ void Characters::coolDownChecking()
 	}
 }
 
-void Characters::knockback(float frameTime)
+void Characters::knockback(float value)
 {
 	double knockbackDegree = 33 * (PI / 180);
-	int baseKnockback = 25;
-	if (healthcomponent->getPerc() == 0 || healthcomponent->getPerc() == 1 || healthcomponent->getPerc() == 2 || healthcomponent->getPerc() == 3)
+	float knockback = this->healthcomponent->damageMe(value);
+	VECTOR2 vel;
+	if (facingRight)
 	{
-		float xVel = (1 * baseKnockback * cos(knockbackDegree));
-		float yVel = (1 * baseKnockback * sin(knockbackDegree));
-		VECTOR2 vel;
-		vel.x = xVel;
-		vel.y = yVel;
-		movecomponent->setVelocity(vel);
+		vel.x = -knockback;
 	}
 	else
 	{
-		float xVel = (healthcomponent->getPerc() / 3 * baseKnockback * cos(knockbackDegree));
-		float yVel = (healthcomponent->getPerc() / 3 * baseKnockback * sin(knockbackDegree));
-		VECTOR2 vel;
-		vel.x = xVel;
-		vel.y = yVel;
-		movecomponent->setVelocity(vel);
+		vel.x = knockback;
 	}
+	vel.y = -(knockback * sin(knockbackDegree));
+	movecomponent->setVelocity(vel);
+	movecomponent->setGravityActive(true);
+
 }
 
 void Characters::removeLife()
