@@ -36,8 +36,10 @@ private:
 	Agent47 *agent47;
 	Necrid *necrid;
 
-	Agent47 *player1;
+	Cyrax *player1;
 	Necrid *player2;
+	Freid *AI1;
+	Agent47 *AI2;
 
 	std::vector<Characters*> characters;
 

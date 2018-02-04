@@ -45,6 +45,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	int getRange() { return NecridWComponentNS::DROPLET_RANGE; }
+	std::vector<Bullet*> *getRaindrops() { return &dropletList; }
 	void activate(bool facingRight, VECTOR2 center, Game *cipher);
 };
 #endif
