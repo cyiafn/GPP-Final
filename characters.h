@@ -56,7 +56,7 @@ protected:
 	bool passThroughWall;
 	float currentWallY;
 	//bool onGround = false;
-	BehaviourTree* behaviour;
+
 
 private:
 	HealthComponent* healthcomponent;
@@ -65,6 +65,7 @@ private:
 	int type;
 public:
 	Characters();
+	BehaviourTree* behaviour;
 	void removeLife();
 	BehaviourTree* getBehaviour() { return behaviour; }
 	void setTargetedPlayer(Characters* target) { targetPlayer = target; }
