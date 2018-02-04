@@ -32,8 +32,8 @@ Characters::Characters() : Entity()
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
 	type = 0;
-
 	behaviour = new BehaviourTree();
+
 }
 
 //=============================================================================
@@ -334,7 +334,7 @@ void Characters::removeLife()
 {
 	if (getActive())
 	{
-		if (this->getX() > 1500 || this->getX() < -300 || this->getY() > 1000 || this->getY() < -300)
+		if (this->getX() > 1580 || this->getX() < -300 || this->getY() > 1020 || this->getY() < -300)
 		{
 			if (healthcomponent->getLives() == 1)
 			{
@@ -346,7 +346,7 @@ void Characters::removeLife()
 				//respawn engine based on map
 				healthcomponent->setLives(healthcomponent->getLives() - 1);
 				this->setX(GAME_WIDTH / 2);
-				this->setY(GAME_HEIGHT / 2);
+				this->setY(GAME_HEIGHT -600);
 			}
 		}
 	}

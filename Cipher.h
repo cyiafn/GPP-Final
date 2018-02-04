@@ -38,12 +38,12 @@ private:
 	Cyrax *player1;
 	Necrid *player2;
 	Freid *AI1;
-	Agent47 *AI2;
+	//Agent47 *AI2;
 
 	//Characters *player1 = NULL;
 	//Characters *player2 = NULL;
-	Characters *player3 = NULL;
-	Characters *player4 = NULL;
+	//Characters *player3 = NULL;
+	//Characters *player4 = NULL;
 
 
 	std::vector<Characters*> characters;
