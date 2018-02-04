@@ -32,24 +32,19 @@ Cipher::~Cipher()
 //=============================================================================
 void Cipher::initialize(HWND hwnd)
 {
-
-	Game::initialize(hwnd); // throws GameError
-	
+    Game::initialize(hwnd); // throws GameError
 	player1 = new Cyrax(this);
-	player2 = new Freid(this);
+	player2 = new Necrid(this);
+	AI1 = new Freid(this);
+	AI2 = new Agent47(this);
 	player2->setX(900);
 	player2->setY(GAME_HEIGHT / 2 - player2->getHeight() / 2);
 
-
-	//Testing
-	//if(!characterTexture.initialize(graphics, KEN_IMAGE))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
 	characters.push_back(player1);
 	characters.push_back(player2);
-	//int pos = characters.size() - 1;
-	//if (!characters.at(pos)->initialize(this, charactersNS::WIDTH, charactersNS::HEIGHT,charactersNS::TEXTURE_COLS, &characterTexture))
-	//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
-
+	characters.push_back(AI1);
+	characters.push_back(AI2);
+	
 	map1 = new Map(0, this, characters);
 
 	
@@ -81,112 +76,126 @@ void Cipher::ai()
 //=============================================================================
 void Cipher::collisions()
 {
+	//=============================================================================
+	//Cyrax
+	//=============================================================================
 	//Cyrax Q
-	//for (std::vector<Bullet*>::iterator it = player2->getQcomponent()->getBulletList()->begin(); it != player2->getQcomponent()->getBulletList()->end();)
-	//{
-	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-	//	//{
-	//		if ((*it)->collidesWith(*player1))
-	//		{
-	//			delete (*it);
-	//			it = player2->getQcomponent()->getBulletList()->erase(it);
-	//		}
-	//		else
-	//		{
-	//			it++;
-	//		}		
-	//	//}
-	//	
-	//}
+	for (std::vector<Bullet*>::iterator it = player1->getQcomponent()->getBulletList()->begin(); it != player1->getQcomponent()->getBulletList()->end();)
+	{
+		if ((*it)->collidesWith(*player2))
+		{
+			delete (*it);
+			it = player1->getQcomponent()->getBulletList()->erase(it);
+		}
+		else
+		{
+			it++;
+		}		
+	}
 	//Cyrax W
-	//for (std::vector<Bullet*>::iterator it = player2->getWcomponent()->getBulletList()->begin(); it != player2->getWcomponent()->getBulletList()->end();)
-	//{
-	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-	//	//{
-	//	if ((*it)->collidesWith(*player1))
-	//	{
-	//		//player2->setY(player2->getY() - 30);
+	for (std::vector<Bullet*>::iterator it = player1->getWcomponent()->getBulletList()->begin(); it != player1->getWcomponent()->getBulletList()->end();)
+	{
+		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		//{
+		if ((*it)->collidesWith(*player2))
+		{
+			//player2->setY(player2->getY() - 30);
 
-	//		delete (*it);
-	//		it = player2->getWcomponent()->getBulletList()->erase(it);
-	//	}
-	//	else
-	//		it++;
-	//	//}
-	//}
-//=============================================================================
+			delete (*it);
+			it = player1->getWcomponent()->getBulletList()->erase(it);
+		}
+		else
+			it++;
+		//}
+	}
+	//=============================================================================
+	//Freid
+	//=============================================================================
+	//Freid Q
+	for (std::vector<Bullet*>::iterator it = AI1->getQcomponent()->getArrowList()->begin(); it != AI1->getQcomponent()->getArrowList()->end();)
+	{
+		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		//{
+		if ((*it)->collidesWith(*player1))
+		{
+			//player2->setY(player2->getY() - 30);
 
-	////Freid Q
-	//for (std::vector<Bullet*>::iterator it = player2->getQcomponent()->getArrowList()->begin(); it != player2->getQcomponent()->getArrowList()->end();)
-	//{
-	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-	//	//{
-	//	if ((*it)->collidesWith(*player1))
-	//	{
-	//		//player2->setY(player2->getY() - 30);
+			delete (*it);
+			it = AI1->getQcomponent()->getArrowList()->erase(it);
+		}
+		else
+			it++;
+		//}
+	}
+	//Freid W
+	for (std::vector<Bullet*>::iterator it = AI1->getWcomponent()->getCometList()->begin(); it != AI1->getWcomponent()->getCometList()->end();)
+	{
+		//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		//{
+		if ((*it)->collidesWith(*player1))
+		{
+			//player2->setY(player2->getY() - 30);
 
-	//		delete (*it);
-	//		it = player2->getQcomponent()->getArrowList()->erase(it);
-	//	}
-	//	else
-	//		it++;
-	//	//}
-	//}
-	////Freid W
-	//for (std::vector<Bullet*>::iterator it = player2->getWcomponent()->getCometList()->begin(); it != player2->getWcomponent()->getCometList()->end();)
-	//{
-	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-	//	//{
-	//	if ((*it)->collidesWith(*player1))
-	//	{
-	//		//player2->setY(player2->getY() - 30);
-
-	//		delete (*it);		
-	//		it = player2->getWcomponent()->getCometList()->erase(it);
-	//	}
-	//// i want Freid Comet to collide with platform as well.
-	//	//else if ((*it)->collidesWith(*platform))
-	//	//{
-	//	//  delete (*it);
-	//	//	it = player2->getWcomponent()->getCometList()->erase(it);
-	//	//}
-	//	else
-	//		it++;
-	//	//}
-	//}
-//=============================================================================
-	//Freid E --> platform , Yifan can help LMAO
-	//He makes a platform for characters to stand on
-	//need collisions with platform
-//=============================================================================
+			delete (*it);		
+			it = AI1->getWcomponent()->getCometList()->erase(it);
+		}
+		else
+			it++;
+	// i want Freid Comet to collide with platform as well.
+		//else if ((*it)->collidesWith(*platform))
+		//{
+		//  delete (*it);
+		//	it = player2->getWcomponent()->getCometList()->erase(it);
+		//}
+		
+		//}
+	}
+	//=============================================================================
+	
+	//=============================================================================
 
 	//Agent 47 Q
-	/*Bullet *punch = player1->getQcomponent()->getPunch();
+	Bullet *punch = AI2->getQcomponent()->getPunch();
 	if (punch->collidesWith(*player2))
 	{
-		float damage = player1->getQcomponent()->hit();
-	}*/
+		float damage = AI2->getQcomponent()->hit();
+	} 
 
 	//Agent 47 W
+	Bullet *zap = AI2->getWcomponent()->getPunch();
+	if (zap->collidesWith(*player2))
+	{
+		float damage = AI2->getQcomponent()->hit();
+	}
 
-//=============================================================================
+	//=============================================================================
 	//Necrid Q
-	//for (std::vector<Bomb*>::iterator it = player2->getQcomponent()->getBombList()->begin(); it != player2->getQcomponent()->getBombList()->end();)
-	//{
-	//	//for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-	//	//{
-	//		if ((*it)->collidesWith(*player1))
-	//		{
-	//			delete (*it);
-	//			it = player2->getQcomponent()->getBombList()->erase(it);
-	//		}
-	//		else
-	//		{
-	//			it++;
-	//		}		
-	//	//}
-	//	
-	//}
+	for (std::vector<Bomb*>::iterator it = player2->getQcomponent()->getBombList()->begin(); it != player2->getQcomponent()->getBombList()->end();)
+	{
+		if ((*it)->collidesWith(*player1))
+		{
+			delete (*it);
+			it = player2->getQcomponent()->getBombList()->erase(it);
+		}
+		else
+		{
+			it++;
+		}	
+	}
+
+	//Necrid W
+	for (std::vector<Bullet*>::iterator it = player2->getWcomponent()->getRaindrops()->begin(); it != player2->getWcomponent()->getRaindrops()->end();)
+	{
+		if ((*it)->collidesWith(*player1))
+		{
+			delete (*it);
+			it = player2->getWcomponent()->getRaindrops()->erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
 }
 
 //=============================================================================

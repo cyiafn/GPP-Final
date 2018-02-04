@@ -11,7 +11,7 @@
 
 namespace Agent47EComponentNS
 {
-	const float DASH_RANGE = 50;
+	const float DASH_RANGE = 400;
 	//const float SPEED_BUFF = 50;
 	const int BUFF_DURATION = 20; //as per frameTime
 }
@@ -20,14 +20,14 @@ class Agent47EComponent
 {
 private:
 	int buff_duration = Agent47EComponentNS::BUFF_DURATION;
-	//bool gain_buff = false;
+	bool activated = false;
+	bool gain_buff = false;
 public:
 	Agent47EComponent(Game *cipher);
 	~Agent47EComponent();
-	void update(float frameTime);
+	float update(float frameTime);
 	int getRange() { return Agent47EComponentNS::DASH_RANGE; }
-	//float speedBoost();
-	float activate(bool facingRight);
+	void activate();
 	int getDuration() { return buff_duration; }
 };
 #endif

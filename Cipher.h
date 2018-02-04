@@ -36,7 +36,9 @@ private:
 	Necrid *necrid;
 
 	Cyrax *player1;
-	Freid *player2;
+	Necrid *player2;
+	Freid *AI1;
+	Agent47 *AI2;
 
 	//Characters *player1 = NULL;
 	//Characters *player2 = NULL;
