@@ -260,68 +260,75 @@ void Characters::skillInputs(Game *cipher)
 	float centerX = this->getCenterX();
 	float centerY = this->getCenterY();
 	center = VECTOR2(centerX, centerY);
-	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
+	if (type == 1)
 	{
-		if (!Q_on_CoolDown)
+		if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 		{
-			useQ(facingRight, center, cipher);
+			if (!Q_on_CoolDown)
+			{
+				useQ(facingRight, center, cipher);
+			}
+
+		}
+		if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
+		{
+			if (!W_on_CoolDown)
+			{
+				useW(facingRight, center, cipher);
+			}
+
+		}
+		if (input->isKeyDown(P1SKILL3_KEY)) //U or /
+		{
+			if (!E_on_CoolDown)
+			{
+				useE(facingRight, center, cipher);
+			}
+
+		}
+		//Ultimate
+		if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
+		{
+			useR();
 		}
 
 	}
-	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
+	else if (type == 2)
 	{
-		if (!W_on_CoolDown)
+		if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 		{
-			useW(facingRight, center, cipher);
+			if (!Q_on_CoolDown)
+			{
+				useQ(facingRight, center, cipher);
+				Q_on_CoolDown = true;
+			}
 		}
-
-	}
-	if (input->isKeyDown(P1SKILL3_KEY)) //U or /
-	{
-		if (!E_on_CoolDown)
+		if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 		{
-			useE(facingRight, center, cipher);
+			if (!W_on_CoolDown)
+			{
+				useW(facingRight, center, cipher);
+				W_on_CoolDown = true;
+			}
+
 		}
-
-	}
-	//Ultimate
-	if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
-	{
-		useR();
-	}
-
-
-	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
-	{
-		if (!Q_on_CoolDown)
+		if (input->isKeyDown(P2SKILL3_KEY)) //U or /
 		{
-			useQ(facingRight, center, cipher);
-			Q_on_CoolDown = true;
-		}
-	}
-	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
-	{
-		if (!W_on_CoolDown)
-		{
-			useW(facingRight, center, cipher);
-			W_on_CoolDown = true;
-		}
+			if (!E_on_CoolDown)
+			{
+				useE(facingRight, center, cipher);
+				E_on_CoolDown = true;
+			}
 
-	}
-	if (input->isKeyDown(P2SKILL3_KEY)) //U or /
-	{
-		if (!E_on_CoolDown)
-		{
-			useE(facingRight, center, cipher);
-			E_on_CoolDown = true;
 		}
+		//Ultimate
+		if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
+		{
+			useR();
+		}
+	}
 
-	}
-	//Ultimate
-	if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
-	{
-		useR();
-	}
+	
 }
 //Skills by Ee Zher
 void Characters::coolDownChecking()

@@ -34,20 +34,19 @@ void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 	cyrax = new Cyrax(this);
-	cyrax->setType(2);
+	cyrax->setType(1);
 	necrid = new Necrid(this);
 	necrid->setType(2);
 	freid = new Freid(this);
-	freid->setType(2);
+	/*freid->setType(2);*/
 	agent47 = new Agent47(this);
-	agent47->setType(1);
+	/*agent47->setType(1);*/
 	necrid->setX(900);
 	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2);
 
 	characters.push_back(cyrax);
 	characters.push_back(necrid);
-	characters.push_back(freid);
-	characters.push_back(agent47);
+	
 	
 	if (typeid(characters[0]).name() == "class Cyrax")
 	{
