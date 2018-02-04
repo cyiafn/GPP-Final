@@ -3,7 +3,7 @@
 Agent47::Agent47(Game *cipher)
 {
 	Qcomponent = new Agent47QComponent(cipher);
-	//Wcomponent = new Agent47WComponent();
+	Wcomponent = new Agent47WComponent(cipher);
 	Ecomponent = new Agent47EComponent(cipher);
 	//Rcomponent = new Agent47RComponent();
 	Q_CoolDown = Agent47NS::QSkillCD;
@@ -25,7 +25,7 @@ void Agent47::draw()
 {
 	Image::draw();              // draw ship
 	Qcomponent->draw();
-	//Wcomponent->draw();
+	Wcomponent->draw();
 	//Ecomponent->draw();
 	//Rcomponent->draw();
 }
@@ -33,8 +33,27 @@ void Agent47::draw()
 void Agent47::skillUpdate(float frameTime)
 {
 	Qcomponent->update(frameTime);
-	//Wcomponent->update(frameTime);
-	Ecomponent->update(frameTime);
+	Wcomponent->update(frameTime);
+	float speedbuff = Ecomponent->update(frameTime);
+	VECTOR2 vel;
+	if (facingRight)
+	{
+		if (this->getMoveComponent()->getVelocity().x <= 150 && this->getMoveComponent()->getVelocity().x >= -150)
+		{
+			vel.x = this->getMoveComponent()->getVelocity().x + speedbuff;
+			vel.y = this->getMoveComponent()->getVelocity().y;
+			this->getMoveComponent()->setVelocity(vel);
+		}
+	}
+	else
+	{
+		if (this->getMoveComponent()->getVelocity().x <= 150 && this->getMoveComponent()->getVelocity().x >= -150)
+		{
+			vel.x = this->getMoveComponent()->getVelocity().x - speedbuff;
+			vel.y = this->getMoveComponent()->getVelocity().y;
+			this->getMoveComponent()->setVelocity(vel);
+		}
+	}
 	//Rcomponent->update(frameTime);
 }
 
@@ -85,48 +104,24 @@ void Agent47::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 }
 void Agent47::useW(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	if (this->getMoveComponent()->getOnPlatformCheck() == 0) //on platform
+	if (facingRight)
 	{
-
+		float zapX = center.x + spriteData.width / 2;
+		float zapY = center.y - spriteData.height / 4;
+		Wcomponent->activate(facingRight, zapX, zapY, cipher);
+	}
+	else if (!facingRight)
+	{
+		float zapX = center.x - spriteData.width / 2;
+		float zapY = center.y - spriteData.height / 4;
+		Wcomponent->activate(facingRight, zapX, zapY, cipher);
 	}
 	W_on_CoolDown = true;
 
 }
 void Agent47::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
-	float range = Ecomponent->activate(facingRight);
-	VECTOR2 vel;
-	if (facingRight)
-	{
-		if (this->getMoveComponent()->getVelocity().x <= 300)
-		{
-			vel.x = this->getMoveComponent()->getVelocity().x + range;
-			vel.y = this->getMoveComponent()->getVelocity().y;
-			this->getMoveComponent()->setVelocity(vel);
-		}
-	}
-	else
-	{
-		if (this->getMoveComponent()->getVelocity().x <= 300)
-		{
-			vel.x = this->getMoveComponent()->getVelocity().x + range;
-			vel.y = this->getMoveComponent()->getVelocity().y;
-			this->getMoveComponent()->setVelocity(vel);
-		}
-	}
-
-	/*VECTOR2 newLocation;
-	newLocation.x = center.x + range;
-	newLocation.y = center.y;
-	this->setX(newLocation.x - spriteData.width / 2);
-	this->setY(newLocation.y - spriteData.height / 2);*/
-
-
-	/*float buff = Ecomponent->speedBoost();
-	VECTOR2 buffspeed;
-	buffspeed.x = this->getMoveComponent()->getVelocity().x + buff;
-	buffspeed.y = this->getMoveComponent()->getVelocity().y;
-	this->getMoveComponent()->setVelocity(buffspeed);*/
+	Ecomponent->activate();
 	E_on_CoolDown = true;
 }
 void Agent47::useR()
