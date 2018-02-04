@@ -16,7 +16,6 @@
 #include "Agent47.h"
 #include "Necrid.h"
 #include <vector>
-
 #include "characters.h"
 
 //=============================================================================
@@ -25,7 +24,7 @@
 class Cipher : public Game
 {
 private:
-    // game items
+	// game items
 	//TextureManager
 	//Object
 	Map *map1;
@@ -39,20 +38,20 @@ private:
 	std::vector<Characters*> characters;
 
 public:
-    // Constructor
-    Cipher();
+	// Constructor
+	Cipher();
 
-    // Destructor
-    virtual ~Cipher();
+	// Destructor
+	virtual ~Cipher();
 
-    // Initialize the game
-    void initialize(HWND hwnd);
-    void update();      // must override pure virtual from Game
-    void ai();          // "
-    void collisions();  // "
-    void render();      // "
-    void releaseAll();
-    void resetAll();
+	// Initialize the game
+	void initialize(HWND hwnd);
+	void update();      // must override pure virtual from Game
+	void ai();          // "
+	void collisions();  // "
+	void render();      // "
+	void releaseAll();
+	void resetAll();
 };
 
 #endif

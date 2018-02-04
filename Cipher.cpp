@@ -18,7 +18,7 @@ Cipher::Cipher()
 //=============================================================================
 Cipher::~Cipher()
 {
-    releaseAll();           // call onLostDevice() for every graphics item
+	releaseAll();           // call onLostDevice() for every graphics item
 	delete map1;
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		delete characters[i];
@@ -121,7 +121,10 @@ void Cipher::initialize(HWND hwnd)
 	
 
 	map1 = new Map(0, this, characters);
-    return;
+
+	
+
+	return;
 }
 
 //=============================================================================
@@ -129,9 +132,11 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	{
 		characters[i]->update(frameTime, this);
 	}
+
 	map1->update(frameTime, characters);
 }
 
@@ -328,16 +333,19 @@ void Cipher::collisions()
 //=============================================================================
 void Cipher::render()
 {
-    graphics->spriteBegin();                // begin 
+	graphics->spriteBegin();                // begin 
 
+
+	
 	
 	map1->draw();
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
 		characters[i]->draw();
 	}
+	
 	//draw here
 
-    graphics->spriteEnd();                  // end drawing sprites
+	graphics->spriteEnd();                  // end drawing sprites
 }
 
 //=============================================================================
@@ -346,10 +354,10 @@ void Cipher::render()
 //=============================================================================
 void Cipher::releaseAll()
 {
-	//demo release all nebulaTexture.onReleaseAll();
 	map1->releaseAll();
-    Game::releaseAll();
-    return;
+	
+	Game::releaseAll();
+	return;
 }
 
 //=============================================================================
@@ -358,9 +366,8 @@ void Cipher::releaseAll()
 //=============================================================================
 void Cipher::resetAll()
 {
-    
-    // demo reset device nebulaTexture.onResetDevice();
 	map1->resetAll();
-    Game::resetAll();
-    return;
+	
+	Game::resetAll();
+	return;
 }

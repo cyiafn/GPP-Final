@@ -1,267 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="bomb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="characters.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cipher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemPortal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="platform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="projectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="textureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="winmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent47EComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent47QComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent47RComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent47WComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CyraxEComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CyraxQComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CyraxRComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CyraxWComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="FreidEComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="FreidQComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="FreidRComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="FreidWComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="NecridEComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="NecridQComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="NecridRComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="NecridWComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent47.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Cyrax.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Freid.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Necrid.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="audio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="structure.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="Agent47.cpp" />
+    <ClCompile Include="Agent47EComponent.cpp" />
+    <ClCompile Include="Agent47QComponent.cpp" />
+    <ClCompile Include="Agent47RComponent.cpp" />
+    <ClCompile Include="Agent47WComponent.cpp" />
+    <ClCompile Include="audio.cpp" />
+    <ClCompile Include="bomb.cpp" />
+    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="characters.cpp" />
+    <ClCompile Include="Cyrax.cpp" />
+    <ClCompile Include="CyraxEComponent.cpp" />
+    <ClCompile Include="CyraxQComponent.cpp" />
+    <ClCompile Include="CyraxRComponent.cpp" />
+    <ClCompile Include="CyraxWComponent.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="Freid.cpp" />
+    <ClCompile Include="FreidEComponent.cpp" />
+    <ClCompile Include="FreidQComponent.cpp" />
+    <ClCompile Include="FreidRComponent.cpp" />
+    <ClCompile Include="FreidWComponent.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="image.cpp" />
+    <ClCompile Include="input.cpp" />
+    <ClCompile Include="ItemPortal.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="Cipher.cpp" />
+    <ClCompile Include="Necrid.cpp" />
+    <ClCompile Include="NecridEComponent.cpp" />
+    <ClCompile Include="NecridQComponent.cpp" />
+    <ClCompile Include="NecridRComponent.cpp" />
+    <ClCompile Include="NecridWComponent.cpp" />
+    <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="structure.cpp" />
+    <ClCompile Include="platform.cpp" />
+    <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bomb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="characters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameError.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemPortal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="platform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="projectile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="textureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47EComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47QComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47RComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47WComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxEComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxQComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxRComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CyraxWComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidEComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidQComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidRComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="FreidWComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridEComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridQComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridRComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="NecridWComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthComponent.h">
-      <Filter>Header Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent47.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Necrid.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Cyrax.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Cipher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Freid.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BehaviourTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="audio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="structure.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{8b9d19d4-daeb-42ce-8a94-02e5150d338c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{46699f85-2552-49e7-9eaf-e7e9ff1ed068}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Component">
-      <UniqueIdentifier>{13d78192-9598-4067-b9e0-ed2b569c3b66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Characters">
-      <UniqueIdentifier>{f2d2a9b7-e78a-4b0b-8abc-19673f25b4b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Component">
-      <UniqueIdentifier>{1cfc6748-3afd-4b95-80ba-6c31a57e8713}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Characters">
-      <UniqueIdentifier>{c360dc95-ced6-49fb-ac63-312fc49cc607}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="Agent47.h" />
+    <ClInclude Include="Agent47EComponent.h" />
+    <ClInclude Include="Agent47QComponent.h" />
+    <ClInclude Include="Agent47RComponent.h" />
+    <ClInclude Include="Agent47WComponent.h" />
+    <ClInclude Include="audio.h" />
+    <ClInclude Include="BehaviourTree.h" />
+    <ClInclude Include="characters.h" />
+    <ClInclude Include="bomb.h" />
+    <ClInclude Include="bullet.h" />
+    <ClInclude Include="constants.h" />
+    <ClInclude Include="Cyrax.h" />
+    <ClInclude Include="CyraxEComponent.h" />
+    <ClInclude Include="CyraxQComponent.h" />
+    <ClInclude Include="CyraxRComponent.h" />
+    <ClInclude Include="CyraxWComponent.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="Freid.h" />
+    <ClInclude Include="FreidEComponent.h" />
+    <ClInclude Include="FreidQComponent.h" />
+    <ClInclude Include="FreidRComponent.h" />
+    <ClInclude Include="FreidWComponent.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="gameError.h" />
+    <ClInclude Include="graphics.h" />
+    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="image.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="ItemPortal.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="Cipher.h" />
+    <ClInclude Include="Necrid.h" />
+    <ClInclude Include="NecridEComponent.h" />
+    <ClInclude Include="NecridQComponent.h" />
+    <ClInclude Include="NecridRComponent.h" />
+    <ClInclude Include="NecridWComponent.h" />
+    <ClInclude Include="projectile.h" />
+    <ClInclude Include="structure.h" />
+    <ClInclude Include="platform.h" />
+    <ClInclude Include="textureManager.h" />
   </ItemGroup>
 </Project>

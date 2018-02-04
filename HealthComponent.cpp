@@ -11,60 +11,15 @@ HealthComponent::~HealthComponent()
 
 }
 
-void HealthComponent::update(float frameTime, Characters *chars)
+void HealthComponent::update(float frameTime)
 {
-	removeLife(chars);
-}
-
-void HealthComponent::removeLife(Characters *chars)
-{
-	if (chars->getActive())
-	{
-		if (chars->getX() > 1500 || chars->getX() < -300 || chars->getY() > 1000 || chars->getY() < -300)
-		{
-			if (lives == 1)
-			{
-				lives -= 1;
-				chars->setActive(false);
-			}
-			else if(lives > 1)
-			{
-				//respawn engine based on map
-				lives -= 1;
-				chars->setX(GAME_WIDTH / 2);
-				chars->setY(GAME_HEIGHT / 2);
-			}
-		}
-	}
-}
-
-void HealthComponent::knockback(Characters *chars)
-{
-	double knockbackDegree = 33 * (PI / 180);
-	int baseKnockback = 25;
-	if (perc == 0 || perc == 1 || perc == 2 || perc == 3)
-	{
-		float xVel = (1 * baseKnockback * cos(knockbackDegree));
-		float yVel = (1 * baseKnockback * sin(knockbackDegree));
-		VECTOR2 vel;
-		vel.x = xVel;
-		vel.y = yVel;
-		chars->getMoveComponent()->setVelocity(vel);
-	}
-	else
-	{
-		float xVel = (perc / 3 * baseKnockback * cos(knockbackDegree));
-		float yVel = (perc / 3 * baseKnockback * sin(knockbackDegree));
-		VECTOR2 vel;
-		vel.x = xVel;
-		vel.y = yVel;
-		chars->getMoveComponent()->setVelocity(vel);
-	}
+	
 }
 
 
-void HealthComponent::damageMe(Characters *chars, int dmg)
+
+
+void HealthComponent::damageMe(int dmg)
 {
 	perc += dmg;
-	knockback(chars);
 }

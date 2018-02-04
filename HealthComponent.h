@@ -4,9 +4,9 @@
 
 #include "input.h"
 #include "game.h"
-#include "characters.h"
 #include <math.h>
 #include <stdio.h>
+#include "entity.h"
 
 
 //
@@ -24,10 +24,8 @@ private:
 public:
 	HealthComponent();
 	~HealthComponent();
-	void update(float frameTime, Characters *chars);
-	void removeLife(Characters *chars);
-	void damageMe(Characters *chars, int dmg);
-	void knockback(Characters *chars);
+	void update(float frameTime);
+	void damageMe(int dmg);
 	float getPerc()
 	{
 		return perc;

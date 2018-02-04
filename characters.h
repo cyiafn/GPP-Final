@@ -5,10 +5,9 @@
 #include "entity.h"
 #include "constants.h"
 #include "MoveComponent.h"
-
+#include "HealthComponent.h"
 #include <string>
 #include "game.h"
-
 namespace charactersNS
 {
 	const int WIDTH = 70;                   // image width
@@ -21,13 +20,16 @@ namespace charactersNS
 	const int   PLAYER_START_FRAME = 21;      // player starts at frame 0
 	const int   PLAYER_END_FRAME = 25;        // player animation frames 0,1,2
 	const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
+	const float MAX_JUMP = 350;
+	
 }
-class HealthComponent;
+
+class BehaviourTree;
 
 // inherits from Entity class
 class Characters : public Entity
 {
-protected:	
+protected:
 
 	int playerNo;
 	float prevX;
@@ -54,13 +56,21 @@ protected:
 	bool passThroughWall;
 	float currentWallY;
 	//bool onGround = false;
+	BehaviourTree* behaviour;
 
 private:
 	HealthComponent* healthcomponent;
 	MoveComponent* movecomponent;
+	Characters* targetPlayer;
 	int type;
 public:
 	Characters();
+	void removeLife();
+	BehaviourTree* getBehaviour() { return behaviour; }
+	void setTargetedPlayer(Characters* target) { targetPlayer = target; }
+	Characters* getTargetedPlayer() { return targetPlayer; }
+	void setFacingRight(bool s) { facingRight = s; }
+	bool getFacingRight() { return facingRight; }
 	void setPassThroughWall(bool a) { passThroughWall = a; }
 	bool getPassThroughWall() { return passThroughWall; }
 	void setCurrentWallY(float a) { currentWallY = a; }
@@ -70,11 +80,11 @@ public:
 	// inherited member functions
 	void setType(int a) { type = a; }
 	int getType() { return type; }
-//INIT 
-//-----------------------------------------------------------------------------------------------------------------------------
+	//INIT 
+	//-----------------------------------------------------------------------------------------------------------------------------
 	virtual void draw();
-	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,TextureManager *textureM);
-//-----------------------------------------------------------------------------------------------------------------------------		
+	virtual bool initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM);
+	//-----------------------------------------------------------------------------------------------------------------------------		
 
 	MoveComponent* getMoveComponent()
 	{
@@ -86,39 +96,28 @@ public:
 		return healthcomponent;
 	}
 
-//Get Functions
-//-----------------------------------------------------------------------------------------------------------------------------
+	//Get Functions
+	//-----------------------------------------------------------------------------------------------------------------------------
 	int getPlayerNo() { return playerNo; }
 
-//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
 
-//Set Functions
-//-------------------------------------------------------------------------------------------------x--------------------------- -
+	//Set Functions
+	//-------------------------------------------------------------------------------------------------x--------------------------- -
 	void setPlayerNo(int player) { playerNo = player; }
 	void setPrev(float x, float y);
-//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
 
-//Other Functions
-//-----------------------------------------------------------------------------------------------------------------------------
+	//Other Functions
+	//-----------------------------------------------------------------------------------------------------------------------------
 	void update(float frameTime, Game *cipher);
 	//void changeState(const CharacterFSM * newState) {};
 	void revertLocation();
 	void revertLocationY() { setY(prevY); }
-//-----------------------------------------------------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------------------------------------------------
 
-//Movements & Inputs - by Yifan
-//-----------------------------------------------------------------------------------------------------------------------------
-	void skillInputs(Game* cipher);
-	void movementInputs(float frameTime);
-	void moveRight(float frameTime);
-	void moveLeft(float frameTime);
-	void jump(float frameTime);
-	void drop(float frameTime);
-	void resetJumpCounter() { jumpCounter = 0; }
-//-----------------------------------------------------------------------------------------------------------------------------
-
-//Skills - by Ee Zher
-//-----------------------------------------------------------------------------------------------------------------------------
+	//Skills - by Ee Zher
+	//-----------------------------------------------------------------------------------------------------------------------------
 	virtual void useQ(bool facingRight, VECTOR2 center, Game *cipher) {};
 	virtual void useW(bool facingRight, VECTOR2 center, Game *cipher) {};
 	virtual void useE(bool facingRight, VECTOR2 center, Game *cipher) {};
@@ -130,6 +129,16 @@ public:
 	virtual int getQRange() { return 0; }
 	virtual int getWRange() { return 0; }
 	virtual int getERange() { return 0; }
+	void skillInputs(Game* cipher);
+	void movementInputs(float frameTime);
+	void moveRight();
+	void moveLeft();
+	void jump();
+	void knockback(float frameTime);
+	void drop();
+	int getJumpCounter() { return jumpCounter; }
+	//-----------------------------------------------------------------------------------------------------------------------------
+	void resetJumpCounter() { jumpCounter = 0; }
 //-----------------------------------------------------------------------------------------------------------------------------
 	
 
@@ -139,8 +148,7 @@ public:
 	
 //-----------------------------------------------------------------------------------------------------------------------------
 
-
-//Enum classes 
+	//Enum classes 
 	enum PlayerNo
 	{
 		P1 = 0,

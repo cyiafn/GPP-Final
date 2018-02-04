@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "characters.h"
-#include "HealthComponent.h"
+#include "behaviourTree.h"
 #include <math.h>
 
 //=============================================================================
@@ -22,8 +22,8 @@ Characters::Characters() : Entity()
 	collisionType = entityNS::BOX;
 	edge.left = -charactersNS::WIDTH*getScale() / 2;;
 	edge.top = -charactersNS::HEIGHT*getScale() / 2;;
-	edge.right = charactersNS::WIDTH*getScale()/2;
-	edge.bottom = charactersNS::HEIGHT*getScale() /2;
+	edge.right = charactersNS::WIDTH*getScale() / 2;
+	edge.bottom = charactersNS::HEIGHT*getScale() / 2;
 	/*edge.left = 0;
 	edge.top = 0;
 	edge.right = charactersNS::WIDTH*getScale();
@@ -31,6 +31,9 @@ Characters::Characters() : Entity()
 	passThroughWall = true;
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
+	type = 0;
+
+	behaviour = new BehaviourTree();
 }
 
 //=============================================================================
@@ -64,8 +67,8 @@ void Characters::draw()
 void Characters::update(float frameTime, Game *cipher)
 {
 	Entity::update(frameTime);
+	removeLife();
 	movecomponent->update(frameTime, this);
-	healthcomponent->update(frameTime, this);
 	this->coolDownChecking();
 	skillInputs(cipher);
 	movementInputs(frameTime);
@@ -73,7 +76,7 @@ void Characters::update(float frameTime, Game *cipher)
 	setPrev(getX(), getY());
 }
 
-void Characters::moveRight(float frameTime)
+void Characters::moveRight()
 {
 	facingRight = true;
 	this->flipHorizontal(false);
@@ -86,7 +89,7 @@ void Characters::moveRight(float frameTime)
 	}
 }
 
-void Characters::moveLeft(float frameTime)
+void Characters::moveLeft()
 {
 	facingRight = false;
 	this->flipHorizontal(true);
@@ -99,14 +102,17 @@ void Characters::moveLeft(float frameTime)
 	}
 }
 
-void Characters::drop(float frameTime)
+void Characters::drop()
 {
-		movecomponent->setGravityActive(true);
-		passThroughWall = true;
-		setY(getY() + 11);
+	movecomponent->setGravityActive(true);
+	passThroughWall = true;
+	setY(getY() + 11);
+	movecomponent->setGravityActive(true);
+	passThroughWall = true;
+	setY(getY() + 11);
 }
 
-void Characters::jump(float frameTime)
+void Characters::jump()
 {
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
@@ -119,60 +125,62 @@ void Characters::jump(float frameTime)
 
 void Characters::movementInputs(float frameTime)
 {
-	if (input->isKeyDown(P1RIGHT_KEY))            // if move right
+	if (type == 1)
 	{
-		moveRight(frameTime);
-	}
-	if (input->isKeyDown(P1LEFT_KEY))             // if move left
-	{
-		moveLeft(frameTime);
-	}
-	if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
-	{
-		if (movecomponent->getVelocity().x > 0)
+		if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x - 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
+			moveRight();
 		}
-		else if (movecomponent->getVelocity().x < 0)
+		if (input->isKeyDown(P1LEFT_KEY))             // if move left
 		{
-			VECTOR2 vel;
-			vel.x = movecomponent->getVelocity().x + 20;
-			vel.y = movecomponent->getVelocity().y;
-			movecomponent->setVelocity(vel);
+			moveLeft();
 		}
-	}
-
-	if (!input->isKeyDown(P1JUMP_KEY))
-	{
-		jumpLock = false;
-	}
-	if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
-	{
-		dropLock = false;
-	}
-
-
-	if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
-	{
-		if (dropLock == false)
+		if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
 		{
-			drop(frameTime);
-			dropLock = true;
-		}
-;	}
-	else if (input->isKeyDown(P1JUMP_KEY))
-	{
-		if (jumpCounter != 2)
-		{
-			if (!jumpLock)
+			if (movecomponent->getVelocity().x > 0)
 			{
-				jumpLock = true;
-				jump(frameTime);
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x - 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
 			}
+			else if (movecomponent->getVelocity().x < 0)
+			{
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x + 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
+			}
+		}
 
+		if (!input->isKeyDown(P1JUMP_KEY))
+		{
+			jumpLock = false;
+		}
+		if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
+		{
+			dropLock = false;
+		}
+
+		if (input->isKeyDown(P1JUMP_KEY) && input->isKeyDown(P1DROP_KEY))
+		{
+			if (dropLock == false)
+			{
+				drop();
+				dropLock = true;
+			}
+		}
+		else if (input->isKeyDown(P1JUMP_KEY))
+		{
+			if (jumpCounter != 2)
+			{
+				if (!jumpLock)
+				{
+					jumpLock = true;
+					jump();
+				}
+
+			}
 		}
 	}
 }
@@ -258,7 +266,7 @@ void Characters::skillInputs(Game *cipher)
 	}
 }
 //Skills by Ee Zher
-void Characters::coolDownChecking() 
+void Characters::coolDownChecking()
 {
 	if (Q_on_CoolDown)
 	{
@@ -293,6 +301,52 @@ void Characters::coolDownChecking()
 			if (E_CoolDown == 0)
 			{
 				resetSkill("E");
+			}
+		}
+	}
+}
+
+void Characters::knockback(float frameTime)
+{
+	double knockbackDegree = 33 * (PI / 180);
+	int baseKnockback = 25;
+	if (healthcomponent->getPerc() == 0 || healthcomponent->getPerc() == 1 || healthcomponent->getPerc() == 2 || healthcomponent->getPerc() == 3)
+	{
+		float xVel = (1 * baseKnockback * cos(knockbackDegree));
+		float yVel = (1 * baseKnockback * sin(knockbackDegree));
+		VECTOR2 vel;
+		vel.x = xVel;
+		vel.y = yVel;
+		movecomponent->setVelocity(vel);
+	}
+	else
+	{
+		float xVel = (healthcomponent->getPerc() / 3 * baseKnockback * cos(knockbackDegree));
+		float yVel = (healthcomponent->getPerc() / 3 * baseKnockback * sin(knockbackDegree));
+		VECTOR2 vel;
+		vel.x = xVel;
+		vel.y = yVel;
+		movecomponent->setVelocity(vel);
+	}
+}
+
+void Characters::removeLife()
+{
+	if (getActive())
+	{
+		if (this->getX() > 1500 || this->getX() < -300 || this->getY() > 1000 || this->getY() < -300)
+		{
+			if (healthcomponent->getLives() == 1)
+			{
+				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				this->setActive(false);
+			}
+			else if (healthcomponent->getLives() > 1)
+			{
+				//respawn engine based on map
+				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				this->setX(GAME_WIDTH / 2);
+				this->setY(GAME_HEIGHT / 2);
 			}
 		}
 	}

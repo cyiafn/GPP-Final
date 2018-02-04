@@ -8,10 +8,7 @@
 #include "textureManager.h"
 #include "game.h"
 #include "characters.h"
-#include "Cyrax.h"
-#include "Freid.h"
-#include "Agent47.h"
-#include "Necrid.h"
+#include "BehaviourTree.h"
 
 namespace mapNS
 {
@@ -24,7 +21,7 @@ namespace mapNS
 }
 
 
-
+//class BehaviourTree;
 class Map
 {
 private:
@@ -81,6 +78,7 @@ public:
 	std::vector<Platform*> getPlatforms() { return platforms; }
 	void checkIfOnFloor(std::vector<Characters*> characters, float frameTime);
 	void checkIfCharInFloor(std::vector < Characters*> characters);
+	void ai(float frameTime, std::vector < Characters*> characters);
 	void collisions(float frameTime, std::vector < Characters*> characters);
 };
 
