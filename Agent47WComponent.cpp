@@ -42,6 +42,7 @@ void Agent47WComponent::update(float frameTime)
 	}
 	if (tombstone->getActive())
 	{
+		tombstone->update(frameTime);
 		if (tombstone->getDuration() == Agent47WComponentNS::WSTONE_DURATION)
 		{
 			tombstone->setActive(false);

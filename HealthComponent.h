@@ -6,7 +6,7 @@
 #include "game.h"
 #include <math.h>
 #include <stdio.h>
-#include "entity.h"
+
 
 
 //
@@ -18,21 +18,21 @@
 class HealthComponent
 {
 private:
-	float perc;       
+	float percentage;
 	int lives;
 
 public:
 	HealthComponent();
 	~HealthComponent();
 	void update(float frameTime);
-	void damageMe(int dmg);
+	float damageMe(int dmg);
 	float getPerc()
 	{
-		return perc;
+		return percentage;
 	}
-	void setPerc(float er)
+	void setPerc(float perc)
 	{
-		perc = er;
+		percentage = perc;
 	}
 	float getLives()
 	{

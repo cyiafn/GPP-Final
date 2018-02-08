@@ -32,8 +32,8 @@ Characters::Characters() : Entity()
 	movecomponent = new MoveComponent();
 	healthcomponent = new HealthComponent();
 	type = 0;
-
 	behaviour = new BehaviourTree();
+
 }
 
 //=============================================================================
@@ -183,6 +183,64 @@ void Characters::movementInputs(float frameTime)
 			}
 		}
 	}
+	else if (type == 2)
+	{
+		if (input->isKeyDown(P2RIGHT_KEY))            // if move right
+		{
+			moveRight();
+		}
+		if (input->isKeyDown(P2LEFT_KEY))             // if move left
+		{
+			moveLeft();
+		}
+		if ((!input->isKeyDown(P2RIGHT_KEY) && !input->isKeyDown(P2LEFT_KEY)))
+		{
+			if (movecomponent->getVelocity().x > 0)
+			{
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x - 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
+			}
+			else if (movecomponent->getVelocity().x < 0)
+			{
+				VECTOR2 vel;
+				vel.x = movecomponent->getVelocity().x + 20;
+				vel.y = movecomponent->getVelocity().y;
+				movecomponent->setVelocity(vel);
+			}
+		}
+
+		if (!input->isKeyDown(P2JUMP_KEY))
+		{
+			jumpLock = false;
+		}
+		if (!input->isKeyDown(P2JUMP_KEY) && !input->isKeyDown(P2DROP_KEY))
+		{
+			dropLock = false;
+		}
+
+		if (input->isKeyDown(P2JUMP_KEY) && input->isKeyDown(P2DROP_KEY))
+		{
+			if (dropLock == false)
+			{
+				drop();
+				dropLock = true;
+			}
+		}
+		else if (input->isKeyDown(P2JUMP_KEY))
+		{
+			if (jumpCounter != 2)
+			{
+				if (!jumpLock)
+				{
+					jumpLock = true;
+					jump();
+				}
+
+			}
+		}
+	}
 }
 
 void Characters::setPrev(float x, float y)
@@ -202,68 +260,75 @@ void Characters::skillInputs(Game *cipher)
 	float centerX = this->getCenterX();
 	float centerY = this->getCenterY();
 	center = VECTOR2(centerX, centerY);
-	if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
+	if (type == 1)
 	{
-		if (!Q_on_CoolDown)
+		if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 		{
-			useQ(facingRight, center, cipher);
+			if (!Q_on_CoolDown)
+			{
+				useQ(facingRight, center, cipher);
+			}
+
+		}
+		if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
+		{
+			if (!W_on_CoolDown)
+			{
+				useW(facingRight, center, cipher);
+			}
+
+		}
+		if (input->isKeyDown(P1SKILL3_KEY)) //U or /
+		{
+			if (!E_on_CoolDown)
+			{
+				useE(facingRight, center, cipher);
+			}
+
+		}
+		//Ultimate
+		if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
+		{
+			useR();
 		}
 
 	}
-	if (input->isKeyDown(P1SKILL2_KEY)) //Y or .
+	else if (type == 2)
 	{
-		if (!W_on_CoolDown)
+		if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
 		{
-			useW(facingRight, center, cipher);
+			if (!Q_on_CoolDown)
+			{
+				useQ(facingRight, center, cipher);
+				Q_on_CoolDown = true;
+			}
 		}
-
-	}
-	if (input->isKeyDown(P1SKILL3_KEY)) //U or /
-	{
-		if (!E_on_CoolDown)
+		if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
 		{
-			useE(facingRight, center, cipher);
+			if (!W_on_CoolDown)
+			{
+				useW(facingRight, center, cipher);
+				W_on_CoolDown = true;
+			}
+
 		}
-
-	}
-	//Ultimate
-	if (input->isKeyDown(P1SKILL1_KEY) && input->isKeyDown(P1SKILL2_KEY) && input->isKeyDown(P1SKILL3_KEY))
-	{
-		useR();
-	}
-
-
-	if (input->isKeyDown(P2SKILL1_KEY)) //T or ,
-	{
-		if (!Q_on_CoolDown)
+		if (input->isKeyDown(P2SKILL3_KEY)) //U or /
 		{
-			useQ(facingRight, center, cipher);
-			Q_on_CoolDown = true;
-		}
-	}
-	if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
-	{
-		if (!W_on_CoolDown)
-		{
-			useW(facingRight, center, cipher);
-			W_on_CoolDown = true;
-		}
+			if (!E_on_CoolDown)
+			{
+				useE(facingRight, center, cipher);
+				E_on_CoolDown = true;
+			}
 
-	}
-	if (input->isKeyDown(P2SKILL3_KEY)) //U or /
-	{
-		if (!E_on_CoolDown)
-		{
-			useE(facingRight, center, cipher);
-			E_on_CoolDown = true;
 		}
+		//Ultimate
+		if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
+		{
+			useR();
+		}
+	}
 
-	}
-	//Ultimate
-	if (input->isKeyDown(P2SKILL1_KEY) && input->isKeyDown(P2SKILL2_KEY) && input->isKeyDown(P2SKILL3_KEY))
-	{
-		useR();
-	}
+	
 }
 //Skills by Ee Zher
 void Characters::coolDownChecking()
@@ -306,35 +371,30 @@ void Characters::coolDownChecking()
 	}
 }
 
-void Characters::knockback(float frameTime)
+void Characters::knockback(float value)
 {
 	double knockbackDegree = 33 * (PI / 180);
-	int baseKnockback = 25;
-	if (healthcomponent->getPerc() == 0 || healthcomponent->getPerc() == 1 || healthcomponent->getPerc() == 2 || healthcomponent->getPerc() == 3)
+	float knockback = this->healthcomponent->damageMe(value);
+	VECTOR2 vel;
+	if (facingRight)
 	{
-		float xVel = (1 * baseKnockback * cos(knockbackDegree));
-		float yVel = (1 * baseKnockback * sin(knockbackDegree));
-		VECTOR2 vel;
-		vel.x = xVel;
-		vel.y = yVel;
-		movecomponent->setVelocity(vel);
+		vel.x = -knockback;
 	}
 	else
 	{
-		float xVel = (healthcomponent->getPerc() / 3 * baseKnockback * cos(knockbackDegree));
-		float yVel = (healthcomponent->getPerc() / 3 * baseKnockback * sin(knockbackDegree));
-		VECTOR2 vel;
-		vel.x = xVel;
-		vel.y = yVel;
-		movecomponent->setVelocity(vel);
+		vel.x = knockback;
 	}
+	vel.y = -(knockback * sin(knockbackDegree));
+	movecomponent->setVelocity(vel);
+	movecomponent->setGravityActive(true);
+
 }
 
 void Characters::removeLife()
 {
 	if (getActive())
 	{
-		if (this->getX() > 1500 || this->getX() < -300 || this->getY() > 1000 || this->getY() < -300)
+		if (this->getX() > 1580 || this->getX() < -300 || this->getY() > 1020 || this->getY() < -300)
 		{
 			if (healthcomponent->getLives() == 1)
 			{
@@ -346,7 +406,7 @@ void Characters::removeLife()
 				//respawn engine based on map
 				healthcomponent->setLives(healthcomponent->getLives() - 1);
 				this->setX(GAME_WIDTH / 2);
-				this->setY(GAME_HEIGHT / 2);
+				this->setY(GAME_HEIGHT -600);
 			}
 		}
 	}

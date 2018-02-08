@@ -12,6 +12,9 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 	frontground2 = new Platform();
 	gamePointer = cipher;
 
+	mapOriginalPosX = 0;
+	mapOriginalPosY = 0;
+
 	float averageX = 0;
 	float averageY = 0;
 
@@ -22,6 +25,9 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 	probability = 1;
 	startingBuffer = -1;
 	currentVibrationDirection = -1;
+
+	mapOriginalPosX = 0;
+	mapOriginalPosY = 0;
 
 	srand((unsigned)time(NULL));
 
@@ -85,65 +91,176 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2);
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255 * platforms.at(pos)->getScale());
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(500);
+		platforms.at(pos)->setY(600);
 
-		//secondlayer
+		//
+
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255 * platforms.at(pos)->getScale() - 200);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (255 * platforms.at(pos)->getScale()) - 200);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()) - 200);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()) - 200);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()) - 200);
+		platforms.at(pos)->setY(400);
+
+		//
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255 * platforms.at(pos)->getScale() + 500);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (255 * platforms.at(pos)->getScale()) + 500);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()) + 500);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()) + 500);
+		platforms.at(pos)->setY(400);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()) + 500);
+		platforms.at(pos)->setY(400);
+
+		//
+
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2);
+		platforms.at(pos)->setY(200);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255 * platforms.at(pos)->getScale());
+		platforms.at(pos)->setY(200);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(200);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(200);
+
+		platforms.push_back(new Platform());
+		pos = platforms.size() - 1;
+		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
+		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()));
+		platforms.at(pos)->setY(200);
+
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
@@ -171,8 +288,7 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
 		platforms.at(pos)->setY(200);
-
-
+		
 
 		mapCurrentPosX = 0;
 		mapCurrentPosY = 0;
@@ -229,9 +345,15 @@ Map::~Map()
 
 void Map::update(float frameTime, std::vector<Characters*> characters)
 {
-	if (gamePointer->getInput()->getMouseLButton())
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
 	{
-		vibrationOn = true;
+		if (characters[i]->getActive())
+		{
+			if (characters[i]->getX() > 1580 || characters[i]->getX() < -300 || characters[i]->getY() > 1020 || characters[i]->getY() < -300)
+			{
+				vibrationOn = true;
+			}
+		}
 	}
 	mapTime(frameTime);
 	backgroundCheck();
@@ -305,53 +427,61 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 	float averageY = 0;
 
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		averageX += characters[i]->getX();
-		averageY += characters[i]->getY();
+		if (characters[i]->getActive())
+		{
+			averageX += characters[i]->getX();
+			averageY += characters[i]->getY();
+		}
 	}
 	averageX = averageX / characters.size();
 	averageY = averageY / characters.size();
 
 	float DisX = averageX - mapCurrentPosX;
 	float DisY = averageY - mapCurrentPosY;
-
-	/*if (averageX > mapNS::centerX + mapNS::maximumXFalloff)
+	if (!(mapOriginalPosX + DisX > mapNS::maximumXFalloff))
 	{
-	averageX = mapNS::centerX + mapNS::maximumXFalloff;
+		mapOriginalPosX += DisX * frameTime;
 	}
-	else if (averageX <= mapNS::centerX - mapNS::maximumXFalloff)
+	else
 	{
-	averageX = mapNS::centerX - mapNS::maximumXFalloff;
+		DisX = 0;
 	}
-	if (averageY > mapNS::centerY + mapNS::maximumYFalloff)
+	if (!(mapOriginalPosX + DisX < -1 * mapNS::maximumXFalloff))
 	{
-	averageY = mapNS::centerY + mapNS::maximumYFalloff;
+		mapOriginalPosX += DisX * frameTime;
 	}
-	else if (averageY <= mapNS::centerY - mapNS::maximumYFalloff)
+	else
 	{
-	averageY = mapNS::centerY - mapNS::maximumYFalloff;
-	}*/
-	/*VECTOR2 setVel;
-	setVel.x = -DisX / mapNS::timeForMapMovement;
-	setVel.y = -DisY / mapNS::timeForMapMovement;
-
+		DisX = 0;
+	}
+	if (!(mapOriginalPosY + DisY > mapNS::maximumYFalloff))
+	{
+		mapOriginalPosY += DisY * frameTime;
+	}
+	else
+	{
+		DisY = 0;
+	}
+	if (!(mapOriginalPosY + DisY < -1 * mapNS::maximumYFalloff))
+	{
+		mapOriginalPosY += DisY * frameTime;
+	}
+	else
+	{
+		DisY = 0;
+	}
+	
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-	characters[i]->setX(characters[i]->getX() + setVel.x * frameTime);
-	characters[i]->setY(characters[i]->getY() + setVel.y * frameTime);
-	}
-	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++ )
-	{
-	platforms[i]->setX(platforms[i]->getX() + setVel.x * frameTime);
-	platforms[i]->setY(platforms[i]->getY() + setVel.x * frameTime);
-	}*/
-	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		characters[i]->setX(characters[i]->getX() - DisX);
-		characters[i]->setY(characters[i]->getY() - DisY);
+		characters[i]->setX(characters[i]->getX() - DisX * frameTime);
+		characters[i]->setY(characters[i]->getY() - DisY * frameTime);
 	}
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 	{
-		platforms[i]->setX(platforms[i]->getX() - DisX);
-		platforms[i]->setY(platforms[i]->getY() - DisY);
+		platforms[i]->setX(platforms[i]->getX() - DisX * frameTime);
+		platforms[i]->setY(platforms[i]->getY() - DisY * frameTime);
 	}
+
+	
 	//mapCurrentPosX = averageX;
 	//mapCurrentPosY = averageY;
 
@@ -368,95 +498,95 @@ void Map::vibration(std::vector<Characters*> characters, float frameTime)
 		}
 		else
 		{
-			if ((0 < startingBuffer  && startingBuffer <= 20) || (20 < startingBuffer  && startingBuffer <= 40) || (40 < startingBuffer  && startingBuffer <= 60) || (60 < startingBuffer  && startingBuffer <= 80))
+			if ((0 < startingBuffer  && startingBuffer <= 10) || (10 < startingBuffer  && startingBuffer <= 20) || (20 < startingBuffer  && startingBuffer <= 30) || (30 < startingBuffer  && startingBuffer <= 40))
 			{
-				if (startingBuffer == 1 || startingBuffer == 21 || startingBuffer == 41 || startingBuffer == 61)
+				if (startingBuffer == 1 || startingBuffer == 11 || startingBuffer == 21 || startingBuffer == 31)
 				{
 					currentVibrationDirection = rand() % 4;
 				}
-				if ((0 < startingBuffer && startingBuffer <= 10) || (20 < startingBuffer && startingBuffer <= 30) || (40 < startingBuffer && startingBuffer <= 50) || (60 < startingBuffer && startingBuffer <= 70))
+				if ((0 < startingBuffer && startingBuffer <= 5) || (10 < startingBuffer && startingBuffer <= 15) || (20 < startingBuffer && startingBuffer <= 25) || (30 < startingBuffer && startingBuffer <= 35))
 				{
 					if (currentVibrationDirection == 0)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setY(characters[i]->getY() + 20);
+							characters[i]->setY(characters[i]->getY() + 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setY(platforms[i]->getY() + 20);
+							platforms[i]->setY(platforms[i]->getY() + 10);
 						}
 					}
 					else if (currentVibrationDirection == 1)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setX(characters[i]->getX() + 20);
+							characters[i]->setX(characters[i]->getX() + 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setX(platforms[i]->getX() + 20);
+							platforms[i]->setX(platforms[i]->getX() + 10);
 						}
 					}
 					else if (currentVibrationDirection == 2)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setY(characters[i]->getY() - 20);
+							characters[i]->setY(characters[i]->getY() - 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setY(platforms[i]->getY() - 20);
+							platforms[i]->setY(platforms[i]->getY() - 10);
 						}
 					}
 					else if (currentVibrationDirection == 3)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setX(characters[i]->getX() - 20);
+							characters[i]->setX(characters[i]->getX() - 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setX(platforms[i]->getX() - 20);
+							platforms[i]->setX(platforms[i]->getX() - 10);
 						}
 					}
 				}
-				else if ((10 < startingBuffer && startingBuffer <= 20) || (30 < startingBuffer && startingBuffer <= 40) || (50 < startingBuffer && startingBuffer <= 60) || (70 < startingBuffer && startingBuffer <= 80))
+				else if ((5 < startingBuffer && startingBuffer <= 10) || (15 < startingBuffer && startingBuffer <= 20) || (25 < startingBuffer && startingBuffer <= 30) || (35 < startingBuffer && startingBuffer <= 40))
 				{
 					if (currentVibrationDirection == 0)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setY(characters[i]->getY() - 20);
+							characters[i]->setY(characters[i]->getY() - 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setY(platforms[i]->getY() - 20);
+							platforms[i]->setY(platforms[i]->getY() - 10);
 						}
 					}
 					else if (currentVibrationDirection == 1)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setX(characters[i]->getX() - 20);
+							characters[i]->setX(characters[i]->getX() - 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setX(platforms[i]->getX() - 20);
+							platforms[i]->setX(platforms[i]->getX() - 10);
 						}
 					}
 					else if (currentVibrationDirection == 2)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setY(characters[i]->getY() + 20);
+							characters[i]->setY(characters[i]->getY() + 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setY(platforms[i]->getY() + 20);
+							platforms[i]->setY(platforms[i]->getY() + 10);
 						}
 					}
 					else if (currentVibrationDirection == 3)
 					{
 						for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-							characters[i]->setX(characters[i]->getX() + 20);
+							characters[i]->setX(characters[i]->getX() + 10);
 						}
 						for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 						{
-							platforms[i]->setX(platforms[i]->getX() + 20);
+							platforms[i]->setX(platforms[i]->getX() + 10);
 						}
 					}
 				}

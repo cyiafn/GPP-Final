@@ -79,14 +79,14 @@ class BehaviourTree
 		public:
 			MainSelector(Characters* chars, std::vector<Platform*> platforms) { this->chars = chars; this->platforms = platforms; }
 			virtual bool run() override {
-				bool platformBelow = true;
+				bool platformBelow = false;
 				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
-					if ((chars->getX() + charactersNS::WIDTH/2 * chars->getScale() >= platforms[i]->getY()) && (chars->getX() + charactersNS::WIDTH/2 * chars->getScale() <= platforms[i]->getY() + platformNS::WIDTH * platforms[i]->getScale()))
+					if (chars->getX() + charactersNS::WIDTH/2 <= platforms[i]->getX() + platformNS::WIDTH* platforms[i]->getScale() && chars->getX() + charactersNS::WIDTH / 2 >= platforms[i]->getX() && chars->getY() + charactersNS::HEIGHT * chars->getScale() <= platforms[i]->getY())
 					{
-						platformBelow = false;
+						platformBelow = true;
 					}
 				}
-				if (platformBelow == true)
+				if (platformBelow == false)
 				{
 					return getChildren()[1]->run();
 				}
@@ -175,8 +175,8 @@ class BehaviourTree
 				float onTop = 0;
 				for (std::vector<int>::size_type i = 0; i != platforms.size(); i++)
 				{
-					float xDis = platforms[i]->getX() - targetedCharacter->getX();
-					float yDis = platforms[i]->getY() - targetedCharacter->getY();
+					float xDis = platforms[i]->getX() + platformNS::WIDTH/2 - targetedCharacter->getX() + charactersNS::WIDTH /2 * targetedCharacter->getScale();
+					float yDis = platforms[i]->getY() - targetedCharacter->getY() - charactersNS::HEIGHT * targetedCharacter->getScale();
 					if (xDis < 0)
 						xDis *= -1;
 					if (yDis < 0)
@@ -196,8 +196,8 @@ class BehaviourTree
 						}
 					}
 				}
-				float displacementX = targetedPlatform->getX() - chars->getX();
-				float displacementY = targetedPlatform->getY() - chars->getY();
+				float displacementX = targetedPlatform->getX() + platformNS::WIDTH / 2 - chars->getX() + charactersNS::WIDTH / 2 * chars->getScale();
+				float displacementY = targetedPlatform->getY() - chars->getY() - charactersNS::HEIGHT * chars->getScale();
 				float distanceX = displacementX;
 				if (distanceX < 0)
 					distanceX *= -1;
@@ -237,7 +237,10 @@ class BehaviourTree
 					{
 						if (chars->getMoveComponent()->getVelocity().y <= 0)
 						{
-							chars->jump();
+							if (chars->getJumpCounter() != 2)
+							{
+								chars->jump();
+							}
 						}
 					}
 				}
@@ -254,13 +257,13 @@ class BehaviourTree
 							chars->moveRight();
 						}
 					}
-					else
-					{
-						if (chars->getMoveComponent()->getVelocity().y <= 0)
+						if (chars->getMoveComponent()->getVelocity().y >= 0)
 						{
-							chars->jump();
+							if (chars->getJumpCounter() != 2)
+							{
+								chars->jump();
+							}
 						}
-					}
 				}
 				else if (displacementY > 0)
 				{
@@ -275,13 +278,10 @@ class BehaviourTree
 							chars->moveRight();
 						}
 					}
-					else
-					{
 						if (chars->getY() < targetedPlatform->getY() - 10)
 						{
 							chars->drop();
 						}
-					}
 				}
 				return true;
 			}
@@ -310,6 +310,7 @@ class BehaviourTree
 							xDis *= -1;
 						if (yDis < 0)
 							yDis *= -1;
+						totalDistance = sqrt(xDis * xDis + yDis * yDis);
 						if (lowestTotalDis == 0)
 						{
 							targetedCharacter = characters[z];
@@ -338,13 +339,13 @@ class BehaviourTree
 				float distance = chars->getX() - chars->getTargetedPlayer()->getX();
 				if (distance < 0)
 					distance *= -1;
-				if (chars->getQRange() < distance-150 && chars->getWRange() < distance-150)
+				if (chars->getQRange() < distance-100 && chars->getWRange() < distance-100)
 				{
-					if (chars->getQRange() < distance - 150)
+					if (chars->getQRange() < distance - 100)
 					{
 						chars->useQ(chars->getFacingRight(), *chars->getCenter(), cipher);
 					}
-					if (chars->getWRange() < distance - 150)
+					if (chars->getWRange() < distance - 100)
 					{
 						chars->useW(chars->getFacingRight(), *chars->getCenter(), cipher);
 					}
@@ -388,19 +389,16 @@ class BehaviourTree
 					if (totalDist < distanceToClosestPlatform)
 					{
 						distanceToClosestPlatform = totalDist;
+						indexOfMostPreferrablePlatform = i;
 					}
 				}
-				if (distanceToClosestPlatform > 0)
+				if (platforms[indexOfMostPreferrablePlatform]->getX() + 300 > chars->getX())
 				{
 					chars->moveRight();
 				}
-				else if (distanceToClosestPlatform < 0)
+				else if (platforms[indexOfMostPreferrablePlatform]->getY() - 300 < chars->getX())
 				{
 					chars->moveLeft();
-				}
-				else
-				{
-
 				}
 
 				if (!(chars->getJumpCounter() >= 2) && chars->getMoveComponent()->getVelocity().y >= 0)

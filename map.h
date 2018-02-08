@@ -14,8 +14,8 @@ namespace mapNS
 {
 	const int centerX = 640;
 	const int centerY = 360;
-	const int maximumXFalloff = 300;
-	const int maximumYFalloff = 200;
+	const int maximumXFalloff = 400;
+	const int maximumYFalloff = 300;
 	const float timeForMapMovement = 1.5;
 	const int maxSpawnItem = 4;
 }
@@ -46,6 +46,8 @@ private:
 
 	float mapCurrentPosX;
 	float mapCurrentPosY;
+	float mapOriginalPosX;
+	float mapOriginalPosY;
 
 	int secondBuffer;
 	int secondTracker;
@@ -54,8 +56,7 @@ private:
 	int probability;
 
 	//VECTOR2 currentVelocity;
-
-
+	
 
 	//This is temporary filler vector for vector of Characters
 	//std::vector<Platform*> characters;

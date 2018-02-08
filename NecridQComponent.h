@@ -21,6 +21,7 @@ namespace NecridQComponentNS
 	const int QBOMB_MAX_RANGE = 400;	// range by frametime
 	const float QBOMB_DURATION = 180;	// velocity.x for Bullet speed
 	const float QBOMB_ANGLE = 80.0f;
+	const float DAMAGE = 15;
 }
 
 class NecridQComponent
@@ -38,7 +39,7 @@ public:
 	void releaseAll();
 	void resetAll();
 	void activate(bool facingRight, VECTOR2 center, Game *cipher);
-	int getRange() { return NecridQComponentNS::QBOMB_MAX_RANGE; }
+	float getDamage() { return NecridQComponentNS::DAMAGE; }
 	std::vector<Bomb*> *getBombList() { return &bombList; }
 };
 #endif

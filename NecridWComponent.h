@@ -25,6 +25,7 @@ namespace NecridWComponentNS
 	const int RAIN_DURATION = 200;		// range by frametime
 	const int DROPLET_RANGE = 150;			// range by frametime
 	const float RAIN_SPEED = 100;		// range by frametime
+	const float DAMAGE = 10;
 }
 
 class NecridWComponent
@@ -44,7 +45,8 @@ public:
 	void draw();
 	void releaseAll();
 	void resetAll();
-	int getRange() { return NecridWComponentNS::DROPLET_RANGE; }
+	float getDamage() { return NecridWComponentNS::DAMAGE; }
+	std::vector<Bullet*> *getRaindrops() { return &dropletList; }
 	void activate(bool facingRight, VECTOR2 center, Game *cipher);
 };
 #endif
