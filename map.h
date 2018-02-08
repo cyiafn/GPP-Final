@@ -9,6 +9,9 @@
 #include "game.h"
 #include "characters.h"
 #include "BehaviourTree.h"
+#include "TextDX.h"
+#include "heart.h"
+#include "cross.h"
 
 namespace mapNS
 {
@@ -40,6 +43,34 @@ private:
 	Platform *frontground2;
 	Game* gamePointer;
 
+	TextureManager txtP1;
+	TextureManager txtP2;
+	TextureManager txtP3;
+	TextureManager txtP4;
+
+	Image P1;
+	Image P2;
+	Image P3;
+	Image P4;
+
+	//TextureManager txtPauseScreen;
+	//Image pauseScreen;
+
+	TextDX dxFontP1;
+	TextDX dxFontP2;
+	TextDX dxFontP3;
+	TextDX dxFontP4;
+
+	TextDX dxFontKnockBack1;
+	TextDX dxFontKnockBack2;
+	TextDX dxFontKnockBack3;
+	TextDX dxFontKnockBack4;
+
+	TextureManager txtHeart;
+	TextureManager txtCross;
+	Heart Hearts[4];
+	Cross cross[4];
+
 	bool vibrationOn;
 	int startingBuffer;
 	int currentVibrationDirection;
@@ -55,6 +86,10 @@ private:
 	int spawnedInMinute;
 	int probability;
 
+	bool GameOver1 = false;
+	bool GameOver2 = false;
+	bool GameOver3 = false;
+	bool GameOver4 = false;
 	//VECTOR2 currentVelocity;
 	
 
@@ -65,7 +100,7 @@ public:
 	Map(int type, Game *cipher, std::vector<Characters*> characters);
 	~Map();
 	void update(float frameTime, std::vector<Characters*> characters);
-	void draw();
+	void draw(std::vector<Characters*> characters);
 	void releaseAll();
 	void resetAll();
 	void backgroundCheck();

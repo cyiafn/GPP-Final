@@ -16,7 +16,15 @@
 #include "Agent47.h"
 #include "Necrid.h"
 #include <vector>
+#include "heart.h"
+#include "TextDX.h"
 #include "characters.h"
+#include "menuBtn.h"
+#include "playerSelectionBtn.h"
+
+#include "startMenu.h"
+#include "instructionCreditScreen.h"
+#include "pauseScreen.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -28,12 +36,62 @@ private:
 	//TextureManager
 	//Object
 	Map *map1;
+	PauseScreen *pauseScreen;
+
+	StartMenu *startMenuScreen;
+	InstructionCreditScreen *instructionsCreditsScreen;
 
 	TextureManager characterTexture;     // player texture
 	Cyrax *cyrax;
 	Freid *freid;
 	Agent47 *agent47;
 	Necrid *necrid;
+	
+	TextDX dxFontEnter;
+
+	TextureManager txtSelection;
+
+	Image SelectionScreen;
+
+	TextureManager txtCyraxBox;
+	TextureManager txtNecridBox;
+	TextureManager txtAgent47Box;
+	TextureManager txtFreidBox;
+
+	PlayerSelectionBtn *cyraxBox;
+	PlayerSelectionBtn *necridBox;
+	PlayerSelectionBtn *agent47Box;
+	PlayerSelectionBtn *freidBox;
+
+	TextureManager txtP1Box;
+	TextureManager txtP2Box;
+	TextureManager txtP3Box;
+	TextureManager txtP4Box;
+
+	PlayerSelectionBtn *p1Box;
+	PlayerSelectionBtn *p2Box;
+	PlayerSelectionBtn *p3Box;
+	PlayerSelectionBtn *p4Box;
+
+	RECT back;
+
+	RECT p1Select;
+	RECT p2Select;
+	RECT p3Select;
+	RECT p4Select;
+
+	RECT cyraxSelect;
+	RECT necridSelect;
+	RECT agent47Select;
+	RECT freidSelect;
+
+	int playerSelecting;
+	int numberOfPlayers = 0;
+
+	int characterSelectedP1 = notChosen;
+	int characterSelectedP2 = notChosen;
+	int characterSelectedP3 = notChosen;
+	int characterSelectedP4 = notChosen;
 
 	std::vector<Characters*> characters;
 

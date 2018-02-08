@@ -40,6 +40,7 @@ const float GRAVITY = 9.81;             // gravitational constant
 
 // graphic images
 const char PLATFORM1_IMAGE[] = "pictures\\Background\\platform1.png";
+const char PAUSE_SCREEN_IMAGE[] = "pictures\\Background\\pauseScreen.png";
 const char BACKGROUND1_IMAGE[] = "pictures\\Background\\background1.png";
 const char MIDDLEGROUND1_IMAGE[] = "pictures\\Background\\middleground1.png";
 const char FRONTGROUND1_IMAGE[] = "pictures\\Background\\frontground1.png";
@@ -57,6 +58,33 @@ const char NECRIDQ_IMAGE[] = "pictures\\Bullets\\NecridQ.png";
 const char NECRIDW1_IMAGE[] = "pictures\\Bullets\\NecridW1.png";
 const char NECRIDW2_IMAGE[] = "pictures\\Bullets\\NecridW2.png";
 const char NECRIDE_IMAGE[] = "pictures\\Bullets\\NecridE.png";
+
+
+const char STARTSCREEN_IMAGE[] = "pictures\\StartScreen\\Menu.png";
+const char STARTBTN_IMAGE[] = "pictures\\StartScreen\\StartButton.png";
+const char CREDITSBTN_IMAGE[] = "pictures\\StartScreen\\CreditsButton.png";
+const char INSTRUCTIONSBTN_IMAGE[] = "pictures\\StartScreen\\InstructionsButton.png";
+const char PLAYBTN_IMAGE[] = "pictures\\StartScreen\\PlayButton.png";
+
+const char INSTRUCTIONS_IMAGE[] = "pictures\\InstructionsScreen\\Instructions.png";
+const char CREDITS_IMAGE[] = "pictures\\CreditsScreen\\Credits.png";
+const char SELECTION_IMAGE[] = "pictures\\SelectionScreen\\Selection.png";
+
+const char P1LOGO_IMAGE[] = "pictures\\HUD\\P1.png";
+const char P2LOGO_IMAGE[] = "pictures\\HUD\\P2.png";
+const char P3LOGO_IMAGE[] = "pictures\\HUD\\P3.png";
+const char P4LOGO_IMAGE[] = "pictures\\HUD\\P4.png";
+const char CROSS_IMAGE[] = "pictures\\HUD\\redCross.png";
+const char HEART_IMAGE[] = "pictures\\HUD\\heart.png";
+
+const char CYRAXBOX_IMAGE[] = "pictures\\SelectionScreen\\CyraxBox.png";
+const char NECRIDBOX_IMAGE[] = "pictures\\SelectionScreen\\NecridBox.png";
+const char AGENT47BOX_IMAGE[] = "pictures\\SelectionScreen\\Agent47Box.png";
+const char FREIDBOX_IMAGE[] = "pictures\\SelectionScreen\\FreidBox.png";
+const char P1BOX_IMAGE[] = "pictures\\SelectionScreen\\Player1Box.png";
+const char P2BOX_IMAGE[] = "pictures\\SelectionScreen\\Player2Box.png";
+const char P3BOX_IMAGE[] = "pictures\\SelectionScreen\\Player3Box.png";
+const char P4BOX_IMAGE[] = "pictures\\SelectionScreen\\Player4Box.png";
 
 //Character sprites
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
@@ -81,6 +109,9 @@ const UCHAR ENTER_KEY    = VK_RETURN;       // Enter key
 
 
 // Controls
+const UCHAR PAUSE_KEY = VK_SPACE;
+const UCHAR RESET_KEY = VK_BACK;
+
 //Player 1
 const UCHAR P1RIGHT_KEY = 0x44;
 const UCHAR P1LEFT_KEY = 0x41;

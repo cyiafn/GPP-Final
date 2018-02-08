@@ -43,6 +43,112 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		if (!frontgroundTexture.initialize(cipher->getGraphics(), FRONTGROUND1_IMAGE))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing frontground image"));
 
+		if (!txtP1.initialize(cipher->getGraphics(), P1LOGO_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P1 logo texture"));
+		if (!txtP2.initialize(cipher->getGraphics(), P2LOGO_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P2 logo texture"));
+		if (!txtP3.initialize(cipher->getGraphics(), P3LOGO_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P3 logo texture"));
+		if (!txtP4.initialize(cipher->getGraphics(), P4LOGO_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P4 logo texture"));
+
+		if (!P1.initialize(cipher->getGraphics(), 150, 150, 1, &txtP1))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P1 logo"));
+		P1.setX(0);
+		P1.setY(GAME_HEIGHT - 150);
+		P1.setScale(0.3);
+		if (!P2.initialize(cipher->getGraphics(), 150, 150, 1, &txtP2))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P2 logo"));
+		P2.setX(150);
+		P2.setY(GAME_HEIGHT - 150);
+		P2.setScale(0.3);
+		if (!P3.initialize(cipher->getGraphics(), 150, 150, 1, &txtP3))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P3 logo"));
+		P3.setX(300);
+		P3.setY(GAME_HEIGHT - 150);
+		P3.setScale(0.3);
+		if (!P4.initialize(cipher->getGraphics(), 150, 150, 1, &txtP4))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing P4 logo"));
+		P4.setX(450);
+		P4.setY(GAME_HEIGHT - 150);
+		P4.setScale(0.3);
+
+		//if (!txtPauseScreen.initialize(cipher->getGraphics(), PAUSE_SCREEN_IMAGE))
+		//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Pause Screen Texture"));
+		//if (!pauseScreen.initialize(cipher->getGraphics(), 0, 0, 0, &txtPauseScreen))
+		//	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Selection Screen"));
+		//pauseScreen.setScale(2);
+		//pauseScreen.setY(GAME_HEIGHT / 2 - 240);
+		//pauseScreen.setX(GAME_WIDTH / 2 - 427);
+
+		if (dxFontP1.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+		if (dxFontP2.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+		if (dxFontP3.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+		if (dxFontP4.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+
+		if (dxFontKnockBack1.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+		if (dxFontKnockBack2.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+		if (dxFontKnockBack3.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+		if (dxFontKnockBack4.initialize(cipher->getGraphics(), 20, false, false, "Arial") == false)
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+
+
+
+		if (!txtHeart.initialize(cipher->getGraphics(), HEART_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Heart texture"));
+		if (!Hearts[0].initialize(cipher, &txtHeart))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		Hearts[0].setX(45);
+		Hearts[0].setY(GAME_HEIGHT - 128);
+		Hearts[0].setScale(0.1125);
+		if (!Hearts[1].initialize(cipher, &txtHeart))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		Hearts[1].setX(195);
+		Hearts[1].setY(GAME_HEIGHT - 128);
+		Hearts[1].setScale(0.1125);
+		if (!Hearts[2].initialize(cipher, &txtHeart))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		Hearts[2].setX(345);
+		Hearts[2].setY(GAME_HEIGHT - 128);
+		Hearts[2].setScale(0.1125);
+		if (!Hearts[3].initialize(cipher, &txtHeart))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		Hearts[3].setX(495);
+		Hearts[3].setY(GAME_HEIGHT - 128);
+		Hearts[3].setScale(0.1125);
+
+
+
+		if (!txtCross.initialize(cipher->getGraphics(), CROSS_IMAGE))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Heart texture"));
+		if (!cross[0].initialize(cipher, &txtCross))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		cross[0].setX(0);
+		cross[0].setY(GAME_HEIGHT - 150);
+		cross[0].setScale(0.3);
+		if (!cross[1].initialize(cipher, &txtCross))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		cross[1].setX(150);
+		cross[1].setY(GAME_HEIGHT - 150);
+		cross[1].setScale(0.3);
+		if (!cross[2].initialize(cipher, &txtCross))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		cross[2].setX(300);
+		cross[2].setY(GAME_HEIGHT - 150);
+		cross[2].setScale(0.3);
+		if (!cross[3].initialize(cipher, &txtCross))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing wall"));
+		cross[3].setX(450);
+		cross[3].setY(GAME_HEIGHT - 150);
+		cross[3].setScale(0.3);
+
 		VECTOR2 vel;
 		if (!background1->initialize(cipher, 272, 160, &backgroundTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
@@ -369,12 +475,26 @@ void Map::update(float frameTime, std::vector<Characters*> characters)
 	frontground2->update(frameTime);
 	//checkIfCharInFloor(characters);
 	checkIfOnFloor(characters, frameTime);
-
+	P1.update(frameTime);
+	P2.update(frameTime);
+	P3.update(frameTime);
+	P4.update(frameTime);
 }
 
 
-void Map::draw()
+void Map::draw(std::vector<Characters*> characters)
 {
+	const int BUF_SIZE = 20;
+
+	static char bufferHP1[BUF_SIZE];
+	static char bufferPERC1[BUF_SIZE];
+	static char bufferHP2[BUF_SIZE];
+	static char bufferPERC2[BUF_SIZE];
+	static char bufferHP3[BUF_SIZE];
+	static char bufferPERC3[BUF_SIZE];
+	static char bufferHP4[BUF_SIZE];
+	static char bufferPERC4[BUF_SIZE];
+
 	background1->draw();
 	middleground1->draw();
 	middleground2->draw();
@@ -382,6 +502,91 @@ void Map::draw()
 	frontground2->draw();
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 		platforms[i]->draw();
+	}
+
+	if (gamePointer->getSelectedP1() /*|| player1->getHealthComponent()->getLives() != 0*/)
+	{
+		P1.draw();
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			if (characters[i]->getType() == characters[i]->P1)
+			{
+				_snprintf_s(bufferPERC1, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getPerc());
+				_snprintf_s(bufferHP1, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getLives());
+				if ((int)characters[i]->getHealthComponent()->getLives() == 0)
+				{
+					GameOver1 = true;
+				}
+			}
+		}
+		dxFontKnockBack1.print(bufferPERC1, 45, GAME_HEIGHT - 150);
+		dxFontP1.print(bufferHP1, 65, GAME_HEIGHT - 128);
+		Hearts[0].draw();
+		if (GameOver1 == true)
+			cross[0].draw();
+	}
+	if (gamePointer->getSelectedP2())
+	{
+		P2.draw();
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			if (characters[i]->getType() == characters[i]->P2)
+			{
+				_snprintf_s(bufferPERC2, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getPerc());
+				_snprintf_s(bufferHP2, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getLives());
+				if ((int)characters[i]->getHealthComponent()->getLives() == 0)
+				{
+					GameOver2 = true;
+				}
+			}
+		}
+		dxFontKnockBack2.print(bufferPERC2, 195, GAME_HEIGHT - 150);
+		dxFontP2.print(bufferHP2, 215, GAME_HEIGHT - 128);
+		Hearts[1].draw();
+		if (GameOver2 == true)
+			cross[1].draw();
+	}
+	if (gamePointer->getSelectedP3())
+	{
+		P3.draw();
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			if (characters[i]->getType() == characters[i]->AI1)
+			{
+				_snprintf_s(bufferPERC3, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getPerc());
+				_snprintf_s(bufferHP3, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getLives());
+				if ((int)characters[i]->getHealthComponent()->getLives() == 0)
+				{
+					GameOver3 = true;
+				}
+			}
+		}
+		dxFontKnockBack3.print(bufferPERC3, 345, GAME_HEIGHT - 150);
+		dxFontP3.print(bufferHP3, 365, GAME_HEIGHT - 128);
+		Hearts[2].draw();
+		if (GameOver3 == true)
+			cross[2].draw();
+	}
+	if (gamePointer->getSelectedP4())
+	{
+		P4.draw();
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			if (characters[i]->getType() == characters[i]->AI2)
+			{
+				_snprintf_s(bufferPERC4, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getPerc());
+				_snprintf_s(bufferHP4, BUF_SIZE, "%d ", (int)characters[i]->getHealthComponent()->getLives());
+				if ((int)characters[i]->getHealthComponent()->getLives() == 0)
+				{
+					GameOver4 = true;
+				}
+			}
+		}
+		dxFontKnockBack4.print(bufferPERC4, 495, GAME_HEIGHT - 150);
+		dxFontP4.print(bufferHP4, 515, GAME_HEIGHT - 128);
+		Hearts[3].draw();
+		if (GameOver4 == true)
+			cross[3].draw();
 	}
 }
 
@@ -391,6 +596,20 @@ void Map::releaseAll()
 	backgroundTexture.onLostDevice();
 	middlegroundTexture.onLostDevice();
 	frontgroundTexture.onLostDevice();
+	dxFontP1.onLostDevice();
+	dxFontP2.onLostDevice();
+	dxFontP3.onLostDevice();
+	dxFontP4.onLostDevice();
+	dxFontKnockBack1.onLostDevice();
+	dxFontKnockBack2.onLostDevice();
+	dxFontKnockBack3.onLostDevice();
+	dxFontKnockBack4.onLostDevice();
+	/*txtPauseScreen.onLostDevice();*/
+	txtP1.onLostDevice();
+	txtP2.onLostDevice();
+	txtP3.onLostDevice();
+	txtP4.onLostDevice();
+	txtHeart.onLostDevice();
 }
 
 void Map::resetAll()
@@ -399,6 +618,20 @@ void Map::resetAll()
 	backgroundTexture.onResetDevice();
 	middlegroundTexture.onResetDevice();
 	frontgroundTexture.onResetDevice();
+	dxFontP1.onResetDevice();
+	dxFontP2.onResetDevice();
+	dxFontP3.onResetDevice();
+	dxFontP4.onResetDevice();
+	dxFontKnockBack1.onResetDevice();
+	dxFontKnockBack2.onResetDevice();
+	dxFontKnockBack3.onResetDevice();
+	dxFontKnockBack4.onResetDevice();
+	//txtPauseScreen.onResetDevice();
+	txtP1.onResetDevice();
+	txtP2.onResetDevice();
+	txtP3.onResetDevice();
+	txtP4.onResetDevice();
+	txtHeart.onResetDevice();
 }
 
 void Map::backgroundCheck()

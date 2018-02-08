@@ -152,10 +152,10 @@ public:
 	//Enum classes 
 	enum PlayerNo
 	{
-		P1 = 0,
-		P2 = 1,
-		AI1 = 2,
-		AI2 = 3,
+		P1 = 1,
+		P2 = 2,
+		AI1 = 3,
+		AI2 = 4,
 	};
 };
 #endif

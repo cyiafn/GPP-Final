@@ -97,6 +97,7 @@
     <ClCompile Include="bomb.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="characters.cpp" />
+    <ClCompile Include="cross.cpp" />
     <ClCompile Include="Cyrax.cpp" />
     <ClCompile Include="CyraxEComponent.cpp" />
     <ClCompile Include="CyraxQComponent.cpp" />
@@ -111,10 +112,13 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="heart.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="instructionCreditScreen.cpp" />
     <ClCompile Include="ItemPortal.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="menuBtn.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Cipher.cpp" />
     <ClCompile Include="Necrid.cpp" />
@@ -122,9 +126,13 @@
     <ClCompile Include="NecridQComponent.cpp" />
     <ClCompile Include="NecridRComponent.cpp" />
     <ClCompile Include="NecridWComponent.cpp" />
+    <ClCompile Include="pauseScreen.cpp" />
+    <ClCompile Include="playerSelectionBtn.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="structure.cpp" />
     <ClCompile Include="platform.cpp" />
+    <ClCompile Include="TextDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
@@ -140,6 +148,7 @@
     <ClInclude Include="bomb.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="cross.h" />
     <ClInclude Include="Cyrax.h" />
     <ClInclude Include="CyraxEComponent.h" />
     <ClInclude Include="CyraxQComponent.h" />
@@ -155,10 +164,13 @@
     <ClInclude Include="gameError.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="heart.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="instructionCreditScreen.h" />
     <ClInclude Include="ItemPortal.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="menuBtn.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Cipher.h" />
     <ClInclude Include="Necrid.h" />
@@ -166,9 +178,13 @@
     <ClInclude Include="NecridQComponent.h" />
     <ClInclude Include="NecridRComponent.h" />
     <ClInclude Include="NecridWComponent.h" />
+    <ClInclude Include="pauseScreen.h" />
+    <ClInclude Include="playerSelectionBtn.h" />
     <ClInclude Include="projectile.h" />
+    <ClInclude Include="startMenu.h" />
     <ClInclude Include="structure.h" />
     <ClInclude Include="platform.h" />
+    <ClInclude Include="TextDX.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
