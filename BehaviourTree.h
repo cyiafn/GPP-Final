@@ -296,37 +296,30 @@ class BehaviourTree
 				float distance = chars->getX() - chars->getTargetedPlayer()->getX();
 				if (distance < 0)
 					distance *= -1;
-				if (chars->getQRange() > distance-50 && chars->getWRange() > distance- 50)
+				if (chars->getFacingRight() == true && distance > 70)
 				{
-					if (chars->getQRange() > distance - 50)
+					chars->moveRight();
+					if (chars->getQCD() == false)
 					{
-						if (!chars->getQCD())
-						{
-							chars->useQ(chars->getFacingRight(), *chars->getCenter(), cipher);
-						}
-						
+						chars->useQ(chars->getFacingRight(), *chars->getCenter(), cipher);
 					}
-					if (chars->getWRange() > distance - 50)
+					if (chars->getWCD() == false)
 					{
-						if (!chars->getWCD())
-						{
-							chars->useW(chars->getFacingRight(), *chars->getCenter(), cipher);
-						}
-						
+						chars->useW(chars->getFacingRight(), *chars->getCenter(), cipher);
 					}
 				}
-				else
+				else if (chars->getFacingRight() == false && distance > 70)
 				{
-					if (chars->getFacingRight() == true)
+					chars->moveLeft();
+					if (chars->getQCD() == false)
 					{
-						chars->moveRight();
+						chars->useQ(chars->getFacingRight(), *chars->getCenter(), cipher);
 					}
-					else
+					if (chars->getWCD() == false)
 					{
-						chars->moveLeft();
+						chars->useW(chars->getFacingRight(), *chars->getCenter(), cipher);
 					}
 				}
-				//
 				return true;
 			}
 		};
