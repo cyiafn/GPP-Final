@@ -38,14 +38,17 @@ void Cipher::initialize(HWND hwnd)
 	necrid = new Necrid(this);
 	necrid->setType(2);
 	freid = new Freid(this);
-	/*freid->setType(2);*/
+	freid->setType(0);
+	freid->setX(300);
+	freid->setY(GAME_HEIGHT / 2 - freid->getHeight() / 2 + 250);
 	agent47 = new Agent47(this);
 	/*agent47->setType(1);*/
 	necrid->setX(900);
-	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2);
+	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
 
 	characters.push_back(cyrax);
 	characters.push_back(necrid);
+	characters.push_back(freid);
 	
 	
 	if (typeid(characters[0]).name() == "class Cyrax")
@@ -64,7 +67,6 @@ void Cipher::initialize(HWND hwnd)
 	{
 		necrid = dynamic_cast<Necrid*>(characters[0]);
 	}
-	//=============================================================================
 	if (typeid(characters[1]).name() == "class Cyrax")
 	{
 		cyrax = dynamic_cast<Cyrax*>(characters[1]);
@@ -147,7 +149,9 @@ void Cipher::update()
 // Artificial Intelligence
 //=============================================================================
 void Cipher::ai()
-{}
+{
+	map1->ai(frameTime, characters);
+}
 
 //=============================================================================
 // Handle collisions

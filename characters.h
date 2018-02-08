@@ -20,7 +20,7 @@ namespace charactersNS
 	const int   PLAYER_START_FRAME = 21;      // player starts at frame 0
 	const int   PLAYER_END_FRAME = 25;        // player animation frames 0,1,2
 	const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
-	const float MAX_JUMP = 350;
+	const float MAX_JUMP = 300;
 	
 }
 
@@ -68,6 +68,8 @@ public:
 	BehaviourTree* behaviour;
 	void removeLife();
 	BehaviourTree* getBehaviour() { return behaviour; }
+	bool getQCD() { return Q_on_CoolDown; }
+	bool getWCD() { return W_on_CoolDown; }
 	void setTargetedPlayer(Characters* target) { targetPlayer = target; }
 	Characters* getTargetedPlayer() { return targetPlayer; }
 	void setFacingRight(bool s) { facingRight = s; }

@@ -110,6 +110,7 @@ void Characters::drop()
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
 	setY(getY() + 11);
+	jumpLock = true;
 }
 
 void Characters::jump()
