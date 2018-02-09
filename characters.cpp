@@ -374,8 +374,12 @@ void Characters::coolDownChecking()
 
 void Characters::knockback(float value)
 {
+	float baseKnockback = 500;
 	double knockbackDegree = 33 * (PI / 180);
-	float knockback = this->healthcomponent->damageMe(value);
+	this->healthcomponent->damageMe(value);
+	float knockback = this->healthcomponent->getPerc();
+	knockback /= 100;
+	knockback *= baseKnockback;
 	VECTOR2 vel;
 	if (facingRight)
 	{
@@ -406,6 +410,7 @@ void Characters::removeLife()
 			{
 				//respawn engine based on map
 				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				healthcomponent->setPerc(0);
 				this->setX(GAME_WIDTH / 2);
 				this->setY(GAME_HEIGHT -600);
 			}
