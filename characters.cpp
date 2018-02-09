@@ -80,7 +80,7 @@ void Characters::moveRight()
 {
 	facingRight = true;
 	this->flipHorizontal(false);
-	if (movecomponent->getVelocity().x != 300)
+	if (movecomponent->getVelocity().x <= 300)
 	{
 		VECTOR2 vel;
 		vel.x = movecomponent->getVelocity().x + 20;
@@ -93,7 +93,7 @@ void Characters::moveLeft()
 {
 	facingRight = false;
 	this->flipHorizontal(true);
-	if (movecomponent->getVelocity().x != -300)
+	if (movecomponent->getVelocity().x >= -300)
 	{
 		VECTOR2 vel;
 		vel.x = movecomponent->getVelocity().x - 20;
