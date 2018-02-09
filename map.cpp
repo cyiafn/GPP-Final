@@ -341,6 +341,10 @@ Map::~Map()
 	middleground2 = NULL;
 	frontground1 = NULL;
 	frontground2 = NULL;
+	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+		delete platforms[i];
+	}
+	gamePointer = NULL;
 }
 
 void Map::update(float frameTime, std::vector<Characters*> characters)
