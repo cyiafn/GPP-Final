@@ -10,8 +10,8 @@
 #include "game.h"
 namespace charactersNS
 {
-	const int WIDTH = 70;                   // image width
-	const int HEIGHT = 80;                  // image height
+	const int WIDTH = 54;                   // image width
+	const int HEIGHT = 54;                  // image height
 	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
 	const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
 	const float MASS = 250.0f;              // mass

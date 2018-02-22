@@ -60,6 +60,10 @@ const char NECRIDE_IMAGE[] = "pictures\\Bullets\\NecridE.png";
 
 //Character sprites
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
+const char CYRAX_IMAGE[] = "pictures\\characters\\cyrax.png";
+const char FREID_IMAGE[] = "pictures\\characters\\freid.png";
+const char AGENT47_IMAGE[] = "pictures\\characters\\agent47.png";
+const char NECRID_IMAGE[] = "pictures\\characters\\necrid.png";
 
 // audio files
 const char WAVE_BANK[] = "audio\\Win\\waveBank.xwb";

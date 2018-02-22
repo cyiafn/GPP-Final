@@ -8,7 +8,7 @@ Bullet::Bullet() : Entity()
 }
 Bullet::~Bullet()
 {
-	//this destructor is useless AF
+	
 }
 void Bullet::update(float frameTime)
 {

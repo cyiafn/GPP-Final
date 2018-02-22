@@ -14,9 +14,9 @@ Characters::Characters() : Entity()
 	spriteData.y = charactersNS::Y;
 	spriteData.rect.bottom = charactersNS::HEIGHT;    // rectangle to select parts of an image
 	spriteData.rect.right = charactersNS::WIDTH;
-	currentFrame = startFrame;
-	startFrame = charactersNS::PLAYER_START_FRAME;     // first frame of ship animation
-	endFrame = charactersNS::PLAYER_END_FRAME;     // last frame of ship animation
+	//currentFrame = startFrame;
+	//startFrame = charactersNS::PLAYER_START_FRAME;     // first frame of ship animation
+	//endFrame = charactersNS::PLAYER_END_FRAME;     // last frame of ship animation
 	radius = charactersNS::WIDTH / 2.0;
 	frameDelay = charactersNS::PLAYER_ANIMATION_DELAY;
 	collisionType = entityNS::BOX;
@@ -33,7 +33,7 @@ Characters::Characters() : Entity()
 	healthcomponent = new HealthComponent();
 	type = 0;
 	behaviour = new BehaviourTree();
-
+	this->setActive(false);
 }
 
 //=============================================================================

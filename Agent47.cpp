@@ -9,10 +9,13 @@ Agent47::Agent47(Game *cipher)
 	Q_CoolDown = Agent47NS::QSkillCD;
 	W_CoolDown = Agent47NS::WSkillCD;
 	E_CoolDown = Agent47NS::ESkillCD;
-	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+	if (!characterTexture.initialize(cipher->getGraphics(), AGENT47_IMAGE))
 	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
+	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, Agent47NS::TEXTURE_COLS, &characterTexture))
 	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	currentFrame = startFrame;
+	startFrame = Agent47NS::AGENT_START_FRAME;     // first frame of ship animation
+	endFrame = Agent47NS::AGENT_END_FRAME;     // last frame of ship animation
 }
 
 bool Agent47::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)

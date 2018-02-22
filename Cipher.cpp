@@ -38,18 +38,23 @@ void Cipher::initialize(HWND hwnd)
 	necrid = new Necrid(this);
 	necrid->setType(2);
 	freid = new Freid(this);
-	freid->setType(0);
+	freid->setType(1);
 	freid->setX(300);
 	freid->setY(GAME_HEIGHT / 2 - freid->getHeight() / 2 + 250);
 	agent47 = new Agent47(this);
-	/*agent47->setType(1);*/
+	agent47->setType(2);
 	necrid->setX(900);
 	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
+
+	cyrax->setActive(true);
+	necrid->setActive(true);
+	/*freid->setActive(true);
+	agent47->setActive(true);*/
 
 	characters.push_back(cyrax);
 	characters.push_back(necrid);
 	characters.push_back(freid);
-	
+	characters.push_back(agent47);
 	
 	if (typeid(characters[0]).name() == "class Cyrax")
 	{
@@ -427,7 +432,11 @@ void Cipher::render()
 	
 	map1->draw();
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
-		characters[i]->draw();
+		if (characters[i]->getActive())
+		{
+			characters[i]->draw();
+		}
+		
 	}
 	
 	//draw here
