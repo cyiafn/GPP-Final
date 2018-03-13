@@ -14,9 +14,9 @@ Characters::Characters() : Entity()
 	spriteData.y = charactersNS::Y;
 	spriteData.rect.bottom = charactersNS::HEIGHT;    // rectangle to select parts of an image
 	spriteData.rect.right = charactersNS::WIDTH;
-	currentFrame = startFrame;
-	startFrame = charactersNS::PLAYER_START_FRAME;     // first frame of ship animation
-	endFrame = charactersNS::PLAYER_END_FRAME;     // last frame of ship animation
+	//currentFrame = startFrame;
+	//startFrame = charactersNS::PLAYER_START_FRAME;     // first frame of ship animation
+	//endFrame = charactersNS::PLAYER_END_FRAME;     // last frame of ship animation
 	radius = charactersNS::WIDTH / 2.0;
 	frameDelay = charactersNS::PLAYER_ANIMATION_DELAY;
 	collisionType = entityNS::BOX;
@@ -33,7 +33,7 @@ Characters::Characters() : Entity()
 	healthcomponent = new HealthComponent();
 	type = 0;
 	behaviour = new BehaviourTree();
-
+	this->setActive(false);
 }
 
 //=============================================================================
@@ -80,7 +80,7 @@ void Characters::moveRight()
 {
 	facingRight = true;
 	this->flipHorizontal(false);
-	if (movecomponent->getVelocity().x != 300)
+	if (movecomponent->getVelocity().x <= 300)
 	{
 		VECTOR2 vel;
 		vel.x = movecomponent->getVelocity().x + 20;
@@ -93,7 +93,7 @@ void Characters::moveLeft()
 {
 	facingRight = false;
 	this->flipHorizontal(true);
-	if (movecomponent->getVelocity().x != -300)
+	if (movecomponent->getVelocity().x >= -300)
 	{
 		VECTOR2 vel;
 		vel.x = movecomponent->getVelocity().x - 20;
@@ -110,6 +110,7 @@ void Characters::drop()
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
 	setY(getY() + 11);
+	jumpLock = true;
 }
 
 void Characters::jump()
@@ -373,8 +374,12 @@ void Characters::coolDownChecking()
 
 void Characters::knockback(float value)
 {
+	float baseKnockback = 500;
 	double knockbackDegree = 33 * (PI / 180);
-	float knockback = this->healthcomponent->damageMe(value);
+	this->healthcomponent->damageMe(value);
+	float knockback = this->healthcomponent->getPerc();
+	knockback /= 100;
+	knockback *= baseKnockback;
 	VECTOR2 vel;
 	if (facingRight)
 	{
@@ -405,6 +410,7 @@ void Characters::removeLife()
 			{
 				//respawn engine based on map
 				healthcomponent->setLives(healthcomponent->getLives() - 1);
+				healthcomponent->setPerc(0);
 				this->setX(GAME_WIDTH / 2);
 				this->setY(GAME_HEIGHT -600);
 			}

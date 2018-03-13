@@ -14,6 +14,9 @@
 
 namespace Agent47NS
 {
+	const int AGENT_START_FRAME = 0;      // player starts at frame 0
+	const int AGENT_END_FRAME = 2;        // player animation frames 0,1,2
+	const int TEXTURE_COLS = 3;           // texture has 2 columns
 	const int QSkillCD = 1;
 	const int WSkillCD = 3;
 	const int ESkillCD = 5;

@@ -9,10 +9,13 @@ Necrid::Necrid(Game *cipher)
 	Q_CoolDown = NecridNS::QSkillCD;
 	W_CoolDown = NecridNS::WSkillCD;
 	E_CoolDown = NecridNS::ESkillCD;
-	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+	if (!characterTexture.initialize(cipher->getGraphics(), NECRID_IMAGE))
 	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
+	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, NecridNS::TEXTURE_COLS, &characterTexture))
 	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	currentFrame = startFrame;
+	startFrame = NecridNS::NECRID_START_FRAME;     // first frame of ship animation
+	endFrame = NecridNS::NECRID_END_FRAME;     // last frame of ship animation
 }
 
 bool Necrid::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)

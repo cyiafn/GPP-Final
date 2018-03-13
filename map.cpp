@@ -197,63 +197,63 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2);
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255 * platforms.at(pos)->getScale());
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(600);
+		platforms.at(pos)->setY(550);
 
 		//
 
@@ -337,63 +337,63 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2);
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 255 * platforms.at(pos)->getScale());
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 4 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 5 * (255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 2 * (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 
 		platforms.push_back(new Platform());
 		pos = platforms.size() - 1;
 		if (!platforms.at(pos)->initialize(cipher, 255, 106, &platformTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing platforms"));
 		platforms.at(pos)->setX(GAME_WIDTH / 2 - 3 * (-255 * platforms.at(pos)->getScale()));
-		platforms.at(pos)->setY(200);
+		platforms.at(pos)->setY(250);
 		
 
 		mapCurrentPosX = 0;
@@ -447,6 +447,10 @@ Map::~Map()
 	middleground2 = NULL;
 	frontground1 = NULL;
 	frontground2 = NULL;
+	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
+		delete platforms[i];
+	}
+	gamePointer = NULL;
 }
 
 void Map::update(float frameTime, std::vector<Characters*> characters)
@@ -468,7 +472,6 @@ void Map::update(float frameTime, std::vector<Characters*> characters)
 	for (std::vector<int>::size_type i = 0; i != platforms.size(); i++) {
 		platforms[i]->update(frameTime);
 	}
-	ai(frameTime, characters);
 	middleground1->update(frameTime);
 	frontground1->update(frameTime);
 	middleground2->update(frameTime);
@@ -671,6 +674,7 @@ void Map::cameraMovement(std::vector<Characters*> characters, float frameTime)
 
 	float DisX = averageX - mapCurrentPosX;
 	float DisY = averageY - mapCurrentPosY;
+
 	if (!(mapOriginalPosX + DisX > mapNS::maximumXFalloff))
 	{
 		mapOriginalPosX += DisX * frameTime;

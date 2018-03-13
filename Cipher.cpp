@@ -41,229 +41,25 @@ void Cipher::initialize(HWND hwnd)
 	necrid = new Necrid(this);
 	//necrid->setType(2);
 	freid = new Freid(this);
-	/*freid->setType(2);*/
+	freid->setType(1);
+	freid->setX(300);
+	freid->setY(GAME_HEIGHT / 2 - freid->getHeight() / 2 + 250);
 	agent47 = new Agent47(this);
-	/*agent47->setType(1);*/
-	//necrid->setX(900);
-	//necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2);
+	agent47->setType(2);
+	necrid->setX(900);
+	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
 
-	//characters.push_back(cyrax);
-	//characters.push_back(necrid);
+	cyrax->setActive(true);
+	necrid->setActive(true);
+	/*freid->setActive(true);
+	agent47->setActive(true);*/
+
+	characters.push_back(cyrax);
+	characters.push_back(necrid);
+	characters.push_back(freid);
+	characters.push_back(agent47);
 	
-	
-	//if (typeid(characters[0]).name() == "class Cyrax")
-	//{
-	//	cyrax = dynamic_cast<Cyrax*>(characters[0]);
-	//}
-	//else if (typeid(characters[0]).name() == "class Freid")
-	//{
-	//	freid = dynamic_cast<Freid*>(characters[0]);
-	//}
-	//else if (typeid(characters[0]).name() == "class Agent47")
-	//{
-	//	agent47 = dynamic_cast<Agent47*>(characters[0]);
-	//}
-	//else if (typeid(characters[0]).name() == "class Necrid")
-	//{
-	//	necrid = dynamic_cast<Necrid*>(characters[0]);
-	//}
-	////=============================================================================
-	//if (typeid(characters[1]).name() == "class Cyrax")
-	//{
-	//	cyrax = dynamic_cast<Cyrax*>(characters[1]);
-	//}
-	//else if (typeid(characters[1]).name() == "class Freid")
-	//{
-	//	freid = dynamic_cast<Freid*>(characters[1]);
-	//}
-	//else if (typeid(characters[1]).name() == "class Agent47")
-	//{
-	//	agent47 = dynamic_cast<Agent47*>(characters[1]);
-	//}
-	//else if (typeid(characters[1]).name() == "class Necrid")
-	//{
-	//	necrid = dynamic_cast<Necrid*>(characters[1]);
-	//}
-	////=============================================================================
-	//if (characters.size() > 2)
-	//{
-	//	if (typeid(characters[2]).name() == "class Cyrax")
-	//	{
-	//		cyrax = dynamic_cast<Cyrax*>(characters[2]);
-	//	}
-	//	else if (typeid(characters[2]).name() == "class Freid")
-	//	{
-	//		freid = dynamic_cast<Freid*>(characters[2]);
-	//	}
-	//	else if (typeid(characters[2]).name() == "class Agent47")
-	//	{
-	//		agent47 = dynamic_cast<Agent47*>(characters[2]);
-	//	}
-	//	else if (typeid(characters[2]).name() == "class Necrid")
-	//	{
-	//		necrid = dynamic_cast<Necrid*>(characters[2]);
-	//	}
-	//}
-	////=============================================================================
-	//if (characters.size() > 3)
-	//{
-	//	if (typeid(characters[3]).name() == "class Cyrax")
-	//	{
-	//		cyrax = dynamic_cast<Cyrax*>(characters[3]);
-	//	}
-	//	else if (typeid(characters[3]).name() == "class Freid")
-	//	{
-	//		freid = dynamic_cast<Freid*>(characters[3]);
-	//	}
-	//	else if (typeid(characters[3]).name() == "class Agent47")
-	//	{
-	//		agent47 = dynamic_cast<Agent47*>(characters[3]);
-	//	}
-	//	else if (typeid(characters[3]).name() == "class Necrid")
-	//	{
-	//		necrid = dynamic_cast<Necrid*>(characters[3]);
-	//	}
-	//}
-	
-	cyraxBox = new PlayerSelectionBtn();
-	necridBox = new PlayerSelectionBtn();
-	agent47Box = new PlayerSelectionBtn();
-	freidBox = new PlayerSelectionBtn();
-
-	p1Box = new PlayerSelectionBtn();
-	p2Box = new PlayerSelectionBtn();
-	p3Box = new PlayerSelectionBtn();
-	p4Box = new PlayerSelectionBtn();
-
-	if (dxFontEnter.initialize(graphics, 30, false, false, "Arial") == false)
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
-
-	if (!txtSelection.initialize(graphics, SELECTION_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Selection Screen Texture"));
-
-	if (!SelectionScreen.initialize(graphics, 0, 0, 0, &txtSelection))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Selection Screen"));
-	SelectionScreen.setScale(2);
-
-	if (!txtCyraxBox.initialize(graphics, CYRAXBOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Start Box Texture"));
-	if (!txtNecridBox.initialize(graphics, NECRIDBOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Necrid Box Texture"));
-	if (!txtAgent47Box.initialize(graphics, AGENT47BOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Agent47 Box Texture"));
-	if (!txtFreidBox.initialize(graphics, FREIDBOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Freid Box Texture"));
-
-	if (!cyraxBox->initialize(this, &txtCyraxBox))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Play button"));
-	cyraxBox->setY(350 - playerSelectionBtnNS::BTN_HEIGHT);
-	cyraxBox->setX(GAME_WIDTH / 4 - 130);
-	if (!necridBox->initialize(this, &txtNecridBox))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Play button"));
-	necridBox->setY(350 - playerSelectionBtnNS::BTN_HEIGHT);
-	necridBox->setX(cyraxBox->getX() + playerSelectionBtnNS::BTN_WIDTH + 35);
-	if (!agent47Box->initialize(this, &txtAgent47Box))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Play button"));
-	agent47Box->setY(350 - playerSelectionBtnNS::BTN_HEIGHT);
-	agent47Box->setX(necridBox->getX() + playerSelectionBtnNS::BTN_WIDTH + 35);
-	if (!freidBox->initialize(this, &txtFreidBox))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Play button"));
-	freidBox->setY(350 - playerSelectionBtnNS::BTN_HEIGHT);
-	freidBox->setX(agent47Box->getX() + playerSelectionBtnNS::BTN_WIDTH + 35);
-
-
-	if (!txtP1Box.initialize(graphics, P1BOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 1 Box Texture"));
-	if (!txtP2Box.initialize(graphics, P2BOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 2 Box Texture"));
-	if (!txtP3Box.initialize(graphics, P3BOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 3 Box Texture"));
-	if (!txtP4Box.initialize(graphics, P4BOX_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 4 Box Texture"));
-
-	if (!p1Box->initialize(this, &txtP1Box))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 1 Box"));
-	p1Box->setY(450);
-	p1Box->setX(GAME_WIDTH / 4 - 130);
-	p1Box->setScale(0.8);
-	if (!p2Box->initialize(this, &txtP2Box))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 2 Box"));
-	p2Box->setY(450);
-	p2Box->setX(p1Box->getX() + playerSelectionBtnNS::BTN_WIDTH + 45);
-	p2Box->setScale(0.8);
-	if (!p3Box->initialize(this, &txtP3Box))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 3 Box"));
-	p3Box->setY(450);
-	p3Box->setX(p2Box->getX() + playerSelectionBtnNS::BTN_WIDTH + 45);
-	p3Box->setScale(0.8);
-	if (!p4Box->initialize(this, &txtP4Box))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player 4 Box"));
-	p4Box->setY(450);
-	p4Box->setX(p3Box->getX() + playerSelectionBtnNS::BTN_WIDTH + 45);
-	p4Box->setScale(0.8);
-
-
-	cyraxSelect.top = cyraxBox->getY();
-	cyraxSelect.bottom = cyraxBox->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	cyraxSelect.right = cyraxBox->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	cyraxSelect.left = cyraxBox->getX();
-
-	necridSelect.top = necridBox->getY();
-	necridSelect.bottom = necridBox->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	necridSelect.right = necridBox->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	necridSelect.left = necridBox->getX();
-
-	agent47Select.top = agent47Box->getY();
-	agent47Select.bottom = agent47Box->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	agent47Select.right = agent47Box->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	agent47Select.left = agent47Box->getX();
-
-	freidSelect.top = freidBox->getY();
-	freidSelect.bottom = freidBox->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	freidSelect.right = freidBox->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	freidSelect.left = freidBox->getX();
-
-	p1Select.top = p1Box->getY();
-	p1Select.bottom = p1Box->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	p1Select.right = p1Box->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	p1Select.left = p1Box->getX();
-
-	p2Select.top = p2Box->getY();
-	p2Select.bottom = p2Box->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	p2Select.right = p2Box->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	p2Select.left = p2Box->getX();
-
-	p3Select.top = p3Box->getY();
-	p3Select.bottom = p3Box->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	p3Select.right = p3Box->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	p3Select.left = p3Box->getX();
-
-	p4Select.top = p4Box->getY();
-	p4Select.bottom = p4Box->getY() + playerSelectionBtnNS::BTN_HEIGHT;
-	p4Select.right = p4Box->getX() + playerSelectionBtnNS::BTN_WIDTH;
-	p4Select.left = p4Box->getX();
-
-	back.top = GAME_HEIGHT - 100;
-	back.bottom = GAME_HEIGHT;
-	back.left = 0;
-	back.right = 50;
-
-	map1 = new Map(0, this, characters);
-	pauseScreen = new PauseScreen(0, this);
-	startMenuScreen = new StartMenu(0, this);
-	instructionsCreditsScreen = new InstructionCreditScreen(0, this);
-
-	
-
-	return;
-}
-
-//=============================================================================
-// Update all game items
-//=============================================================================
-void Cipher::update()
-{
-	if (startScreenOn == true)
+	if (typeid(characters[0]).name() == "class Cyrax")
 	{
 		startMenuScreen->update(frameTime);
 	}
@@ -280,7 +76,28 @@ void Cipher::update()
 
 	else if (selectionScreenOn == true)
 	{
-		if (input->getMouseX() >= back.left && input->getMouseX() <= back.right && input->getMouseY() >= back.top && input->getMouseY() <= back.bottom)
+		necrid = dynamic_cast<Necrid*>(characters[0]);
+	}
+	if (typeid(characters[1]).name() == "class Cyrax")
+	{
+		cyrax = dynamic_cast<Cyrax*>(characters[1]);
+	}
+	else if (typeid(characters[1]).name() == "class Freid")
+	{
+		freid = dynamic_cast<Freid*>(characters[1]);
+	}
+	else if (typeid(characters[1]).name() == "class Agent47")
+	{
+		agent47 = dynamic_cast<Agent47*>(characters[1]);
+	}
+	else if (typeid(characters[1]).name() == "class Necrid")
+	{
+		necrid = dynamic_cast<Necrid*>(characters[1]);
+	}
+	//=============================================================================
+	if (characters.size() > 2)
+	{
+		if (typeid(characters[2]).name() == "class Cyrax")
 		{
 			if (input->getMouseLButton())
 			{
@@ -1056,7 +873,9 @@ void Cipher::update()
 // Artificial Intelligence
 //=============================================================================
 void Cipher::ai()
-{}
+{
+	map1->ai(frameTime, characters);
+}
 
 //=============================================================================
 // Handle collisions
@@ -1341,18 +1160,14 @@ void Cipher::render()
 		instructionsCreditsScreen->draw();
 	}
 	
-	else if (selectionScreenOn == true)
-	{
-		SelectionScreen.draw();
-		dxFontEnter.print("Press Enter to Start Game", GAME_HEIGHT - 10, GAME_WIDTH / 2);
-		cyraxBox->draw();
-		necridBox->draw();
-		agent47Box->draw();
-		freidBox->draw();
-		p1Box->draw();
-		p2Box->draw();
-		p3Box->draw();
-		p4Box->draw();
+	
+	map1->draw();
+	for (std::vector<int>::size_type i = 0; i != characters.size(); i++) {
+		if (characters[i]->getActive())
+		{
+			characters[i]->draw();
+		}
+		
 	}
 
 	else if (playScreenOn == true)

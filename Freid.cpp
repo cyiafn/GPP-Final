@@ -9,10 +9,13 @@ Freid::Freid(Game *cipher)
 	Q_CoolDown = FreidNS::QSkillCD;
 	W_CoolDown = FreidNS::WSkillCD;
 	E_CoolDown = FreidNS::ESkillCD;
-	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+	if (!characterTexture.initialize(cipher->getGraphics(), FREID_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
+	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, FreidNS::TEXTURE_COLS, &characterTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	currentFrame = startFrame;
+	startFrame = FreidNS::FREID_START_FRAME;     // first frame of ship animation
+	endFrame = FreidNS::FREID_END_FRAME;     // last frame of ship animation
 }
 
 bool Freid::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)

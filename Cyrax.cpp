@@ -9,10 +9,13 @@ Cyrax::Cyrax(Game *cipher)
 	Q_CoolDown = cyraxNS::QSkillCD;
 	W_CoolDown = cyraxNS::WSkillCD;
 	E_CoolDown = cyraxNS::ESkillCD;
-	if (!characterTexture.initialize(cipher->getGraphics(), KEN_IMAGE))
+	if (!characterTexture.initialize(cipher->getGraphics(), CYRAX_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player texture"));
-	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, charactersNS::TEXTURE_COLS, &characterTexture))
+	if (!this->initialize(cipher, charactersNS::WIDTH, charactersNS::HEIGHT, cyraxNS::TEXTURE_COLS, &characterTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
+	currentFrame = startFrame;
+	startFrame = cyraxNS::CYRAX_START_FRAME;     // first frame of ship animation
+	endFrame = cyraxNS::CYRAX_END_FRAME;     // last frame of ship animation
 }
 
 bool Cyrax::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM)

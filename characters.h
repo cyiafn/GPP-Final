@@ -10,8 +10,8 @@
 #include "game.h"
 namespace charactersNS
 {
-	const int WIDTH = 70;                   // image width
-	const int HEIGHT = 80;                  // image height
+	const int WIDTH = 54;                   // image width
+	const int HEIGHT = 54;                  // image height
 	const int X = GAME_WIDTH / 2 - WIDTH / 2;   // location on screen
 	const int Y = GAME_HEIGHT / 2 - HEIGHT / 2;
 	const float MASS = 250.0f;              // mass
@@ -20,7 +20,7 @@ namespace charactersNS
 	const int   PLAYER_START_FRAME = 21;      // player starts at frame 0
 	const int   PLAYER_END_FRAME = 25;        // player animation frames 0,1,2
 	const float PLAYER_ANIMATION_DELAY = 0.2f;    // time between frames
-	const float MAX_JUMP = 350;
+	const float MAX_JUMP = 300;
 	
 }
 
@@ -68,6 +68,8 @@ public:
 	BehaviourTree* behaviour;
 	void removeLife();
 	BehaviourTree* getBehaviour() { return behaviour; }
+	bool getQCD() { return Q_on_CoolDown; }
+	bool getWCD() { return W_on_CoolDown; }
 	void setTargetedPlayer(Characters* target) { targetPlayer = target; }
 	Characters* getTargetedPlayer() { return targetPlayer; }
 	void setFacingRight(bool s) { facingRight = s; }
