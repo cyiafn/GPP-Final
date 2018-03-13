@@ -34,6 +34,7 @@ private:
 	Freid *freid;
 	Agent47 *agent47;
 	Necrid *necrid;
+	int currentMode;
 
 	std::vector<Characters*> characters;
 

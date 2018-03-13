@@ -131,7 +131,7 @@ void Cipher::initialize(HWND hwnd)
 	
 
 	map1 = new Map(0, this, characters);
-
+	currentMode = 0;
 	
 
 	return;
@@ -142,12 +142,14 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-	{
-		characters[i]->update(frameTime, this);
-	}
 
-	map1->update(frameTime, characters);
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			characters[i]->update(frameTime, this);
+		}
+
+		map1->update(frameTime, characters);
+
 }
 
 //=============================================================================
