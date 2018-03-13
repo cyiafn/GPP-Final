@@ -115,7 +115,7 @@
     <ClCompile Include="heart.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
-    <ClCompile Include="instructionCreditScreen.cpp" />
+    <ClCompile Include="instruction.cpp" />
     <ClCompile Include="ItemPortal.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="menuBtn.cpp" />
@@ -167,7 +167,7 @@
     <ClInclude Include="heart.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
-    <ClInclude Include="instructionCreditScreen.h" />
+    <ClInclude Include="instruction.h" />
     <ClInclude Include="ItemPortal.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="menuBtn.h" />

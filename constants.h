@@ -44,6 +44,7 @@ const char PAUSE_SCREEN_IMAGE[] = "pictures\\Background\\pauseScreen.png";
 const char BACKGROUND1_IMAGE[] = "pictures\\Background\\background1.png";
 const char MIDDLEGROUND1_IMAGE[] = "pictures\\Background\\middleground1.png";
 const char FRONTGROUND1_IMAGE[] = "pictures\\Background\\frontground1.png";
+const char INSTRUCTION_IMAGE[] = "pictures\\instructions.png";
 
 //Skill images -by Ee Zher
 const char CYRAXQ_IMAGE[] = "pictures\\Bullets\\CyraxQ.png";

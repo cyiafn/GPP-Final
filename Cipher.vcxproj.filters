@@ -40,14 +40,7 @@
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
-    <ClCompile Include="heart.cpp" />
-    <ClCompile Include="instructionCreditScreen.cpp" />
-    <ClCompile Include="menuBtn.cpp" />
-    <ClCompile Include="playerSelectionBtn.cpp" />
-    <ClCompile Include="startMenu.cpp" />
-    <ClCompile Include="TextDX.cpp" />
-    <ClCompile Include="pauseScreen.cpp" />
-    <ClCompile Include="cross.cpp" />
+    <ClCompile Include="instruction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent47.h" />
@@ -91,13 +84,6 @@
     <ClInclude Include="structure.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="textureManager.h" />
-    <ClInclude Include="heart.h" />
-    <ClInclude Include="instructionCreditScreen.h" />
-    <ClInclude Include="menuBtn.h" />
-    <ClInclude Include="playerSelectionBtn.h" />
-    <ClInclude Include="startMenu.h" />
-    <ClInclude Include="TextDX.h" />
-    <ClInclude Include="pauseScreen.h" />
-    <ClInclude Include="cross.h" />
+    <ClInclude Include="instruction.h" />
   </ItemGroup>
 </Project>

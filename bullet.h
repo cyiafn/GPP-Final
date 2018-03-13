@@ -12,7 +12,7 @@
 
 namespace bulletNS
 {
-	
+
 }
 
 class Bullet : public Entity
