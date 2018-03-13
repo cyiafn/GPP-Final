@@ -17,6 +17,7 @@
 #include "Necrid.h"
 #include <vector>
 #include "characters.h"
+#include "instruction.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -30,6 +31,8 @@ private:
 	Map *map1;
 
 	TextureManager characterTexture;     // player texture
+	TextureManager instructionTexture;
+	Instruction instruction;
 	Cyrax *cyrax;
 	Freid *freid;
 	Agent47 *agent47;
