@@ -779,94 +779,25 @@ void Cipher::initialize(HWND hwnd)
 
 	}
 
-	else if (playScreenOn == true)
-	{
-		if (pauseScreenOn == false)
-		{
-			for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
-			{
-				characters[i]->update(frameTime, this);
-			}
-			map1->update(frameTime, characters);
-			if (input->isKeyDown(PAUSE_KEY))
-			{
-				if (!previousInput->isKeyDown(PAUSE_KEY))
-				{
-					pauseScreenOn = true;
-					previousInput->keyDown(PAUSE_KEY);
-				}
-			}
-			else
-			{
-				previousInput->keyUp(PAUSE_KEY);
-			}
-		}
-
-		else if (pauseScreenOn == true)
-		{
-			if (input->isKeyDown(PAUSE_KEY))
-			{
-				if (!previousInput->isKeyDown(PAUSE_KEY))
-				{
-					pauseScreenOn = false;
-					previousInput->keyDown(PAUSE_KEY);
-				}
-				else
-				{
-					previousInput->keyUp(PAUSE_KEY);
-				}
-			}
-			if (input->isKeyDown(RESET_KEY))
-			{
+	map1 = new Map(0, this, characters);
+	currentMode = 0;
+	
 
 				PostQuitMessage(0);
 
-				//playScreenOn == false;
-				//pauseScreenOn = false;
-				//startScreenOn = true;
-				//cyraxChosen = false;
-				//necridChosen = false;
-				//agent47Chosen = false;
-				//freidChosen = false;
+//=============================================================================
+// Update all game items
+//=============================================================================
+void Cipher::update()
+{
 
-				//clickP1 = false;
-				//clickP2 = false;
-				//clickP3 = false;
-				//clickP4 = false;
-
-				//selectedP1 = false;
-				//selectedP2 = false;
-				//selectedP3 = false;
-				//selectedP4 = false;
-
-				//counted = false;
-
-				//characterSelectedP1 = notChosen;
-				//characterSelectedP2 = notChosen;
-				//characterSelectedP3 = notChosen;
-				//characterSelectedP4 = notChosen;
-
-				//numberOfPlayers = 0;
-
-				//characters.clear();
-
-				////delete player1;
-				////delete player2;
-				////delete player3;
-				////delete player4;
-				//player1 = NULL;
-				//player2 = NULL;
-				//player3 = NULL;
-				//player4 = NULL;
-
-				//map1->~Map();
-				//delete map1;
-				//map1 = NULL;
-				//mapInitialized = false;
-				////characters.clear();
-			}
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			characters[i]->update(frameTime, this);
 		}
-	}
+
+		map1->update(frameTime, characters);
+
 }
 
 //=============================================================================

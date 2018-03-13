@@ -46,8 +46,7 @@ private:
 	Freid *freid;
 	Agent47 *agent47;
 	Necrid *necrid;
-	
-	TextDX dxFontEnter;
+	int currentMode;
 
 	TextureManager txtSelection;
 
