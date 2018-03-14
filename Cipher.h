@@ -17,6 +17,7 @@
 #include "Necrid.h"
 #include <vector>
 #include "characters.h"
+#include "audio.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -28,7 +29,7 @@ private:
 	//TextureManager
 	//Object
 	Map *map1;
-
+	Audio audio;
 	TextureManager characterTexture;     // player texture
 	Cyrax *cyrax;
 	Freid *freid;
