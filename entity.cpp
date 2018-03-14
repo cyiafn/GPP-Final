@@ -118,11 +118,11 @@ bool Entity::collidesWith(Entity &ent)
 				// Check the alpha value of each texture pixel
 				// The alpha value is the leftmost byte
 				BYTE a = (pixelsS1[s1y * 128 + s1x] & 0xFF000000) >> 24;
-				//BYTE b = (pixelsS2[s2y * 480 + s2x] & 0xFF000000) >> 24;
+				BYTE b = (pixelsS2[s2y * 480 + s2x] & 0xFF000000) >> 24;
 
 				// If both pixels are opaque, we found a collision
 				// We have to unlock the textures and return
-				if (a == 255)
+				if (a == 255 && b == 255)
 				{
 					this->spriteData.texture->UnlockRect(0);
 					ent.spriteData.texture->UnlockRect(0);

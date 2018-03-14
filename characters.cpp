@@ -20,8 +20,8 @@ Characters::Characters() : Entity()
 	radius = charactersNS::WIDTH / 2.0;
 	frameDelay = charactersNS::PLAYER_ANIMATION_DELAY;
 	collisionType = entityNS::BOX;
-	edge.left = -charactersNS::WIDTH*getScale() / 2;;
-	edge.top = -charactersNS::HEIGHT*getScale() / 2;;
+	edge.left = -charactersNS::WIDTH*getScale() / 2;
+	edge.top = -charactersNS::HEIGHT*getScale() / 2;
 	edge.right = charactersNS::WIDTH*getScale() / 2;
 	edge.bottom = charactersNS::HEIGHT*getScale() / 2;
 	/*edge.left = 0;
@@ -76,8 +76,8 @@ void Characters::update(float frameTime, Game *cipher)
 	setPrev(getX(), getY());
 	if (movecomponent->getVelocity().x == 0 && movecomponent->getVelocity().y == 0)
 	{
-		this->setCurrentFrame(0);
-		this->setLoop(true);
+		startFrame = 0;
+		endFrame = 2;
 	}
 }
 
@@ -120,7 +120,6 @@ void Characters::drop()
 
 void Characters::jump()
 {
-	this->setCurrentFrame(6);
 	this->setLoop(false);
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
@@ -138,12 +137,14 @@ void Characters::movementInputs(float frameTime)
 		
 		if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 		{
-			setCurrentFrame(3);
+			startFrame = 3;
+			endFrame = 5;
 			moveRight();
 		}
 		if (input->isKeyDown(P1LEFT_KEY))             // if move left
 		{
-			setCurrentFrame(3);
+			startFrame = 3;
+			endFrame = 5;
 			moveLeft();
 		}
 		if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
@@ -168,7 +169,6 @@ void Characters::movementInputs(float frameTime)
 
 		if (!input->isKeyDown(P1JUMP_KEY))
 		{
-			this->setCurrentFrame(6);
 			jumpLock = false;
 		}
 		if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
@@ -286,7 +286,6 @@ void Characters::skillInputs(Game *cipher)
 	{
 		if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 		{
-			currentFrame = 9;
 			if (!Q_on_CoolDown)
 			{			
 				useQ(facingRight, center, cipher);
