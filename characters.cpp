@@ -75,6 +75,11 @@ void Characters::update(float frameTime, Game *cipher)
 	movementInputs(frameTime);
 	skillUpdate(frameTime);
 	setPrev(getX(), getY());
+	if (movecomponent->getVelocity().x == 0 && movecomponent->getVelocity().y == 0)
+	{
+		this->setCurrentFrame(0);
+		this->setLoop(true);
+	}
 }
 
 void Characters::moveRight()
@@ -116,6 +121,8 @@ void Characters::drop()
 
 void Characters::jump()
 {
+	this->setCurrentFrame(6);
+	this->setLoop(false);
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
 	jumpCounter += 1;
@@ -129,12 +136,15 @@ void Characters::movementInputs(float frameTime)
 {
 	if (type == 1)
 	{
+		
 		if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 		{
+			setCurrentFrame(3);
 			moveRight();
 		}
 		if (input->isKeyDown(P1LEFT_KEY))             // if move left
 		{
+			setCurrentFrame(3);
 			moveLeft();
 		}
 		if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
@@ -144,6 +154,7 @@ void Characters::movementInputs(float frameTime)
 				VECTOR2 vel;
 				vel.x = movecomponent->getVelocity().x - 20;
 				vel.y = movecomponent->getVelocity().y;
+				
 				movecomponent->setVelocity(vel);
 			}
 			else if (movecomponent->getVelocity().x < 0)
@@ -153,10 +164,12 @@ void Characters::movementInputs(float frameTime)
 				vel.y = movecomponent->getVelocity().y;
 				movecomponent->setVelocity(vel);
 			}
+			
 		}
 
 		if (!input->isKeyDown(P1JUMP_KEY))
 		{
+			this->setCurrentFrame(6);
 			jumpLock = false;
 		}
 		if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
@@ -184,15 +197,23 @@ void Characters::movementInputs(float frameTime)
 
 			}
 		}
+		if (this->getCurrentFrame() == 5)
+		{
+			currentFrame = 3;
+		}
 	}
 	else if (type == 2)
 	{
 		if (input->isKeyDown(P2RIGHT_KEY))            // if move right
 		{
+			startFrame = 3;
+			endFrame = 5;
 			moveRight();
 		}
 		if (input->isKeyDown(P2LEFT_KEY))             // if move left
 		{
+			startFrame = 3;
+			endFrame = 5;
 			moveLeft();
 		}
 		if ((!input->isKeyDown(P2RIGHT_KEY) && !input->isKeyDown(P2LEFT_KEY)))
@@ -266,8 +287,9 @@ void Characters::skillInputs(Game *cipher)
 	{
 		if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 		{
+			currentFrame = 9;
 			if (!Q_on_CoolDown)
-			{
+			{			
 				useQ(facingRight, center, cipher);
 			}
 
@@ -393,7 +415,7 @@ void Characters::knockback(float value)
 	vel.y = -(knockback * sin(knockbackDegree));
 	movecomponent->setVelocity(vel);
 	movecomponent->setGravityActive(true);
-
+	
 }
 
 void Characters::removeLife()

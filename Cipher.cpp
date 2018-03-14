@@ -34,7 +34,7 @@ void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 	cyrax = new Cyrax(this);
-	cyrax->setType(1);
+	//cyrax->setType(1);
 	necrid = new Necrid(this);
 	necrid->setType(2);
 	freid = new Freid(this);
@@ -46,7 +46,7 @@ void Cipher::initialize(HWND hwnd)
 	necrid->setX(900);
 	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
 
-	cyrax->setActive(true);
+	//cyrax->setActive(true);
 	necrid->setActive(true);
 	freid->setActive(true);
 	agent47->setActive(true);
