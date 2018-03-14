@@ -26,6 +26,7 @@
 #include "ai.h"
 #include "playerone.h"
 #include "playertwo.h"
+#include "credit.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -54,7 +55,9 @@ private:
 	TextureManager playeroneTexture;
 	TextureManager playertwoTexture;
 	TextureManager aiTexture;
+	TextureManager creditTexture;
 
+	Credit credits;
 	WinBackground winbackground;
 	First first;
 	Second second;

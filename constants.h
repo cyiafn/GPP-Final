@@ -68,6 +68,8 @@ const char NECRIDW1_IMAGE[] = "pictures\\Bullets\\NecridW1.png";
 const char NECRIDW2_IMAGE[] = "pictures\\Bullets\\NecridW2.png";
 const char NECRIDE_IMAGE[] = "pictures\\Bullets\\NecridE.png";
 
+const char CREDITS_IMAGE[] = "pictures\\credits.png";
+
 //Character sprites
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
 const char CYRAX_IMAGE[] = "pictures\\characters\\cyrax.png";

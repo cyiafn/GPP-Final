@@ -34,7 +34,7 @@ void Cipher::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 	cyrax = new Cyrax(this);
-	//cyrax->setType(1);
+	cyrax->setType(1);
 	necrid = new Necrid(this);
 	necrid->setType(2);
 	freid = new Freid(this);
@@ -46,7 +46,7 @@ void Cipher::initialize(HWND hwnd)
 	necrid->setX(900);
 	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
 
-	//cyrax->setActive(true);
+	cyrax->setActive(true);
 	necrid->setActive(true);
 	freid->setActive(true);
 	agent47->setActive(true);
@@ -198,6 +198,14 @@ void Cipher::initialize(HWND hwnd)
 	ai1.setY(0);
 	ai2.setX(0);
 	ai2.setY(0);
+
+	if (!creditTexture.initialize(this->getGraphics(), CREDITS_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!credits.initialize(this, 1280, 720, 1, &creditTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	credits.setActive(false);
+	credits.setX(0);
+	credits.setY(0);
 
 	return;
 }
@@ -372,12 +380,13 @@ void Cipher::update()
 		if (input->getMouseLButton())
 		{
 			currentMode = 3;
+			credits.setActive(true);
 		}
 
 	}
 	else if (currentMode == 3)
 	{
-
+		credits.update(frameTime);
 	}
 }
 
@@ -681,6 +690,7 @@ void Cipher::render()
 	playertwo.draw();
 	ai1.draw();
 	ai2.draw();
+	credits.draw();
 	graphics->spriteEnd();                  // end drawing sprites
 }
 

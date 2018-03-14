@@ -49,6 +49,7 @@
     <ClCompile Include="playerone.cpp" />
     <ClCompile Include="playertwo.cpp" />
     <ClCompile Include="ai.cpp" />
+    <ClCompile Include="credit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent47.h" />
@@ -101,5 +102,6 @@
     <ClInclude Include="playerone.h" />
     <ClInclude Include="playertwo.h" />
     <ClInclude Include="ai.h" />
+    <ClInclude Include="credit.h" />
   </ItemGroup>
 </Project>

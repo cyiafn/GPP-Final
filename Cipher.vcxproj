@@ -98,6 +98,7 @@
     <ClCompile Include="bomb.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="characters.cpp" />
+    <ClCompile Include="credit.cpp" />
     <ClCompile Include="Cyrax.cpp" />
     <ClCompile Include="CyraxEComponent.cpp" />
     <ClCompile Include="CyraxQComponent.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="bomb.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="credit.h" />
     <ClInclude Include="Cyrax.h" />
     <ClInclude Include="CyraxEComponent.h" />
     <ClInclude Include="CyraxQComponent.h" />
