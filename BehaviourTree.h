@@ -96,7 +96,7 @@ class BehaviourTree
 				}
 				else if (chars->getHealthComponent()->getPerc() > 150)
 				{
-					return getChildren()[0]->run();
+					return getChildren()[2]->run();
 				}
 				else
 				{
