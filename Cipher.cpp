@@ -489,19 +489,20 @@ void Cipher::collisions()
 	Bullet *punch = agent47->getQcomponent()->getPunch();
 	if (punch->getActive())
 	{ 
-		if (punch->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if (punch->OldCollidesWith(*cyrax, vec))
 		{
 			float damage = agent47->getQcomponent()->hit();
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		if (punch->collidesWith(*freid))
+		if (punch->OldCollidesWith(*freid, vec))
 		{
 			float damage = agent47->getQcomponent()->hit();
 			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		if (punch->collidesWith(*necrid))
+		if (punch->OldCollidesWith(*necrid, vec))
 		{
 			float damage = agent47->getQcomponent()->hit();
 			necrid->knockback(damage, &audio);
@@ -513,19 +514,20 @@ void Cipher::collisions()
 	Bullet *zap = agent47->getWcomponent()->getPunch();
 	if (zap->getActive())
 	{
-		if (zap->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if (zap->OldCollidesWith(*cyrax, vec))
 		{
 			float damage = agent47->getWcomponent()->hit();
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		if (zap->collidesWith(*freid))
+		if (zap->OldCollidesWith(*freid, vec))
 		{
 			float damage = agent47->getWcomponent()->hit();
 			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		if (zap->collidesWith(*necrid))
+		if (zap->OldCollidesWith(*necrid, vec))
 		{
 			float damage = agent47->getWcomponent()->hit();
 			necrid->knockback(damage, &audio);
