@@ -40,6 +40,7 @@
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
+    <ClCompile Include="instruction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent47.h" />
@@ -83,5 +84,6 @@
     <ClInclude Include="structure.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="instruction.h" />
   </ItemGroup>
 </Project>

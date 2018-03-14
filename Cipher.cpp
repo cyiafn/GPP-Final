@@ -129,9 +129,11 @@ void Cipher::initialize(HWND hwnd)
 	
 
 	map1 = new Map(0, this, characters);
-
-	
-
+	currentMode = 0;
+	if (!instructionTexture.initialize(this->getGraphics(), INSTRUCTION_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction image"));
+	if (!instruction.initialize(this, 1280, 720,1, &instructionTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 	return;
 }
 
@@ -140,12 +142,24 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+	if (currentMode == 0)
 	{
-		characters[i]->update(frameTime, this);
+		instruction.update(frameTime);
+		if (input->getMouseLButton())
+		{
+			instruction.setActive(false);
+			currentMode = 1;
+		}
 	}
+	else if (currentMode == 1)
+	{
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			characters[i]->update(frameTime, this);
+		}
 
-	map1->update(frameTime, characters);
+		map1->update(frameTime, characters);
+	}
 }
 
 //=============================================================================
@@ -438,7 +452,7 @@ void Cipher::render()
 	}
 	
 	//draw here
-
+	instruction.draw();
 	graphics->spriteEnd();                  // end drawing sprites
 }
 
