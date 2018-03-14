@@ -17,6 +17,7 @@
 #include "Necrid.h"
 #include <vector>
 #include "characters.h"
+#include "audio.h"
 #include "instruction.h"
 #include "first.h"
 #include "second.h"
@@ -45,6 +46,7 @@ private:
 	Characters* fourthPos;
 
 
+	Audio audio;
 	TextureManager characterTexture;     // player texture
 	TextureManager instructionTexture;
 	TextureManager winbackgroundTexture;

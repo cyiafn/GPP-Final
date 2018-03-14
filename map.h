@@ -9,6 +9,7 @@
 #include "game.h"
 #include "characters.h"
 #include "BehaviourTree.h"
+#include "audio.h"
 
 namespace mapNS
 {
@@ -64,7 +65,7 @@ private:
 public:
 	Map(int type, Game *cipher, std::vector<Characters*> characters);
 	~Map();
-	void update(float frameTime, std::vector<Characters*> characters);
+	void update(float frameTime, std::vector<Characters*> characters, Audio *audio);
 	void draw();
 	void releaseAll();
 	void resetAll();

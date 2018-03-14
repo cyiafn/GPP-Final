@@ -118,5 +118,4 @@ const UCHAR P2SKILL3_KEY = VK_OEM_2;
 
 
 // weapon types
-
 #endif

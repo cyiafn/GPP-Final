@@ -136,75 +136,12 @@ void Cipher::initialize(HWND hwnd)
 	if (!instruction.initialize(this, 1280, 720,1, &instructionTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 	return;
+	
+	if (audio.initialize() != S_OK) {
+		throw (new GameError());
+	}
 
-	if (!winbackgroundTexture.initialize(this->getGraphics(), WIN_BACKGROUND))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!winbackground.initialize(this, 1280, 720, 1, &winbackgroundTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	winbackground.setActive(false);
-	winbackground.setX(0);
-	winbackground.setY(0);
-
-	if (!firstTexture.initialize(this->getGraphics(), FIRST_TEXT))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!first.initialize(this, firstNS::WIDTH, firstNS::HEIGHT, 1, &firstTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	if (!secondTexture.initialize(this->getGraphics(), SECOND_TEXT))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!second.initialize(this, secondNS::WIDTH, secondNS::HEIGHT, 1, &secondTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	if (!thirdTexture.initialize(this->getGraphics(), THIRD_TEXT))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!third.initialize(this, thirdNS::WIDTH, thirdNS::HEIGHT, 1, &thirdTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	if (!fourthTexture.initialize(this->getGraphics(), FOURTH_TEXT))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!fourth.initialize(this, fourthNS::WIDTH, fourthNS::HEIGHT , 1, &fourthTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-
-	first.setActive(false);
-	second.setActive(false);
-	third.setActive(false);
-	fourth.setActive(false);
-	first.setX(437.5);
-	first.setY(180);
-	second.setX(437.5);
-	second.setY(180 + 2 * 45);
-	third.setX(437.5);
-	third.setY(180 + 4 * 45);
-	fourth.setX(437.5);
-	fourth.setY(180 + 6 * 45);
-
-	if (!playeroneTexture.initialize(this->getGraphics(), PLAYERONE_TEXT))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!playerone.initialize(this, playeroneNS::WIDTH, playeroneNS::HEIGHT, 1, &playeroneTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	if (!playertwoTexture.initialize(this->getGraphics(), PLAYERTWO_TEXT))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!playertwo.initialize(this, playertwoNS::WIDTH, playertwoNS::HEIGHT, 1, &playertwoTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	if (!aiTexture.initialize(this->getGraphics(), AI_TEXT))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!ai1.initialize(this, aiNS::WIDTH, aiNS::HEIGHT, 1, &aiTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	if (!ai2.initialize(this, aiNS::WIDTH, aiNS::HEIGHT, 1, &aiTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	playerone.setActive(false);
-	playertwo.setActive(false);
-	ai1.setActive(false);
-	ai1.setActive(false);
-	ai1.setX(0);
-	ai1.setY(0);
-	ai2.setX(0);
-	ai2.setY(0);
-
-	if (!creditTexture.initialize(this->getGraphics(), CREDITS_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
-	if (!credits.initialize(this, 1280, 720, 1, &creditTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
-	credits.setActive(false);
-	credits.setX(0);
-	credits.setY(0);
+	audio.playCue(BM_MUSIC);
 
 	return;
 }
@@ -227,10 +164,11 @@ void Cipher::update()
 	{
 		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
 		{
-			characters[i]->update(frameTime, this);
+			characters[i]->update(frameTime, this, &audio);
 		}
 
-		map1->update(frameTime, characters);
+		map1->update(frameTime, characters, &audio);
+		audio.run();
 
 		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
 		{
@@ -415,15 +353,16 @@ void Cipher::collisions()
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getQcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
+			
 		}
 		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getQcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*necrid, vec))
@@ -431,7 +370,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getQcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -449,7 +388,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getWcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*agent47, vec))
@@ -457,7 +396,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getWcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*necrid, vec))
@@ -465,7 +404,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getWcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -485,7 +424,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
 			float damage = freid->getQcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*agent47, vec))
@@ -493,7 +432,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
 			float damage = freid->getQcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*necrid, vec))
@@ -501,7 +440,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
 			float damage = freid->getQcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -518,7 +457,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
 			float damage = freid->getWcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*agent47, vec))
@@ -526,7 +465,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
 			float damage = freid->getWcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*necrid, vec))
@@ -534,7 +473,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
 			float damage = freid->getWcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -553,19 +492,19 @@ void Cipher::collisions()
 		if (punch->collidesWith(*cyrax))
 		{
 			float damage = agent47->getQcomponent()->hit();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		if (punch->collidesWith(*freid))
 		{
 			float damage = agent47->getQcomponent()->hit();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
 		if (punch->collidesWith(*necrid))
 		{
 			float damage = agent47->getQcomponent()->hit();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 	}
@@ -577,19 +516,19 @@ void Cipher::collisions()
 		if (zap->collidesWith(*cyrax))
 		{
 			float damage = agent47->getWcomponent()->hit();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		if (zap->collidesWith(*freid))
 		{
 			float damage = agent47->getWcomponent()->hit();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
 		if (zap->collidesWith(*necrid))
 		{
 			float damage = agent47->getWcomponent()->hit();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 	}
@@ -605,7 +544,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
 			float damage = necrid->getQcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*freid, vec))
@@ -613,7 +552,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
 			float damage = necrid->getQcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*agent47, vec))
@@ -621,7 +560,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
 			float damage = necrid->getQcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else
@@ -639,7 +578,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
 			float damage = necrid->getWcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*freid, vec))
@@ -647,7 +586,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
 			float damage = necrid->getWcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
 		else if ((*it)->OldCollidesWith(*agent47, vec))
@@ -655,7 +594,7 @@ void Cipher::collisions()
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
 			float damage = necrid->getWcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else

@@ -347,7 +347,7 @@ Map::~Map()
 	gamePointer = NULL;
 }
 
-void Map::update(float frameTime, std::vector<Characters*> characters)
+void Map::update(float frameTime, std::vector<Characters*> characters, Audio *audio)
 {
 	for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
 	{
@@ -355,6 +355,7 @@ void Map::update(float frameTime, std::vector<Characters*> characters)
 		{
 			if (characters[i]->getX() > 1580 || characters[i]->getX() < -300 || characters[i]->getY() > 1020 || characters[i]->getY() < -300)
 			{
+				audio->playCue(PLAYER_DAMAGE);
 				vibrationOn = true;
 			}
 		}
