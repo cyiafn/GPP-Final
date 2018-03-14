@@ -48,7 +48,7 @@ void Cipher::initialize(HWND hwnd)
 	cyrax->setActive(true);
 	//necrid->setActive(true);
 	freid->setActive(true);
-	//agent47->setActive(true);
+	agent47->setActive(true);
 
 	characters.push_back(cyrax);
 	characters.push_back(necrid);
@@ -136,6 +136,77 @@ void Cipher::initialize(HWND hwnd)
 	if (!instruction.initialize(this, 1280, 720,1, &instructionTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 	return;
+
+	if (!winbackgroundTexture.initialize(this->getGraphics(), WIN_BACKGROUND))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!winbackground.initialize(this, 1280, 720, 1, &winbackgroundTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	winbackground.setActive(false);
+	winbackground.setX(0);
+	winbackground.setY(0);
+
+	if (!firstTexture.initialize(this->getGraphics(), FIRST_TEXT))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!first.initialize(this, firstNS::WIDTH, firstNS::HEIGHT, 1, &firstTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	if (!secondTexture.initialize(this->getGraphics(), SECOND_TEXT))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!second.initialize(this, secondNS::WIDTH, secondNS::HEIGHT, 1, &secondTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	if (!thirdTexture.initialize(this->getGraphics(), THIRD_TEXT))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!third.initialize(this, thirdNS::WIDTH, thirdNS::HEIGHT, 1, &thirdTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	if (!fourthTexture.initialize(this->getGraphics(), FOURTH_TEXT))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!fourth.initialize(this, fourthNS::WIDTH, fourthNS::HEIGHT , 1, &fourthTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+
+	first.setActive(false);
+	second.setActive(false);
+	third.setActive(false);
+	fourth.setActive(false);
+	first.setX(437.5);
+	first.setY(180);
+	second.setX(437.5);
+	second.setY(180 + 2 * 45);
+	third.setX(437.5);
+	third.setY(180 + 4 * 45);
+	fourth.setX(437.5);
+	fourth.setY(180 + 6 * 45);
+
+	if (!playeroneTexture.initialize(this->getGraphics(), PLAYERONE_TEXT))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!playerone.initialize(this, playeroneNS::WIDTH, playeroneNS::HEIGHT, 1, &playeroneTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	if (!playertwoTexture.initialize(this->getGraphics(), PLAYERTWO_TEXT))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!playertwo.initialize(this, playertwoNS::WIDTH, playertwoNS::HEIGHT, 1, &playertwoTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	if (!aiTexture.initialize(this->getGraphics(), AI_TEXT))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!ai1.initialize(this, aiNS::WIDTH, aiNS::HEIGHT, 1, &aiTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	if (!ai2.initialize(this, aiNS::WIDTH, aiNS::HEIGHT, 1, &aiTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	playerone.setActive(false);
+	playertwo.setActive(false);
+	ai1.setActive(false);
+	ai1.setActive(false);
+	ai1.setX(0);
+	ai1.setY(0);
+	ai2.setX(0);
+	ai2.setY(0);
+
+	if (!creditTexture.initialize(this->getGraphics(), CREDITS_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
+	if (!credits.initialize(this, 1280, 720, 1, &creditTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	credits.setActive(false);
+	credits.setX(0);
+	credits.setY(0);
+
+	return;
 }
 
 //=============================================================================
@@ -160,6 +231,161 @@ void Cipher::update()
 		}
 
 		map1->update(frameTime, characters);
+
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			if (characters[i]->getHealthComponent()->getLives() <= 0 && characters[i]->getDeathConfirmed() == false)
+			{
+				if (fourthPos == NULL)
+				{
+					fourthPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+				}
+				else if (thirdPos == NULL)
+				{
+					thirdPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+				}
+				else if (secondPos == NULL)
+				{
+					secondPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+				}
+				else if (firstPos == NULL)
+				{
+					firstPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+					currentMode = 2;
+					winbackground.setActive(true);
+					first.setActive(true);
+					second.setActive(true);
+					third.setActive(true);
+					fourth.setActive(true);
+					playerone.setActive(true);
+					playertwo.setActive(true);
+					ai1.setActive(true);
+					ai2.setActive(true);
+				}
+			}
+		}
+	}
+	else if (currentMode == 2)
+	{
+		winbackground.update(frameTime);
+		first.update(frameTime);
+		second.update(frameTime);
+		third.update(frameTime);
+		fourth.update(frameTime);
+		playerone.update(frameTime);
+		playertwo.update(frameTime);
+		ai1.update(frameTime);
+		ai2.update(frameTime);
+		if (firstPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY()== 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180);
+			}
+		}
+		else if (firstPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180);
+		}
+		else if (firstPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180);
+		}
+
+		if (secondPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY() == 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180 + 2 * 45);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180 + 2 * 45);
+			}
+		}
+		else if (secondPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180 + 2 * 45);
+		}
+		else if (secondPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180 + 2 * 45);
+		}
+
+		if (thirdPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY() == 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180 + 4 * 45);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180 + 4 * 45);
+			}
+		}
+		else if (thirdPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180 + 4 * 45);
+		}
+		else if (thirdPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180 + 4 * 45);
+		}
+
+		if (fourthPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY() == 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180 + 6 * 45);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180 + 2 * 45);
+			}
+		}
+		else if (fourthPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180 + 6 * 45);
+		}
+		else if (fourthPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180 + 6 * 45);
+		}
+
+		if (input->getMouseLButton())
+		{
+			currentMode = 3;
+			credits.setActive(true);
+		}
+
+	}
+	else if (currentMode == 3)
+	{
+		credits.update(frameTime);
 	}
 }
 
@@ -460,6 +686,16 @@ void Cipher::render()
 	
 	//draw here
 	instruction.draw();
+	winbackground.draw();
+	first.draw();
+	second.draw();
+	third.draw();
+	fourth.draw();
+	playerone.draw();
+	playertwo.draw();
+	ai1.draw();
+	ai2.draw();
+	credits.draw();
 	graphics->spriteEnd();                  // end drawing sprites
 }
 
@@ -470,7 +706,6 @@ void Cipher::render()
 void Cipher::releaseAll()
 {
 	map1->releaseAll();
-	
 	Game::releaseAll();
 	return;
 }

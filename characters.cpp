@@ -34,6 +34,7 @@ Characters::Characters() : Entity()
 	type = 0;
 	behaviour = new BehaviourTree();
 	this->setActive(false);
+	deathConfirmed = false;
 }
 
 //=============================================================================
