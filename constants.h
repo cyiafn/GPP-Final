@@ -45,6 +45,15 @@ const char MIDDLEGROUND1_IMAGE[] = "pictures\\Background\\middleground1.png";
 const char FRONTGROUND1_IMAGE[] = "pictures\\Background\\frontground1.png";
 const char INSTRUCTION_IMAGE[] = "pictures\\instructions.png";
 
+const char WIN_BACKGROUND[] = "pictures\\winbackground.png";
+const char FIRST_TEXT[] = "pictures\\1sttxt.png";
+const char SECOND_TEXT[] = "pictures\\2ndtxt.png";
+const char THIRD_TEXT[] = "pictures\\3rdtxt.png";
+const char FOURTH_TEXT[] = "pictures\\4thtxt.png";
+const char PLAYERONE_TEXT[] = "pictures\\playeronetxt.png";
+const char PLAYERTWO_TEXT[] = "pictures\\playertwotxt.png";
+const char AI_TEXT[] = "pictures\\AItxt.png";
+
 //Skill images -by Ee Zher
 const char CYRAXQ_IMAGE[] = "pictures\\Bullets\\CyraxQ.png";
 const char CYRAXW_IMAGE[] = "pictures\\Bullets\\CyraxW.png";
@@ -58,6 +67,8 @@ const char NECRIDQ_IMAGE[] = "pictures\\Bullets\\NecridQ.png";
 const char NECRIDW1_IMAGE[] = "pictures\\Bullets\\NecridW1.png";
 const char NECRIDW2_IMAGE[] = "pictures\\Bullets\\NecridW2.png";
 const char NECRIDE_IMAGE[] = "pictures\\Bullets\\NecridE.png";
+
+const char CREDITS_IMAGE[] = "pictures\\credits.png";
 
 //Character sprites
 const char KEN_IMAGE[] = "pictures\\playerTest.png";
