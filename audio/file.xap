@@ -16,8 +16,8 @@ Global Settings
     Header File = file.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 4244462036;
-    Last Modified High = 30639198;
+    Last Modified Low = 2248327658;
+    Last Modified High = 30653452;
 
     Category
     {
@@ -229,6 +229,8 @@ Wave Bank
     Xbox Bank Last Modified High = 0;
     PC Bank Last Modified Low = 466041947;
     PC Bank Last Modified High = 30639203;
+    Header Last Modified Low = 0;
+    Header Last Modified High = 0;
     Bank Last Revised Low = 240036535;
     Bank Last Revised High = 30639203;
 
@@ -332,8 +334,8 @@ Sound Bank
     Windows File = Win\soundBank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
-    Bank Last Modified Low = 1750005069;
-    Bank Last Modified High = 30639207;
+    Bank Last Modified Low = 2248392642;
+    Bank Last Modified High = 30653452;
     Header Last Modified High = 0;
     Header Last Modified Low = 0;
 
@@ -346,7 +348,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = Music;
         }
 
         Track
@@ -356,6 +358,7 @@ Sound Bank
 
             Play Wave Event
             {
+                Loop Count = 255;
                 Break Loop = 0;
                 Use Speaker Position = 0;
                 Use Center Speaker = 1;

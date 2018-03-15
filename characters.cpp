@@ -64,13 +64,13 @@ void Characters::draw()
 // typically called once per frame
 // frameTime is used to regulate the speed of movement and animation
 //=============================================================================
-void Characters::update(float frameTime, Game *cipher)
+void Characters::update(float frameTime, Game *cipher, Audio *audio)
 {
 	Entity::update(frameTime);
-	removeLife();
+	removeLife(audio);
 	movecomponent->update(frameTime, this);
 	this->coolDownChecking();
-	skillInputs(cipher);
+	skillInputs(cipher, audio);
 	movementInputs(frameTime);
 	skillUpdate(frameTime);
 	setPrev(getX(), getY());
@@ -277,7 +277,7 @@ void Characters::revertLocation()
 	this->spriteData.y = prevY;
 }
 
-void Characters::skillInputs(Game *cipher)
+void Characters::skillInputs(Game *cipher, Audio *audio)
 {
 	float centerX = this->getCenterX();
 	float centerY = this->getCenterY();
@@ -289,6 +289,7 @@ void Characters::skillInputs(Game *cipher)
 			if (!Q_on_CoolDown)
 			{			
 				useQ(facingRight, center, cipher);
+				audio->playCue(GUN_SHOT);
 			}
 
 		}
@@ -297,6 +298,7 @@ void Characters::skillInputs(Game *cipher)
 			if (!W_on_CoolDown)
 			{
 				useW(facingRight, center, cipher);
+				audio->playCue(GUN_SHOT);
 			}
 
 		}
@@ -323,6 +325,7 @@ void Characters::skillInputs(Game *cipher)
 			{
 				useQ(facingRight, center, cipher);
 				Q_on_CoolDown = true;
+				audio->playCue(GUN_SHOT);
 			}
 		}
 		if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
@@ -393,7 +396,7 @@ void Characters::coolDownChecking()
 	}
 }
 
-void Characters::knockback(float value)
+void Characters::knockback(float value, Audio *audio)
 {
 	float baseKnockback = 500;
 	double knockbackDegree = 33 * (PI / 180);
@@ -413,15 +416,17 @@ void Characters::knockback(float value)
 	vel.y = -(knockback * sin(knockbackDegree));
 	movecomponent->setVelocity(vel);
 	movecomponent->setGravityActive(true);
-	
+	audio->playCue(MOB_DAMAGE);
 }
 
-void Characters::removeLife()
+void Characters::removeLife(Audio *audio)
 {
 	if (getActive())
 	{
+		audio->playCue(PLAYER_DAMAGE);
 		if (this->getX() > 1580 || this->getX() < -300 || this->getY() > 1020 || this->getY() < -300)
 		{
+
 			if (healthcomponent->getLives() == 1)
 			{
 				healthcomponent->setLives(healthcomponent->getLives() - 1);

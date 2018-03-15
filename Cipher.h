@@ -18,6 +18,7 @@
 #include <vector>
 #include "characters.h"
 #include "instruction.h"
+#include "audio.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -33,6 +34,7 @@ private:
 	TextureManager characterTexture;     // player texture
 	TextureManager instructionTexture;
 	Instruction instruction;
+	Audio audio;
 	Cyrax *cyrax;
 	Freid *freid;
 	Agent47 *agent47;
