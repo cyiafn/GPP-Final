@@ -18,6 +18,7 @@
 #include <vector>
 #include "characters.h"
 #include "instruction.h"
+#include "audio.h"
 #include "first.h"
 #include "second.h"
 #include "third.h"
@@ -68,6 +69,7 @@ private:
 	AI ai1, ai2;
 
 	Instruction instruction;
+	Audio audio;
 	Cyrax *cyrax;
 	Freid *freid;
 	Agent47 *agent47;

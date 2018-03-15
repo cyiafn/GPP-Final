@@ -20,8 +20,8 @@ Characters::Characters() : Entity()
 	radius = charactersNS::WIDTH / 2.0;
 	frameDelay = charactersNS::PLAYER_ANIMATION_DELAY;
 	collisionType = entityNS::BOX;
-	edge.left = -charactersNS::WIDTH*getScale() / 2;;
-	edge.top = -charactersNS::HEIGHT*getScale() / 2;;
+	edge.left = -charactersNS::WIDTH*getScale() / 2;
+	edge.top = -charactersNS::HEIGHT*getScale() / 2;
 	edge.right = charactersNS::WIDTH*getScale() / 2;
 	edge.bottom = charactersNS::HEIGHT*getScale() / 2;
 	/*edge.left = 0;
@@ -65,20 +65,20 @@ void Characters::draw()
 // typically called once per frame
 // frameTime is used to regulate the speed of movement and animation
 //=============================================================================
-void Characters::update(float frameTime, Game *cipher)
+void Characters::update(float frameTime, Game *cipher, Audio *audio)
 {
 	Entity::update(frameTime);
-	removeLife();
+	removeLife(audio);
 	movecomponent->update(frameTime, this);
 	this->coolDownChecking();
-	skillInputs(cipher);
+	skillInputs(cipher, audio);
 	movementInputs(frameTime);
 	skillUpdate(frameTime);
 	setPrev(getX(), getY());
 	if (movecomponent->getVelocity().x == 0 && movecomponent->getVelocity().y == 0)
 	{
-		this->setCurrentFrame(0);
-		this->setLoop(true);
+		startFrame = 0;
+		endFrame = 2;
 	}
 }
 
@@ -121,7 +121,6 @@ void Characters::drop()
 
 void Characters::jump()
 {
-	this->setCurrentFrame(6);
 	this->setLoop(false);
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
@@ -139,12 +138,14 @@ void Characters::movementInputs(float frameTime)
 		
 		if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 		{
-			setCurrentFrame(3);
+			startFrame = 3;
+			endFrame = 5;
 			moveRight();
 		}
 		if (input->isKeyDown(P1LEFT_KEY))             // if move left
 		{
-			setCurrentFrame(3);
+			startFrame = 3;
+			endFrame = 5;
 			moveLeft();
 		}
 		if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
@@ -169,7 +170,6 @@ void Characters::movementInputs(float frameTime)
 
 		if (!input->isKeyDown(P1JUMP_KEY))
 		{
-			this->setCurrentFrame(6);
 			jumpLock = false;
 		}
 		if (!input->isKeyDown(P1JUMP_KEY) && !input->isKeyDown(P1DROP_KEY))
@@ -278,7 +278,7 @@ void Characters::revertLocation()
 	this->spriteData.y = prevY;
 }
 
-void Characters::skillInputs(Game *cipher)
+void Characters::skillInputs(Game *cipher, Audio *audio)
 {
 	float centerX = this->getCenterX();
 	float centerY = this->getCenterY();
@@ -287,10 +287,10 @@ void Characters::skillInputs(Game *cipher)
 	{
 		if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 		{
-			currentFrame = 9;
 			if (!Q_on_CoolDown)
 			{			
 				useQ(facingRight, center, cipher);
+				audio->playCue(GUN_SHOT);
 			}
 
 		}
@@ -299,6 +299,7 @@ void Characters::skillInputs(Game *cipher)
 			if (!W_on_CoolDown)
 			{
 				useW(facingRight, center, cipher);
+				audio->playCue(GUN_SHOT);
 			}
 
 		}
@@ -325,6 +326,7 @@ void Characters::skillInputs(Game *cipher)
 			{
 				useQ(facingRight, center, cipher);
 				Q_on_CoolDown = true;
+				audio->playCue(GUN_SHOT);
 			}
 		}
 		if (input->isKeyDown(P2SKILL2_KEY)) //Y or .
@@ -395,7 +397,7 @@ void Characters::coolDownChecking()
 	}
 }
 
-void Characters::knockback(float value)
+void Characters::knockback(float value, Audio *audio)
 {
 	float baseKnockback = 500;
 	double knockbackDegree = 33 * (PI / 180);
@@ -415,15 +417,17 @@ void Characters::knockback(float value)
 	vel.y = -(knockback * sin(knockbackDegree));
 	movecomponent->setVelocity(vel);
 	movecomponent->setGravityActive(true);
-	
+	audio->playCue(MOB_DAMAGE);
 }
 
-void Characters::removeLife()
+void Characters::removeLife(Audio *audio)
 {
 	if (getActive())
 	{
+		audio->playCue(PLAYER_DAMAGE);
 		if (this->getX() > 1580 || this->getX() < -300 || this->getY() > 1020 || this->getY() < -300)
 		{
+
 			if (healthcomponent->getLives() == 1)
 			{
 				healthcomponent->setLives(healthcomponent->getLives() - 1);

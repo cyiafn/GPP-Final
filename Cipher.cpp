@@ -136,6 +136,12 @@ void Cipher::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction image"));
 	if (!instruction.initialize(this, 1280, 720,1, &instructionTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+
+	if (audio.initialize() != S_OK) {
+		throw (GameError(gameErrorNS::FATAL_ERROR, "Error initialising sound"));
+	}
+	audio.playCue(BM_MUSIC);
+
 	return;
 
 	if (!winbackgroundTexture.initialize(this->getGraphics(), WIN_BACKGROUND))
@@ -228,10 +234,11 @@ void Cipher::update()
 	{
 		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
 		{
-			characters[i]->update(frameTime, this);
+			characters[i]->update(frameTime, this, &audio);
 		}
 
 		map1->update(frameTime, characters);
+		audio.run();
 
 		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
 		{
@@ -409,29 +416,30 @@ void Cipher::collisions()
 	//=============================================================================
 	//Cyrax Q
 	for (std::vector<Bullet*>::iterator it = cyrax->getQcomponent()->getBulletList()->begin(); it != cyrax->getQcomponent()->getBulletList()->end();)
-	{
-		if ((*it)->collidesWith(*freid))
+	{	
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getQcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getQcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getQcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -443,28 +451,29 @@ void Cipher::collisions()
 	//Cyrax W
 	for (std::vector<Bullet*>::iterator it = cyrax->getWcomponent()->getBulletList()->begin(); it != cyrax->getWcomponent()->getBulletList()->end();)
 	{
-		if ((*it)->collidesWith(*freid))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getWcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getWcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
 			float damage = cyrax->getWcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -478,28 +487,29 @@ void Cipher::collisions()
 	//Freid Q
 	for (std::vector<Bullet*>::iterator it = freid->getQcomponent()->getArrowList()->begin(); it != freid->getQcomponent()->getArrowList()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
 			float damage = freid->getQcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
 			float damage = freid->getQcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
 			float damage = freid->getQcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -510,28 +520,29 @@ void Cipher::collisions()
 	//Freid W
 	for (std::vector<Bullet*>::iterator it = freid->getWcomponent()->getCometList()->begin(); it != freid->getWcomponent()->getCometList()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
 			float damage = freid->getWcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
 			float damage = freid->getWcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
 			float damage = freid->getWcomponent()->getDamage();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 		else
@@ -550,19 +561,19 @@ void Cipher::collisions()
 		if (punch->collidesWith(*cyrax))
 		{
 			float damage = agent47->getQcomponent()->hit();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		if (punch->collidesWith(*freid))
 		{
 			float damage = agent47->getQcomponent()->hit();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
 		if (punch->collidesWith(*necrid))
 		{
 			float damage = agent47->getQcomponent()->hit();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 	}
@@ -574,19 +585,19 @@ void Cipher::collisions()
 		if (zap->collidesWith(*cyrax))
 		{
 			float damage = agent47->getWcomponent()->hit();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
 		if (zap->collidesWith(*freid))
 		{
 			float damage = agent47->getWcomponent()->hit();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
 		if (zap->collidesWith(*necrid))
 		{
 			float damage = agent47->getWcomponent()->hit();
-			necrid->knockback(damage);
+			necrid->knockback(damage, &audio);
 			necrid->setPassThroughWall(true);
 		}
 	}
@@ -596,28 +607,29 @@ void Cipher::collisions()
 	//Necrid Q
 	for (std::vector<Bomb*>::iterator it = necrid->getQcomponent()->getBombList()->begin(); it != necrid->getQcomponent()->getBombList()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
 			float damage = necrid->getQcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*freid))
+		else if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
 			float damage = necrid->getQcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
 			float damage = necrid->getQcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else
@@ -629,28 +641,29 @@ void Cipher::collisions()
 	//Necrid W
 	for (std::vector<Bullet*>::iterator it = necrid->getWcomponent()->getRaindrops()->begin(); it != necrid->getWcomponent()->getRaindrops()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
 			float damage = necrid->getWcomponent()->getDamage();
-			cyrax->knockback(damage);
+			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*freid))
+		else if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
 			float damage = necrid->getWcomponent()->getDamage();
-			freid->knockback(damage);
+			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
 			float damage = necrid->getWcomponent()->getDamage();
-			agent47->knockback(damage);
+			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
 		else

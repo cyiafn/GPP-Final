@@ -8,6 +8,7 @@
 #include "HealthComponent.h"
 #include <string>
 #include "game.h"
+#include "audio.h"
 namespace charactersNS
 {
 	const int WIDTH = 54;                   // image width
@@ -69,7 +70,7 @@ public:
 	bool getDeathConfirmed() { return deathConfirmed; }
 	void setDeathConfirmed(bool death) { deathConfirmed = death; }
 	BehaviourTree* behaviour;
-	void removeLife();
+	void removeLife(Audio *audio);
 	BehaviourTree* getBehaviour() { return behaviour; }
 	bool getQCD() { return Q_on_CoolDown; }
 	bool getWCD() { return W_on_CoolDown; }
@@ -116,7 +117,7 @@ public:
 
 	//Other Functions
 	//-----------------------------------------------------------------------------------------------------------------------------
-	void update(float frameTime, Game *cipher);
+	void update(float frameTime, Game *cipher, Audio *audio);
 	//void changeState(const CharacterFSM * newState) {};
 	void revertLocation();
 	void revertLocationY() { setY(prevY); }
@@ -135,12 +136,12 @@ public:
 	virtual int getQRange() { return 0; }
 	virtual int getWRange() { return 0; }
 	virtual int getERange() { return 0; }
-	void skillInputs(Game* cipher);
+	void skillInputs(Game* cipher, Audio *audio);
 	void movementInputs(float frameTime);
 	void moveRight();
 	void moveLeft();
 	void jump();
-	void knockback(float value);
+	void knockback(float value, Audio *audio);
 	void drop();
 	int getJumpCounter() { return jumpCounter; }
 	//-----------------------------------------------------------------------------------------------------------------------------
