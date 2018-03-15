@@ -41,15 +41,6 @@
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="instruction.cpp" />
-    <ClCompile Include="WinBackground.cpp" />
-    <ClCompile Include="first.cpp" />
-    <ClCompile Include="second.cpp" />
-    <ClCompile Include="third.cpp" />
-    <ClCompile Include="fourth.cpp" />
-    <ClCompile Include="playerone.cpp" />
-    <ClCompile Include="playertwo.cpp" />
-    <ClCompile Include="ai.cpp" />
-    <ClCompile Include="credit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent47.h" />
@@ -94,14 +85,5 @@
     <ClInclude Include="platform.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="instruction.h" />
-    <ClInclude Include="WinBackground.h" />
-    <ClInclude Include="first.h" />
-    <ClInclude Include="second.h" />
-    <ClInclude Include="third.h" />
-    <ClInclude Include="fourth.h" />
-    <ClInclude Include="playerone.h" />
-    <ClInclude Include="playertwo.h" />
-    <ClInclude Include="ai.h" />
-    <ClInclude Include="credit.h" />
   </ItemGroup>
 </Project>

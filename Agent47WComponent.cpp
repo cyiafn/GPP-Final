@@ -14,7 +14,14 @@ Agent47WComponent::Agent47WComponent(Game *cipher)
 
 	tombstone = new Structure();
 
-	
+	if (!WstoneTexture.initialize(cipher->getGraphics(), AGENT47W2_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Agent 47 Tombstone image"));
+	tombstone->setSprite(Agent47WComponentNS::WIDTH2, Agent47WComponentNS::HEIGHT2, Agent47WComponentNS::WSTONE_START_FRAME, Agent47WComponentNS::WSTONE_END_FRAME, 0);
+	if (!tombstone->initialize(cipher, Agent47WComponentNS::WIDTH2, Agent47WComponentNS::HEIGHT2, Agent47WComponentNS::TEXTURE_COLS, &WstoneTexture))
+	{
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Necrid E"));
+	}
+	tombstone->setActive(false);
 }
 Agent47WComponent::~Agent47WComponent()
 {
@@ -33,6 +40,14 @@ void Agent47WComponent::update(float frameTime)
 			current_Duration = 0;
 		}
 	}
+	if (tombstone->getActive())
+	{
+		tombstone->update(frameTime);
+		if (tombstone->getDuration() == Agent47WComponentNS::WSTONE_DURATION)
+		{
+			tombstone->setActive(false);
+		}
+	}
 }
 void Agent47WComponent::draw()
 {
@@ -40,6 +55,7 @@ void Agent47WComponent::draw()
 	{
 		Electrocute->draw();
 	}
+	tombstone->draw();
 }
 void Agent47WComponent::releaseAll()
 {
@@ -69,10 +85,14 @@ void Agent47WComponent::activate(bool facingRight, float x, float y, Game *ciphe
 	}
 	Electrocute->setActive(true);
 	zap = false;
+	tombstone->setY(y);
+	tombstone->resetDuration();
+	tombstone->setActive(true);
 }
 
 float Agent47WComponent::hit()
 {
 	zap = true;
+	tombstone->setActive(true);
 	return Agent47WComponentNS::WZAP_DAMAGE;
 }

@@ -15,9 +15,6 @@ namespace cyraxNS
 {
 	const int CYRAX_START_FRAME = 0;      // player starts at frame 0
 	const int CYRAX_END_FRAME = 2;        // player animation frames 0,1,2
-	const int CYRAX_RUN_FRAME = 3;
-	const int CYRAX_RUNNING_FRAME = 5;
-	const int CYRAX_JUMP_FRAME = 6;
 	const int TEXTURE_COLS = 3;           // texture has 2 columns
 	const int QSkillCD = 1;
 	const int WSkillCD = 3;

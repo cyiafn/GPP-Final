@@ -20,8 +20,8 @@ Characters::Characters() : Entity()
 	radius = charactersNS::WIDTH / 2.0;
 	frameDelay = charactersNS::PLAYER_ANIMATION_DELAY;
 	collisionType = entityNS::BOX;
-	edge.left = -charactersNS::WIDTH*getScale() / 2;
-	edge.top = -charactersNS::HEIGHT*getScale() / 2;
+	edge.left = -charactersNS::WIDTH*getScale() / 2;;
+	edge.top = -charactersNS::HEIGHT*getScale() / 2;;
 	edge.right = charactersNS::WIDTH*getScale() / 2;
 	edge.bottom = charactersNS::HEIGHT*getScale() / 2;
 	/*edge.left = 0;
@@ -34,7 +34,6 @@ Characters::Characters() : Entity()
 	type = 0;
 	behaviour = new BehaviourTree();
 	this->setActive(false);
-	deathConfirmed = false;
 }
 
 //=============================================================================
@@ -75,11 +74,6 @@ void Characters::update(float frameTime, Game *cipher, Audio *audio)
 	movementInputs(frameTime);
 	skillUpdate(frameTime);
 	setPrev(getX(), getY());
-	if (movecomponent->getVelocity().x == 0 && movecomponent->getVelocity().y == 0)
-	{
-		startFrame = 0;
-		endFrame = 2;
-	}
 }
 
 void Characters::moveRight()
@@ -121,7 +115,6 @@ void Characters::drop()
 
 void Characters::jump()
 {
-	this->setLoop(false);
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
 	jumpCounter += 1;
@@ -135,17 +128,12 @@ void Characters::movementInputs(float frameTime)
 {
 	if (type == 1)
 	{
-		
 		if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 		{
-			startFrame = 3;
-			endFrame = 5;
 			moveRight();
 		}
 		if (input->isKeyDown(P1LEFT_KEY))             // if move left
 		{
-			startFrame = 3;
-			endFrame = 5;
 			moveLeft();
 		}
 		if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
@@ -155,7 +143,6 @@ void Characters::movementInputs(float frameTime)
 				VECTOR2 vel;
 				vel.x = movecomponent->getVelocity().x - 20;
 				vel.y = movecomponent->getVelocity().y;
-				
 				movecomponent->setVelocity(vel);
 			}
 			else if (movecomponent->getVelocity().x < 0)
@@ -165,7 +152,6 @@ void Characters::movementInputs(float frameTime)
 				vel.y = movecomponent->getVelocity().y;
 				movecomponent->setVelocity(vel);
 			}
-			
 		}
 
 		if (!input->isKeyDown(P1JUMP_KEY))
@@ -197,23 +183,15 @@ void Characters::movementInputs(float frameTime)
 
 			}
 		}
-		if (this->getCurrentFrame() == 5)
-		{
-			currentFrame = 3;
-		}
 	}
 	else if (type == 2)
 	{
 		if (input->isKeyDown(P2RIGHT_KEY))            // if move right
 		{
-			startFrame = 3;
-			endFrame = 5;
 			moveRight();
 		}
 		if (input->isKeyDown(P2LEFT_KEY))             // if move left
 		{
-			startFrame = 3;
-			endFrame = 5;
 			moveLeft();
 		}
 		if ((!input->isKeyDown(P2RIGHT_KEY) && !input->isKeyDown(P2LEFT_KEY)))
@@ -288,7 +266,7 @@ void Characters::skillInputs(Game *cipher, Audio *audio)
 		if (input->isKeyDown(P1SKILL1_KEY)) //T or ,
 		{
 			if (!Q_on_CoolDown)
-			{			
+			{
 				useQ(facingRight, center, cipher);
 				audio->playCue(GUN_SHOT);
 			}
