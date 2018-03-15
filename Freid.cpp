@@ -46,16 +46,19 @@ void Freid::resetSkill(std::string letter)
 {
 	if (letter == "Q")
 	{
+		this->setCurrentFrame(10);
 		Q_CoolDown = FreidNS::QSkillCD;
 		Q_on_CoolDown = false;
 	}
 	else if (letter == "W")
 	{
+		this->setCurrentFrame(8);
 		W_CoolDown = FreidNS::WSkillCD;
 		W_on_CoolDown = false;
 	}
 	else if (letter == "E")
 	{
+		this->setCurrentFrame(7);
 		E_CoolDown = FreidNS::ESkillCD;
 		E_on_CoolDown = false;
 	}

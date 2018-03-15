@@ -26,7 +26,7 @@ namespace Agent47WComponentNS
 	const int WZAP_DURATION = 30;	// range by frametime
 	const int WSTONE_DURATION = 150;	// range by frametime
 	const int SPAWN_DISTANCE = 75;
-	const float WZAP_DAMAGE = 10.0f;
+	const float WZAP_DAMAGE = 5.0f;
 }
 
 class Agent47WComponent

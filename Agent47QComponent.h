@@ -19,7 +19,7 @@ namespace Agent47QComponentNS
 	const int QPUNCH_END_FRAME = 0;       // bullet end at frame 0
 	const float QPUNCH_ANIMATION_DELAY = 0;
 	const int QPUNCH_DURATION = 20;	// range by frametime
-	const float QPUNCH_DAMAGE = 10.0f;
+	const float QPUNCH_DAMAGE = 2.0f;
 }
 
 class Agent47QComponent

@@ -72,16 +72,19 @@ void Necrid::resetSkill(std::string letter)
 
 void Necrid::useQ(bool facingRight, VECTOR2 center, Game *cipher)
 {
+	this->setCurrentFrame(8);
 	Qcomponent->activate(facingRight, center, cipher);
 	Q_on_CoolDown = true;
 }
 void Necrid::useW(bool facingRight, VECTOR2 center, Game *cipher)
 {
+	this->setCurrentFrame(10);
 	Wcomponent->activate(facingRight, center, cipher);
 	W_on_CoolDown = true;
 }
 void Necrid::useE(bool facingRight, VECTOR2 center, Game *cipher)
 {
+	this->setCurrentFrame(7);
 	float infrontX;
 	if (facingRight)
 	{

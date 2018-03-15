@@ -62,7 +62,7 @@ private:
 	//std::vector<Platform*> characters;
 
 public:
-	Map(int type, Game *cipher, std::vector<Characters*> characters);
+	Map(int type, Game *cipher, std::vector<Characters*> characters, Audio *audio);
 	~Map();
 	void update(float frameTime, std::vector<Characters*> characters);
 	void draw();

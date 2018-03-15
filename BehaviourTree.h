@@ -10,6 +10,7 @@
 #include <algorithm>
 #include "platform.h"
 #include "constants.h"
+#include "audio.h"
 
 class Characters;
 
@@ -251,8 +252,9 @@ class BehaviourTree
 			std::vector<Platform*> platforms;
 			std::vector<Characters*> characters;
 			Game* cipher;
+			Audio *audio;
 		public:
-			fightPlayer(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; }
+			fightPlayer(Characters* chars, std::vector<Platform*> platforms, Game* cip, std::vector<Characters*> characters, Audio *au) { this->chars = chars; this->platforms = platforms; this->cipher = cip;  this->characters = characters; this->audio = au; }
 			virtual bool run() override {
 				Characters* targetedCharacter;
 				float lowestTotalDis = 0;
@@ -302,10 +304,12 @@ class BehaviourTree
 					if (chars->getQCD() == false)
 					{
 						chars->useQ(chars->getFacingRight(), *chars->getCenter(), cipher);
+						audio->playCue(GUN_SHOT);
 					}
 					if (chars->getWCD() == false)
 					{
 						chars->useW(chars->getFacingRight(), *chars->getCenter(), cipher);
+						audio->playCue(GUN_SHOT);
 					}
 				}
 				else if (chars->getFacingRight() == false && distance > 70)
@@ -314,10 +318,12 @@ class BehaviourTree
 					if (chars->getQCD() == false)
 					{
 						chars->useQ(chars->getFacingRight(), *chars->getCenter(), cipher);
+						audio->playCue(GUN_SHOT);
 					}
 					if (chars->getWCD() == false)
 					{
 						chars->useW(chars->getFacingRight(), *chars->getCenter(), cipher);
+						audio->playCue(GUN_SHOT);
 					}
 				}
 				return true;

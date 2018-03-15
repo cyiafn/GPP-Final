@@ -65,16 +65,19 @@ void Agent47::resetSkill(std::string letter)
 {
 	if (letter == "Q")
 	{
+		this->setCurrentFrame(7);
 		Q_CoolDown = Agent47NS::QSkillCD;
 		Q_on_CoolDown = false;
 	}
 	else if (letter == "W")
 	{
+		this->setCurrentFrame(8);
 		W_CoolDown = Agent47NS::WSkillCD;
 		W_on_CoolDown = false;
 	}
 	else if (letter == "E")
 	{
+		this->setCurrentFrame(5);
 		E_CoolDown = Agent47NS::ESkillCD;
 		E_on_CoolDown = false;
 	}

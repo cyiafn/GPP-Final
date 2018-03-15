@@ -84,6 +84,8 @@ void Characters::update(float frameTime, Game *cipher, Audio *audio)
 
 void Characters::moveRight()
 {
+	startFrame = 3;
+	endFrame = 5;
 	facingRight = true;
 	this->flipHorizontal(false);
 	if (movecomponent->getVelocity().x <= 300)
@@ -97,6 +99,8 @@ void Characters::moveRight()
 
 void Characters::moveLeft()
 {
+	startFrame = 3;
+	endFrame = 5;
 	facingRight = false;
 	this->flipHorizontal(true);
 	if (movecomponent->getVelocity().x >= -300)
@@ -139,14 +143,10 @@ void Characters::movementInputs(float frameTime)
 		
 		if (input->isKeyDown(P1RIGHT_KEY))            // if move right
 		{
-			startFrame = 3;
-			endFrame = 5;
 			moveRight();
 		}
 		if (input->isKeyDown(P1LEFT_KEY))             // if move left
 		{
-			startFrame = 3;
-			endFrame = 5;
 			moveLeft();
 		}
 		if ((!input->isKeyDown(P1RIGHT_KEY) && !input->isKeyDown(P1LEFT_KEY)))
@@ -400,6 +400,7 @@ void Characters::coolDownChecking()
 
 void Characters::knockback(float value, Audio *audio)
 {
+	this->setCurrentFrame(9);
 	float baseKnockback = 500;
 	double knockbackDegree = 33 * (PI / 180);
 	this->healthcomponent->damageMe(value);
@@ -418,14 +419,14 @@ void Characters::knockback(float value, Audio *audio)
 	vel.y = -(knockback * sin(knockbackDegree));
 	movecomponent->setVelocity(vel);
 	movecomponent->setGravityActive(true);
-	audio->playCue(MOB_DAMAGE);
+	//audio->playCue(MOB_DAMAGE);
 }
 
 void Characters::removeLife(Audio *audio)
 {
 	if (getActive())
 	{
-		audio->playCue(PLAYER_DAMAGE);
+		//audio->playCue(PLAYER_DAMAGE);
 		if (this->getX() > 1580 || this->getX() < -300 || this->getY() > 1020 || this->getY() < -300)
 		{
 

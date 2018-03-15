@@ -2,7 +2,7 @@
 #include <vector>
 #include "platform.h"
 
-Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
+Map::Map(int type, Game* cipher, std::vector<Characters*> characters, Audio *audio)
 {
 	//platforms = new std::vector<Platform>(100);
 	background1 = new Platform();
@@ -302,7 +302,7 @@ Map::Map(int type, Game* cipher, std::vector<Characters*> characters)
 			BehaviourTree::jumpToNearestPlatform* jumptonearestplatform = new BehaviourTree::jumpToNearestPlatform(characters[i], platforms);
 			BehaviourTree::attackSelector* attackselector = new BehaviourTree::attackSelector(characters[i], platforms, gamePointer, characters);
 			BehaviourTree::navigateToNearestPlayer* navigate = new BehaviourTree::navigateToNearestPlayer(characters[i], platforms, gamePointer, characters);
-			BehaviourTree::fightPlayer* fight = new BehaviourTree::fightPlayer(characters[i], platforms, gamePointer, characters);
+			BehaviourTree::fightPlayer* fight = new BehaviourTree::fightPlayer(characters[i], platforms, gamePointer, characters, audio);
 			root->addChild(mainselector);
 			mainselector->addChild(escapeSequence);
 			escapeSequence->addChild(escapeplayers);

@@ -35,15 +35,18 @@ void Cipher::initialize(HWND hwnd)
     Game::initialize(hwnd); // throws GameError
 	cyrax = new Cyrax(this);
 	cyrax->setType(1);
+	cyrax->setX(300);
 	necrid = new Necrid(this);
-	necrid->setType(2);
+	necrid->setType(0);
 	freid = new Freid(this);
 	freid->setType(2);
-	freid->setX(300);
-	freid->setY(GAME_HEIGHT / 2 - freid->getHeight() / 2 + 250);
+	freid->setX(900);
+	freid->setY(GAME_HEIGHT / 2 - freid->getHeight() / 2);
 	agent47 = new Agent47(this);
-	agent47->setType(1);
-	necrid->setX(900);
+	agent47->setType(0);
+	agent47->setX(600);
+	agent47->setY(100);
+	necrid->setX(600);
 	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
 
 	cyrax->setActive(true);
@@ -130,7 +133,7 @@ void Cipher::initialize(HWND hwnd)
 	}
 	
 
-	map1 = new Map(0, this, characters);
+	map1 = new Map(0, this, characters, &audio);
 	currentMode = 0;
 	if (!instructionTexture.initialize(this->getGraphics(), INSTRUCTION_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction image"));
@@ -557,19 +560,20 @@ void Cipher::collisions()
 	Bullet *punch = agent47->getQcomponent()->getPunch();
 	if (punch->getActive())
 	{ 
-		if (punch->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if (punch->OldCollidesWith(*cyrax, vec))
 		{
 			float damage = agent47->getQcomponent()->hit();
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		if (punch->collidesWith(*freid))
+		if (punch->OldCollidesWith(*freid, vec))
 		{
 			float damage = agent47->getQcomponent()->hit();
 			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		if (punch->collidesWith(*necrid))
+		if (punch->OldCollidesWith(*necrid, vec))
 		{
 			float damage = agent47->getQcomponent()->hit();
 			necrid->knockback(damage, &audio);
@@ -581,19 +585,20 @@ void Cipher::collisions()
 	Bullet *zap = agent47->getWcomponent()->getPunch();
 	if (zap->getActive())
 	{
-		if (zap->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if (zap->OldCollidesWith(*cyrax, vec))
 		{
 			float damage = agent47->getWcomponent()->hit();
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		if (zap->collidesWith(*freid))
+		if (zap->OldCollidesWith(*freid, vec))
 		{
 			float damage = agent47->getWcomponent()->hit();
 			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		if (zap->collidesWith(*necrid))
+		if (zap->OldCollidesWith(*necrid, vec))
 		{
 			float damage = agent47->getWcomponent()->hit();
 			necrid->knockback(damage, &audio);

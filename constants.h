@@ -86,6 +86,7 @@ const char BM_MUSIC[] = "music";
 const char GUN_SHOT[] = "gunshot";
 const char MOB_DAMAGE[] = "getHit";
 const char PLAYER_DAMAGE[] = "scream";
+const char WATER_SFX[] = "water";
 
 // key mappings
 

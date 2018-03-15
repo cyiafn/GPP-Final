@@ -1,0 +1,259 @@
+﻿  Agent47.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Agent47EComponent.h(29): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Agent47.h(52): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+  Agent47EComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Agent47EComponent.h(29): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+  Agent47QComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Agent47RComponent.cpp
+  Agent47WComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  ai.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  audio.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  bomb.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+bomb.cpp(49): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+bomb.cpp(50): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+bomb.cpp(51): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+bomb.cpp(52): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+  bullet.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+bullet.cpp(51): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+bullet.cpp(52): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+bullet.cpp(53): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+bullet.cpp(54): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+  characters.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+characters.cpp(23): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+characters.cpp(24): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+characters.cpp(25): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+characters.cpp(26): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+characters.cpp(406): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+characters.cpp(419): warning C4244: '=': conversion from 'double' to 'FLOAT', possible loss of data
+characters.cpp(436): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+characters.cpp(442): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  credit.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Cyrax.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\CyraxEComponent.h(30): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Cyrax.h(54): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+  CyraxEComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\CyraxEComponent.h(30): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+  CyraxQComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+CyraxQComponent.cpp(17): warning C4018: '<': signed/unsigned mismatch
+CyraxQComponent.cpp(32): warning C4804: '<=': unsafe use of type 'bool' in operation
+CyraxQComponent.cpp(34): warning C4018: '<': signed/unsigned mismatch
+  CyraxRComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  CyraxWComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+CyraxWComponent.cpp(17): warning C4018: '<': signed/unsigned mismatch
+CyraxWComponent.cpp(47): warning C4018: '<': signed/unsigned mismatch
+  entity.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+entity.cpp(71): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(72): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(73): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(74): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(77): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(78): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(79): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(80): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+entity.cpp(111): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+entity.cpp(112): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+entity.cpp(115): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+entity.cpp(116): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  first.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  fourth.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Freid.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\FreidEComponent.h(27): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Freid.h(50): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Freid.h(51): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+  Compiling...
+  FreidEComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\FreidEComponent.h(27): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+  FreidQComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+FreidQComponent.cpp(18): warning C4018: '<': signed/unsigned mismatch
+FreidQComponent.cpp(33): warning C4018: '<': signed/unsigned mismatch
+  FreidRComponent.cpp
+  FreidWComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+FreidWComponent.cpp(17): warning C4018: '<': signed/unsigned mismatch
+FreidWComponent.cpp(32): warning C4018: '<': signed/unsigned mismatch
+FreidWComponent.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  game.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  graphics.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  HealthComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  image.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  input.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  instruction.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  ItemPortal.cpp
+  map.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  MoveComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  Cipher.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\CyraxEComponent.h(30): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Cyrax.h(54): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\FreidEComponent.h(27): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Freid.h(50): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Freid.h(51): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Agent47EComponent.h(29): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Agent47.h(52): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridQComponent.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridEComponent.h(21): warning C4305: 'initializing': truncation from 'double' to 'float'
+Cipher.cpp(44): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+Cipher.cpp(50): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+  Necrid.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridQComponent.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridEComponent.h(21): warning C4305: 'initializing': truncation from 'double' to 'float'
+  NecridEComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridEComponent.h(21): warning C4305: 'initializing': truncation from 'double' to 'float'
+  NecridQComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridQComponent.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
+NecridQComponent.cpp(17): warning C4018: '<': signed/unsigned mismatch
+NecridQComponent.cpp(32): warning C4018: '<': signed/unsigned mismatch
+  NecridRComponent.cpp
+  NecridWComponent.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+NecridWComponent.cpp(31): warning C4018: '<': signed/unsigned mismatch
+NecridWComponent.cpp(47): warning C4804: '<=': unsafe use of type 'bool' in operation
+NecridWComponent.cpp(49): warning C4018: '<': signed/unsigned mismatch
+  playerone.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Compiling...
+  playertwo.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  projectile.cpp
+  second.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  structure.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+structure.cpp(56): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+structure.cpp(57): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+structure.cpp(58): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+structure.cpp(59): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+  platform.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+platform.cpp(17): warning C4305: 'argument': truncation from 'double' to 'float'
+  textureManager.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  third.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  WinBackground.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+  winmain.cpp
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\constants.h(39): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(48): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(50): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\MoveComponent.h(52): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\HealthComponent.h(39): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\CyraxEComponent.h(30): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Cyrax.h(54): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\FreidEComponent.h(27): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Freid.h(50): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Freid.h(51): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Agent47EComponent.h(29): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\Agent47.h(52): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridQComponent.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\NecridEComponent.h(21): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating code
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\freidecomponent.cpp(38): warning C4715: 'FreidEComponent::activate': not all control paths return a value
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\cyraxecomponent.cpp(41): warning C4715: 'CyraxEComponent::activate': not all control paths return a value
+c:\users\eezhe\downloads\gpp\cipher\gpp-final\behaviourtree.h(403): warning C4700: uninitialized local variable 'targetedPlatform' used
+  All 931 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Cipher.vcxproj -> C:\Users\EeZhe\Downloads\GPP\Cipher\GPP-Final\Release\Cipher.exe

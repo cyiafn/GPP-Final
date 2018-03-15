@@ -46,16 +46,19 @@ void Cyrax::resetSkill(std::string letter)
 {
 	if (letter == "Q")
 	{
+		this->setCurrentFrame(10);
 		Q_CoolDown = cyraxNS::QSkillCD;
 		Q_on_CoolDown = false;
 	}
 	else if (letter == "W")
 	{
+		this->setCurrentFrame(8);
 		W_CoolDown = cyraxNS::WSkillCD;
 		W_on_CoolDown = false;
 	}
 	else if (letter == "E")
 	{
+		this->setCurrentFrame(6);
 		E_CoolDown = cyraxNS::ESkillCD;
 		E_on_CoolDown = false;
 	}
