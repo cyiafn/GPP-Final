@@ -40,10 +40,10 @@ private:
 	//Object
 	Map *map1;
 	
-	Characters* firstPos;
-	Characters* secondPos;
-	Characters* thirdPos;
-	Characters* fourthPos;
+	Characters* firstPos = NULL;
+	Characters* secondPos = NULL;
+	Characters* thirdPos = NULL;
+	Characters* fourthPos = NULL;
 
 
 	TextureManager characterTexture;     // player texture

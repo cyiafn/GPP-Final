@@ -38,11 +38,11 @@ void Cipher::initialize(HWND hwnd)
 	necrid = new Necrid(this);
 	necrid->setType(2);
 	freid = new Freid(this);
-	freid->setType(0);
+	freid->setType(2);
 	freid->setX(300);
 	freid->setY(GAME_HEIGHT / 2 - freid->getHeight() / 2 + 250);
 	agent47 = new Agent47(this);
-	agent47->setType(0);
+	agent47->setType(1);
 	necrid->setX(900);
 	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
 
@@ -142,12 +142,12 @@ void Cipher::initialize(HWND hwnd)
 	}
 	audio.playCue(BM_MUSIC);
 
-	return;
 
 	if (!winbackgroundTexture.initialize(this->getGraphics(), WIN_BACKGROUND))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background image"));
 	if (!winbackground.initialize(this, 1280, 720, 1, &winbackgroundTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	//change
 	winbackground.setActive(false);
 	winbackground.setX(0);
 	winbackground.setY(0);
@@ -173,6 +173,7 @@ void Cipher::initialize(HWND hwnd)
 	second.setActive(false);
 	third.setActive(false);
 	fourth.setActive(false);
+	
 	first.setX(437.5);
 	first.setY(180);
 	second.setX(437.5);
@@ -199,7 +200,7 @@ void Cipher::initialize(HWND hwnd)
 	playerone.setActive(false);
 	playertwo.setActive(false);
 	ai1.setActive(false);
-	ai1.setActive(false);
+	ai2.setActive(false);
 	ai1.setX(0);
 	ai1.setY(0);
 	ai2.setX(0);
@@ -258,9 +259,6 @@ void Cipher::update()
 				{
 					secondPos = characters[i];
 					characters[i]->setDeathConfirmed(true);
-				}
-				else if (firstPos == NULL)
-				{
 					firstPos = characters[i];
 					characters[i]->setDeathConfirmed(true);
 					currentMode = 2;
@@ -274,6 +272,7 @@ void Cipher::update()
 					ai1.setActive(true);
 					ai2.setActive(true);
 				}
+					
 			}
 		}
 	}

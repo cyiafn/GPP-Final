@@ -121,6 +121,7 @@ void Characters::drop()
 
 void Characters::jump()
 {
+	this->setCurrentFrame(6);
 	this->setLoop(false);
 	movecomponent->setGravityActive(true);
 	passThroughWall = true;
@@ -430,6 +431,7 @@ void Characters::removeLife(Audio *audio)
 
 			if (healthcomponent->getLives() == 1)
 			{
+
 				healthcomponent->setLives(healthcomponent->getLives() - 1);
 				this->setActive(false);
 			}
