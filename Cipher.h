@@ -18,6 +18,16 @@
 #include <vector>
 #include "characters.h"
 #include "audio.h"
+#include "instruction.h"
+#include "first.h"
+#include "second.h"
+#include "third.h"
+#include "fourth.h"
+#include "WinBackground.h"
+#include "ai.h"
+#include "playerone.h"
+#include "playertwo.h"
+#include "credit.h"
 
 //=============================================================================
 // This class is the core of the game
@@ -29,8 +39,37 @@ private:
 	//TextureManager
 	//Object
 	Map *map1;
+	
+	Characters* firstPos;
+	Characters* secondPos;
+	Characters* thirdPos;
+	Characters* fourthPos;
+
+
 	Audio audio;
 	TextureManager characterTexture;     // player texture
+	TextureManager instructionTexture;
+	TextureManager winbackgroundTexture;
+	TextureManager firstTexture;
+	TextureManager secondTexture;
+	TextureManager thirdTexture;
+	TextureManager fourthTexture;
+	TextureManager playeroneTexture;
+	TextureManager playertwoTexture;
+	TextureManager aiTexture;
+	TextureManager creditTexture;
+
+	Credit credits;
+	WinBackground winbackground;
+	First first;
+	Second second;
+	Third third;
+	Fourth fourth;
+	Playerone playerone;
+	Playertwo playertwo;
+	AI ai1, ai2;
+
+	Instruction instruction;
 	Cyrax *cyrax;
 	Freid *freid;
 	Agent47 *agent47;

@@ -38,18 +38,17 @@ void Cipher::initialize(HWND hwnd)
 	necrid = new Necrid(this);
 	necrid->setType(2);
 	freid = new Freid(this);
-	freid->setType(1);
-	freid->setX(300);
-	freid->setY(GAME_HEIGHT / 2 - freid->getHeight() / 2 + 250);
+	freid->setType(2);
 	agent47 = new Agent47(this);
-	agent47->setType(2);
-	necrid->setX(900);
-	necrid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
+	agent47->setType(0);
+	cyrax->setX(300);
+	freid->setX(900);
+	freid->setY(GAME_HEIGHT / 2 - necrid->getHeight()/2 );
 
 	cyrax->setActive(true);
-	necrid->setActive(true);
-	/*freid->setActive(true);
-	agent47->setActive(true);*/
+	//necrid->setActive(true);
+	freid->setActive(true);
+	agent47->setActive(true);
 
 	characters.push_back(cyrax);
 	characters.push_back(necrid);
@@ -132,6 +131,11 @@ void Cipher::initialize(HWND hwnd)
 
 	map1 = new Map(0, this, characters);
 	currentMode = 0;
+	if (!instructionTexture.initialize(this->getGraphics(), INSTRUCTION_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instruction image"));
+	if (!instruction.initialize(this, 1280, 720,1, &instructionTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
+	return;
 	
 	if (audio.initialize() != S_OK) {
 		throw (new GameError());
@@ -147,7 +151,17 @@ void Cipher::initialize(HWND hwnd)
 //=============================================================================
 void Cipher::update()
 {
-
+	if (currentMode == 0)
+	{
+		instruction.update(frameTime);
+		if (input->getMouseLButton())
+		{
+			instruction.setActive(false);
+			currentMode = 1;
+		}
+	}
+	else if (currentMode == 1)
+	{
 		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
 		{
 			characters[i]->update(frameTime, this, &audio);
@@ -156,6 +170,161 @@ void Cipher::update()
 		map1->update(frameTime, characters, &audio);
 		audio.run();
 
+		for (std::vector<int>::size_type i = 0; i != characters.size(); i++)
+		{
+			if (characters[i]->getHealthComponent()->getLives() <= 0 && characters[i]->getDeathConfirmed() == false)
+			{
+				if (fourthPos == NULL)
+				{
+					fourthPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+				}
+				else if (thirdPos == NULL)
+				{
+					thirdPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+				}
+				else if (secondPos == NULL)
+				{
+					secondPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+				}
+				else if (firstPos == NULL)
+				{
+					firstPos = characters[i];
+					characters[i]->setDeathConfirmed(true);
+					currentMode = 2;
+					winbackground.setActive(true);
+					first.setActive(true);
+					second.setActive(true);
+					third.setActive(true);
+					fourth.setActive(true);
+					playerone.setActive(true);
+					playertwo.setActive(true);
+					ai1.setActive(true);
+					ai2.setActive(true);
+				}
+			}
+		}
+	}
+	else if (currentMode == 2)
+	{
+		winbackground.update(frameTime);
+		first.update(frameTime);
+		second.update(frameTime);
+		third.update(frameTime);
+		fourth.update(frameTime);
+		playerone.update(frameTime);
+		playertwo.update(frameTime);
+		ai1.update(frameTime);
+		ai2.update(frameTime);
+		if (firstPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY()== 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180);
+			}
+		}
+		else if (firstPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180);
+		}
+		else if (firstPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180);
+		}
+
+		if (secondPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY() == 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180 + 2 * 45);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180 + 2 * 45);
+			}
+		}
+		else if (secondPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180 + 2 * 45);
+		}
+		else if (secondPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180 + 2 * 45);
+		}
+
+		if (thirdPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY() == 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180 + 4 * 45);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180 + 4 * 45);
+			}
+		}
+		else if (thirdPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180 + 4 * 45);
+		}
+		else if (thirdPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180 + 4 * 45);
+		}
+
+		if (fourthPos->getType() == 0)
+		{
+			if (ai1.getX() == 0 && ai1.getY() == 0)
+			{
+				ai1.setX(437.5 + 135 + 135);
+				ai1.setY(180 + 6 * 45);
+			}
+			else
+			{
+				ai2.setX(437.5 + 135 + 135);
+				ai2.setY(180 + 2 * 45);
+			}
+		}
+		else if (fourthPos->getType() == 1)
+		{
+			playerone.setX(437.5 + 135 + 135);
+			playerone.setY(180 + 6 * 45);
+		}
+		else if (fourthPos->getType() == 2)
+		{
+			playertwo.setX(437.5 + 135 + 135);
+			playertwo.setY(180 + 6 * 45);
+		}
+
+		if (input->getMouseLButton())
+		{
+			currentMode = 3;
+			credits.setActive(true);
+		}
+
+	}
+	else if (currentMode == 3)
+	{
+		credits.update(frameTime);
+	}
 }
 
 //=============================================================================
@@ -177,8 +346,9 @@ void Cipher::collisions()
 	//=============================================================================
 	//Cyrax Q
 	for (std::vector<Bullet*>::iterator it = cyrax->getQcomponent()->getBulletList()->begin(); it != cyrax->getQcomponent()->getBulletList()->end();)
-	{
-		if ((*it)->collidesWith(*freid))
+	{	
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
@@ -187,7 +357,7 @@ void Cipher::collisions()
 			freid->setPassThroughWall(true);
 			
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
@@ -195,7 +365,7 @@ void Cipher::collisions()
 			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = cyrax->getQcomponent()->getBulletList()->erase(it);
@@ -212,7 +382,8 @@ void Cipher::collisions()
 	//Cyrax W
 	for (std::vector<Bullet*>::iterator it = cyrax->getWcomponent()->getBulletList()->begin(); it != cyrax->getWcomponent()->getBulletList()->end();)
 	{
-		if ((*it)->collidesWith(*freid))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
@@ -220,7 +391,7 @@ void Cipher::collisions()
 			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
@@ -228,7 +399,7 @@ void Cipher::collisions()
 			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = cyrax->getWcomponent()->getBulletList()->erase(it);
@@ -247,7 +418,8 @@ void Cipher::collisions()
 	//Freid Q
 	for (std::vector<Bullet*>::iterator it = freid->getQcomponent()->getArrowList()->begin(); it != freid->getQcomponent()->getArrowList()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
@@ -255,7 +427,7 @@ void Cipher::collisions()
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
@@ -263,7 +435,7 @@ void Cipher::collisions()
 			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = freid->getQcomponent()->getArrowList()->erase(it);
@@ -279,7 +451,8 @@ void Cipher::collisions()
 	//Freid W
 	for (std::vector<Bullet*>::iterator it = freid->getWcomponent()->getCometList()->begin(); it != freid->getWcomponent()->getCometList()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
@@ -287,7 +460,7 @@ void Cipher::collisions()
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
@@ -295,7 +468,7 @@ void Cipher::collisions()
 			agent47->knockback(damage, &audio);
 			agent47->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*necrid))
+		else if ((*it)->OldCollidesWith(*necrid, vec))
 		{
 			delete (*it);
 			it = freid->getWcomponent()->getCometList()->erase(it);
@@ -365,7 +538,8 @@ void Cipher::collisions()
 	//Necrid Q
 	for (std::vector<Bomb*>::iterator it = necrid->getQcomponent()->getBombList()->begin(); it != necrid->getQcomponent()->getBombList()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
@@ -373,7 +547,7 @@ void Cipher::collisions()
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*freid))
+		else if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
@@ -381,7 +555,7 @@ void Cipher::collisions()
 			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = necrid->getQcomponent()->getBombList()->erase(it);
@@ -398,7 +572,8 @@ void Cipher::collisions()
 	//Necrid W
 	for (std::vector<Bullet*>::iterator it = necrid->getWcomponent()->getRaindrops()->begin(); it != necrid->getWcomponent()->getRaindrops()->end();)
 	{
-		if ((*it)->collidesWith(*cyrax))
+		VECTOR2 vec;
+		if ((*it)->OldCollidesWith(*cyrax, vec))
 		{
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
@@ -406,7 +581,7 @@ void Cipher::collisions()
 			cyrax->knockback(damage, &audio);
 			cyrax->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*freid))
+		else if ((*it)->OldCollidesWith(*freid, vec))
 		{
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
@@ -414,7 +589,7 @@ void Cipher::collisions()
 			freid->knockback(damage, &audio);
 			freid->setPassThroughWall(true);
 		}
-		else if ((*it)->collidesWith(*agent47))
+		else if ((*it)->OldCollidesWith(*agent47, vec))
 		{
 			delete (*it);
 			it = necrid->getWcomponent()->getRaindrops()->erase(it);
@@ -449,7 +624,17 @@ void Cipher::render()
 	}
 	
 	//draw here
-
+	instruction.draw();
+	winbackground.draw();
+	first.draw();
+	second.draw();
+	third.draw();
+	fourth.draw();
+	playerone.draw();
+	playertwo.draw();
+	ai1.draw();
+	ai2.draw();
+	credits.draw();
 	graphics->spriteEnd();                  // end drawing sprites
 }
 
@@ -460,7 +645,6 @@ void Cipher::render()
 void Cipher::releaseAll()
 {
 	map1->releaseAll();
-	
 	Game::releaseAll();
 	return;
 }

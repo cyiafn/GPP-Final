@@ -93,16 +93,20 @@
     <ClCompile Include="Agent47QComponent.cpp" />
     <ClCompile Include="Agent47RComponent.cpp" />
     <ClCompile Include="Agent47WComponent.cpp" />
+    <ClCompile Include="ai.cpp" />
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="bomb.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="characters.cpp" />
+    <ClCompile Include="credit.cpp" />
     <ClCompile Include="Cyrax.cpp" />
     <ClCompile Include="CyraxEComponent.cpp" />
     <ClCompile Include="CyraxQComponent.cpp" />
     <ClCompile Include="CyraxRComponent.cpp" />
     <ClCompile Include="CyraxWComponent.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="first.cpp" />
+    <ClCompile Include="fourth.cpp" />
     <ClCompile Include="Freid.cpp" />
     <ClCompile Include="FreidEComponent.cpp" />
     <ClCompile Include="FreidQComponent.cpp" />
@@ -123,10 +127,15 @@
     <ClCompile Include="NecridQComponent.cpp" />
     <ClCompile Include="NecridRComponent.cpp" />
     <ClCompile Include="NecridWComponent.cpp" />
+    <ClCompile Include="playerone.cpp" />
+    <ClCompile Include="playertwo.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="second.cpp" />
     <ClCompile Include="structure.cpp" />
     <ClCompile Include="platform.cpp" />
     <ClCompile Include="textureManager.cpp" />
+    <ClCompile Include="third.cpp" />
+    <ClCompile Include="WinBackground.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,18 +144,22 @@
     <ClInclude Include="Agent47QComponent.h" />
     <ClInclude Include="Agent47RComponent.h" />
     <ClInclude Include="Agent47WComponent.h" />
+    <ClInclude Include="ai.h" />
     <ClInclude Include="audio.h" />
     <ClInclude Include="BehaviourTree.h" />
     <ClInclude Include="characters.h" />
     <ClInclude Include="bomb.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="credit.h" />
     <ClInclude Include="Cyrax.h" />
     <ClInclude Include="CyraxEComponent.h" />
     <ClInclude Include="CyraxQComponent.h" />
     <ClInclude Include="CyraxRComponent.h" />
     <ClInclude Include="CyraxWComponent.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="first.h" />
+    <ClInclude Include="fourth.h" />
     <ClInclude Include="Freid.h" />
     <ClInclude Include="FreidEComponent.h" />
     <ClInclude Include="FreidQComponent.h" />
@@ -168,10 +181,15 @@
     <ClInclude Include="NecridQComponent.h" />
     <ClInclude Include="NecridRComponent.h" />
     <ClInclude Include="NecridWComponent.h" />
+    <ClInclude Include="playerone.h" />
+    <ClInclude Include="playertwo.h" />
     <ClInclude Include="projectile.h" />
+    <ClInclude Include="second.h" />
     <ClInclude Include="structure.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="third.h" />
+    <ClInclude Include="WinBackground.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

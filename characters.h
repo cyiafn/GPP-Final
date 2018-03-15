@@ -57,6 +57,7 @@ protected:
 	bool dropLock = false;
 	bool passThroughWall;
 	float currentWallY;
+	bool deathConfirmed;
 	//bool onGround = false;
 
 
@@ -67,6 +68,8 @@ private:
 	int type;
 public:
 	Characters();
+	bool getDeathConfirmed() { return deathConfirmed; }
+	void setDeathConfirmed(bool death) { deathConfirmed = death; }
 	BehaviourTree* behaviour;
 	void removeLife();
 	BehaviourTree* getBehaviour() { return behaviour; }
